@@ -1,0 +1,53 @@
+﻿    <%@ Master  MasterPageFile="~/mainSite.Master"  Language="C#" AutoEventWireup="true" CodeBehind="EmployeeSection.master.cs" Inherits="HRSite.EmployeeSection" %>
+
+<asp:Content ContentPlaceHolderID ="head" runat="server" >
+    <style type="text/css">
+        #ContentPlaceHolder1_NavigationMenu li{
+            width:100px!important;
+            padding-top:10px;
+        }
+    </style>
+
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    
+   </asp:Content>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
+      
+  
+   
+      <div dir="rtl">
+          <asp:SiteMapPath runat="server" ></asp:SiteMapPath>
+          <br />
+          
+
+      </div>
+       
+       <hr />
+       <div dir="rtl"  style="width:15%;float:right;">
+       <asp:SiteMapDataSource StartingNodeOffset="1" ID="SiteMapDataSource1"  runat="server"  ShowStartingNode="false" />
+           <asp:Image runat="server" ID="EmpImg" Width="100" Height="100" />
+           <br />
+      <asp:Menu CssClass="vertical-menu" ID="NavigationMenu" runat="server" Width="100" StaticSelectedStyle-Font-Bold="true"  DataSourceID="SiteMapDataSource1" BackColor="#FFFBD6" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="Medium" ForeColor="#990000" StaticSubMenuIndent="10px" >
+           <DynamicHoverStyle BackColor="#990000" ForeColor="White" />
+           <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+           <DynamicMenuStyle BackColor="#FFFBD6" />
+           <DynamicSelectedStyle BackColor="#FFCC66" />
+           <StaticHoverStyle BackColor="#990000" ForeColor="White" />
+           <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+<StaticSelectedStyle Font-Bold="True" BackColor="#FFCC66"></StaticSelectedStyle>
+           </asp:Menu>
+           </div>
+   <%-- <form id="form1" runat="server"> --%>
+       <div style="float:right;width:70%" dir="rtl">
+         
+              
+                    <asp:ContentPlaceHolder  ID="ContentPlaceHolder1" runat="server" >
+        
+        </asp:ContentPlaceHolder>
+                    
+                      </div>  
+          
+</asp:Content>

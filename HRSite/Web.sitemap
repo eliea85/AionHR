@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+
+  <siteMapNode url="Home.aspx" title="اللوحة الأساسية"  description="اللوحة الأساسية">
+    <siteMapNode url="Employees.aspx" title="الموظفون"  description="الموظفون">
+      <siteMapNode url="EmployeePages/EmployeeSummary.aspx" title="ملخص" description="ملخص"/>
+      <siteMapNode url="EmployeePages/EmployeeEvaluation.aspx" title="التقييم" description="التقييم"/>
+      <siteMapNode url="EmployeePages/EmployeeLeaves.aspx" title="الإجازات" description="الإجازات"/>
+      <siteMapNode url="EmployeePages/EmployeeProfile.aspx" title="الملف" description="الملف"/>
+      <siteMapNode url="EmployeePages/EmployeeSalary.aspx" title="الرواتب" description="الرواتب"/>
+      <siteMapNode url="EmployeePages/EmployeeDocuments.aspx" title="الوثائق القانونية" description="الوثائق القانونية"/>
+      <siteMapNode url="EmployeePages/EmployeeLeaveComp.aspx" title="بدل الإجازات" description="بدل الإجازات"/>
+      <siteMapNode url="EmployeePages/EmployeeDev.aspx" title="النظام التطويري" description="النظام التطويري"/>
+      <siteMapNode url="EmployeePages/EmployeeComplaints.aspx" title="الشكاوى" description="الشكاوى"/>
+      <siteMapNode url="EmployeePages/EmployeeCases.aspx" title="القضايا" description="القضايا"/>
+      <siteMapNode url="EmployeePages/EmployeeTargets.aspx" title="الأهداف" description="الأهداف"/>
+      <siteMapNode url="EmployeePages/EmployeeQualifications.aspx" title="المؤهلات" description="المؤهلات"/>
+      <siteMapNode url="EmployeePages/EmployeePromotions.aspx" title="التهنئة" description="التهنئة"/>
+      <siteMapNode url="EmployeePages/EmployeeTraining.aspx" title="التدريب" description="التدريب"/>
+      <siteMapNode url="EmployeePages/EmployeeBadges.aspx" title="الحوافز" description="الحوافز"/>
+      <siteMapNode url="EmployeePages/EmployeeSponsers.aspx" title="الكفلاء" description="الكفلاء"/>
+      <siteMapNode url="EmployeePages/EmployeeFamilyMembers.aspx" title="أفراد الأسرة" description="أفراد الأسرة"/>
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

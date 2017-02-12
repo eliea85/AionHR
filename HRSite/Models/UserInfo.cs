@@ -1,4 +1,5 @@
-﻿using HRSite.Responses;
+﻿using HRSite.Models;
+using HRSite.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +7,14 @@ using System.Web;
 
 namespace HRSite
 {
-    public class UserInfo
+    public class UserInfo:SimpleModel
     {
         public string accountId
         {
             get; set;
         }
 
-        public string recordId { get; set; }
+       
 
         public string employeeId { get; set; }
         public string languageId { get; set; }

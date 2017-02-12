@@ -72,6 +72,12 @@ namespace HRSite
             return info;
         }
 
+        public static void Logout()
+        {
+            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Response.Redirect("~/Home.aspx");
+        }
+
 
     }
 }

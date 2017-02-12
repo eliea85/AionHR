@@ -10,9 +10,13 @@ namespace HRSite.ServiceLayer
 {
     public class EP
     {
+        public static string serviceUrl;
+
+        private static string qryES = "qryES";
+        private static string getEM = "getEM";
         public static List<Employee> GetEmployees(int count, int startAt, out int total)
         {
-            AuthenticatedServiceRequest<ServiceListResponse<Employee>> req = new Requests.AuthenticatedServiceRequest<ServiceListResponse<Employee>>("http://webservices.aionhr.net/EP.asmx/qryES");
+            AuthenticatedServiceRequest<ServiceListResponse<Employee>> req = new Requests.AuthenticatedServiceRequest<ServiceListResponse<Employee>>(serviceUrl+qryES);
             req.QueryStringParams.Add("_filter", "");
             req.QueryStringParams.Add("_size", count.ToString());
             req.QueryStringParams.Add("_startAt", startAt.ToString());
@@ -23,7 +27,7 @@ namespace HRSite.ServiceLayer
 
         public static Employee GetEmployee(string empId)
         {
-            AuthenticatedServiceRequest<SingleItemServiceResponse<Employee>> req = new AuthenticatedServiceRequest<SingleItemServiceResponse<Employee>>("http://webservices.aionhr.net/EP.asmx/getEM");
+            AuthenticatedServiceRequest<SingleItemServiceResponse<Employee>> req = new AuthenticatedServiceRequest<SingleItemServiceResponse<Employee>>(serviceUrl+getEM);
             req.QueryStringParams.Add("_recordId", empId);
             var s = req.GetAsync();
             return s.record;

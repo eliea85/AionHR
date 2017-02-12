@@ -1,14 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Employees.aspx.cs" Inherits="HRSite.Default" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/mainSite.Master" AutoEventWireup="true" CodeBehind="Employees.aspx.cs" Inherits="HRSite.Employees" %>
 
-<%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
-<script runat="server">
-    
-</script>
-
-<!DOCTYPE html>
-
-<html>
-<head runat="server">
+<asp:Content ContentPlaceHolderID="head" runat="server" ID="headContent">
     <title>Employees</title>
     <link href="/resources/css/examples.css" rel="stylesheet" />
 
@@ -36,10 +28,10 @@
             return "<b>" + record.data.LastName + " " + record.data.FirstName + "</b>";
         };
     </script>
-</head>
-<body>
-    <form runat="server">
-        <ext:ResourceManager runat="server" />
+</asp:Content>
+<asp:Content ID="body" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
+    
+   <asp:Label runat="server" ID="lll" />
 
         <ext:GridPanel 
             runat="server"
@@ -103,7 +95,7 @@
                         
                         DataIndexHref="recordId"
                        
-                        HrefPattern="EmployeeDetails.aspx?id={href}"
+                        HrefPattern="EmployeePages/EmployeeSummary.aspx?id={href}"
                         />
                     </Columns>
             </ColumnModel>
@@ -132,7 +124,5 @@
                     />
             </BottomBar>
         </ext:GridPanel>
-        <asp:HyperLink Text="Home" NavigateUrl="~/Home.aspx" runat="server" />
-    </form>
-</body>
-</html>
+        
+    </asp:Content>

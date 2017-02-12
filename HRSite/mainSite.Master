@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="mainSite.master.cs" Inherits="HRSite.mainSite" %>
+<%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <ext:ResourceManager runat="server" />
+    <form id="form1" runat="server">
+     <div  dir="rtl" style="width:100%;background-color:blue; height:50px;color:white">
+       <h1 style="float:right;"> AION HR</h1>
+         <h2 style="float:left; margin-left:15px; color:white; width: 59px;"><asp:LinkButton OnClick="logoutButton_Click"  ID="logoutButton" runat="server"  Text="الخروج" ForeColor="White" /></h2>
+            
+    </div>
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+       
+        </asp:ContentPlaceHolder>
+    </div>
+        </form>
+    
+</body>
+</html>

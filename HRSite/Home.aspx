@@ -1,10 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="HRSite.Home" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs"  Inherits="HRSite.Home" MasterPageFile="~/mainSite.Master" %>
 <%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
-<!DOCTYPE html>
+<%--<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title></title>--%>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <style type="text/css">
         .centerDiv{
 width:90%;
@@ -18,9 +19,9 @@ margin-left:-1px;
 top:20%;
 left:12%;}
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+<%--</head>
+<body>--%>
+    
     <div class="centerDiv">
     
         
@@ -108,8 +109,11 @@ left:12%;}
         <br />
         <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/WebForm3.aspx">Test Combobox</asp:HyperLink>
         <br />
+         
         </div>
     </div>
-    </form>
-</body>
-</html>
+    
+   
+    </asp:Content>
+<%--</body>
+</html>--%>

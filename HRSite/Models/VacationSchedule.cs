@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace HRSite
+namespace HRSite.Models
 {
-    public class GridArrayHelper
+    public class VacationSchedule:SimpleModel
     {
-        
     }
 }

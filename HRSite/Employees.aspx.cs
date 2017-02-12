@@ -11,12 +11,16 @@ using HRSite.ServiceLayer;
 using HRSite.Classes;
 namespace HRSite
 {
-    public class Default : System.Web.UI.Page
+    public class Employees : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!UserManager.CheckUserLoggedIn())
                 Response.Redirect("~/Login.aspx");
+           
+            
+            
+           
         }
         
         [DirectMethod]

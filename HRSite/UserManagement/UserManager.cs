@@ -26,8 +26,6 @@ namespace HRSite
         public static Dictionary<string, string> GetAuthorizationHeadersForApp()
         {
             Dictionary<string, string> headers = new Dictionary<string, string>();
-
-
             headers.Add("Authorization", "Basic " + GetTokenForUser(HttpContext.Current.Session["AccountId"].ToString(),"0"));
             headers.Add("AccountId", HttpContext.Current.Session["AccountId"].ToString());
             headers.Add("UserId", "0");

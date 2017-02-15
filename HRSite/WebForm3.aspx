@@ -34,7 +34,7 @@
 <body>
     <form runat="server">
         <ext:ResourceManager runat="server" />
-
+        <ext:FormPanel ID="formPanel1" runat="server" ></ext:FormPanel>
         <ext:ComboBox
             ID="cbStates"
             runat="server"
@@ -49,7 +49,7 @@
             <Store>
                 <ext:Store ID="Store1" runat="server" IsPagingStore="true" PageSize="10" AutoSync="true">
                     <Proxy>
-                        <ext:PageProxy DirectFn="App.direct.BindData" />
+                        <ext:PageProxy DirectFn="App.direct.BindDepts"   />
                     </Proxy>
                     <Model>
                         <ext:Model runat="server">

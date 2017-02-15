@@ -1,21 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="HRSite.WebForm1" %>
-<%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
-<!DOCTYPE html>
+﻿<%@ Page MasterPageFile="~/mainSite.Master" Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="HRSite.WebForm1" %>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
- 
-    <title></title>
-    <script runat="server">
+
+
+
+ <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content2" runat="server" >
     
-</script>
-</head>
-<body  >
-    <h1 style="width:100%;background-color:darkblue;color:white">
-        AION HR
-    </h1>
-    <ext:ResourceManager runat="server" />
-    <form id="form1" runat="server" style="margin:auto;width:90%;">
+    
     <%--<div  >
         
        
@@ -95,6 +85,4 @@
                 </ext:Button>
             </Buttons>
         </ext:Window>
-    </form>
-</body>
-</html>
+   </asp:Content>

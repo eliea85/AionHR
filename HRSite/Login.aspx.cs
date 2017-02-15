@@ -18,32 +18,25 @@ namespace HRSite
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (UserManager.CheckUserLoggedIn())
+                Response.Redirect("~/Home.aspx");
         }
         
         protected void login_Click(object sender, EventArgs e)
         {
-
-
-            //ServiceRequest<UserInfo> request = new HRSite.ServiceRequest<UserInfo>("http://webservices.aionhr.net/SY.asmx/signIn");
-
-            //request.QueryStringParams.Add("_accountName", accountName.Text);
-            //request.QueryStringParams.Add("_email", email.Text);
-            //request.QueryStringParams.Add("_password", password.Text);
-            //UserInfo response = request.GetAsync();
-            UserInfo response = SY.Signin2(accountName.Text, email.Text, password.Text); 
-            if (response.recordId == null)
+            UserInfo response = SY.Signin(accountName.Text, email.Text, password.Text); 
+            if (response==null|| response.recordId == null)
             {
-                X.Msg.Alert("Error", "Login failed", new JFunction { }).Show();
+                X.Msg.Alert("Authentication Error", "Please check your information and try again", new JFunction { }).Show();
+                Session.Clear();
                 return;
             }
            
             UserManager.LoginUser(response);
             Response.Redirect("~/Home.aspx");
+
         }
-
-      
-
+        
    
     }
 }

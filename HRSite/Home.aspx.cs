@@ -14,5 +14,10 @@ namespace HRSite
             if (!UserManager.CheckUserLoggedIn())
                 Response.Redirect("~/Login.aspx");
         }
+
+        protected void LogoutButton_Click(object sender, EventArgs e)
+        {
+            UserManager.Logout();
+        }
     }
 }

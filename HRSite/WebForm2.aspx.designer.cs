@@ -10,60 +10,87 @@
 namespace HRSite {
     
     
-    public partial class CalendarTest {
+    public partial class WebForm2 {
         
         /// <summary>
-        /// form1 control.
+        /// hireDateLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label hireDateLbl;
         
         /// <summary>
-        /// Window1 control.
+        /// birthLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Window Window1;
+        protected global::System.Web.UI.WebControls.Label birthLbl;
         
         /// <summary>
-        /// MainForm control.
+        /// positionLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.FormPanel MainForm;
+        protected global::System.Web.UI.WebControls.Label positionLbl;
         
         /// <summary>
-        /// Hijiri_Month control.
+        /// genderLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.ComboBox Hijiri_Month;
+        protected global::System.Web.UI.WebControls.Label genderLbl;
         
         /// <summary>
-        /// Hijiri_Year control.
+        /// departmentLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.ComboBox Hijiri_Year;
+        protected global::System.Web.UI.WebControls.Label departmentLbl;
         
         /// <summary>
-        /// MainPanel control.
+        /// mobileLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Panel MainPanel;
+        protected global::System.Web.UI.WebControls.Label mobileLbl;
+        
+        /// <summary>
+        /// MgmtLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MgmtLbl;
+        
+        /// <summary>
+        /// emailLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label emailLbl;
+        
+        /// <summary>
+        /// branchLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label branchLbl;
     }
 }

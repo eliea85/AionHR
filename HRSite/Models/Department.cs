@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HRSite.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +7,14 @@ using System.Web;
 
 namespace HRSite.Classes
 {
-    public class Department
+    public class Department:SimpleModel
     {
         
-        public string recordId { get; set; }
+       
         
         public string reference { get; set; }
         
-        public string name { get; set; }
+        
         
         public string parentName { get; set; }
         

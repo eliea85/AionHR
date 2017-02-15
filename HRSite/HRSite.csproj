@@ -80,9 +80,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CalendarTest.aspx" />
     <Content Include="Depts.aspx" />
-    <Content Include="EmployeeDetails.aspx" />
+    <Content Include="EmployeePages\EmployeeBadges.aspx" />
+    <Content Include="EmployeePages\EmployeeCases.aspx" />
+    <Content Include="EmployeePages\EmployeeComplaints.aspx" />
+    <Content Include="EmployeePages\EmployeeDev.aspx" />
+    <Content Include="EmployeePages\EmployeeDocuments.aspx" />
+    <Content Include="EmployeePages\EmployeeEvaluation.aspx" />
+    <Content Include="EmployeePages\EmployeeFamilyMembers.aspx" />
+    <Content Include="EmployeePages\EmployeeInsert.aspx" />
+    <Content Include="EmployeePages\EmployeeLeaveComp.aspx" />
+    <Content Include="EmployeePages\EmployeeLeaves.aspx" />
+    <Content Include="EmployeePages\EmployeeProfile.aspx" />
+    <Content Include="EmployeePages\EmployeePromotions.aspx" />
+    <Content Include="EmployeePages\EmployeeQualifications.aspx" />
+    <Content Include="EmployeePages\EmployeeSalary.aspx" />
+    <Content Include="EmployeePages\EmployeeSponsers.aspx" />
+    <Content Include="EmployeePages\EmployeeSummary.aspx" />
+    <Content Include="EmployeePages\EmployeeTargets.aspx" />
+    <Content Include="EmployeePages\EmployeeTraining.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="packages.config" />
     <Content Include="Resources\Applications.jpg" />
@@ -96,7 +112,9 @@
     <Content Include="Resources\organization.jpg" />
     <Content Include="Resources\planner.jpg" />
     <Content Include="Resources\reports.jpg" />
-    <Content Include="WebForm3.aspx" />
+    <Content Include="WebForm2.aspx" />
+    <Content Include="EmployeePages\EmployeeSection.Master" />
+    <Content Include="mainSite.Master" />
     <None Include="Properties\PublishProfiles\amazon-deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -104,6 +122,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Employees.aspx" />
@@ -112,23 +131,160 @@
     <Content Include="Login.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmployeeDetails.aspx.cs">
-      <DependentUpon>EmployeeDetails.aspx</DependentUpon>
+    <Compile Include="Custom Controls\BoundedComboBox.cs" />
+    <Compile Include="EmployeePages\EmployeeBadges.aspx.cs">
+      <DependentUpon>EmployeeBadges.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EmployeeDetails.aspx.designer.cs">
-      <DependentUpon>EmployeeDetails.aspx</DependentUpon>
+    <Compile Include="EmployeePages\EmployeeBadges.aspx.designer.cs">
+      <DependentUpon>EmployeeBadges.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GridArrayHelper.cs" />
+    <Compile Include="EmployeePages\EmployeeCases.aspx.cs">
+      <DependentUpon>EmployeeCases.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeCases.aspx.designer.cs">
+      <DependentUpon>EmployeeCases.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeComplaints.aspx.cs">
+      <DependentUpon>EmployeeComplaints.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeComplaints.aspx.designer.cs">
+      <DependentUpon>EmployeeComplaints.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeDev.aspx.cs">
+      <DependentUpon>EmployeeDev.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeDev.aspx.designer.cs">
+      <DependentUpon>EmployeeDev.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeDocuments.aspx.cs">
+      <DependentUpon>EmployeeDocuments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeDocuments.aspx.designer.cs">
+      <DependentUpon>EmployeeDocuments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeEvaluation.aspx.cs">
+      <DependentUpon>EmployeeEvaluation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeEvaluation.aspx.designer.cs">
+      <DependentUpon>EmployeeEvaluation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeFamilyMembers.aspx.cs">
+      <DependentUpon>EmployeeFamilyMembers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeFamilyMembers.aspx.designer.cs">
+      <DependentUpon>EmployeeFamilyMembers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeInsert.aspx.cs">
+      <DependentUpon>EmployeeInsert.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeInsert.aspx.designer.cs">
+      <DependentUpon>EmployeeInsert.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeLeaveComp.aspx.cs">
+      <DependentUpon>EmployeeLeaveComp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeLeaveComp.aspx.designer.cs">
+      <DependentUpon>EmployeeLeaveComp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeLeaves.aspx.cs">
+      <DependentUpon>EmployeeLeaves.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeLeaves.aspx.designer.cs">
+      <DependentUpon>EmployeeLeaves.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeProfile.aspx.cs">
+      <DependentUpon>EmployeeProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeProfile.aspx.designer.cs">
+      <DependentUpon>EmployeeProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeePromotions.aspx.cs">
+      <DependentUpon>EmployeePromotions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeePromotions.aspx.designer.cs">
+      <DependentUpon>EmployeePromotions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeQualifications.aspx.cs">
+      <DependentUpon>EmployeeQualifications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeQualifications.aspx.designer.cs">
+      <DependentUpon>EmployeeQualifications.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeSalary.aspx.cs">
+      <DependentUpon>EmployeeSalary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeSalary.aspx.designer.cs">
+      <DependentUpon>EmployeeSalary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeSection.Master.cs">
+      <DependentUpon>EmployeeSection.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeSection.Master.designer.cs">
+      <DependentUpon>EmployeeSection.Master</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeSponsers.aspx.cs">
+      <DependentUpon>EmployeeSponsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeSponsers.aspx.designer.cs">
+      <DependentUpon>EmployeeSponsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeSummary.aspx.cs">
+      <DependentUpon>EmployeeSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeSummary.aspx.designer.cs">
+      <DependentUpon>EmployeeSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeTargets.aspx.cs">
+      <DependentUpon>EmployeeTargets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeTargets.aspx.designer.cs">
+      <DependentUpon>EmployeeTargets.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeTraining.aspx.cs">
+      <DependentUpon>EmployeeTraining.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeePages\EmployeeTraining.aspx.designer.cs">
+      <DependentUpon>EmployeeTraining.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="mainSite.Master.cs">
+      <DependentUpon>mainSite.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="mainSite.Master.designer.cs">
+      <DependentUpon>mainSite.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Branch.cs" />
+    <Compile Include="Models\Nationality.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\SimpleModel.cs" />
+    <Compile Include="Models\UnixTimeStampConverter.cs" />
+    <Compile Include="Models\VacationSchedule.cs" />
+    <Compile Include="Models\WorkingCalendar.cs" />
+    <Compile Include="ServiceWrapper\LM.cs" />
+    <Compile Include="ServiceWrapper\ServiceFactory.cs" />
     <Compile Include="ServiceWrapper\SY.cs" />
+    <Compile Include="ServiceWrapper\TA.cs" />
+    <Compile Include="StoreFactory.cs" />
     <Compile Include="UserManagement\APIKeyBasedTokenGenerator.cs" />
-    <Compile Include="CalendarTest.aspx.cs">
-      <DependentUpon>CalendarTest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CalendarTest.aspx.designer.cs">
-      <DependentUpon>CalendarTest.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Employees.aspx.cs">
@@ -171,12 +327,12 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm3.aspx.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm3.aspx.designer.cs">
-      <DependentUpon>WebForm3.aspx</DependentUpon>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

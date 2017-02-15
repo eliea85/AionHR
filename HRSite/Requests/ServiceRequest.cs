@@ -105,7 +105,7 @@ namespace HRSite
         public T GetAsync()
         {
             WebRequest req = HttpWebRequest.Create(requestUrl);
-            //WebProxy p = new WebProxy("proxy.tishreen.net",8080);
+            //WebProxy p = new WebProxy("proxy.tishreen.net", 8080);
             //p.Credentials = new NetworkCredential("user16@26", "R3DU");
             //req.Credentials = p.Credentials;
             //req.Proxy = p;

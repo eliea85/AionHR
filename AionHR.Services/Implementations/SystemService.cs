@@ -14,16 +14,16 @@ namespace AionHR.Services.Implementations
     /// <summary>
     /// Class responsible for all operation of the system.
     /// </summary>
-    public class SystemService : ISystemService
+    public class SystemService :BaseService, ISystemService
     {
-        //Injected
+        
         private readonly IUserRepository _userRepository;
-        private readonly SessionHelper _sessionHelper;
+       // public readonly SessionHelper _sessionHelper;
 
-        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper)
+        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper)
         {
             _userRepository = userRepository;
-            _sessionHelper = sessionHelper;
+           // _sessionHelper = sessionHelper;
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace AionHR.Services.Implementations
             //First Step Request by Account >> Defining Header
             AuthenticateResponse response = new AuthenticateResponse();
 
-            _sessionHelper.Set("AccountId", "0"); //To be checked as it is a strange behavior ( simulated from old code)
-            Dictionary<string, string> headers = _sessionHelper.GetAuthorizationHeadersForUser();
+            SessionHelper.Set("AccountId", "0"); //To be checked as it is a strange behavior ( simulated from old code)
+            Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("_accountName", request.Account);
 
@@ -58,8 +58,8 @@ namespace AionHR.Services.Implementations
 
 
             //Valid account >> fill session and prepare for the new request
-            _sessionHelper.Set("AccountId", record.record.accountId);
-             headers = _sessionHelper.GetAuthorizationHeadersForUser();
+            SessionHelper.Set("AccountId", record.record.accountId);
+             headers = SessionHelper.GetAuthorizationHeadersForUser();
             parameters.Clear();
             parameters.Add("_email", request.UserName);
             parameters.Add("_password", request.Password);
@@ -77,10 +77,10 @@ namespace AionHR.Services.Implementations
                 return response;
             }
             //authentication Valid, set the session then return the response back
-        
 
-            _sessionHelper.Set("UserId", record.record.recordId);
-            _sessionHelper.Set("key", _sessionHelper.GetToken(_sessionHelper.Get("AccountId").ToString(), record.record.recordId));
+
+            SessionHelper.Set("UserId", record.record.recordId);
+            SessionHelper.Set("key", SessionHelper.GetToken(SessionHelper.Get("AccountId").ToString(), record.record.recordId));
 
             response.Success = true;
             return response;

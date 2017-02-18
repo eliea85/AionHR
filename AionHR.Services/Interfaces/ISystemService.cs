@@ -5,8 +5,9 @@ namespace AionHR.Services.Interfaces
     /// <summary>
     /// Interface that hold the methods of a service
     /// </summary>
-    public interface ISystemService
+    public interface ISystemService : IBaseService
     {
+
         /// <summary>
         /// Authenticate a request
         /// </summary>

@@ -10,43 +10,7 @@
 namespace AionHR.Web.UI.Forms {
     
     
-    public partial class Login {
-        
-        /// <summary>
-        /// Literal4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal4;
-        
-        /// <summary>
-        /// Literal5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal5;
-        
-        /// <summary>
-        /// Literal3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal3;
-        
-        /// <summary>
-        /// Literal8 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal8;
+    public partial class Default {
         
         /// <summary>
         /// Literal1 control.
@@ -58,13 +22,13 @@ namespace AionHR.Web.UI.Forms {
         protected global::System.Web.UI.WebControls.Literal Literal1;
         
         /// <summary>
-        /// Form1 control.
+        /// lblChangePassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
+        protected global::Ext.Net.Hidden lblChangePassword;
         
         /// <summary>
         /// ResourceManager1 control.
@@ -85,66 +49,84 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.Viewport Viewport1;
         
         /// <summary>
-        /// panelLogin control.
+        /// topPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.FormPanel panelLogin;
+        protected global::Ext.Net.Panel topPanel;
         
         /// <summary>
-        /// tbAccountName control.
+        /// Literal3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField tbAccountName;
+        protected global::System.Web.UI.WebControls.Literal Literal3;
         
         /// <summary>
-        /// tbUsername control.
+        /// Literal8 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField tbUsername;
+        protected global::System.Web.UI.WebControls.Literal Literal8;
         
         /// <summary>
-        /// tbPassword control.
+        /// leftPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField tbPassword;
+        protected global::Ext.Net.Panel leftPanel;
         
         /// <summary>
-        /// lblError control.
+        /// Toolbar1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Label lblError;
+        protected global::Ext.Net.Toolbar Toolbar1;
         
         /// <summary>
-        /// btnLogin control.
+        /// btnPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Button btnLogin;
+        protected global::Ext.Net.Button btnPassword;
         
         /// <summary>
-        /// btnReset control.
+        /// pnlAlignMiddle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Button btnReset;
+        protected global::Ext.Net.Panel pnlAlignMiddle;
+        
+        /// <summary>
+        /// tabPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.TabPanel tabPanel;
+        
+        /// <summary>
+        /// tabHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Panel tabHome;
     }
 }

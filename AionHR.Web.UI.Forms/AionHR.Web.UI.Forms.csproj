@@ -86,7 +86,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSS\Common.css" />
+    <Content Include="CSS\DefaultAR.css" />
+    <Content Include="CSS\Default.css" />
+    <Content Include="CSS\Header.css" />
+    <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Home.aspx" />
+    <Content Include="Images\bg.png" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -100,9 +107,28 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Common.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
     <Compile Include="BootStrapper.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -131,6 +157,18 @@
       <Project>{f60bfeaf-3b3b-47c5-9da0-ac8892dc9be8}</Project>
       <Name>AionHR.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Common.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Login.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

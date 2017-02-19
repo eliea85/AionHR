@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active Module.
+        /// </summary>
+        internal static string ActiveModule {
+            get {
+                return ResourceManager.GetString("ActiveModule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Human Resources Solution.
         /// </summary>
         internal static string ApplicationModule {
@@ -79,11 +88,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Case Management.
+        /// </summary>
+        internal static string CaseManagement {
+            get {
+                return ResourceManager.GetString("CaseManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cases.
+        /// </summary>
+        internal static string Cases {
+            get {
+                return ResourceManager.GetString("Cases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Cases.
+        /// </summary>
+        internal static string CasesLeaf {
+            get {
+                return ResourceManager.GetString("CasesLeaf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Password.
         /// </summary>
         internal static string ChangePassword {
             get {
                 return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collapse All.
+        /// </summary>
+        internal static string CollapseAll {
+            get {
+                return ResourceManager.GetString("CollapseAll", resourceCulture);
             }
         }
         
@@ -97,11 +142,65 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Information.
+        /// </summary>
+        internal static string Company {
+            get {
+                return ResourceManager.GetString("Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to © 2017 AionHR. All rights reserved..
         /// </summary>
         internal static string CopyRight {
             get {
                 return ResourceManager.GetString("CopyRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employees.
+        /// </summary>
+        internal static string Employee {
+            get {
+                return ResourceManager.GetString("Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Files.
+        /// </summary>
+        internal static string EmployeeFiles {
+            get {
+                return ResourceManager.GetString("EmployeeFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Employee.
+        /// </summary>
+        internal static string EmployeeLeaf {
+            get {
+                return ResourceManager.GetString("EmployeeLeaf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error In Operation, Try again Later !.
+        /// </summary>
+        internal static string ErrorOperation {
+            get {
+                return ResourceManager.GetString("ErrorOperation", resourceCulture);
             }
         }
         
@@ -115,11 +214,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expand All.
+        /// </summary>
+        internal static string ExpandAll {
+            get {
+                return ResourceManager.GetString("ExpandAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expand.
         /// </summary>
         internal static string ExpandPanel {
             get {
                 return ResourceManager.GetString("ExpandPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        internal static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
             }
         }
         
@@ -142,11 +259,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        internal static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Field is mandatory !.
         /// </summary>
         internal static string MandatoryField {
             get {
                 return ResourceManager.GetString("MandatoryField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modules.
+        /// </summary>
+        internal static string Modules {
+            get {
+                return ResourceManager.GetString("Modules", resourceCulture);
             }
         }
         
@@ -160,11 +295,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reports.
+        /// </summary>
+        internal static string Reports {
+            get {
+                return ResourceManager.GetString("Reports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>
         internal static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work Schedule.
+        /// </summary>
+        internal static string Scheduler {
+            get {
+                return ResourceManager.GetString("Scheduler", resourceCulture);
             }
         }
         

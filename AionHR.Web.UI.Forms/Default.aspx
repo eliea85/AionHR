@@ -5,17 +5,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
-    <link rel="stylesheet" type="text/css" href="CSS/Default.css" />
+    <link rel="stylesheet" type="text/css" href="CSS/Tools.css" />
+    <script type="text/javascript" src="Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="Scripts/app.js"></script>
+    <script type="text/javascript" src="Scripts/default.js"></script>
+
     <title>
         <asp:Literal ID="Literal1" runat="server" Text="<%$Resources:Common , ApplicationTitle%>" />
     </title>
 </head>
 <body>
     <ext:Hidden runat="server" ID="lblChangePassword" Text="<%$Resources:Common , ChangePassword %>" />
-    <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" DirectMethodNamespace="AionHR" IDMode="Explicit" AjaxTimeout="1200000" />
+    <ext:Hidden runat="server" ID="lblError" Text="<%$Resources:Common , Error %>" />
+    <ext:Hidden runat="server" ID="lblOk" Text="<%$Resources:Common , Ok %>" />
+    <ext:Hidden runat="server" ID="lblErrorOperation" Text="<%$Resources:Common , ErrorOperation %>" />
+    <ext:Hidden runat="server" ID="lblLoading" Text="<%$Resources:Common , Loading %>" />
+    <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" IDMode="Explicit" AjaxTimeout="1200000" />
     <ext:Viewport ID="Viewport1" runat="server" Layout="border">
         <Items>
-
             <ext:Panel ID="topPanel" runat="server" Title="AionHR" Height="60" Header="false" Region="North" PaddingSpec="0 0 1 0" BodyStyle="background-color:#157fcc">
                 <Items>
                     <ext:Container runat="server">
@@ -28,11 +35,10 @@
                             </div>
                             <div class="buttons">
 
-                                <a class="button" href="ARLogin.aspx">
+                                <a id="btnChangeLanguage" class="button" href="#">
                                     <asp:Literal ID="Literal8" runat="server" Text="<%$ Resources:Common ,LanguageSwitch%>" /></a>
-                                <a class="button" href="ARLogin.aspx">
+                                <a id="btnLogout" class="button" href="#">
                                     <img src="Images/logoff.png" />
-
                                 </a>
 
                             </div>
@@ -42,46 +48,86 @@
 
 
             </ext:Panel>
-            <ext:Panel ID="leftPanel" runat="server" Region="West" Layout="AccordionLayout" Width="250" PaddingSpec="0 0 0 0" Padding="0"
+            <ext:Panel ID="leftPanel" runat="server" Region="West" Layout="AccordionLayout" Width="260" PaddingSpec="0 0 0 0" Padding="0"
                 Header="true" Collapsible="true" Split="true" CollapseMode="Mini" StyleSpec="border-bottom:2px solid #2A92D4;"
                 Title="<%$ Resources:Common , NavigationPane %>" CollapseToolText="<%$ Resources:Common , CollapsePanel %>" ExpandToolText="<%$ Resources:Common , ExpandPanel %>" Icon="ApplicationTileVertical" BodyBorder="0">
                 <TopBar>
                     <ext:Toolbar ID="Toolbar1" runat="server" Border="true">
                         <Items>
-
+                            <ext:Label runat="server" Text="<%$ Resources:Common , Modules %>" />
+                            <ext:Button ID="btnEmployeeFiles" runat="server" Icon="Group" ToolTip="<%$ Resources:Common , EmployeeFiles %>">
+                                <Listeners>
+                                    <Click Handler="#{commonTree}.setTitle(this.tooltip);openModule(1);" />
+                                </Listeners>
+                            </ext:Button>
 
                             <ext:ToolbarSeparator runat="server"></ext:ToolbarSeparator>
-                            <ext:Button ID="btnPassword" runat="server" Icon="CogEdit" ToolTip="<%$ Resources:Common , ChangePassword %>">
+                            <ext:Button ID="btnCases" runat="server" Icon="ApplicationEdit" ToolTip="<%$ Resources:Common , CaseManagement %>">
                                 <Listeners>
-                                    <Click Handler="openNewTab('password', 'ChangePassword.aspx',  #{lblChangePassword}.value, 'icon-Password')" />
+                                    <Click Handler="#{commonTree}.setTitle(this.tooltip);openModule(2);" />
                                 </Listeners>
+                            </ext:Button>
+
+                            <ext:ToolbarSeparator runat="server"></ext:ToolbarSeparator>
+                            <ext:Button ID="btnCompany" runat="server" Icon="Building" ToolTip="<%$ Resources:Common , Company %>">                              
+                            </ext:Button>
+                              <ext:ToolbarSeparator runat="server"></ext:ToolbarSeparator>
+                            <ext:Button ID="btnScheduler" runat="server" Icon="CalendarSelectDay" ToolTip="<%$ Resources:Common , Scheduler %>">                              
+                            </ext:Button>
+                                <ext:ToolbarSeparator runat="server"></ext:ToolbarSeparator>
+                            <ext:Button ID="btnReport" runat="server" Icon="ChartBar" ToolTip="<%$ Resources:Common , Reports %>">                              
                             </ext:Button>
                         </Items>
                     </ext:Toolbar>
                 </TopBar>
                 <Items>
-                    <ext:TreePanel runat="server" Title="Human Resources" RootVisible="false">
-                        <Tools>
-                            <ext:Tool Type="Refresh" Handler="Ext.Msg.alert('Message','Refresh Tool Clicked!');" />
-                        </Tools>
-                        <Root>
-                            <ext:Node Text="Root">
-                                <Children>
-                                    <ext:Node Text="Employee" Expanded="true">
-                                        <Children>
-                                            <ext:Node Text="Manage Employee" Icon="User" Leaf="True" />
+                    <ext:TreePanel runat="server" Title="<%$ Resources:Common , ActiveModule %>" RootVisible="false" ID="commonTree" Scroll="Vertical">
+                        <SelectionModel>
+                            <ext:TreeSelectionModel runat="server" ID="selModel">
+                            </ext:TreeSelectionModel>
+                        </SelectionModel>
+                        <TopBar>
+                            <ext:Toolbar ID="Toolbar2" runat="server">
+                                <Items>
+                                    <ext:TextField ID="filerTreeTrigger" runat="server" EnableKeyEvents="true" Width="150" EmptyText="<%$ Resources:Common , Filter %>">
+                                        <Triggers>
+                                            <ext:FieldTrigger Icon="Clear" />
+                                        </Triggers>
+                                        <Listeners>
+                                            <KeyUp Fn="filterCommonTree" Buffer="100" />
+                                            <TriggerClick Handler="clearFilter();" />
+                                        </Listeners>
+                                    </ext:TextField>
+                                    <ext:Button ID="btnExpandAll" runat="server" ToolTip="<%$ Resources:Common , ExpandAll %>" IconCls="icon-expand-all">
+                                        <Listeners>
+                                            <Click Handler="#{commonTree}.expandAll();" />
+                                        </Listeners>
+                                    </ext:Button>
+                                    <ext:ToolbarSeparator>
+                                    </ext:ToolbarSeparator>
+                                    <ext:Button ID="btnCollapseAll" runat="server" ToolTip="<%$ Resources:Common , CollapseAll %>" IconCls="icon-collapse-all">
+                                        <Listeners>
+                                            <Click Handler="#{commonTree}.collapseAll();" />
+                                        </Listeners>
+                                    </ext:Button>
 
-                                        </Children>
-                                    </ext:Node>
-                                    <ext:Node Text="Payroll" Expanded="true">
-                                        <Children>
-                                            <ext:Node Text="Manage Payroll" Icon="Money" Leaf="True" />
+                                </Items>
+                            </ext:Toolbar>
+                        </TopBar>
 
-                                        </Children>
-                                    </ext:Node>
-                                </Children>
-                            </ext:Node>
-                        </Root>
+
+                        <Fields>
+                            <ext:ModelField Name="idTab" />
+                            <ext:ModelField Name="url" />
+                            <ext:ModelField Name="title" />
+                            <ext:ModelField Name="css" />
+                            <ext:ModelField Name="click" />
+                        </Fields>
+
+                        <Listeners>
+                            <ItemClick Handler="onTreeItemClick(record, e);" />
+                        </Listeners>
+
                     </ext:TreePanel>
                     <ext:Panel
                         ID="pnlAlignMiddle"
@@ -96,34 +142,31 @@
                             <ext:VBoxLayoutConfig Align="Center" />
                         </LayoutConfig>
                         <Items>
-                           <ext:Button
-                                    runat="server"
-                                    Text="Paste"
-                                   Icon="User"
-                                    Scale="Large"
-                                    IconAlign="Top"
-                                    Cls="x-btn-as-arrow"
-                                    RowSpan="3" 
-                                    />
-                              <ext:Button
-                                    runat="server"
-                                    Text="Paste"
-                                   Icon="User"
-                                    Scale="Large"
-                                    IconAlign="Top"
-                                    Cls="x-btn-as-arrow"
-                                    RowSpan="3" 
-                                    />
-                              <ext:Button
-                                    runat="server"
-                                    Text="Paste"
-                                   Icon="User"
-                                    Scale="Large"
-                                    IconAlign="Top"
-                                    Cls="x-btn-as-arrow"
-                                    RowSpan="3" 
-                                    />
-                        
+                            <ext:Button
+                                runat="server"
+                                Text="Paste"
+                                Icon="User"
+                                Scale="Large"
+                                IconAlign="Top"
+                                Cls="x-btn-as-arrow"
+                                RowSpan="3" />
+                            <ext:Button
+                                runat="server"
+                                Text="Paste"
+                                Icon="User"
+                                Scale="Large"
+                                IconAlign="Top"
+                                Cls="x-btn-as-arrow"
+                                RowSpan="3" />
+                            <ext:Button
+                                runat="server"
+                                Text="Paste"
+                                Icon="User"
+                                Scale="Large"
+                                IconAlign="Top"
+                                Cls="x-btn-as-arrow"
+                                RowSpan="3" />
+
                         </Items>
                     </ext:Panel>
 
@@ -136,11 +179,11 @@
             </ext:Panel>
             <ext:TabPanel ID="tabPanel" runat="server" Region="Center" EnableTabScroll="true" MinTabWidth="100" BodyBorder="0" StyleSpec="border-bottom:2px solid #2A92D4;">
                 <Items>
-                    <ext:Panel ID="tabHome" runat="server" Title="<%$ Resources:Common , Home %>" Icon="House">
+                    <ext:Panel ID="tabHome" Closable="false" runat="server" Title="<%$ Resources:Common , Home %>" Icon="House" >
                         <Loader ID="Loader1"
                             runat="server"
-                            Url="Home.aspx"
-                            Mode="Frame"
+                            Url="Dashboard.aspx"
+                            Mode="Frame" 
                             ShowMask="true">
                             <LoadMask ShowMask="true" />
                         </Loader>

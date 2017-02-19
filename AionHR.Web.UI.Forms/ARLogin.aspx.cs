@@ -18,7 +18,7 @@ using System.Web.UI.WebControls;
 
 namespace AionHR.Web.UI.Forms
 {
-    public partial class Login : Page
+    public partial class ARLogin : Page
     {
 
 
@@ -29,9 +29,9 @@ namespace AionHR.Web.UI.Forms
         {
 
             base.InitializeCulture();
-            //User came to english login so set the language to english           
-            _systemService.SessionHelper.SetLanguage("en");
-            LocalisationManager.Instance.SetEnglishLocalisation();
+            //User came to arabic login so set the language to arabic           
+            _systemService.SessionHelper.SetLanguage("ar");
+            LocalisationManager.Instance.SetArabicLocalisation();
 
         }
 
@@ -41,6 +41,17 @@ namespace AionHR.Web.UI.Forms
             {
                 lblError.Text = Resources.Common.SessionDisconnected;
             }
+            SetExtLanguage();
+            
+        }
+
+        private void SetExtLanguage()
+        {
+            
+                this.ResourceManager1.RTL = true;
+                this.Viewport1.RTL = true;
+
+           
         }
 
         protected void login_Click(object sender, EventArgs e)

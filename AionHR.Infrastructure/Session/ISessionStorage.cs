@@ -9,10 +9,13 @@ namespace AionHR.Infrastructure.Session
     /// <summary>
     /// Session storage interface
     /// </summary>
-   public  interface ISessionStorage
+    public interface ISessionStorage
     {
 
         void Save(string key, object value);
         object Retrieve(string key);
+
+
+        void Clear();
     }
 }

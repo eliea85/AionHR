@@ -118,96 +118,96 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActiveModule" xml:space="preserve">
-    <value>Active Module</value>
+    <value>الوحدة</value>
   </data>
   <data name="ApplicationModule" xml:space="preserve">
-    <value>Human Resources Solution</value>
+    <value>إدارة الموارد البشرية</value>
   </data>
   <data name="ApplicationTitle" xml:space="preserve">
     <value>AionHR</value>
   </data>
   <data name="CaseManagement" xml:space="preserve">
-    <value>Case Management</value>
+    <value>إدارة الحالة</value>
   </data>
   <data name="Cases" xml:space="preserve">
-    <value>Cases</value>
+    <value>الحالات</value>
   </data>
   <data name="CasesLeaf" xml:space="preserve">
-    <value>Manage Cases</value>
+    <value>ادارة الحالات</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
-    <value>Change Password</value>
+    <value>تغيير كلمة السر</value>
   </data>
   <data name="CollapseAll" xml:space="preserve">
-    <value>Collapse All</value>
+    <value>اغلاق الكل</value>
   </data>
   <data name="CollapsePanel" xml:space="preserve">
-    <value>Collapse</value>
+    <value>اغلاق</value>
   </data>
   <data name="Company" xml:space="preserve">
-    <value>Company Information</value>
+    <value>معلومات الشركة</value>
   </data>
   <data name="CopyRight" xml:space="preserve">
-    <value>© 2017 AionHR. All rights reserved.</value>
+    <value>© 2017 AionHR. كل الحقوق محفوظة.</value>
   </data>
   <data name="Employee" xml:space="preserve">
-    <value>Employees</value>
+    <value>الموظفين</value>
   </data>
   <data name="EmployeeFiles" xml:space="preserve">
-    <value>Employee Files</value>
+    <value>شؤون الموظفين</value>
   </data>
   <data name="EmployeeLeaf" xml:space="preserve">
-    <value>Manage Employee</value>
+    <value>ادارة الموظفين</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>خطأ</value>
   </data>
   <data name="ErrorOperation" xml:space="preserve">
-    <value>Error In Operation, Try again Later !</value>
+    <value>خطأ في العملية، حاول مرة أخرى !</value>
   </data>
   <data name="Exit" xml:space="preserve">
-    <value>Exit</value>
+    <value>خروج</value>
   </data>
   <data name="ExpandAll" xml:space="preserve">
-    <value>Expand All</value>
+    <value>فتح الكل</value>
   </data>
   <data name="ExpandPanel" xml:space="preserve">
-    <value>Expand</value>
+    <value>فتح</value>
   </data>
   <data name="Filter" xml:space="preserve">
-    <value>Filter</value>
+    <value>فلتر</value>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Home</value>
+    <value>الرئيسية</value>
   </data>
   <data name="LanguageSwitch" xml:space="preserve">
-    <value>عربي</value>
+    <value>EN</value>
   </data>
   <data name="Loading" xml:space="preserve">
-    <value>Loading...</value>
+    <value>تحميل ...</value>
   </data>
   <data name="MandatoryField" xml:space="preserve">
-    <value>Field is mandatory !</value>
+    <value>حقل إلزامي!</value>
   </data>
   <data name="Modules" xml:space="preserve">
-    <value>Modules</value>
+    <value>الوحدات</value>
   </data>
   <data name="NavigationPane" xml:space="preserve">
-    <value>Navigation</value>
+    <value>لوحة التحكم</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>Ok</value>
+    <value>حسنا</value>
   </data>
   <data name="Reports" xml:space="preserve">
-    <value>Reports</value>
+    <value>تقارير</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>Reset</value>
+    <value>مسح</value>
   </data>
   <data name="Scheduler" xml:space="preserve">
-    <value>Work Schedule</value>
+    <value>جدول العمل</value>
   </data>
   <data name="SessionDisconnected" xml:space="preserve">
-    <value>Session Disconnected !</value>
+    <value>انتهت مهلة الجلسة!</value>
   </data>
 </root>

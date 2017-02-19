@@ -33,6 +33,32 @@ namespace AionHR.Infrastructure.Session
             else return true;
         }
 
+        /// <summary>
+        /// Check if the current session is arabic
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckIfArabicSession()
+        {
+            if (Get("Language") != null )
+                if(Get("Language").ToString()=="ar")
+                    return true;
+             return false;
+        }
+
+        /// <summary>
+        /// Clear session for the current storage
+        /// </summary>
+        public void ClearSession()
+        {
+            _sessionStorage.Clear();
+        }
+
+
+        public void SetLanguage(string language)
+        {
+            Set("Language", language);
+        }
+
         public void Set(string key, object value)
         {
             _sessionStorage.Save(key, value);

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="AionHR.Web.UI.Forms.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ARLogin.aspx.cs" Inherits="AionHR.Web.UI.Forms.ARLogin" %>
 
 <%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,7 +12,7 @@
 
 
 
-    <link rel="stylesheet" type="text/css" href="CSS/Header.css" />
+    <link rel="stylesheet" type="text/css" href="CSS/HeaderAR.css" />
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
 
     <style type="text/css">
@@ -31,7 +31,7 @@
                 <img src="Images/logo.png" width="90" height="82" />
             </div>
             <div class="title">
-                <div style="width: 400px">
+                <div>
                     <span class="title-sub">
                         <asp:Literal ID="Literal5" runat="server" Text="<%$ Resources:Common ,ApplicationTitle%>" /></span>
                 </div>
@@ -43,8 +43,8 @@
         </div>
         <div class="right">
             <div class="button-group" style="margin-top: 15px;">
-                <a class="button" href="ARLogin.aspx">
-                    <asp:Literal ID="Literal8" runat="server" Text="عربي" /></a>
+                <a class="button" href="Login.aspx">
+                    <asp:Literal ID="Literal8" runat="server" Text="EN" /></a>
             </div>
         </div>
     </div>
@@ -113,11 +113,13 @@
                             FieldLabel="<%$ Resources: Password %>"
                             EmptyText="<%$ Resources: EnterYourPassword %>"
                             InputType="Password" />
+
                         <ext:FieldContainer runat="server" ID="lblErroContainer" FieldLabel="">
                             <Items>
                                 <ext:Label ID="lblError"
                                     runat="server"
                                     Text=""
+                                    
                                     Visible="true"
                                     Cls="error" />
                             </Items>

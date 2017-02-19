@@ -31,5 +31,13 @@ namespace AionHR.Infrastructure.Session
         {
             return HttpContext.Current.Session[key];
         }
+
+        /// <summary>
+        /// Clear Session
+        /// </summary>
+        public void Clear()
+        {
+            HttpContext.Current.Session.Clear();
+        }
     }
 }

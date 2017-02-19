@@ -87,13 +87,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CSS\Common.css" />
-    <Content Include="CSS\DefaultAR.css" />
-    <Content Include="CSS\Default.css" />
+    <Content Include="CSS\HeaderAR.css" />
+    <Content Include="CSS\HeaderInsideAR.css" />
+    <Content Include="CSS\HeaderInside.css" />
     <Content Include="CSS\Header.css" />
+    <Content Include="CSS\Home.css" />
+    <Content Include="CSS\Tools.css" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="Images\bg.png" />
+    <Content Include="ARLogin.aspx" />
+    <Content Include="Images\casemanagement.png" />
+    <Content Include="Images\company.png" />
+    <Content Include="Images\employees.png" />
+    <Content Include="Images\home.png" />
+    <Content Include="Images\language.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\logoff.png" />
+    <Content Include="Images\reports.png" />
+    <Content Include="Images\schedule.png" />
+    <Content Include="Images\Tools\application_edit.png" />
+    <Content Include="Images\Tools\collapse-all.gif" />
+    <Content Include="Images\Tools\expand-all.gif" />
+    <Content Include="Images\Tools\group.png" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
@@ -104,15 +122,30 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\default.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\Common.ar.designer.cs">
+      <DependentUpon>Common.ar.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="App_GlobalResources\Common.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Common.resx</DependentUpon>
     </Compile>
     <Compile Include="BootStrapper.cs" />
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -130,6 +163,13 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ARLogin.aspx.cs">
+      <DependentUpon>ARLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ARLogin.aspx.designer.cs">
+      <DependentUpon>ARLogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -139,6 +179,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructureMapServiceLocator.cs" />
+    <Compile Include="Utilities\LocalisationManager.cs" />
+    <Compile Include="Utilities\TreeBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AionHR.Infrastructure\AionHR.Infrastructure.csproj">
@@ -159,7 +201,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripts\" />
+    <Content Include="App_LocalResources\ARLogin.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Common.resx">
@@ -169,6 +211,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Login.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Common.ar.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Common.ar.designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

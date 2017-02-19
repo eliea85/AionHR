@@ -6,10 +6,14 @@
      border-radius: 0px; 
      border-width:2px !important;
 }
-.x-box-inner{
+#tabPanel  .x-box-inner{
     top:2px !important;
     left:2px !important;
     right:2px !important;
+}
+
+.x-tab-bar-top > .x-tab-bar-body-default {
+
 }
 
 .x-tab-default-top {
@@ -30,6 +34,8 @@
     border-style: solid;
     background-color: #4c9dd8;
     top:2px !important;
+    
+   
 }
 .x-tab-bar-top > .x-tab-bar-strip-default {
  

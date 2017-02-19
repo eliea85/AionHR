@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AionHR.Infrastructure</RootNamespace>
     <AssemblyName>AionHR.Infrastructure</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -55,6 +55,7 @@
     <Compile Include="Configuration\WebConfigApplicationSettings.cs" />
     <Compile Include="Domain\IEntity.cs" />
     <Compile Include="Domain\IRepository.cs" />
+    <Compile Include="Domain\ModelBase.cs" />
     <Compile Include="JSON\CustomResolver.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\Log4NetAdapter.cs" />

@@ -75,7 +75,7 @@
                 <ext:VBoxLayoutConfig Align="Center" />
             </LayoutConfig>
             <Items>
-                <ext:FormPanel
+                <ext:FormPanel 
                     ID="panelLogin"
                     runat="server"
                     Closable="false"
@@ -92,13 +92,19 @@
 
                     <Items>
                         <ext:TextField
-                            ID="tbAccountName"
-                            runat="server"
+                            ID="tbAccountName" IndicatorTip="A Indicator ToolTip"
+                            runat="server" Anchor="-5" 
                             AutoFocus="true"
+                             IsRemoteValidation="true" 
                             FieldLabel="<%$ Resources:  Account %>"
-                            AllowBlank="false"
+                            AllowBlank="false" 
                             BlankText="<%$ Resources: Common, MandatoryField %>"
-                            EmptyText="<%$ Resources:  EnterYourAccount %>" />
+                            EmptyText="<%$ Resources:  EnterYourAccount %>"  >
+                           
+                                <RemoteValidation OnValidation="CheckField" />
+
+                           
+                            </ext:TextField>
 
                         <ext:TextField ID="tbUsername"
                             runat="server"
@@ -140,6 +146,11 @@
                         <ext:Button ID="btnReset" runat="server" Text="<%$ Resources:Common , Reset %>">
                             <Listeners>
                                 <Click Handler="#{panelLogin}.reset();" />
+                            </Listeners>
+                        </ext:Button>
+                        <ext:Button ID="btnForgot" runat="server" Text="<%$ Resources:Common , ResetPassword %>">
+                            <Listeners>
+                                
                             </Listeners>
                         </ext:Button>
                     </Buttons>

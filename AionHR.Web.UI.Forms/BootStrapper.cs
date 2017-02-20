@@ -48,6 +48,7 @@ namespace AionHR.Web.UI.Forms
                 //Services
                 For<ISystemService>().Use<SystemService>();
                 For<IEmployeeService>().Use<EmployeeService>();
+                For<IMasterService>().Use<MasterService>();
             }
         }
     }

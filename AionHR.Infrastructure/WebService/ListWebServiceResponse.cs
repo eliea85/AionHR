@@ -15,7 +15,7 @@ namespace AionHR.Infrastructure.WebService
         
         public T[] list;
 
-        public int viewCount;
+        public int count;
 
         public List<T> GetAll()
         {

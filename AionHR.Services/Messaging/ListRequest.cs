@@ -28,7 +28,9 @@ namespace AionHR.Services.Messaging
         /// <summary>
         /// parameter list shipped with the web request
         /// </summary>
-        public Dictionary<string, string> parameters;
+        private Dictionary<string, string> parameters;
+
+        public Dictionary<string, string> QueryStringParams;
         /// <summary>
         /// /// parameter list shipped with the web request
         /// </summary>
@@ -41,8 +43,17 @@ namespace AionHR.Services.Messaging
                 parameters.Add("_filter", Filter);
                 parameters.Add("_size", Size);
                 parameters.Add("_startAt", StartAt);
+                foreach (var item in QueryStringParams)
+                {
+                    parameters.Add(item.Key, item.Value);
+                }
                 return parameters;
             }
+        }
+
+        public ListRequest()
+        {
+            QueryStringParams = new Dictionary<string, string>();
         }
     }
 }

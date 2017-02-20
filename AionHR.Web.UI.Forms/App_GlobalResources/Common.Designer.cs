@@ -367,15 +367,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Records Deleted Successfully.
-        /// </summary>
-        internal static string ManyRecordDeletedSucc {
-            get {
-                return ResourceManager.GetString("ManyRecordDeletedSucc", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Modules.
         /// </summary>
         internal static string Modules {
@@ -471,6 +462,15 @@ namespace Resources {
         internal static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Password.
+        /// </summary>
+        internal static string ResetPassword {
+            get {
+                return ResourceManager.GetString("ResetPassword", resourceCulture);
             }
         }
         

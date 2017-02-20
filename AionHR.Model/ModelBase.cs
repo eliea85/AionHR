@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model
 {
-   public class ModelBase
+   public abstract class ModelBase
     {
         public string recordId { get; set; }
     }

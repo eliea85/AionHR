@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Employees\Profile\Employee.cs" />
+    <Compile Include="MasterModule\IAccountRepository.cs" />
+    <Compile Include="ModelBase.cs" />
     <Compile Include="TimeAttendance\AttendanceBreak.cs" />
     <Compile Include="TimeAttendance\AttendanceDay.cs" />
     <Compile Include="TimeAttendance\AttendanceSchedule.cs" />
@@ -66,7 +69,6 @@
     <Compile Include="Employees\Profile\Badge.cs" />
     <Compile Include="Employees\Profile\CertificateLevel.cs" />
     <Compile Include="Employees\Profile\DocumentType.cs" />
-    <Compile Include="Employees\Profile\Employee.cs" />
     <Compile Include="Employees\IEmployeeRepository.cs" />
     <Compile Include="Employees\Profile\EmployeeAllowance.cs" />
     <Compile Include="Employees\Profile\EmployeeDocument.cs" />

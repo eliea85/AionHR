@@ -44,6 +44,11 @@ namespace AionHR.Web.UI.Forms
             {
                 lblError.Text = Resources.Common.SessionDisconnected;
             }
+            if (!X.IsAjaxRequest)
+            {
+                ResourceManager1.RegisterIcon(Icon.Tick);
+                ResourceManager1.RegisterIcon(Icon.Error);
+            }
         }
 
         protected void login_Click(object sender, EventArgs e)
@@ -92,7 +97,7 @@ namespace AionHR.Web.UI.Forms
         }
         protected void CheckField(object sender, RemoteValidationEventArgs e)
         {
-            TextField field = (TextField)sender;
+            TextField field = (TextField)sender;              
             AuthenticateRequest request = new AuthenticateRequest();
             request.Account = field.Text;
 
@@ -101,19 +106,18 @@ namespace AionHR.Web.UI.Forms
             if (response.Success)
             {
 
-                tbAccountName.IndicatorIcon = Icon.Accept;
-                ResourceManager1.RegisterIcon(Icon.Accept);
                 e.Success = true;
+                field.IndicatorTip = (String)GetLocalResourceObject("AccountValid");
             }
             else
             {
-                tbAccountName.IndicatorIcon = Icon.Error;
-                ResourceManager1.RegisterIcon(Icon.Error);
+                
+            
                 e.Success = false;
-                e.ErrorMessage = "Invalid Account";//should access local resources, just didn't figure how yet , only Resources.Common is accessible
+                e.ErrorMessage = (String)GetLocalResourceObject(response.Message); //should access local resources, just didn't figure how yet , only Resources.Common is accessible
 
             }
-            tbAccountName.ShowIndicator();
+            
             
 
             System.Threading.Thread.Sleep(500);

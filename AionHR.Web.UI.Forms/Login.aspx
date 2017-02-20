@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="AionHR.Web.UI.Forms.Login" %>
 
-<%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
+<%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -65,7 +65,7 @@
     </div>
 
     <form id="Form1" runat="server">
-        <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" />
+        <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="12000"/>
 
         <ext:Viewport ID="Viewport1" runat="server">
             <Defaults>
@@ -75,36 +75,39 @@
                 <ext:VBoxLayoutConfig Align="Center" />
             </LayoutConfig>
             <Items>
-                <ext:FormPanel 
+                <ext:FormPanel
                     ID="panelLogin"
                     runat="server"
-                    Closable="false"
-                    Resizable="false"
                     Icon="LockGo"
                     Title="<%$ Resources:Login %>"
                     Draggable="false"
                     Width="400"
-                    Modal="false"
                     Frame="true"
                     BodyPadding="20"
-                    Layout="FormLayout"
-                    DefaultButton="btnLogin" Border="false" Shadow="true">
+                    DefaultButton="btnLogin" Border="false" Shadow="true" DefaultAnchor="100%">
 
                     <Items>
                         <ext:TextField
-                            ID="tbAccountName" IndicatorTip="A Indicator ToolTip"
-                            runat="server" Anchor="-5" 
+                            ID="tbAccountName"
+                            runat="server"
                             AutoFocus="true"
-                             IsRemoteValidation="true" 
+                            IsRemoteValidation="true"                           
+                            MsgTarget="Side"
                             FieldLabel="<%$ Resources:  Account %>"
-                            AllowBlank="false" 
+                            AllowBlank="false"
                             BlankText="<%$ Resources: Common, MandatoryField %>"
-                            EmptyText="<%$ Resources:  EnterYourAccount %>"  >
-                           
-                                <RemoteValidation OnValidation="CheckField" />
+                            EmptyText="<%$ Resources:  EnterYourAccount %>">
 
-                           
-                            </ext:TextField>
+                            <RemoteValidation Delay="2000" OnValidation="CheckField"  >
+                                <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
+                                </RemoteValidation>
+                            <Listeners>
+                                
+                                <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-tick'); " />
+                                <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); " />
+                            </Listeners>
+
+                        </ext:TextField>
 
                         <ext:TextField ID="tbUsername"
                             runat="server"
@@ -150,7 +153,6 @@
                         </ext:Button>
                         <ext:Button ID="btnForgot" runat="server" Text="<%$ Resources:Common , ResetPassword %>">
                             <Listeners>
-                                
                             </Listeners>
                         </ext:Button>
                     </Buttons>

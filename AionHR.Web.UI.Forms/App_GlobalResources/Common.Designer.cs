@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Record.
+        /// </summary>
+        internal static string AddNewRecord {
+            get {
+                return ResourceManager.GetString("AddNewRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Human Resources Solution.
         /// </summary>
         internal static string ApplicationModule {
@@ -102,6 +111,15 @@ namespace Resources {
         internal static string Cases {
             get {
                 return ResourceManager.GetString("Cases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Case Sensitive.
+        /// </summary>
+        internal static string CaseSensitive {
+            get {
+                return ResourceManager.GetString("CaseSensitive", resourceCulture);
             }
         }
         
@@ -151,11 +169,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirmation.
+        /// </summary>
+        internal static string Confirmation {
+            get {
+                return ResourceManager.GetString("Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to © 2017 AionHR. All rights reserved..
         /// </summary>
         internal static string CopyRight {
             get {
                 return ResourceManager.GetString("CopyRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the selected records ?.
+        /// </summary>
+        internal static string DeleteManyRecord {
+            get {
+                return ResourceManager.GetString("DeleteManyRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete the selected record ?.
+        /// </summary>
+        internal static string DeleteOneRecord {
+            get {
+                return ResourceManager.GetString("DeleteOneRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Record.
+        /// </summary>
+        internal static string EditWindowsTitle {
+            get {
+                return ResourceManager.GetString("EditWindowsTitle", resourceCulture);
             }
         }
         
@@ -196,11 +250,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error Deleting Record,try again later..
+        /// </summary>
+        internal static string ErrorDeletingRecord {
+            get {
+                return ResourceManager.GetString("ErrorDeletingRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error In Operation, Try again Later !.
         /// </summary>
         internal static string ErrorOperation {
             get {
                 return ResourceManager.GetString("ErrorOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error Saving this Record..
+        /// </summary>
+        internal static string ErrorSavingRecord {
+            get {
+                return ResourceManager.GetString("ErrorSavingRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error Updating this Record..
+        /// </summary>
+        internal static string ErrorUpdatingRecord {
+            get {
+                return ResourceManager.GetString("ErrorUpdatingRecord", resourceCulture);
             }
         }
         
@@ -259,6 +340,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Live Search.
+        /// </summary>
+        internal static string LiveSearch {
+            get {
+                return ResourceManager.GetString("LiveSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading....
         /// </summary>
         internal static string Loading {
@@ -273,6 +363,15 @@ namespace Resources {
         internal static string MandatoryField {
             get {
                 return ResourceManager.GetString("MandatoryField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Records Deleted Successfully.
+        /// </summary>
+        internal static string ManyRecordDeletedSucc {
+            get {
+                return ResourceManager.GetString("ManyRecordDeletedSucc", resourceCulture);
             }
         }
         
@@ -295,11 +394,65 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification.
+        /// </summary>
+        internal static string Notification {
+            get {
+                return ResourceManager.GetString("Notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         internal static string Ok {
             get {
                 return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record Deleted Successfully.
+        /// </summary>
+        internal static string RecordDeletedSucc {
+            get {
+                return ResourceManager.GetString("RecordDeletedSucc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record Saved Successfully.
+        /// </summary>
+        internal static string RecordSavingSucc {
+            get {
+                return ResourceManager.GetString("RecordSavingSucc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record Updated Successfully.
+        /// </summary>
+        internal static string RecordUpdatedSucc {
+            get {
+                return ResourceManager.GetString("RecordUpdatedSucc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regular Expression.
+        /// </summary>
+        internal static string RegularExpression {
+            get {
+                return ResourceManager.GetString("RegularExpression", resourceCulture);
             }
         }
         
@@ -336,6 +489,15 @@ namespace Resources {
         internal static string SessionDisconnected {
             get {
                 return ResourceManager.GetString("SessionDisconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

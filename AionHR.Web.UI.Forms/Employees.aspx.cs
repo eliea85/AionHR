@@ -36,8 +36,11 @@ namespace AionHR.Web.UI.Forms
             ListRequest req = new ListRequest();
             req.Size = prms.Limit.ToString();
             req.StartAt = prms.Start.ToString();
-            req.Parameters.Add("departmentId", "0");
-            req.Parameters.Add("branchId", "0");
+            req.QueryStringParams.Add("_departmentId", "0");
+            req.QueryStringParams.Add("_branchId", "0");
+            req.QueryStringParams.Add("_includeInactive", "true");
+            req.QueryStringParams.Add("_sortBy", "fullName");
+            req.Filter = "";
             Response<List<Employee>> response = _employeeService.GetAll(req);
             var data = response.result;
             total = response.rowCount;

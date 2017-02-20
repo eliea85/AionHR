@@ -43,10 +43,12 @@
   <ItemGroup>
     <Compile Include="Implementations\BaseService.cs" />
     <Compile Include="Implementations\EmployeeService.cs" />
+    <Compile Include="Implementations\MasterService.cs" />
     <Compile Include="Interfaces\IBaseService.cs" />
     <Compile Include="Interfaces\IEmployeeService.cs" />
     <Compile Include="Interfaces\ISystemService.cs" />
     <Compile Include="Implementations\SystemService.cs" />
+    <Compile Include="Interfaces\IMasterService.cs" />
     <Compile Include="Messaging\System\AuthenticateRequest.cs" />
     <Compile Include="Messaging\System\AuthenticateResponse.cs" />
     <Compile Include="Messaging\ListRequest.cs" />

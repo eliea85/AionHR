@@ -277,7 +277,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modules.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string Modules {
             get {
@@ -318,6 +318,15 @@ namespace Resources {
         internal static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset Password.
+        /// </summary>
+        internal static string ResetPassword {
+            get {
+                return ResourceManager.GetString("ResetPassword", resourceCulture);
             }
         }
         

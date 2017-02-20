@@ -1,5 +1,7 @@
-﻿using AionHR.Services.Implementations;
+﻿using AionHR.Model.MasterModule;
+using AionHR.Services.Implementations;
 using AionHR.Services.Interfaces;
+using AionHR.Services.Messaging;
 using AionHR.Services.Messaging.System;
 using AionHR.Web.UI.Forms.Utilities;
 using Ext.Net;
@@ -24,6 +26,7 @@ namespace AionHR.Web.UI.Forms
 
 
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
+        IMasterService _masterService = ServiceLocator.Current.GetInstance<IMasterService>();
 
         protected override void InitializeCulture()
         {
@@ -61,6 +64,61 @@ namespace AionHR.Web.UI.Forms
                 
             }
         }
+
+        [DirectMethod]
+        public object DirectCheckField(string value)
+        {
+            //return true;
+            AuthenticateRequest request = new AuthenticateRequest();
+            request.Account = value;
+
+           Response<Account> response= _masterService.GetAccount(request);
+
+            if(response.Success)
+            {
+                
+                tbAccountName.IndicatorIcon = Icon.Accept;
+                ResourceManager1.RegisterIcon(Icon.Accept);
+                
+            }
+            else
+            {
+                tbAccountName.IndicatorIcon = Icon.Error;
+                ResourceManager1.RegisterIcon(Icon.Error);
+
+            }
+            tbAccountName.ShowIndicator();
+            return response.Success;
+        }
+        protected void CheckField(object sender, RemoteValidationEventArgs e)
+        {
+            TextField field = (TextField)sender;
+            AuthenticateRequest request = new AuthenticateRequest();
+            request.Account = field.Text;
+
+            Response<Account> response = _masterService.GetAccount(request);
+
+            if (response.Success)
+            {
+
+                tbAccountName.IndicatorIcon = Icon.Accept;
+                ResourceManager1.RegisterIcon(Icon.Accept);
+                e.Success = true;
+            }
+            else
+            {
+                tbAccountName.IndicatorIcon = Icon.Error;
+                ResourceManager1.RegisterIcon(Icon.Error);
+                e.Success = false;
+                e.ErrorMessage = "Invalid Account";//should access local resources, just didn't figure how yet , only Resources.Common is accessible
+
+            }
+            tbAccountName.ShowIndicator();
+            
+
+            System.Threading.Thread.Sleep(500);
+        }
+
 
 
 

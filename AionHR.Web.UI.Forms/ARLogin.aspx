@@ -91,14 +91,20 @@
                     DefaultButton="btnLogin" Border="false" Shadow="true">
 
                     <Items>
-                        <ext:TextField
-                            ID="tbAccountName"
-                            runat="server"
+                          <ext:TextField
+                            ID="tbAccountName" IndicatorTip="A Indicator ToolTip"
+                            runat="server" Anchor="-5" 
                             AutoFocus="true"
+                             IsRemoteValidation="true" 
                             FieldLabel="<%$ Resources:  Account %>"
-                            AllowBlank="false"
+                            AllowBlank="false" 
                             BlankText="<%$ Resources: Common, MandatoryField %>"
-                            EmptyText="<%$ Resources:  EnterYourAccount %>" />
+                            EmptyText="<%$ Resources:  EnterYourAccount %>"  >
+                           
+                                <RemoteValidation OnValidation="CheckField" />
+
+                           
+                            </ext:TextField>
 
                         <ext:TextField ID="tbUsername"
                             runat="server"
@@ -142,6 +148,11 @@
                         <ext:Button ID="btnReset" runat="server" Text="<%$ Resources:Common , Reset %>">
                             <Listeners>
                                 <Click Handler="#{panelLogin}.reset();" />
+                            </Listeners>
+                        </ext:Button>
+                             <ext:Button ID="btnForgot" runat="server" Text="<%$ Resources:Common , ResetPassword %>">
+                            <Listeners>
+                                
                             </Listeners>
                         </ext:Button>
                     </Buttons>

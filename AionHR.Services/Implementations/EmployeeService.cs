@@ -24,7 +24,7 @@ namespace AionHR.Services.Implementations
             Response<List<Employee>> response = new Response<List<Employee>>();
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             var webResponse = _employeeRepository.GetAll("qryES", headers, request.Parameters);
-            if (webResponse.statusId != "1")
+            if (webResponse==null  || webResponse.statusId != "1")
             {
                 response.result = null;
                 response.Success = false;
@@ -33,7 +33,7 @@ namespace AionHR.Services.Implementations
             else
             {
                 response.result = webResponse.list.ToList<Employee>();
-                response.rowCount = webResponse.viewCount;
+                response.rowCount = webResponse.count;
                 response.Success = true;
             }
             return response;

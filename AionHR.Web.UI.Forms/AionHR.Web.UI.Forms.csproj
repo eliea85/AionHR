@@ -45,10 +45,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ext.Net">
-      <HintPath>..\..\..\..\Desktop\Ext.Net.dll</HintPath>
+      <HintPath>..\..\..\..\Ext.net\Ext.NET.WebForms.4.1.0\lib\net46\Ext.Net.dll</HintPath>
     </Reference>
     <Reference Include="Ext.Net.Utilities">
-      <HintPath>..\..\..\..\Desktop\Ext.Net.Utilities.dll</HintPath>
+      <HintPath>..\..\..\..\Ext.net\Ext.NET.WebForms.4.1.0\lib\net46\Ext.Net.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -79,7 +79,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="Transformer.NET">
-      <HintPath>..\..\..\..\Desktop\Transformer.NET.dll</HintPath>
+      <HintPath>..\..\..\..\Ext.net\Ext.NET.WebForms.4.1.0\lib\net46\Transformer.NET.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

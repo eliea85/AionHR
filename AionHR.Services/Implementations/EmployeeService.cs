@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AionHR.Model.Employees;
 using AionHR.Services.Messaging;
 using AionHR.Infrastructure.Session;
+using AionHR.Model.Employees.Profile;
 
 namespace AionHR.Services.Implementations
 {

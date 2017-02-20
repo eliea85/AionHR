@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AionHR.Infrastructure.Domain;
 using AionHR.Infrastructure.Configuration;
+using AionHR.Model.Employees.Profile;
 
 namespace AionHR.Repository.WebService.Repositories
 {

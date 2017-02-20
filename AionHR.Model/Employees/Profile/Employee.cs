@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model.Employees.Profile
 {
-    class Employee:ModelBase,IEntity
+    public class Employee:ModelBase,IEntity
     {
         public string reference { get; set; }
         public string fullName { get; set; }

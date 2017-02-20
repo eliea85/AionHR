@@ -10,6 +10,7 @@ using AionHR.Model.Employees;
 using AionHR.Services.Messaging;
 using AionHR.Services.Interfaces;
 using Microsoft.Practices.ServiceLocation;
+using AionHR.Model.Employees.Profile;
 
 namespace AionHR.Web.UI.Forms
 {

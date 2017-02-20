@@ -1,4 +1,5 @@
 ﻿using AionHR.Model.Employees;
+using AionHR.Model.Employees.Profile;
 using AionHR.Services.Messaging;
 using System;
 using System.Collections.Generic;

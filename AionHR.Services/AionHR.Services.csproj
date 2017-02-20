@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementations\BaseService.cs" />
+    <Compile Include="Implementations\EmployeeService.cs" />
     <Compile Include="Interfaces\IBaseService.cs" />
+    <Compile Include="Interfaces\IEmployeeService.cs" />
     <Compile Include="Interfaces\ISystemService.cs" />
     <Compile Include="Implementations\SystemService.cs" />
     <Compile Include="Messaging\System\AuthenticateRequest.cs" />

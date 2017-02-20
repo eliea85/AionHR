@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MasterModule\IAccountRepository.cs" />
+    <Compile Include="ModelBase.cs" />
     <Compile Include="TimeAttendance\AttendanceBreak.cs" />
     <Compile Include="TimeAttendance\AttendanceDay.cs" />
     <Compile Include="TimeAttendance\AttendanceSchedule.cs" />

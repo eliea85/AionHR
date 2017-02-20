@@ -1,5 +1,6 @@
 ﻿using AionHR.Infrastructure.Session;
 using AionHR.Infrastructure.WebService;
+using AionHR.Model.MasterModule;
 using AionHR.Model.System;
 using AionHR.Services.Interfaces;
 using AionHR.Services.Messaging.System;
@@ -18,12 +19,14 @@ namespace AionHR.Services.Implementations
     {
         
         private readonly IUserRepository _userRepository;
-       // public readonly SessionHelper _sessionHelper;
+        private readonly IAccountRepository _accountRespository;
+        // public readonly SessionHelper _sessionHelper;
 
-        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper)
+        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper, IAccountRepository accountRepository) : base(sessionHelper)
         {
             _userRepository = userRepository;
-           // _sessionHelper = sessionHelper;
+            _accountRespository = accountRepository;
+            // _sessionHelper = sessionHelper;
         }
 
         /// <summary>
@@ -42,14 +45,14 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("_accountName", request.Account);
 
-            RecordWebServiceResponse<UserInfo> record = _userRepository.GetRecord("getAC", headers, parameters);
-            if (record == null)
+            RecordWebServiceResponse<Account> accountRecord = _accountRespository.GetRecord("getAC", headers, parameters);
+            if (accountRecord == null)
             {
                 response.Success = false;
                 response.Message = "RequestError"; //This message have to be read from resource, it indicate that there was a problem in the connection.
                 return response;
             }
-            if (record.record == null)
+            if (accountRecord.record == null)
             {
                 response.Success = false;
                 response.Message = "InvalidAccount";
@@ -58,19 +61,20 @@ namespace AionHR.Services.Implementations
 
 
             //Valid account >> fill session and prepare for the new request
-            SessionHelper.Set("AccountId", record.record.accountId);
+            SessionHelper.Set("AccountId", accountRecord.record.accountId);
              headers = SessionHelper.GetAuthorizationHeadersForUser();
+            
             parameters.Clear();
             parameters.Add("_email", request.UserName);
             parameters.Add("_password", request.Password);
-            record = _userRepository.GetRecord("signIn", headers, parameters);
-            if (record == null)
+            RecordWebServiceResponse<UserInfo> userRecord = _userRepository.GetRecord("signIn", headers, parameters);
+            if (userRecord == null)
             {
                 response.Success = false;
                 response.Message = "RequestError"; //This message have to be read from resource, it indicate that there was a problem in the connection.
                 return response;
             }
-            if (record.record == null)
+            if (userRecord.record == null)
             {
                 response.Success = false;
                 response.Message = "InvalidCredentials"; 
@@ -79,8 +83,8 @@ namespace AionHR.Services.Implementations
             //authentication Valid, set the session then return the response back
 
 
-            SessionHelper.Set("UserId", record.record.recordId);
-            SessionHelper.Set("key", SessionHelper.GetToken(SessionHelper.Get("AccountId").ToString(), record.record.recordId));
+            SessionHelper.Set("UserId", userRecord.record.recordId);
+            SessionHelper.Set("key", SessionHelper.GetToken(SessionHelper.Get("AccountId").ToString(), userRecord.record.recordId));
 
             response.Success = true;
             return response;

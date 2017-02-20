@@ -48,7 +48,7 @@ namespace AionHR.Web.UI.Forms.Utilities
             Ext.Net.Node rootParent = BuildRootParentNode("rootParent", Resources.Common.EmployeeFiles, true);
             Ext.Net.Node employees = BuildParentNode("rootParent_Employee", Resources.Common.Employee, true, rootParent);
             Ext.Net.Node employeesLeaf = BuildLeafNode("rootParent_Employee_Leaf", Resources.Common.EmployeeLeaf, "Group", true, employees);
-            FillConfigItem(employeesLeaf, "manageemployees", "Employee.aspx", Resources.Common.EmployeeLeaf, "icon-Employees", "1");
+            FillConfigItem(employeesLeaf, "manageemployees", "Employees.aspx", Resources.Common.EmployeeLeaf, "icon-Employees", "1");
 
 
 

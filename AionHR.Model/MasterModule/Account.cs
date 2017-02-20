@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AionHR.Infrastructure.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model.MasterModule
 {
-    public class Account
+    public class Account:IEntity
     {
         public int? accountId;
         public int registrationId;

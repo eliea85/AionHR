@@ -48,27 +48,21 @@ namespace AionHR.Web.UI.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ValidateSession();
+
 
             if (!X.IsAjaxRequest && !IsPostBack)
             {
-
+               
                 SetExtLanguage();
-                HideShowButtons();           
-                HideShowColumns();            
+                HideShowButtons();
+                HideShowColumns();
                 FillLiveSearchLabels();
 
-                
-            }
-        }
 
-        private void ValidateSession()
-        {
-            if (!_systemService.SessionHelper.CheckUserLoggedIn())
-            {
-                Response.Redirect("Login.aspx?timeout=yes", true);
             }
         }
+        
+      
 
         /// <summary>
         /// the detailed tabs for the edit form. I put two tabs by default so hide unecessary or add addional
@@ -78,17 +72,14 @@ namespace AionHR.Web.UI.Forms
             this.OtherInfoTab.Visible = false;
         }
 
-    
+
 
         private void HideShowButtons()
         {
-            this.btnCSV.Visible = this.btnCSVSeparator.Visible = false;
-            this.btnExcel.Visible = this.btnExcelSeparator.Visible = false;
-            this.btnXML.Visible = this.btnXMLSeparator.Visible = false;
-            this.btnHelp.Visible = false;
+
         }
 
-      
+
         /// <summary>
         /// hiding uncessary column in the grid. 
         /// </summary>
@@ -97,7 +88,7 @@ namespace AionHR.Web.UI.Forms
             this.colAttach.Visible = false;
         }
 
-        
+
         private void SetExtLanguage()
         {
             bool rtl = _systemService.SessionHelper.CheckIfArabicSession();
@@ -119,16 +110,16 @@ namespace AionHR.Web.UI.Forms
         protected void PoPuP(object sender, DirectEventArgs e)
         {
 
-            ValidateSession();
+           
             int id = Convert.ToInt32(e.ExtraParams["id"]);
             string type = e.ExtraParams["type"];
             switch (type)
             {
                 case "colEdit":
                     //Step 1 : get the object from the Web Service 
-                    
+
                     //Step 2 : call setvalues with the retrieved object
-                   // this.BasicInfoTab.SetValues(obj);
+                    // this.BasicInfoTab.SetValues(obj);
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -152,7 +143,7 @@ namespace AionHR.Web.UI.Forms
 
                 case "colAttach":
 
-                  //Here will show up a winow relatice to attachement depending on the case we are working on
+                    //Here will show up a winow relatice to attachement depending on the case we are working on
                     break;
                 default:
                     break;
@@ -170,7 +161,7 @@ namespace AionHR.Web.UI.Forms
         {
             try
             {
-               //Step 1 Code to delete the object from the database 
+                //Step 1 Code to delete the object from the database 
 
                 //Step 2 :  remove the object from the store
                 Store1.Remove(index);
@@ -206,7 +197,7 @@ namespace AionHR.Web.UI.Forms
         /// <param name="e"></param>
         protected void btnDeleteAll(object sender, DirectEventArgs e)
         {
-            ValidateSession();
+         
 
             RowSelectionModel sm = this.GridPanel1.GetSelectionModel() as RowSelectionModel;
             if (sm.SelectedRows.Count() <= 0)
@@ -241,7 +232,7 @@ namespace AionHR.Web.UI.Forms
                 {
                     //Step 1 :Getting the id of the selected record: it maybe string 
                     int id = int.Parse(row.RecordID);
-                   
+
 
                     //Step 2 : removing the record from the store
                     //To do add code here 
@@ -264,10 +255,10 @@ namespace AionHR.Web.UI.Forms
                 //Alert in case of any failure
                 X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
                 X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorDeletingRecord).Show();
-                
+
             }
         }
-        
+
         /// <summary>
         /// Adding new record
         /// </summary>
@@ -275,7 +266,7 @@ namespace AionHR.Web.UI.Forms
         /// <param name="e"></param>
         protected void ADDNewRecord(object sender, DirectEventArgs e)
         {
-            ValidateSession();
+           
             //Reset all values of the relative object
             BasicInfoTab.Reset();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
@@ -284,7 +275,7 @@ namespace AionHR.Web.UI.Forms
 
         protected void Store1_RefreshData(object sender, StoreReadDataEventArgs e)
         {
-            ValidateSession();
+           
             //GEtting the filter from the page
             string filter = string.Empty;
             int totalCount = 1;
@@ -308,7 +299,7 @@ namespace AionHR.Web.UI.Forms
 
         protected void SaveNewRecord(object sender, DirectEventArgs e)
         {
-            ValidateSession();
+          
 
             //Getting the id to check if it is an Add or an edit as they are managed within the same form.
             string id = e.ExtraParams["id"];
@@ -323,7 +314,7 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     //New Mode
-                  //Step 1 : Fill The object and insert in the store 
+                    //Step 1 : Fill The object and insert in the store 
 
                     //check if the insert failed
                     if (n == null)//it maybe be another condition
@@ -336,7 +327,7 @@ namespace AionHR.Web.UI.Forms
                     else
                     {
 
-                  //Add this record to the store 
+                        //Add this record to the store 
                         this.Store1.Insert(0, n);
 
                         //Display successful notification
@@ -349,7 +340,7 @@ namespace AionHR.Web.UI.Forms
 
                         this.EditRecordWindow.Close();
                         RowSelectionModel sm = this.GridPanel1.GetSelectionModel() as RowSelectionModel;
-                        sm.DeselectAll();                        
+                        sm.DeselectAll();
                         sm.Select(n.recordId.ToString());
 
 
@@ -372,9 +363,9 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                   //Step 1 Selecting the object or building up the object for update purpose
+                                                    //Step 1 Selecting the object or building up the object for update purpose
 
-                //Step 2 : saving to store
+                    //Step 2 : saving to store
 
                     //Step 3 :  Check if request fails
                     if (n == null)//it maybe another check
@@ -409,6 +400,16 @@ namespace AionHR.Web.UI.Forms
                 }
             }
         }
-        
+
+        [DirectMethod]
+        public string CheckSession()
+        {
+            if (!_systemService.SessionHelper.CheckUserLoggedIn())
+            {
+                return "0";
+            }
+            else return "1";
+        }
+
     }
 }

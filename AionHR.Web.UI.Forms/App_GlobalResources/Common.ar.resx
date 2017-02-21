@@ -267,4 +267,79 @@
   <data name="Yes" xml:space="preserve">
     <value>نعم</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>اضافة</value>
+  </data>
+  <data name="AfterPageText" xml:space="preserve">
+    <value>من  {0}</value>
+  </data>
+  <data name="Attach" xml:space="preserve">
+    <value>ارفاق</value>
+  </data>
+  <data name="BeforePageText" xml:space="preserve">
+    <value>صفحة</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>الغاء</value>
+  </data>
+  <data name="ColumnsText" xml:space="preserve">
+    <value>الخانات</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>حذف السجلات المحددة</value>
+  </data>
+  <data name="DisplayMsg" xml:space="preserve">
+    <value>عرض السجلات {0} - {1} من {2}</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="EmptyMsg" xml:space="preserve">
+    <value>لا سجلات للعرض</value>
+  </data>
+  <data name="FirstText" xml:space="preserve">
+    <value>الاول</value>
+  </data>
+  <data name="LastText" xml:space="preserve">
+    <value>الأخير</value>
+  </data>
+  <data name="LoadFailed" xml:space="preserve">
+    <value>فشل  في التحميل</value>
+  </data>
+  <data name="MatchFound" xml:space="preserve">
+    <value>تطابق(ات)</value>
+  </data>
+  <data name="NextText" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="PrevText" xml:space="preserve">
+    <value>السابق</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="RefreshText" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="SortAscText" xml:space="preserve">
+    <value>ترتيب تصاعدي</value>
+  </data>
+  <data name="SortClearText" xml:space="preserve">
+    <value>الغاء الترتيب</value>
+  </data>
+  <data name="SortDescText" xml:space="preserve">
+    <value>ترتيب تنازلي</value>
+  </data>
+  <data name="TitleSavingError" xml:space="preserve">
+    <value>خطأ في حفظ السجل</value>
+  </data>
+  <data name="TitleSavingErrorMessage" xml:space="preserve">
+    <value>خطأ خلال الحفظ,حاول مرة أخرى</value>
+  </data>
 </root>

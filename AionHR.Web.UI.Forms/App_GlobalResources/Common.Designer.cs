@@ -70,11 +70,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Record.
         /// </summary>
         internal static string AddNewRecord {
             get {
                 return ResourceManager.GetString("AddNewRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of {0}.
+        /// </summary>
+        internal static string AfterPageText {
+            get {
+                return ResourceManager.GetString("AfterPageText", resourceCulture);
             }
         }
         
@@ -93,6 +111,33 @@ namespace Resources {
         internal static string ApplicationTitle {
             get {
                 return ResourceManager.GetString("ApplicationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attach.
+        /// </summary>
+        internal static string Attach {
+            get {
+                return ResourceManager.GetString("Attach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page.
+        /// </summary>
+        internal static string BeforePageText {
+            get {
+                return ResourceManager.GetString("BeforePageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
@@ -160,6 +205,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Columns.
+        /// </summary>
+        internal static string ColumnsText {
+            get {
+                return ResourceManager.GetString("ColumnsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Information.
         /// </summary>
         internal static string Company {
@@ -187,6 +241,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete All.
+        /// </summary>
+        internal static string DeleteAll {
+            get {
+                return ResourceManager.GetString("DeleteAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete the selected records ?.
         /// </summary>
         internal static string DeleteManyRecord {
@@ -201,6 +273,24 @@ namespace Resources {
         internal static string DeleteOneRecord {
             get {
                 return ResourceManager.GetString("DeleteOneRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Displaying Records {0} - {1} of {2}.
+        /// </summary>
+        internal static string DisplayMsg {
+            get {
+                return ResourceManager.GetString("DisplayMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -237,6 +327,15 @@ namespace Resources {
         internal static string EmployeeLeaf {
             get {
                 return ResourceManager.GetString("EmployeeLeaf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Record to Display.
+        /// </summary>
+        internal static string EmptyMsg {
+            get {
+                return ResourceManager.GetString("EmptyMsg", resourceCulture);
             }
         }
         
@@ -322,6 +421,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First.
+        /// </summary>
+        internal static string FirstText {
+            get {
+                return ResourceManager.GetString("FirstText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         internal static string Home {
@@ -340,11 +448,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last.
+        /// </summary>
+        internal static string LastText {
+            get {
+                return ResourceManager.GetString("LastText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Live Search.
         /// </summary>
         internal static string LiveSearch {
             get {
                 return ResourceManager.GetString("LiveSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load Failed.
+        /// </summary>
+        internal static string LoadFailed {
+            get {
+                return ResourceManager.GetString("LoadFailed", resourceCulture);
             }
         }
         
@@ -367,7 +493,25 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modules.
+        ///   Looks up a localized string similar to Records Deleted Successfully.
+        /// </summary>
+        internal static string ManyRecordDeletedSucc {
+            get {
+                return ResourceManager.GetString("ManyRecordDeletedSucc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to match(es) found..
+        /// </summary>
+        internal static string MatchFound {
+            get {
+                return ResourceManager.GetString("MatchFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string Modules {
             get {
@@ -381,6 +525,15 @@ namespace Resources {
         internal static string NavigationPane {
             get {
                 return ResourceManager.GetString("NavigationPane", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string NextText {
+            get {
+                return ResourceManager.GetString("NextText", resourceCulture);
             }
         }
         
@@ -412,6 +565,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        internal static string PrevText {
+            get {
+                return ResourceManager.GetString("PrevText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Record Deleted Successfully.
         /// </summary>
         internal static string RecordDeletedSucc {
@@ -435,6 +597,24 @@ namespace Resources {
         internal static string RecordUpdatedSucc {
             get {
                 return ResourceManager.GetString("RecordUpdatedSucc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        internal static string RefreshText {
+            get {
+                return ResourceManager.GetString("RefreshText", resourceCulture);
             }
         }
         
@@ -475,6 +655,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Work Schedule.
         /// </summary>
         internal static string Scheduler {
@@ -489,6 +678,51 @@ namespace Resources {
         internal static string SessionDisconnected {
             get {
                 return ResourceManager.GetString("SessionDisconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Ascending.
+        /// </summary>
+        internal static string SortAscText {
+            get {
+                return ResourceManager.GetString("SortAscText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Sorting.
+        /// </summary>
+        internal static string SortClearText {
+            get {
+                return ResourceManager.GetString("SortClearText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Descending.
+        /// </summary>
+        internal static string SortDescText {
+            get {
+                return ResourceManager.GetString("SortDescText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error Saving Record.
+        /// </summary>
+        internal static string TitleSavingError {
+            get {
+                return ResourceManager.GetString("TitleSavingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error During Saving, Try again later..
+        /// </summary>
+        internal static string TitleSavingErrorMessage {
+            get {
+                return ResourceManager.GetString("TitleSavingErrorMessage", resourceCulture);
             }
         }
         

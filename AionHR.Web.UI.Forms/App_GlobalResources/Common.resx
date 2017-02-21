@@ -267,4 +267,79 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AfterPageText" xml:space="preserve">
+    <value>of {0}</value>
+  </data>
+  <data name="Attach" xml:space="preserve">
+    <value>Attach</value>
+  </data>
+  <data name="BeforePageText" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ColumnsText" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>Delete All</value>
+  </data>
+  <data name="DisplayMsg" xml:space="preserve">
+    <value>Displaying Records {0} - {1} of {2}</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EmptyMsg" xml:space="preserve">
+    <value>No Record to Display</value>
+  </data>
+  <data name="FirstText" xml:space="preserve">
+    <value>First</value>
+  </data>
+  <data name="LastText" xml:space="preserve">
+    <value>Last</value>
+  </data>
+  <data name="LoadFailed" xml:space="preserve">
+    <value>Load Failed</value>
+  </data>
+  <data name="MatchFound" xml:space="preserve">
+    <value>match(es) found.</value>
+  </data>
+  <data name="NextText" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="PrevText" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="RefreshText" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SortAscText" xml:space="preserve">
+    <value>Sort Ascending</value>
+  </data>
+  <data name="SortClearText" xml:space="preserve">
+    <value>Clear Sorting</value>
+  </data>
+  <data name="SortDescText" xml:space="preserve">
+    <value>Sort Descending</value>
+  </data>
+  <data name="TitleSavingError" xml:space="preserve">
+    <value>Error Saving Record</value>
+  </data>
+  <data name="TitleSavingErrorMessage" xml:space="preserve">
+    <value>Error During Saving, Try again later.</value>
+  </data>
 </root>

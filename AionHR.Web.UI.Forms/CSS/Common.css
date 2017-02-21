@@ -11,7 +11,11 @@
     left:2px !important;
     right:2px !important;
 }
-
+#panelRecordDetails  .x-box-inner{
+    top:2px !important;
+    left:2px !important;
+    right:2px !important;
+}
 .x-tab-bar-top > .x-tab-bar-body-default {
 
 }
@@ -73,3 +77,4 @@
      .x-title.x-rtl {
             font-weight: bold;
         }
+

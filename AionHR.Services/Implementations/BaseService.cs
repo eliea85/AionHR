@@ -27,5 +27,8 @@ namespace AionHR.Services.Implementations
             response.Success = webResponse!=null && webResponse.statusId == "1";
             return response;
         }
+
+        //GetAll 
+        //Repository.GetAll(??MethodName)
     }
 }

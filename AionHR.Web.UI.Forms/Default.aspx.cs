@@ -111,7 +111,9 @@ namespace AionHR.Web.UI.Forms
                     nodes = TreeBuilder.Instance.BuildEmployeeFilesTree(commonTree.Root);
                     return nodes.ToJson();
 
-
+                case 3:
+                    nodes = TreeBuilder.Instance.BuildCompanyStructureTree(commonTree.Root);
+                    return nodes.ToJson();
                 default:
                     nodes = TreeBuilder.Instance.BuildCaseManagementTree(commonTree.Root);
                     return nodes.ToJson();

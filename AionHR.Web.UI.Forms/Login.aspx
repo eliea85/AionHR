@@ -83,7 +83,7 @@
                     Draggable="false"
                     Width="400"
                     Frame="true"
-                    BodyPadding="20"
+                    BodyPadding="20" AutoUpdateLayout="true"
                     DefaultButton="btnLogin" Border="false" Shadow="true" DefaultAnchor="100%">
 
                     <Items>
@@ -92,7 +92,7 @@
                             runat="server"
                             AutoFocus="true"
                             IsRemoteValidation="true"                           
-                            MsgTarget="Side"
+                            MsgTarget="Side" 
                             FieldLabel="<%$ Resources:  Account %>"
                             AllowBlank="false"
                             BlankText="<%$ Resources: Common, MandatoryField %>"
@@ -114,7 +114,8 @@
                             BlankText="<%$ Resources:Common, MandatoryField %>"
                             AllowBlank="false"
                             FieldLabel="<%$ Resources:  UserID %>"
-                            EmptyText="<%$ Resources:  EnterYourID %>" />
+                            EmptyText="<%$ Resources:  EnterYourID %>" 
+                             />
                         <ext:TextField ID="tbPassword"
                             runat="server"
                             AllowBlank="false"

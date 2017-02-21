@@ -89,6 +89,7 @@
     <Content Include="CSS\HeaderInside.css" />
     <Content Include="CSS\Header.css" />
     <Content Include="CSS\Home.css" />
+    <Content Include="CSS\LiveSearch.css" />
     <Content Include="CSS\Tools.css" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
@@ -125,8 +126,11 @@
   <ItemGroup>
     <Content Include="resetPw.aspx" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\test.js" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Test.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +210,13 @@
       <DependentUpon>resetPw.aspx</DependentUpon>
     </Compile>
     <Compile Include="StructureMapServiceLocator.cs" />
+    <Compile Include="Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\LocalisationManager.cs" />
     <Compile Include="Utilities\TreeBuilder.cs" />
   </ItemGroup>
@@ -244,12 +255,6 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Common.ar.designer.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_LocalResources\ForgotPassword.aspx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_LocalResources\ForgotPassword.aspx.ar.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

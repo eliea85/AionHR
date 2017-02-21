@@ -45,6 +45,8 @@ namespace AionHR.Web.UI.Forms
             {
                 lblError.Text = Resources.Common.SessionDisconnected;
             }
+            if (Request.QueryString["accountId"] != null)
+                tbAccountName.Text = Request.QueryString["accountId"];
             SetExtLanguage();
             if (!X.IsAjaxRequest)
             {

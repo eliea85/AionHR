@@ -77,14 +77,14 @@
             <Items>
                 <ext:FormPanel
                     ID="panelLogin"
-                    runat="server"                  
+                    runat="server"
                     Icon="LockGo"
                     Title="<%$ Resources:Login %>"
                     Draggable="false"
-                    Width="400"                  
+                    Width="400"
                     Frame="true"
                     BodyPadding="20"
-                  
+
                     DefaultButton="btnLogin" Border="false" Shadow="true" DefaultAnchor="100%">
                     
                     <Items>
@@ -99,14 +99,7 @@
                             BlankText="<%$ Resources: Common, MandatoryField %>"
                             EmptyText="<%$ Resources:  EnterYourAccount %>"  >
                            
-                                  <RemoteValidation Delay="2000" OnValidation="CheckField"  >
-                                <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
-                                </RemoteValidation>
-                            <Listeners>
-                                
-                                <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-tick'); " />
-                                <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); " />
-                            </Listeners>
+                                <RemoteValidation OnValidation="CheckField" />
 
                            
                             </ext:TextField>

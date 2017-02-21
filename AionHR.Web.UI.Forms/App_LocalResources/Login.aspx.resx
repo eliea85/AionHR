@@ -147,4 +147,7 @@
   <data name="UserID" xml:space="preserve">
     <value>Username | Email</value>
   </data>
+  <data name="ValidAccount" xml:space="preserve">
+    <value>Valid Account Name</value>
+  </data>
 </root>

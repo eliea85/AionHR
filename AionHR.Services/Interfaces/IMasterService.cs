@@ -12,5 +12,7 @@ namespace AionHR.Services.Interfaces
     public interface IMasterService:IBaseService
     {
         Response<Account> GetAccount(AuthenticateRequest request);   
+
+
     }
 }

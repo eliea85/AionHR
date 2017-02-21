@@ -20,11 +20,8 @@ using System.Web.UI.WebControls;
 
 namespace AionHR.Web.UI.Forms
 {
-    public partial class Login : Page
+    public partial class ForgotPassword : System.Web.UI.Page
     {
-
-
-
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
         IMasterService _masterService = ServiceLocator.Current.GetInstance<IMasterService>();
 
@@ -51,7 +48,7 @@ namespace AionHR.Web.UI.Forms
             AuthenticateRequest request = new AuthenticateRequest();
             request.Account = tbAccountName.Text;
             request.UserName = tbUsername.Text;
-            request.Password = tbPassword.Text;
+            
             AuthenticateResponse response = _systemService.Authenticate(request);
             if (response.Success)
             {
@@ -61,7 +58,7 @@ namespace AionHR.Web.UI.Forms
             else
             {
                 lblError.Text = (String)GetLocalResourceObject(response.Message);
-                
+
             }
         }
 
@@ -72,14 +69,14 @@ namespace AionHR.Web.UI.Forms
             AuthenticateRequest request = new AuthenticateRequest();
             request.Account = value;
 
-           Response<Account> response= _masterService.GetAccount(request);
+            Response<Account> response = _masterService.GetAccount(request);
 
-            if(response.Success)
+            if (response.Success)
             {
-                
+
                 tbAccountName.IndicatorIcon = Icon.Accept;
                 ResourceManager1.RegisterIcon(Icon.Accept);
-                
+
             }
             else
             {
@@ -102,26 +99,25 @@ namespace AionHR.Web.UI.Forms
             {
 
                 tbAccountName.IndicatorIcon = Icon.Accept;
-                field.IndicatorTip = "Identified";
-                
+                tbAccountName.IndicatorTip = "Identified";
+
                 e.Success = true;
             }
             else
             {
                 tbAccountName.IndicatorIcon = Icon.Error;
-                
+
                 e.Success = false;
                 tbAccountName.IndicatorTip = "Unidentified";
                 e.ErrorMessage = "Invalid Account";//should access local resources, just didn't figure how yet , only Resources.Common is accessible
 
             }
-            
+
         }
 
-        protected void forgotpw_Event(object sender, EventArgs e)
+        protected void forgotpw_Event()
         {
-            Response.Redirect("~/ForgotPassword.aspx");
-            
+
         }
     }
 }

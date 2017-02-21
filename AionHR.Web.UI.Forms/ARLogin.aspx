@@ -101,7 +101,17 @@
                             BlankText="<%$ Resources: Common, MandatoryField %>"
                             EmptyText="<%$ Resources:  EnterYourAccount %>"  >
                            
-                                <RemoteValidation OnValidation="CheckField" />
+                                       <RemoteValidation Delay="500" OnValidation="CheckField"  >
+                              <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
+                                          <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
+                                         </RemoteValidation>
+                                  
+
+                            <Listeners>
+                                 
+                                 <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-accept'); this.setIndicatorTip('اسم حساب صحيح'); " />
+                                 <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); this.setIndicatorTip('اسم حساب غير صالح'); " />
+                            </Listeners>
 
                            
                             </ext:TextField>

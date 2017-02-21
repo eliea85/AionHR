@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="AionHR.Web.UI.Forms.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ForgotPassword.aspx.cs" Inherits="AionHR.Web.UI.Forms.ForgotPassword" %>
 
 <%@ Register TagPrefix="ext" Namespace="Ext.Net" Assembly="Ext.Net" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -93,27 +93,17 @@
                     <Items>
                         <ext:TextField
                             ID="tbAccountName"
-                            runat="server"
+                            runat="server" Anchor="-5" 
                             AutoFocus="true"
                              IsRemoteValidation="true" 
                             FieldLabel="<%$ Resources:  Account %>"
-                            AllowBlank="false"  
-                             MsgTarget="Side"
+                            AllowBlank="false"  IndicatorIcon="Accept"
                             BlankText="<%$ Resources: Common, MandatoryField %>"
                             EmptyText="<%$ Resources:  EnterYourAccount %>"  >
                            
-                                
-                                     <RemoteValidation Delay="500" OnValidation="CheckField"  >
-                              <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
-                                          <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
-                                         </RemoteValidation>
-                                  
+                                <RemoteValidation OnValidation="CheckField" ShowBusy="true"  />
 
-                            <Listeners>
-                                 
-                                 <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-accept'); this.setIndicatorTip('Valid Account Name'); " />
-                                 <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); this.setIndicatorTip('Invalid Account Name'); " />
-                            </Listeners>
+                           
                             </ext:TextField>
 
                         <ext:TextField ID="tbUsername"
@@ -122,13 +112,7 @@
                             AllowBlank="false"
                             FieldLabel="<%$ Resources:  UserID %>"
                             EmptyText="<%$ Resources:  EnterYourID %>" />
-                        <ext:TextField ID="tbPassword"
-                            runat="server"
-                            AllowBlank="false"
-                            BlankText="<%$ Resources:Common , MandatoryField %>"
-                            FieldLabel="<%$ Resources: Password %>"
-                            EmptyText="<%$ Resources: EnterYourPassword %>"
-                            InputType="Password" />
+                        
                         <ext:FieldContainer runat="server" ID="lblErroContainer" FieldLabel="">
                             <Items>
                                 <ext:Label ID="lblError"
@@ -158,13 +142,7 @@
                                 <Click Handler="#{panelLogin}.reset();" />
                             </Listeners>
                         </ext:Button>
-                        <ext:Button ID="btnForgot" runat="server" Text="<%$ Resources:Common , ResetPassword %>">
-                            <DirectEvents>
-                                <Click  OnEvent="forgotpw_Event">
-                                    <EventMask ShowMask="true" Msg="<%$ Resources:Common , Loading %>" MinDelay="500" />
-                                </Click>
-                            </DirectEvents>
-                        </ext:Button>
+                        
                     </Buttons>
                 </ext:FormPanel>
             </Items>

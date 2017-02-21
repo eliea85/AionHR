@@ -59,7 +59,7 @@
     <div class="footer">
 
         <span class="footer__note title-sub">
-            <asp:Literal ID="Literal1" runat="server" Text="<%$ Resources:Common , CopyRight%>" /></span>
+            <asp:Literal ID="Literal1" runat="server" Text="" /></span>
 
 
     </div>
@@ -81,7 +81,7 @@
                     Closable="false"
                     Resizable="false"
                     Icon="LockGo"
-                    Title="<%$ Resources:Login %>"
+                    Title="Forget Password"
                     Draggable="false"
                     Width="400"
                     Modal="false"
@@ -96,22 +96,28 @@
                             runat="server" Anchor="-5" 
                             AutoFocus="true"
                              IsRemoteValidation="true" 
-                            FieldLabel="<%$ Resources:  Account %>"
-                            AllowBlank="false"  IndicatorIcon="Accept"
-                            BlankText="<%$ Resources: Common, MandatoryField %>"
-                            EmptyText="<%$ Resources:  EnterYourAccount %>"  >
+                            FieldLabel="Account Name"
+                            AllowBlank="false"  
+                            BlankText=""
+                            EmptyText=""  >
                            
-                                <RemoteValidation OnValidation="CheckField" ShowBusy="true"  />
-
+                                <RemoteValidation Delay="2000" OnValidation="CheckField"  >
+                                <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
+                                </RemoteValidation>
+                            <Listeners>
+                                
+                                <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-accept'); " />
+                                <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); " />
+                            </Listeners>
                            
                             </ext:TextField>
 
                         <ext:TextField ID="tbUsername"
                             runat="server"
-                            BlankText="<%$ Resources:Common, MandatoryField %>"
+                            BlankText=""
                             AllowBlank="false"
-                            FieldLabel="<%$ Resources:  UserID %>"
-                            EmptyText="<%$ Resources:  EnterYourID %>" />
+                            FieldLabel=" Email"
+                            EmptyText="" />
                         
                         <ext:FieldContainer runat="server" ID="lblErroContainer" FieldLabel="">
                             <Items>
@@ -124,7 +130,7 @@
                         </ext:FieldContainer>
                     </Items>
                     <Buttons>
-                        <ext:Button ID="btnLogin" runat="server" Text="<%$ Resources:  Login %>">
+                        <ext:Button ID="btnLogin" runat="server" Text="submit">
                             <Listeners>
                                 <Click Handler="
                             if (!#{panelLogin}.validate()) {                                
@@ -133,11 +139,11 @@
                             </Listeners>
                             <DirectEvents>
                                 <Click OnEvent="login_Click">
-                                    <EventMask ShowMask="true" Msg="<%$ Resources:Common , Loading %>" MinDelay="500" />
+                                    <EventMask ShowMask="true" Msg="" MinDelay="500" />
                                 </Click>
                             </DirectEvents>
                         </ext:Button>
-                        <ext:Button ID="btnReset" runat="server" Text="<%$ Resources:Common , Reset %>">
+                        <ext:Button ID="btnReset" runat="server" Text="reset">
                             <Listeners>
                                 <Click Handler="#{panelLogin}.reset();" />
                             </Listeners>

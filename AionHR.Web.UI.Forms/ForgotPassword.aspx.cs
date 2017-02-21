@@ -41,52 +41,36 @@ namespace AionHR.Web.UI.Forms
             {
                 lblError.Text = Resources.Common.SessionDisconnected;
             }
+            ResourceManager1.RegisterIcon(Icon.Tick);
+            ResourceManager1.RegisterIcon(Icon.Error);
         }
 
         protected void login_Click(object sender, EventArgs e)
         {
             AuthenticateRequest request = new AuthenticateRequest();
             request.Account = tbAccountName.Text;
+            Response<Account> account = _masterService.GetAccount(request);
+            if(!account.Success)
+            {
+                lblError.Text = (String)GetLocalResourceObject(account.Message);
+            }
             request.UserName = tbUsername.Text;
-            
-            AuthenticateResponse response = _systemService.Authenticate(request);
+            PasswordRecoveryResponse response = _systemService.RequestPasswordRecovery(request);
             if (response.Success)
             {
+                
+                X.Msg.Alert("Recovery","Your Password has been sent to your email!");
                 //Redirecting..
-                Response.Redirect("Default.aspx", true);
+                Response.Redirect("Login.aspx", true);
             }
             else
             {
-                lblError.Text = (String)GetLocalResourceObject(response.Message);
+                lblError.Text = "Error!";//(String)GetLocalResourceObject(response.Message);
 
             }
         }
 
-        [DirectMethod]
-        public object DirectCheckField(string value)
-        {
-            //return true;
-            AuthenticateRequest request = new AuthenticateRequest();
-            request.Account = value;
-
-            Response<Account> response = _masterService.GetAccount(request);
-
-            if (response.Success)
-            {
-
-                tbAccountName.IndicatorIcon = Icon.Accept;
-                ResourceManager1.RegisterIcon(Icon.Accept);
-
-            }
-            else
-            {
-                tbAccountName.IndicatorIcon = Icon.Error;
-                ResourceManager1.RegisterIcon(Icon.Error);
-
-            }
-            tbAccountName.ShowIndicator();
-            return response.Success;
-        }
+        
         protected void CheckField(object sender, RemoteValidationEventArgs e)
         {
             TextField field = (TextField)sender;

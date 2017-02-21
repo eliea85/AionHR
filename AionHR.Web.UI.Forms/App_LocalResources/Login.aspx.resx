@@ -120,6 +120,9 @@
   <data name="Account" xml:space="preserve">
     <value>Account Name</value>
   </data>
+  <data name="AccountValid" xml:space="preserve">
+    <value>Account is valid.</value>
+  </data>
   <data name="EnterYourAccount" xml:space="preserve">
     <value>Enter Your Account</value>
   </data>

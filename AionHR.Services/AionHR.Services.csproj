@@ -55,6 +55,8 @@
     <Compile Include="Messaging\RecordRequest.cs" />
     <Compile Include="Messaging\Response.cs" />
     <Compile Include="Messaging\ResponseBase.cs" />
+    <Compile Include="Messaging\System\PasswordRecoveryRequest.cs" />
+    <Compile Include="Messaging\System\PasswordRecoveryResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

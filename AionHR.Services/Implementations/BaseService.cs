@@ -1,5 +1,7 @@
 ﻿using AionHR.Infrastructure.Session;
+using AionHR.Infrastructure.WebService;
 using AionHR.Services.Interfaces;
+using AionHR.Services.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,13 @@ namespace AionHR.Services.Implementations
         public BaseService(SessionHelper sessionHelper)
         {
             SessionHelper = sessionHelper;
+        }
+
+        protected T CreateServiceResponse<T>(BaseWebServiceResponse webResponse) where T :ResponseBase,new()
+        {
+            T response =new T();
+            response.Success = webResponse!=null && webResponse.statusId == "1";
+            return response;
         }
     }
 }

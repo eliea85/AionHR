@@ -77,40 +77,35 @@
             <Items>
                 <ext:FormPanel
                     ID="panelLogin"
-                    runat="server"
-                    Closable="false"
-                    Resizable="false"
+                    runat="server"                  
                     Icon="LockGo"
                     Title="<%$ Resources:Login %>"
                     Draggable="false"
-                    Width="400"
-                    Modal="false"
+                    Width="400"                  
                     Frame="true"
                     BodyPadding="20"
-                    Layout="FormLayout"
-                    DefaultButton="btnLogin" Border="false" Shadow="true">
-
+                  
+                    DefaultButton="btnLogin" Border="false" Shadow="true" DefaultAnchor="100%">
+                    
                     <Items>
                           <ext:TextField
-                            ID="tbAccountName" IndicatorTip="A Indicator ToolTip"
-                            runat="server" Anchor="-5" 
+                            ID="tbAccountName" 
+                            runat="server" 
                             AutoFocus="true"
                              IsRemoteValidation="true" 
                             FieldLabel="<%$ Resources:  Account %>"
                             AllowBlank="false" 
+                              MsgTarget="Side"
                             BlankText="<%$ Resources: Common, MandatoryField %>"
                             EmptyText="<%$ Resources:  EnterYourAccount %>"  >
                            
-                                       <RemoteValidation Delay="500" OnValidation="CheckField"  >
-                              <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
-                                          <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
-                                         </RemoteValidation>
-                                  
-
+                                  <RemoteValidation Delay="2000" OnValidation="CheckField"  >
+                                <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
+                                </RemoteValidation>
                             <Listeners>
-                                 
-                                 <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-accept'); this.setIndicatorTip('اسم حساب صحيح'); " />
-                                 <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); this.setIndicatorTip('اسم حساب غير صالح'); " />
+                                
+                                <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-tick'); " />
+                                <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); " />
                             </Listeners>
 
                            
@@ -120,6 +115,7 @@
                             runat="server"
                             BlankText="<%$ Resources:Common, MandatoryField %>"
                             AllowBlank="false"
+                            
                             FieldLabel="<%$ Resources:  UserID %>"
                             EmptyText="<%$ Resources:  EnterYourID %>" />
                         <ext:TextField ID="tbPassword"

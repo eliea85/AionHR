@@ -45,10 +45,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ext.Net">
-      <HintPath>..\..\..\..\Desktop\Ext.Net.dll</HintPath>
+      <HintPath>..\..\..\..\Ext.net\Ext.NET.WebForms.4.1.0\lib\net46\Ext.Net.dll</HintPath>
     </Reference>
     <Reference Include="Ext.Net.Utilities">
-      <HintPath>..\..\..\..\Desktop\Ext.Net.Utilities.dll</HintPath>
+      <HintPath>..\..\..\..\Ext.net\Ext.NET.WebForms.4.1.0\lib\net46\Ext.Net.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -79,7 +79,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="Transformer.NET">
-      <HintPath>..\..\..\..\Desktop\Transformer.NET.dll</HintPath>
+      <HintPath>..\..\..\..\Ext.net\Ext.NET.WebForms.4.1.0\lib\net46\Transformer.NET.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +93,7 @@
     <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Employees.aspx" />
+    <Content Include="ForgotAccount.aspx" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
@@ -122,6 +123,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="resetPw.aspx" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\jquery.min.js" />
@@ -157,6 +159,13 @@
       <DependentUpon>Employees.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ForgotAccount.aspx.cs">
+      <DependentUpon>ForgotAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotAccount.aspx.designer.cs">
+      <DependentUpon>ForgotAccount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ForgotPassword.aspx.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -189,6 +198,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="resetPw.aspx.cs">
+      <DependentUpon>resetPw.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="resetPw.aspx.designer.cs">
+      <DependentUpon>resetPw.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StructureMapServiceLocator.cs" />
     <Compile Include="Utilities\LocalisationManager.cs" />
     <Compile Include="Utilities\TreeBuilder.cs" />

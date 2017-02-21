@@ -36,7 +36,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\Desktop\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\..\Ext.net\Ext.NET.WebForms.4.1.0\lib\net46\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -67,6 +67,7 @@
     <Compile Include="Tokens\APIKeyBasedTokenGenerator.cs" />
     <Compile Include="Tokens\ITokenGenerator.cs" />
     <Compile Include="WebService\BaseWebServiceResponse.cs" />
+    <Compile Include="WebService\BlankWebServiceResponse.cs" />
     <Compile Include="WebService\HTTPWebServiceRequest.cs" />
     <Compile Include="WebService\IWebServiceRequest.cs" />
     <Compile Include="WebService\ListWebServiceResponse.cs" />

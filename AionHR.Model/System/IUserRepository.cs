@@ -13,6 +13,7 @@ namespace AionHR.Model.System
     /// </summary>
     public interface IUserRepository:IRepository<UserInfo,string>
     {
-      
+
+        
     }
 }

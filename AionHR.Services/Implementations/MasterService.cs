@@ -44,7 +44,22 @@ namespace AionHR.Services.Implementations
                 return response;
             }
             response.result = accountRecord.record;
+            SessionHelper.Set("AccountId", accountRecord.record.accountId);
             response.Success = true;
+            return response;
+        }
+
+        public Response<Account> RequestAccountRecovery(AuthenticateRequest request)
+        {
+            Response<Account> response;
+            SessionHelper.Set("AccountId", "0");
+            Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
+            Dictionary<string, string> queryParams = new Dictionary<string, string>();
+            queryParams.Add("_email", request.UserName);
+            RecordWebServiceResponse<Account> webResponse=  _accountRepository.GetRecord("reqAN", headers, queryParams);
+            response = CreateServiceResponse<Response<Account>>(webResponse);
+            if (!response.Success)
+                response.Message = "";
             return response;
         }
     }

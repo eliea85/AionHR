@@ -132,6 +132,9 @@
   <data name="Cases" xml:space="preserve">
     <value>الحالات</value>
   </data>
+  <data name="CaseSensitive" xml:space="preserve">
+    <value>أحرف متطابقة</value>
+  </data>
   <data name="CasesLeaf" xml:space="preserve">
     <value>ادارة الحالات</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="LanguageSwitch" xml:space="preserve">
     <value>EN</value>
   </data>
+  <data name="LiveSearch" xml:space="preserve">
+    <value>البحث السريع</value>
+  </data>
   <data name="Loading" xml:space="preserve">
     <value>تحميل ...</value>
   </data>
@@ -198,6 +204,9 @@
   <data name="Ok" xml:space="preserve">
     <value>حسنا</value>
   </data>
+  <data name="RegularExpression" xml:space="preserve">
+    <value>عبارات منتظمة</value>
+  </data>
   <data name="Reports" xml:space="preserve">
     <value>تقارير</value>
   </data>
@@ -212,5 +221,50 @@
   </data>
   <data name="SessionDisconnected" xml:space="preserve">
     <value>انتهت مهلة الجلسة!</value>
+  </data>
+  <data name="AddNewRecord" xml:space="preserve">
+    <value>اضافة سجل</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>تأكيد</value>
+  </data>
+  <data name="DeleteManyRecord" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد حذف السجلات المحددة؟</value>
+  </data>
+  <data name="DeleteOneRecord" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد حذف السجل المحدد؟</value>
+  </data>
+  <data name="EditWindowsTitle" xml:space="preserve">
+    <value>تعديل السجل</value>
+  </data>
+  <data name="ErrorDeletingRecord" xml:space="preserve">
+    <value>خطأ  في حذف السجل،حاول مرة أخرى.</value>
+  </data>
+  <data name="ErrorSavingRecord" xml:space="preserve">
+    <value>خطأ في حفظ السجل. اتصل بمسؤول النظام</value>
+  </data>
+  <data name="ErrorUpdatingRecord" xml:space="preserve">
+    <value>خطأ في تعديل السجل. اتصل بمسؤول النظام</value>
+  </data>
+  <data name="ManyRecordDeletedSucc" xml:space="preserve">
+    <value>تم حذف السجلات بنجاح</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>إشعار</value>
+  </data>
+  <data name="RecordDeletedSucc" xml:space="preserve">
+    <value>تم حذف السجل بنجاح</value>
+  </data>
+  <data name="RecordSavingSucc" xml:space="preserve">
+    <value>تم حفظ السجل بنجاح</value>
+  </data>
+  <data name="RecordUpdatedSucc" xml:space="preserve">
+    <value>تم تعديل السجل بنجاح</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
   </data>
 </root>

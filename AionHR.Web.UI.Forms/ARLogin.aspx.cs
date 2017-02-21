@@ -46,7 +46,12 @@ namespace AionHR.Web.UI.Forms
                 lblError.Text = Resources.Common.SessionDisconnected;
             }
             SetExtLanguage();
-            
+            if (!X.IsAjaxRequest)
+            {
+                ResourceManager1.RegisterIcon(Icon.Tick);
+                ResourceManager1.RegisterIcon(Icon.Error);
+            }
+
         }
 
         private void SetExtLanguage()
@@ -88,19 +93,20 @@ namespace AionHR.Web.UI.Forms
             if (response.Success)
             {
 
-                tbAccountName.IndicatorIcon = Icon.Accept;
-                //ResourceManager1.RegisterIcon(Icon.Accept);
                 e.Success = true;
+                field.IndicatorTip = (String)GetLocalResourceObject("AccountValid");
             }
             else
             {
-                tbAccountName.IndicatorIcon = Icon.Error;
-               // ResourceManager1.RegisterIcon(Icon.Error);
+
+
                 e.Success = false;
-                
+                e.ErrorMessage = (String)GetLocalResourceObject(response.Message); 
 
             }
-            
+
+            System.Threading.Thread.Sleep(500);
+
         }
     }
 }

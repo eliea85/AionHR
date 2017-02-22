@@ -19,5 +19,7 @@ namespace AionHR.Infrastructure.Domain
 
        
         ListWebServiceResponse<T> GetAll( string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+
+        PostWebServiceResponse Post(string methodName, T entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
     }
 }

@@ -16,7 +16,7 @@ namespace AionHR.Repository.WebService.Repositories
     public abstract class Repository<T, TEntityKey> where T : IEntity
     {
         public string ServiceURL;
-        
+
 
         /// <summary>
         /// Generic method for getting a record T from the webservice
@@ -33,7 +33,7 @@ namespace AionHR.Repository.WebService.Repositories
             if (Headers != null)
                 request.Headers = Headers;
             if (QueryStringParams != null)
-                request.QueryStringParams = QueryStringParams;          
+                request.QueryStringParams = QueryStringParams;
 
             return request.GetAsync<RecordWebServiceResponse<T>>();
 
@@ -55,11 +55,26 @@ namespace AionHR.Repository.WebService.Repositories
                 request.Headers = Headers;
             if (QueryStringParams != null)
                 request.QueryStringParams = QueryStringParams;
-           
+
 
             return request.GetAsync<ListWebServiceResponse<T>>();
-            
+
         }
+
+        public PostWebServiceResponse Post(string methodName, T entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
+        {
+            var request = new HTTPWebServiceRequest();
+            request.MethodType = "POST";
+            request.URL = ServiceURL + methodName;
+            if (Headers != null)
+                request.Headers = Headers;
+            if (QueryStringParams != null)
+                request.QueryStringParams = QueryStringParams;
+            return request.PostAsync<T>(entity);
+            
+                
+        }
+
 
 
        

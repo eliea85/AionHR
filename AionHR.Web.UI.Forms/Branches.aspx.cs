@@ -115,11 +115,15 @@ namespace AionHR.Web.UI.Forms
             string type = e.ExtraParams["type"];
             switch (type)
             {
-                case "colEdit":
+                case "ColName":
                     //Step 1 : get the object from the Web Service 
+                    RecordRequest r = new RecordRequest();
+                    r.RecordID = id.ToString();
+                    RecordResponse<Branch> response =  _branchService.Get(r);
 
                     //Step 2 : call setvalues with the retrieved object
-                    // this.BasicInfoTab.SetValues(obj);
+                     this.BasicInfoTab.SetValues(response.result);
+                    timeZoneCombo.Select(response.result.timeZone);
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -306,8 +310,8 @@ namespace AionHR.Web.UI.Forms
             //Getting the id to check if it is an Add or an edit as they are managed within the same form.
             string id = e.ExtraParams["id"];
 
-
-
+            string obj = e.ExtraParams["values"];
+            Branch b = JsonConvert.DeserializeObject<Branch>(obj);
             // Define the object to add or edit as null
             News n = null;
             if (string.IsNullOrEmpty(id))
@@ -317,9 +321,11 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
+                   PostResponse r = _branchService.Add(b);
 
+                    
                     //check if the insert failed
-                    if (n == null)//it maybe be another condition
+                    if (!r.Success)//it maybe be another condition
                     {
                         //Show an error saving...
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
@@ -330,7 +336,7 @@ namespace AionHR.Web.UI.Forms
                     {
 
                         //Add this record to the store 
-                        this.Store1.Insert(0, n);
+                        this.Store1.Insert(0, b);
 
                         //Display successful notification
                         Notification.Show(new NotificationConfig
@@ -365,7 +371,7 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                                                    //Step 1 Selecting the object or building up the object for update purpose
+                    PostResponse r = _branchService.Add(b);                     //Step 1 Selecting the object or building up the object for update purpose
 
                     //Step 2 : saving to store
 

@@ -154,7 +154,7 @@
                         </ext:Button>
                         <ext:Button ID="btnForgot" runat="server" Text="<%$ Resources:Common , ResetPassword %>">
                              <DirectEvents>
-                                <Click OnEvent="forgot_clicked">
+                                <Click OnEvent="forgotpw_Event">
                                     <EventMask ShowMask="true" Msg="<%$ Resources:Common , Loading %>" MinDelay="500" />
                                 </Click>
                             </DirectEvents>

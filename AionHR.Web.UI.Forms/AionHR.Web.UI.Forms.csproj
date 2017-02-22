@@ -83,6 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Branches.aspx" />
     <Content Include="CSS\Common.css" />
     <Content Include="CSS\HeaderAR.css" />
     <Content Include="CSS\HeaderInsideAR.css" />
@@ -127,6 +128,7 @@
     <Content Include="resetPw.aspx" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\Branches.js" />
     <Content Include="Scripts\test.js" />
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\jquery.min.js" />
@@ -145,6 +147,13 @@
       <DependentUpon>Common.resx</DependentUpon>
     </Compile>
     <Compile Include="BootStrapper.cs" />
+    <Compile Include="Branches.aspx.cs">
+      <DependentUpon>Branches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Branches.aspx.designer.cs">
+      <DependentUpon>Branches.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

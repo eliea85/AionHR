@@ -6,6 +6,7 @@
 <head runat="server">
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" type="text/css" href="CSS/Tools.css" />
+    
     <script type="text/javascript" src="Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="Scripts/app.js"></script>
     <script type="text/javascript" src="Scripts/default.js"></script>
@@ -70,12 +71,21 @@
 
                             <ext:ToolbarSeparator runat="server"></ext:ToolbarSeparator>
                             <ext:Button ID="btnCompany" runat="server" Icon="Building" ToolTip="<%$ Resources:Common , Company %>">                              
+                                <Listeners>
+                                    <Click Handler="#{commonTree}.setTitle(this.tooltip);openModule(3);" />
+                                </Listeners>
                             </ext:Button>
                               <ext:ToolbarSeparator runat="server"></ext:ToolbarSeparator>
                             <ext:Button ID="btnScheduler" runat="server" Icon="CalendarSelectDay" ToolTip="<%$ Resources:Common , Scheduler %>">                              
+                                <Listeners>
+                                    <Click Handler="#{commonTree}.setTitle(this.tooltip);openModule(4);" />
+                                </Listeners>
                             </ext:Button>
                                 <ext:ToolbarSeparator runat="server"></ext:ToolbarSeparator>
                             <ext:Button ID="btnReport" runat="server" Icon="ChartBar" ToolTip="<%$ Resources:Common , Reports %>">                              
+                                <Listeners>
+                                    <Click Handler="#{commonTree}.setTitle(this.tooltip);openModule(5);" />
+                                </Listeners>
                             </ext:Button>
                         </Items>
                     </ext:Toolbar>

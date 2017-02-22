@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activities.
+        /// </summary>
+        internal static string Activities {
+            get {
+                return ResourceManager.GetString("Activities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         internal static string Add {
@@ -129,6 +138,15 @@ namespace Resources {
         internal static string BeforePageText {
             get {
                 return ResourceManager.GetString("BeforePageText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Branches.
+        /// </summary>
+        internal static string Branches {
+            get {
+                return ResourceManager.GetString("Branches", resourceCulture);
             }
         }
         
@@ -223,6 +241,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Structure.
+        /// </summary>
+        internal static string CompanyStructure {
+            get {
+                return ResourceManager.GetString("CompanyStructure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirmation.
         /// </summary>
         internal static string Confirmation {
@@ -250,7 +277,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete All.
+        ///   Looks up a localized string similar to Delete .
         /// </summary>
         internal static string DeleteAll {
             get {
@@ -273,6 +300,15 @@ namespace Resources {
         internal static string DeleteOneRecord {
             get {
                 return ResourceManager.GetString("DeleteOneRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Departments.
+        /// </summary>
+        internal static string Departments {
+            get {
+                return ResourceManager.GetString("Departments", resourceCulture);
             }
         }
         
@@ -565,6 +601,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Positions.
+        /// </summary>
+        internal static string Positions {
+            get {
+                return ResourceManager.GetString("Positions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Previous.
         /// </summary>
         internal static string PrevText {
@@ -723,6 +768,15 @@ namespace Resources {
         internal static string TitleSavingErrorMessage {
             get {
                 return ResourceManager.GetString("TitleSavingErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfers.
+        /// </summary>
+        internal static string Transfers {
+            get {
+                return ResourceManager.GetString("Transfers", resourceCulture);
             }
         }
         

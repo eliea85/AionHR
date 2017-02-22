@@ -289,7 +289,7 @@
     <value>Delete</value>
   </data>
   <data name="DeleteAll" xml:space="preserve">
-    <value>Delete All</value>
+    <value>Delete </value>
   </data>
   <data name="DisplayMsg" xml:space="preserve">
     <value>Displaying Records {0} - {1} of {2}</value>
@@ -341,5 +341,23 @@
   </data>
   <data name="TitleSavingErrorMessage" xml:space="preserve">
     <value>Error During Saving, Try again later.</value>
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value>Activities</value>
+  </data>
+  <data name="Branches" xml:space="preserve">
+    <value>Branches</value>
+  </data>
+  <data name="CompanyStructure" xml:space="preserve">
+    <value>Company Structure</value>
+  </data>
+  <data name="Departments" xml:space="preserve">
+    <value>Departments</value>
+  </data>
+  <data name="Positions" xml:space="preserve">
+    <value>Positions</value>
+  </data>
+  <data name="Transfers" xml:space="preserve">
+    <value>Transfers</value>
   </data>
 </root>

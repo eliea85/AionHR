@@ -117,40 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>Account Name</value>
+  <data name="BasicInfoTabEditWindowTitle" xml:space="preserve">
+    <value>Branch Info</value>
   </data>
-  <data name="AccountValid" xml:space="preserve">
-    <value>Account is valid.</value>
+  <data name="EditWindowsTitle" xml:space="preserve">
+    <value>Edit Branch</value>
   </data>
-  <data name="EnterYourAccount" xml:space="preserve">
-    <value>Enter Your Account</value>
+  <data name="FieldIsInactive" xml:space="preserve">
+    <value>Is Inactive?</value>
   </data>
-  <data name="EnterYourID" xml:space="preserve">
-    <value>Enter Your ID</value>
+  <data name="FieldName" xml:space="preserve">
+    <value>Name</value>
   </data>
-  <data name="EnterYourPassword" xml:space="preserve">
-    <value>Enter Your Password</value>
+  <data name="FieldRecordId" xml:space="preserve">
+    <value>Record ID</value>
   </data>
-  <data name="InvalidAccount" xml:space="preserve">
-    <value>Invalid Account Name.</value>
+  <data name="FieldReference" xml:space="preserve">
+    <value>Reference</value>
   </data>
-  <data name="InvalidCredentials" xml:space="preserve">
-    <value>Invalid Username or Password</value>
+  <data name="FieldSegmentCode" xml:space="preserve">
+    <value>Segment</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Login</value>
+  <data name="FieldTimeZone" xml:space="preserve">
+    <value>Time Zone</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="RequestError" xml:space="preserve">
-    <value>Error in request, Try Again Later.</value>
-  </data>
-  <data name="UserID" xml:space="preserve">
-    <value>Username | Email</value>
-  </data>
-  <data name="ValidAccount" xml:space="preserve">
-    <value>Valid Account Name</value>
+  <data name="WindowTitle" xml:space="preserve">
+    <value>Branches</value>
   </data>
 </root>

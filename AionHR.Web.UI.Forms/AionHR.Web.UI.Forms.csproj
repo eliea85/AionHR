@@ -94,6 +94,8 @@
     <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Employees.aspx" />
+    <Content Include="ForgotAccount.aspx" />
+    <Content Include="ForgotPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
     <Content Include="Images\bg.png" />
@@ -125,6 +127,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="resetPw.aspx" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\test.js" />
@@ -163,6 +166,20 @@
       <DependentUpon>Employees.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ForgotAccount.aspx.cs">
+      <DependentUpon>ForgotAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotAccount.aspx.designer.cs">
+      <DependentUpon>ForgotAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +205,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="resetPw.aspx.cs">
+      <DependentUpon>resetPw.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="resetPw.aspx.designer.cs">
+      <DependentUpon>resetPw.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StructureMapServiceLocator.cs" />
     <Compile Include="Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>
@@ -234,12 +258,6 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Common.ar.designer.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_LocalResources\Test.aspx.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_LocalResources\Test.aspx.ar.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

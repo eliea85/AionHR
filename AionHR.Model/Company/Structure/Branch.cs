@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model.Company.Structure
 {
-   public  class Branch : ModelBase
+   public  class Branch : ModelBase,IEntity
     {
         public string reference { get; set; }
         public string name { get; set; }

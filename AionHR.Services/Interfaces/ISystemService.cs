@@ -1,4 +1,5 @@
-﻿using AionHR.Services.Messaging.System;
+﻿using AionHR.Services.Messaging;
+using AionHR.Services.Messaging.System;
 
 namespace AionHR.Services.Interfaces
 {
@@ -14,5 +15,10 @@ namespace AionHR.Services.Interfaces
         /// <param name="request">holding the account, user, and password</param>
         /// <returns>AuthenticateResponse object</returns>
         AuthenticateResponse Authenticate(AuthenticateRequest request);
+
+        PasswordRecoveryResponse RequestPasswordRecovery(AuthenticateRequest request);
+
+
+        PasswordRecoveryResponse ResetPassword(ResetPasswordRequest request);
     }
 }

@@ -2,6 +2,7 @@
 using AionHR.Infrastructure.Logging;
 using AionHR.Infrastructure.Session;
 using AionHR.Infrastructure.Tokens;
+using AionHR.Model.Company.Structure;
 using AionHR.Model.Employees;
 using AionHR.Model.MasterModule;
 using AionHR.Model.System;
@@ -44,11 +45,13 @@ namespace AionHR.Web.UI.Forms
                 For<IEmployeeRepository>().Use<EmployeeRepository>();
                 For<IUserRepository>().Use<UserRepository>();
                 For<IAccountRepository>().Use<AccountRepository>();
+                For<IBranchRepository>().Use<BranchRepository>();
 
                 //Services
                 For<ISystemService>().Use<SystemService>();
                 For<IEmployeeService>().Use<EmployeeService>();
                 For<IMasterService>().Use<MasterService>();
+                For<IBranchService>().Use<BranchService>();
             }
         }
     }

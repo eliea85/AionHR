@@ -3,6 +3,7 @@ using AionHR.Infrastructure.WebService;
 using AionHR.Model.MasterModule;
 using AionHR.Model.System;
 using AionHR.Services.Interfaces;
+using AionHR.Services.Messaging;
 using AionHR.Services.Messaging.System;
 using System;
 using System.Collections.Generic;
@@ -15,17 +16,17 @@ namespace AionHR.Services.Implementations
     /// <summary>
     /// Class responsible for all operation of the system.
     /// </summary>
-    public class SystemService :BaseService, ISystemService
+    public class SystemService : BaseService, ISystemService
     {
-        
+
         private readonly IUserRepository _userRepository;
-        private readonly IAccountRepository _accountRespository;
+
         // public readonly SessionHelper _sessionHelper;
 
-        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper, IAccountRepository accountRepository) : base(sessionHelper)
+        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper)
         {
             _userRepository = userRepository;
-            _accountRespository = accountRepository;
+
             // _sessionHelper = sessionHelper;
         }
 
@@ -36,35 +37,19 @@ namespace AionHR.Services.Implementations
         /// <returns>Object AuthenticateResponse</returns>
         public AuthenticateResponse Authenticate(AuthenticateRequest request)
         {
+
             //Building the WebService request
             //First Step Request by Account >> Defining Header
             AuthenticateResponse response = new AuthenticateResponse();
 
-            SessionHelper.Set("AccountId", "0"); //To be checked as it is a strange behavior ( simulated from old code)
+
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("_accountName", request.Account);
-
-            RecordWebServiceResponse<Account> accountRecord = _accountRespository.GetRecord("getAC", headers, parameters);
-            if (accountRecord == null)
-            {
-                response.Success = false;
-                response.Message = "RequestError"; //This message have to be read from resource, it indicate that there was a problem in the connection.
-                return response;
-            }
-            if (accountRecord.record == null)
-            {
-                response.Success = false;
-                response.Message = "InvalidAccount";
-                return response;
-            }
 
 
-            //Valid account >> fill session and prepare for the new request
-            SessionHelper.Set("AccountId", accountRecord.record.accountId);
-             headers = SessionHelper.GetAuthorizationHeadersForUser();
-            
-            parameters.Clear();
+
+
+
             parameters.Add("_email", request.UserName);
             parameters.Add("_password", request.Password);
             RecordWebServiceResponse<UserInfo> userRecord = _userRepository.GetRecord("signIn", headers, parameters);
@@ -77,7 +62,7 @@ namespace AionHR.Services.Implementations
             if (userRecord.record == null)
             {
                 response.Success = false;
-                response.Message = "InvalidCredentials"; 
+                response.Message = "InvalidCredentials";
                 return response;
             }
             //authentication Valid, set the session then return the response back
@@ -89,6 +74,39 @@ namespace AionHR.Services.Implementations
             response.Success = true;
             return response;
 
+        }
+
+        public PasswordRecoveryResponse RequestPasswordRecovery(AuthenticateRequest request)
+        {
+            PasswordRecoveryResponse response = new PasswordRecoveryResponse();
+
+
+
+            Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("_email", request.UserName);
+            RecordWebServiceResponse<UserInfo> userRecord = _userRepository.GetRecord("reqPW", headers, parameters);
+
+            response = CreateServiceResponse<PasswordRecoveryResponse>(userRecord);
+           // if (response.Success)
+                return response;
+           
+        }
+
+        public PasswordRecoveryResponse ResetPassword(ResetPasswordRequest request)
+        {
+            PasswordRecoveryResponse response;
+            Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("_email", request.Email);
+            parameters.Add("_guid", request.Guid);
+            parameters.Add("_newPassword", request.NewPassword);
+            RecordWebServiceResponse<UserInfo> webResponse = _userRepository.GetRecord("resetPW", headers, parameters);
+
+
+            response = CreateServiceResponse<PasswordRecoveryResponse>(webResponse);
+
+            return response;
         }
     }
 }

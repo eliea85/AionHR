@@ -67,6 +67,7 @@
     <Compile Include="Tokens\APIKeyBasedTokenGenerator.cs" />
     <Compile Include="Tokens\ITokenGenerator.cs" />
     <Compile Include="WebService\BaseWebServiceResponse.cs" />
+    <Compile Include="WebService\BlankWebServiceResponse.cs" />
     <Compile Include="WebService\HTTPWebServiceRequest.cs" />
     <Compile Include="WebService\IWebServiceRequest.cs" />
     <Compile Include="WebService\ListWebServiceResponse.cs" />

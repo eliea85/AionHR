@@ -97,5 +97,26 @@ namespace AionHR.Web.UI.Forms.Utilities
             node.CustomAttributes.Add(new ConfigItem("css", css, ParameterMode.Value));
             node.CustomAttributes.Add(new ConfigItem("click", ifClick, ParameterMode.Value));
         }
+
+        internal NodeCollection BuildCompanyStructureTree(NodeCollection nodes)
+        {
+            if (nodes == null)
+                nodes = new Ext.Net.NodeCollection();
+
+
+
+            Ext.Net.Node rootParent = BuildRootParentNode("rootParent", Resources.Common.Company, true);
+            Ext.Net.Node companyStructure = BuildParentNode("rootParent_CS", Resources.Common.CompanyStructure, true, rootParent);
+            Ext.Net.Node departments = BuildLeafNode("rootParent_CS_DE", Resources.Common.Departments, "Group", true, companyStructure);
+            Ext.Net.Node branches = BuildLeafNode("rootParent_CS_BR", Resources.Common.Branches, "Group", true, companyStructure);
+            Ext.Net.Node positions = BuildLeafNode("rootParent_CS_PO", Resources.Common.Positions, "Group", true, companyStructure);
+            FillConfigItem(branches, "branches", "Branches.aspx", Resources.Common.CompanyStructure, "icon-Employees", "1");
+            Ext.Net.Node activities = BuildParentNode("rootParent_AC", Resources.Common.Activities, true, rootParent);
+            Ext.Net.Node transfers = BuildLeafNode("rootParent_AC_TR", Resources.Common.Transfers, "Group", true, activities);
+
+
+            nodes.Add(rootParent);
+            return nodes;
+        }
     }
 }

@@ -46,7 +46,7 @@
                         <ext:ModelField Name="reference" />
                         <ext:ModelField Name="timeZone" />
                         <ext:ModelField Name="segmentCode" />
-                        <ext:ModelField Name="isInactive" />
+                        <ext:ModelField Name="isInactive" Type="Boolean" DefaultValue="false"/>
                        
 
 
@@ -329,7 +329,7 @@
                                     </Items>
                                 </ext:ComboBox>
                                 
-                                <ext:Checkbox ID="isInactive" runat="server" FieldLabel="<%$ Resources: FieldIsInactive%>" DataIndex="isInactive" Name="isInactive" />
+                                <ext:Checkbox ID="isInactive" runat="server" FieldLabel="<%$ Resources: FieldIsInactive%>" Name="isInactive" InputValue="true" />
                                
 
                             </Items>
@@ -350,7 +350,7 @@
                             <EventMask ShowMask="true" Target="CustomTarget" CustomTarget="={#{EditRecordWindow}.body}" />
                             <ExtraParams>
                                 <ext:Parameter Name="id" Value="#{recordId}.getValue()" Mode="Raw" />
-                                <ext:Parameter Name="values" Value ="#{BasicInfoTab}.getForm().getValues()" Mode="Raw" Encode="true" />
+                                <ext:Parameter Name="values" Value ="#{BasicInfoTab}.getForm().getValues(false, false, false, true)" Mode="Raw" Encode="true" />
                             </ExtraParams>
                         </Click>
                     </DirectEvents>

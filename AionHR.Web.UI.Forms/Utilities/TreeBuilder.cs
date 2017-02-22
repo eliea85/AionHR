@@ -111,6 +111,7 @@ namespace AionHR.Web.UI.Forms.Utilities
             Ext.Net.Node branches = BuildLeafNode("rootParent_CS_BR", Resources.Common.Branches, "Group", true, companyStructure);
             Ext.Net.Node positions = BuildLeafNode("rootParent_CS_PO", Resources.Common.Positions, "Group", true, companyStructure);
             FillConfigItem(branches, "branches", "Branches.aspx", Resources.Common.CompanyStructure, "icon-Employees", "1");
+            FillConfigItem(departments, "branches", "Departments.aspx", Resources.Common.CompanyStructure, "icon-Employees", "1");
             Ext.Net.Node activities = BuildParentNode("rootParent_AC", Resources.Common.Activities, true, rootParent);
             Ext.Net.Node transfers = BuildLeafNode("rootParent_AC_TR", Resources.Common.Transfers, "Group", true, activities);
 

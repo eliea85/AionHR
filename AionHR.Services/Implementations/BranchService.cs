@@ -56,6 +56,18 @@ namespace AionHR.Services.Implementations
             response.recordId = webResponse.recordId;
             return response;
         }
+
+        public StatusResponse Delete(RecordRequest request)
+        {
+            StatusResponse response = new StatusResponse();
+            var headers = SessionHelper.GetAuthorizationHeadersForUser();
+            Dictionary<string, string> queryParams = new Dictionary<string, string>();
+            queryParams.Add("_recordId", request.RecordID);
+            var webResponse = _branchRepository.Delete("delBR", headers, queryParams);
+            response = CreateServiceResponse<StatusResponse>(webResponse);
+            response. = webResponse.record;
+            return response;
+        }
        
     }
 }

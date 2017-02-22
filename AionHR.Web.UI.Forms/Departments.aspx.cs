@@ -21,10 +21,12 @@ using AionHR.Model.Company.News;
 using AionHR.Services.Messaging;
 using AionHR.Model.Company.Structure;
 
+
 namespace AionHR.Web.UI.Forms
 {
-    public partial class Branches : System.Web.UI.Page
+    public partial class Departments : System.Web.UI.Page
     {
+
         IBranchService _branchService = ServiceLocator.Current.GetInstance<IBranchService>();
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
         protected override void InitializeCulture()
@@ -60,10 +62,10 @@ namespace AionHR.Web.UI.Forms
 
 
             }
-           
-            if(timeZoneOffset.Text !="")
+
+            if (timeZoneOffset.Text != "")
             {
-                Session.Add("TimeZone",timeZoneOffset.Text);
+                Session.Add("TimeZone", timeZoneOffset.Text);
             }
         }
 
@@ -124,10 +126,10 @@ namespace AionHR.Web.UI.Forms
                     //Step 1 : get the object from the Web Service 
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
-                    RecordResponse<Branch> response =  _branchService.Get(r);
+                    RecordResponse<Branch> response = _branchService.Get(r);
 
                     //Step 2 : call setvalues with the retrieved object
-                     this.BasicInfoTab.SetValues(response.result);
+                    this.BasicInfoTab.SetValues(response.result);
                     timeZoneCombo.Select(response.result.timeZone);
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
@@ -297,7 +299,7 @@ namespace AionHR.Web.UI.Forms
             //in this test will take a list of News
             ListRequest request = new ListRequest();
             request.Filter = "";
-            ListResponse<Branch> branches =  _branchService.GetAll(request);
+            ListResponse<Branch> branches = _branchService.GetAll(request);
             if (!branches.Success)
                 return;
             this.Store1.DataSource = branches.Items;
@@ -321,7 +323,7 @@ namespace AionHR.Web.UI.Forms
             b.isInactive = isInactive.Checked;
             b.recordId = id;
             // Define the object to add or edit as null
-           
+
             if (string.IsNullOrEmpty(id))
             {
 
@@ -329,9 +331,9 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                   PostResponse r = _branchService.Add(b);
+                    PostResponse r = _branchService.Add(b);
                     b.recordId = r.recordId;
-                    
+
                     //check if the insert failed
                     if (!r.Success)//it maybe be another condition
                     {
@@ -432,8 +434,8 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-       [DirectMethod]
-       public void StoreTimeZone(string z)
+        [DirectMethod]
+        public void StoreTimeZone(string z)
         {
             Session.Add("TimeZone", z);
         }

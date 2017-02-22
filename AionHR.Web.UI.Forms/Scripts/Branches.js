@@ -20,7 +20,7 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
     if (columnIndex == 0)
         return false;
     var t = e.getTarget(),
-        columnId = this.columns[columnIndex - 1].id; // Get column id
+        columnId = this.columns[columnIndex].id; // Get column id
 
     if (t.className == "imgEdit" && columnId == "colEdit") {
         //the ajax call is allowed
@@ -36,7 +36,7 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
         //the ajax call is allowed
         return true;
     }
-    if (columnId = "ColName")
+    if (columnId == "ColName")
         return true;
 
 
@@ -48,13 +48,13 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
 var getCellType = function (grid, rowIndex, cellIndex) {
     if (cellIndex == 0)
         return "";
-    var columnId = grid.columns[cellIndex - 1].id; // Get column id
+    var columnId = grid.columns[cellIndex].id; // Get column id
     return columnId;
 };
 
 
 var enterKeyPressSearchHandler = function (el, event) {
-    
+
     var enter = false;
     if (event.getKey() == event.ENTER) {
         if (el.getValue().length > 0)

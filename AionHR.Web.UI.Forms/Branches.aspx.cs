@@ -312,8 +312,10 @@ namespace AionHR.Web.UI.Forms
 
             string obj = e.ExtraParams["values"];
             Branch b = JsonConvert.DeserializeObject<Branch>(obj);
+            b.isInactive = isInactive.Checked;
+            b.recordId = id;
             // Define the object to add or edit as null
-            News n = null;
+           
             if (string.IsNullOrEmpty(id))
             {
 
@@ -322,7 +324,7 @@ namespace AionHR.Web.UI.Forms
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
                    PostResponse r = _branchService.Add(b);
-
+                    b.recordId = r.recordId;
                     
                     //check if the insert failed
                     if (!r.Success)//it maybe be another condition
@@ -349,7 +351,7 @@ namespace AionHR.Web.UI.Forms
                         this.EditRecordWindow.Close();
                         RowSelectionModel sm = this.GridPanel1.GetSelectionModel() as RowSelectionModel;
                         sm.DeselectAll();
-                        sm.Select(n.recordId.ToString());
+                        sm.Select(b.recordId.ToString());
 
 
 
@@ -376,7 +378,7 @@ namespace AionHR.Web.UI.Forms
                     //Step 2 : saving to store
 
                     //Step 3 :  Check if request fails
-                    if (n == null)//it maybe another check
+                    if (!r.Success)//it maybe another check
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
                         X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();

@@ -15,7 +15,7 @@
         }
     </style>
     <title>
-        <asp:Literal ID="Literal1" runat="server" Text="<%$Resources:Common , ApplicationTitle%>" />
+        <asp:Literal ID="Literal1" runat="server" Text="<%$Resouirces:Common , ApplicatonTitle%>" />
     </title>
 </head>
 <body>

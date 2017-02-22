@@ -148,8 +148,15 @@ namespace AionHR.Infrastructure.WebService
 
                 if (Headers.Count > 0)
                     BuildHeaders(req);
+                Body = JsonConvert.SerializeObject(item);
+                Stream stream = req.GetRequestStream();
+                StreamWriter wr = new StreamWriter(stream);
+                wr.Write(Body);
+                wr.Flush();
+                wr.Close();
+                stream.Close();
+                //req.ContentLength = stream.Length;
 
-                
                 var r = req.GetResponse();
                 Stream s = r.GetResponseStream();
                 StreamReader reader = new StreamReader(s, true);
@@ -160,7 +167,8 @@ namespace AionHR.Infrastructure.WebService
                 {
                     settings.ContractResolver = Resolver;
                 }
-                Body = JsonConvert.SerializeObject(item);
+                
+                
                 response = JsonConvert.DeserializeObject<PostWebServiceResponse>(x, settings);
                 return response;
             }

@@ -49,9 +49,11 @@ namespace AionHR.Services.Implementations
 
         public PostResponse Add(Branch branch)
         {
-            PostResponse response = new PostResponse();
+            PostResponse response;
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             PostWebServiceResponse webResponse = _branchRepository.Post("setBR", branch, headers);
+            response = CreateServiceResponse<PostResponse>(webResponse);
+            response.recordId = webResponse.recordId;
             return response;
         }
        

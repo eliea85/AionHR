@@ -330,7 +330,9 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                   PostResponse r = _branchService.ChildAdd(b);
+                    PostRequest<Branch> request = new PostRequest<Branch>();
+                    request.entity = b;
+                    PostResponse<Branch> r = _branchService.ChildAddOrUpdate<Branch>(request);
                     b.recordId = r.recordId;
                     
                     //check if the insert failed
@@ -380,7 +382,9 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                    PostResponse r = _branchService.AddOrUpdate(b);                     //Step 1 Selecting the object or building up the object for update purpose
+                    PostRequest<Branch> request = new PostRequest<Branch>();
+                    request.entity = b;
+                    PostResponse<Branch> r = _branchService.ChildAddOrUpdate<Branch>(request);                      //Step 1 Selecting the object or building up the object for update purpose
 
                     //Step 2 : saving to store
 

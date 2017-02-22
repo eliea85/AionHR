@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Branches.aspx.cs" Inherits="AionHR.Web.UI.Forms.Branches" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Departments.aspx.cs" Inherits="AionHR.Web.UI.Forms.Departments" %>
 
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -29,7 +29,7 @@
             RemoteSort="True"
             RemoteFilter="true"
             OnReadData="Store1_RefreshData"
-            PageSize="50" IDMode="Explicit" Namespace="App">
+            PageSize="10" IDMode="Explicit" Namespace="App">
             <Proxy>
                 <ext:PageProxy>
                     <Listeners>
@@ -46,7 +46,7 @@
                         <ext:ModelField Name="reference" />
                         <ext:ModelField Name="timeZone" />
                         <ext:ModelField Name="segmentCode" />
-                        <ext:ModelField Name="isInactive" Type="Boolean" DefaultValue="false"/>
+                        <ext:ModelField Name="isInactive" />
                        
 
 
@@ -67,7 +67,7 @@
                     runat="server"
                     StoreID="Store1" 
                     PaddingSpec="0 0 1 0"
-                    Header="true" 
+                    Header="true"
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
                     Scroll="None"
@@ -120,18 +120,14 @@
 
                               <ext:Column  Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" width="75" Align="Center"/>
                             <ext:Column ID="ColReference" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference%>" DataIndex="reference" Flex="1" Hideable="false"/>
-                            <ext:Column   CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
-                            <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
+                            <ext:Column   CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false" >
+                                 <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
 
-                            </Renderer>
+                                </Renderer>
                                 </ext:Column>
-                            <ext:Column ID="ColTimeZone" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldTimeZone%>" DataIndex="timeZone" Flex="1" Hideable="false">
-                                <Renderer Handler="var sign = ''; if(record.data['timeZone']>=0) sign = '+'; return 'UTC '+sign + record.data['timeZone'] + ':00 ' " />     
-                                </ext:Column>
-                            <ext:Column ID="ColSegmentCode" Hidden="true" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldSegmentCode%>" DataIndex="segmentCode" Flex="1" Hideable="false"/>
-                           
-                           
-                            <ext:CheckColumn ID="ColInactive" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsInactive %>" DataIndex="isInactive" Width="75" Hideable="false" />
+                            <ext:Column  Visible ="false" ID="parentId" MenuDisabled="true" runat="server"  DataIndex="parentId" Flex="1" Hideable="false" />
+                            <ext:Column  Visible ="false" ID="supervisorId" MenuDisabled="true" runat="server"  DataIndex="supervisorId" Flex="1" Hideable="false" />
+                           <ext:CheckColumn ID="ColIsSegmented" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsSegmentedHead %>" DataIndex="isSegmentedHead" Hideable="false" />
 
                          
 
@@ -301,7 +297,7 @@
                                 <ext:ComboBox runat="server" ID="timeZoneCombo"  SimpleSubmit="true" IDMode="Static" Name="timeZone" FieldLabel="<%$ Resources:FieldTimeZone%>">
                                     <Items>
                                         <ext:ListItem Text="-12 UTC" Value="-12" />
-                                        <ext:ListItem Text="-11 UTC" Value="-11" />
+                                        <ext:ListItem Text="-12 UTC" Value="-11" />
                                         <ext:ListItem Text="-10 UTC" Value="-10" />
                                         <ext:ListItem Text="-9 UTC" Value="-9" />
                                         <ext:ListItem Text="-8 UTC" Value="-8" />
@@ -328,7 +324,7 @@
                                     </Items>
                                 </ext:ComboBox>
                                 
-                                <ext:Checkbox ID="isInactive" runat="server" FieldLabel="<%$ Resources: FieldIsInactive%>" Name="isInactive" InputValue="true" />
+                                <ext:Checkbox ID="isInactive" runat="server" FieldLabel="<%$ Resources: FieldIsInactive%>" DataIndex="isInactive" Name="isInactive" />
                                
 
                             </Items>
@@ -349,7 +345,7 @@
                             <EventMask ShowMask="true" Target="CustomTarget" CustomTarget="={#{EditRecordWindow}.body}" />
                             <ExtraParams>
                                 <ext:Parameter Name="id" Value="#{recordId}.getValue()" Mode="Raw" />
-                                <ext:Parameter Name="values" Value ="#{BasicInfoTab}.getForm().getValues(false, false, false, true)" Mode="Raw" Encode="true" />
+                                <ext:Parameter Name="values" Value ="#{BasicInfoTab}.getForm().getValues()" Mode="Raw" Encode="true" />
                             </ExtraParams>
                         </Click>
                     </DirectEvents>
@@ -367,3 +363,4 @@
     </form>
 </body>
 </html>
+

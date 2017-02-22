@@ -9,7 +9,7 @@ namespace AionHR.Services.Messaging
     /// <summary>
     /// Generic class used to fill a request to be used by a record retrieval service
     /// </summary>
-    public class RecordRequest
+    public class RecordRequest:RequestBase
     {
         /// <summary>
         /// Generic record request class

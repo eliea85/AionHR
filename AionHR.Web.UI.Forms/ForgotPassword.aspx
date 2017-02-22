@@ -130,7 +130,7 @@
                         </ext:FieldContainer>
                     </Items>
                     <Buttons>
-                        <ext:Button ID="btnLogin" runat="server" Text="submit">
+                        <ext:Button ID="btnLogin" runat="server" Text="Reset">
                             <Listeners>
                                 <Click Handler="
                             if (!#{panelLogin}.validate()) {                                
@@ -143,11 +143,7 @@
                                 </Click>
                             </DirectEvents>
                         </ext:Button>
-                        <ext:Button ID="btnReset" runat="server" Text="reset">
-                            <Listeners>
-                                <Click Handler="#{panelLogin}.reset();" />
-                            </Listeners>
-                        </ext:Button>
+                    
                         
                     </Buttons>
                 </ext:FormPanel>

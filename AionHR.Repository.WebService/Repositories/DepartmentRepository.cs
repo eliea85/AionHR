@@ -6,13 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using AionHR.Infrastructure.WebService;
 using AionHR.Infrastructure.Configuration;
-
 namespace AionHR.Repository.WebService.Repositories
 {
-    public class BranchRepository : Repository<Branch,string>, IBranchRepository
+    public class DepartmentRepository: Repository<Department,string>,IDepartmentRepository
     {
         private string serviceName = "CS.asmx/";
-        public BranchRepository()
+        public DepartmentRepository()
         {
 
             base.ServiceURL = ApplicationSettingsFactory.GetApplicationSettings().BaseURL + serviceName;

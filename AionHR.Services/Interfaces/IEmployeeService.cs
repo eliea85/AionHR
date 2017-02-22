@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace AionHR.Services.Interfaces
 {
-    public interface IEmployeeService:IBaseService
+    public interface IEmployeeService:IBaseService<Employee,string>
     {
-        Response<List<Employee>> GetAll(ListRequest request);
+        
     }
 }

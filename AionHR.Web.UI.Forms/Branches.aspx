@@ -29,7 +29,7 @@
             RemoteSort="True"
             RemoteFilter="true"
             OnReadData="Store1_RefreshData"
-            PageSize="10" IDMode="Explicit" Namespace="App">
+            PageSize="50" IDMode="Explicit" Namespace="App">
             <Proxy>
                 <ext:PageProxy>
                     <Listeners>
@@ -67,7 +67,7 @@
                     runat="server"
                     StoreID="Store1" 
                     PaddingSpec="0 0 1 0"
-                    Header="true"
+                    Header="true" 
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
                     Scroll="None"

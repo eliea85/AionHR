@@ -14,7 +14,7 @@ namespace AionHR.Model.Company.Structure
         public string parentName { get; set; }
         public int? parentId { get; set; }
         public int? supervisorId { get; set; }
-        public string supervisorName { get; set; }
+        public string svFullName { get; set; }
         public string segmentCode { get; set; }
         public bool isSegmentHead { get; set; }
     }

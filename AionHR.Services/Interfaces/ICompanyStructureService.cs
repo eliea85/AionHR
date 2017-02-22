@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 using AionHR.Infrastructure.Session;
 using AionHR.Services.Messaging;
 using AionHR.Model.Company.Structure;
+using AionHR.Infrastructure.Domain;
 
 namespace AionHR.Services.Interfaces
 {
-    public interface IBranchService : IBaseService
+    public interface ICompanyStructureService : IBaseService<IEntity,string>
     {
-        ListResponse<Branch> GetAll(ListRequest request);
-        RecordResponse<Branch> Get(RecordRequest request);
-
-        PostResponse Add(Branch branch);
+        
     }
 }

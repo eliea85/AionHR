@@ -27,7 +27,7 @@ namespace AionHR.Web.UI.Forms
     public partial class Departments : System.Web.UI.Page
     {
 
-        IBranchService _branchService = ServiceLocator.Current.GetInstance<IBranchService>();
+        ICompanyStructureService _branchService = ServiceLocator.Current.GetInstance<ICompanyStructureService>();
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
         protected override void InitializeCulture()
         {
@@ -126,7 +126,7 @@ namespace AionHR.Web.UI.Forms
                     //Step 1 : get the object from the Web Service 
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
-                    RecordResponse<Branch> response = _branchService.Get(r);
+                    RecordResponse<Branch> response = _branchService.ChildGetRecord<Branch>(r);
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
@@ -299,7 +299,7 @@ namespace AionHR.Web.UI.Forms
             //in this test will take a list of News
             ListRequest request = new ListRequest();
             request.Filter = "";
-            ListResponse<Branch> branches = _branchService.GetAll(request);
+            ListResponse<Department> branches = _branchService.ChildGetAll<Department>(request);
             if (!branches.Success)
                 return;
             this.Store1.DataSource = branches.Items;
@@ -331,7 +331,7 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    PostResponse r = _branchService.Add(b);
+                    PostResponse r = _branchService.AddOrUpdate(b);
                     b.recordId = r.recordId;
 
                     //check if the insert failed
@@ -381,7 +381,7 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                    PostResponse r = _branchService.Add(b);                     //Step 1 Selecting the object or building up the object for update purpose
+                    PostResponse r = _branchService.AddOrUpdate(b);                     //Step 1 Selecting the object or building up the object for update purpose
 
                     //Step 2 : saving to store
 

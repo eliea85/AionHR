@@ -1,4 +1,6 @@
-﻿using AionHR.Services.Messaging;
+﻿using AionHR.Model.MasterModule;
+using AionHR.Model.System;
+using AionHR.Services.Messaging;
 using AionHR.Services.Messaging.System;
 
 namespace AionHR.Services.Interfaces
@@ -6,7 +8,7 @@ namespace AionHR.Services.Interfaces
     /// <summary>
     /// Interface that hold the methods of a service
     /// </summary>
-    public interface ISystemService : IBaseService
+    public interface ISystemService : IBaseService<UserInfo,string>
     {
 
         /// <summary>

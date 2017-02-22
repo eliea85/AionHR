@@ -9,7 +9,7 @@ namespace AionHR.Services.Messaging
     /// <summary>
     ///Generic Class used to build up a list request to be sent to a service
     /// </summary>
-    public class ListRequest
+    public class ListRequest:RequestBase
     {
         /// <summary>
         /// the filter string

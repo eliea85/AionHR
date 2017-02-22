@@ -11,33 +11,14 @@ using AionHR.Model.Employees.Profile;
 
 namespace AionHR.Services.Implementations
 {
-    public class EmployeeService : BaseService, IEmployeeService
+    public class EmployeeService : BaseService<Employee,string>, IEmployeeService
     {
-        private readonly IEmployeeRepository _employeeRepository;
+        
 
-        public EmployeeService(IEmployeeRepository employeeRepository, SessionHelper sessionHelper) : base(sessionHelper)
+        public EmployeeService(IEmployeeRepository employeeRepository, SessionHelper sessionHelper) : base(sessionHelper, employeeRepository)
         {
-            _employeeRepository = employeeRepository;
+            
         }
-        public Response<List<Employee>> GetAll(ListRequest request)
-        {
-            Response<List<Employee>> response = new Response<List<Employee>>();
-            var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            var webResponse = _employeeRepository.GetAll("qryES", headers, request.Parameters);
-            if (webResponse==null  || webResponse.statusId != "1")
-            {
-                response.result = null;
-                response.Success = false;
-                
-            }
-            else
-            {
-                response.result = webResponse.list.ToList<Employee>();
-                response.rowCount = webResponse.count;
-                response.Success = true;
-            }
-            return response;
-
-        }
+        
     }
 }

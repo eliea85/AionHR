@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Services.Messaging
 {
-   public class PostResponse<T>:ResponseBase
+    public class RequestBase
     {
-        public string recordId { get; set; }
     }
 }

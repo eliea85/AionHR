@@ -8,7 +8,7 @@ using AionHR.Infrastructure.WebService;
 
 namespace AionHR.Model.Company.Structure
 {
-    public interface IBranchRepository : IRepository<Branch, string>
+    public interface ICompanyStructureRepository : IRepository<IEntity, string>
     {
         
     }

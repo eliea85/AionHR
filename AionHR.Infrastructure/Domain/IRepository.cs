@@ -20,8 +20,15 @@ namespace AionHR.Infrastructure.Domain
        
         ListWebServiceResponse<T> GetAll( string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
 
-        PostWebServiceResponse Post(string methodName, T entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+        PostWebServiceResponse AddOrUpdate(string methodName, T entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
 
          BlankWebServiceResponse Delete(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+
+         RecordWebServiceResponse<TChild> ChildGetRecord<TChild>(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+
+         ListWebServiceResponse<TChild> ChildGetAll<TChild>(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+
+        PostWebServiceResponse ChildAddOrUpdate<TChild>(string methodName, TChild entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+
     }
 }

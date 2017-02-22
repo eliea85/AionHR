@@ -16,19 +16,19 @@ namespace AionHR.Services.Implementations
     /// <summary>
     /// Class responsible for all operation of the system.
     /// </summary>
-    public class SystemService : BaseService, ISystemService
+    public class SystemService : BaseService<UserInfo,string>, ISystemService
     {
 
-        private readonly IUserRepository _userRepository;
+      
 
         // public readonly SessionHelper _sessionHelper;
 
-        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper)
+        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper,userRepository)
         {
-            _userRepository = userRepository;
 
             // _sessionHelper = sessionHelper;
         }
+
 
         /// <summary>
         /// The concrete method that authenticate a user request 
@@ -52,7 +52,7 @@ namespace AionHR.Services.Implementations
 
             parameters.Add("_email", request.UserName);
             parameters.Add("_password", request.Password);
-            RecordWebServiceResponse<UserInfo> userRecord = _userRepository.GetRecord("signIn", headers, parameters);
+            RecordWebServiceResponse<UserInfo> userRecord = _repository.GetRecord("signIn", headers, parameters);
             if (userRecord == null)
             {
                 response.Success = false;
@@ -85,7 +85,7 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("_email", request.UserName);
-            RecordWebServiceResponse<UserInfo> userRecord = _userRepository.GetRecord("reqPW", headers, parameters);
+            RecordWebServiceResponse<UserInfo> userRecord = _repository.GetRecord("reqPW", headers, parameters);
 
             response = CreateServiceResponse<PasswordRecoveryResponse>(userRecord);
            // if (response.Success)
@@ -101,12 +101,14 @@ namespace AionHR.Services.Implementations
             parameters.Add("_email", request.Email);
             parameters.Add("_guid", request.Guid);
             parameters.Add("_newPassword", request.NewPassword);
-            RecordWebServiceResponse<UserInfo> webResponse = _userRepository.GetRecord("resetPW", headers, parameters);
+            RecordWebServiceResponse<UserInfo> webResponse = _repository.GetRecord("resetPW", headers, parameters);
 
 
             response = CreateServiceResponse<PasswordRecoveryResponse>(webResponse);
 
             return response;
         }
+
+       
     }
 }

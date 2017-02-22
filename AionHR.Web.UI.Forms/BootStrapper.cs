@@ -45,13 +45,13 @@ namespace AionHR.Web.UI.Forms
                 For<IEmployeeRepository>().Use<EmployeeRepository>();
                 For<IUserRepository>().Use<UserRepository>();
                 For<IAccountRepository>().Use<AccountRepository>();
-                For<IBranchRepository>().Use<BranchRepository>();
+                For<ICompanyStructureRepository>().Use<CompanyStructureRepository>();
 
                 //Services
                 For<ISystemService>().Use<SystemService>();
                 For<IEmployeeService>().Use<EmployeeService>();
                 For<IMasterService>().Use<MasterService>();
-                For<IBranchService>().Use<BranchService>();
+                For<ICompanyStructureService>().Use<CompanyStructureService>();
             }
         }
     }

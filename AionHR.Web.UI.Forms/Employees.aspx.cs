@@ -41,9 +41,9 @@ namespace AionHR.Web.UI.Forms
             req.QueryStringParams.Add("_includeInactive", "true");
             req.QueryStringParams.Add("_sortBy", "fullName");
             req.Filter = "";
-            Response<List<Employee>> response = _employeeService.GetAll(req);
-            var data = response.result;
-            total = response.rowCount;
+            ListResponse<Employee> response = _employeeService.GetAll(req);
+            var data = response.Items;
+            total = response.Count;
             return new { data, total };
         }
     }

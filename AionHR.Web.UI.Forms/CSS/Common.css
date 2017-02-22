@@ -23,6 +23,9 @@
     background-color: #15b4f0; /*400C24*/
     border-color:#15b4f0!important;
 }
+.cellLink{
+    text-decoration:underline;
+}
 .x-panel{
     border-color:#15b4f0!important;
 }

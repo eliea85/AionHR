@@ -30,6 +30,8 @@ namespace AionHR.Infrastructure.WebService
         /// </summary>
         public string URL { get; set; }
 
+        public string Body { get; set; }
+
         /// <summary>
         /// the method type
         /// </summary>
@@ -132,6 +134,43 @@ namespace AionHR.Infrastructure.WebService
                 string exception = BuildLogMessage() + " : " + ex.Message;
                 LoggingFactory.GetLogger().Log(exception);
                 return default(T);
+            }
+        }
+
+        public PostWebServiceResponse PostAsync<T>(T item)
+        {
+            PostWebServiceResponse response = new PostWebServiceResponse() ;
+            try
+            {
+                WebRequest req = HttpWebRequest.Create(RequestUrl);
+                req.Method = MethodType;
+
+
+                if (Headers.Count > 0)
+                    BuildHeaders(req);
+
+                
+                var r = req.GetResponse();
+                Stream s = r.GetResponseStream();
+                StreamReader reader = new StreamReader(s, true);
+                string x = reader.ReadToEnd();
+
+                var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+                if (Resolver != null)
+                {
+                    settings.ContractResolver = Resolver;
+                }
+                Body = JsonConvert.SerializeObject(item);
+                response = JsonConvert.DeserializeObject<PostWebServiceResponse>(x, settings);
+                return response;
+            }
+            catch (Exception ex)
+            {
+
+                string exception = BuildLogMessage() + " : " + ex.Message;
+                LoggingFactory.GetLogger().Log(exception);
+                response.statusId = "0";
+                return response;
             }
         }
     }

@@ -52,6 +52,8 @@
     <Compile Include="Implementations\SystemService.cs" />
     <Compile Include="Interfaces\IMasterService.cs" />
     <Compile Include="Messaging\ListReponse.cs" />
+    <Compile Include="Messaging\PostResponse.cs" />
+    <Compile Include="Messaging\RecordResponse.cs" />
     <Compile Include="Messaging\System\AuthenticateRequest.cs" />
     <Compile Include="Messaging\System\AuthenticateResponse.cs" />
     <Compile Include="Messaging\ListRequest.cs" />

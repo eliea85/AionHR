@@ -12,5 +12,8 @@ namespace AionHR.Services.Interfaces
     public interface IBranchService : IBaseService
     {
         ListResponse<Branch> GetAll(ListRequest request);
+        RecordResponse<Branch> Get(RecordRequest request);
+
+        PostResponse Add(Branch branch);
     }
 }

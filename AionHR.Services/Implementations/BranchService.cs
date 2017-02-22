@@ -19,7 +19,18 @@ namespace AionHR.Services.Implementations
         {
             _branchRepository = branchRepository;
         }
-
+        public RecordResponse<Branch> Get(RecordRequest request)
+        {
+            RecordResponse<Branch> response = new RecordResponse<Branch>();
+            var headers = SessionHelper.GetAuthorizationHeadersForUser();
+            Dictionary<string, string> queryParams = new Dictionary<string, string>();
+            queryParams.Add("_recordId", request.RecordID);
+            var webResponse = _branchRepository.GetRecord("getBR", headers, queryParams);
+            CreateServiceResponse<RecordResponse<Branch>>(webResponse);
+            response.result = webResponse.record;
+            return response;
+            
+        }
         public ListResponse<Branch> GetAll(ListRequest request)
         {
             ListResponse<Branch> response = new ListResponse<Branch>();
@@ -35,5 +46,15 @@ namespace AionHR.Services.Implementations
             response.Items = webResponse.list.ToList();
             return response;
         }
+
+        public PostResponse Add(Branch branch)
+        {
+            PostResponse response = new PostResponse();
+            var headers = SessionHelper.GetAuthorizationHeadersForUser();
+            PostWebServiceResponse webResponse = _branchRepository.Post("setBR", branch, headers);
+            return response;
+        }
+       
     }
 }
+

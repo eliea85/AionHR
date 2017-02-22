@@ -9,7 +9,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
-    <script type="text/javascript" src="Scripts/test.js" ></script>
+    <script type="text/javascript" src="Scripts/Branches.js" ></script>
     <script type="text/javascript" src="Scripts/common.js" ></script>
    
  
@@ -120,14 +120,18 @@
 
                               <ext:Column Hidden="true" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" width="75" Align="Center"/>
                             <ext:Column ID="ColReference" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference%>" DataIndex="reference" Flex="1" Hideable="false"/>
-                            <ext:Column  ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
-                           
+                            <ext:Column   CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
+                            
                                 </ext:Column>
                             <ext:Column ID="ColTimeZone" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldTimeZone%>" DataIndex="timeZone" Flex="1" Hideable="false">
                                 <Renderer Handler="return 'UTC + ' + record.data['timeZone'] + ':00 ' " />     
                                 </ext:Column>
                             <ext:Column ID="ColSegmentCode" Hidden="true" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldSegmentCode%>" DataIndex="segmentCode" Flex="1" Hideable="false"/>
-                           
+                           <ext:HyperlinkColumn runat="server" >
+                               <DirectEvents > 
+                                   
+                               </DirectEvents>
+                           </ext:HyperlinkColumn>
                            
                             <ext:CheckColumn ID="ColInactive" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsInactive %>" DataIndex="isInactive" Width="75" Hideable="false" />
 
@@ -295,7 +299,7 @@
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="subject" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                 <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources: FieldReference %>" DataIndex="reference" AllowBlank="false" />
-                                <ext:ComboBox runat="server" ID="timeZoneCombo" FieldLabel="<%$ Resources:FieldTimeZone%>">
+                                <ext:ComboBox runat="server" ID="timeZoneCombo"  SimpleSubmit="true" IDMode="Static" Name="timeZone" FieldLabel="<%$ Resources:FieldTimeZone%>">
                                     <Items>
                                         <ext:ListItem Text="-12 UTC" Value="-12" />
                                         <ext:ListItem Text="-12 UTC" Value="-11" />
@@ -346,6 +350,7 @@
                             <EventMask ShowMask="true" Target="CustomTarget" CustomTarget="={#{EditRecordWindow}.body}" />
                             <ExtraParams>
                                 <ext:Parameter Name="id" Value="#{recordId}.getValue()" Mode="Raw" />
+                                <ext:Parameter Name="values" Value ="#{BasicInfoTab}.getForm.getValues()" Mode="Raw" Encode="true" />
                             </ExtraParams>
                         </Click>
                     </DirectEvents>

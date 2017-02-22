@@ -11,6 +11,8 @@ namespace AionHR.Repository.WebService.Repositories
     /// <summary>
     /// Class that handle the communcation between the model and the webservice. it encapsultes all the account related methods
     /// </summary>
+    /// 
+ 
    public class AccountRepository :Repository<Account,string>, IAccountRepository
     {
         // the webservice name       

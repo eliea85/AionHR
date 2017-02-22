@@ -39,7 +39,7 @@ namespace AionHR.Web.UI.Forms
             req.QueryStringParams.Add("_departmentId", "0");
             req.QueryStringParams.Add("_branchId", "0");
             req.QueryStringParams.Add("_includeInactive", "true");
-            req.QueryStringParams.Add("_sortBy", "fullName");
+            req.QueryStringParams.Add("_sortBy", "firstName");
             req.Filter = "";
             ListResponse<Employee> response = _employeeService.GetAll(req);
             var data = response.Items;

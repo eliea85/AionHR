@@ -126,11 +126,11 @@ namespace AionHR.Web.UI.Forms
                     //Step 1 : get the object from the Web Service 
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
-                    RecordResponse<Branch> response = _branchService.ChildGetRecord<Branch>(r);
+                    RecordResponse<Department> response = _branchService.ChildGetRecord<Department>(r);
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
-                    timeZoneCombo.Select(response.result.timeZone);
+                    
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;

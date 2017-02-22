@@ -14,8 +14,11 @@ namespace AionHR.Services.Implementations
 {
     public class CompanyStructureService:BaseService<IEntity,string>,ICompanyStructureService
     {
-        
 
+        public enum CompanyStructureErrors
+        {
+            Company_Department_50005,
+        }
         public CompanyStructureService(ICompanyStructureRepository companyStructureRepository, SessionHelper sessionHelper) : base(sessionHelper, companyStructureRepository)
         {
             

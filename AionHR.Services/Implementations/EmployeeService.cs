@@ -14,10 +14,12 @@ namespace AionHR.Services.Implementations
     public class EmployeeService : BaseService<Employee,string>, IEmployeeService
     {
         
-
+        
         public EmployeeService(IEmployeeRepository employeeRepository, SessionHelper sessionHelper) : base(sessionHelper, employeeRepository)
         {
-            
+            GetAllMethodName = "qryES";
+            GetRecordMethodName = "getEM";
+            AddOrUpdateMethodName = "setEM";
         }
         
     }

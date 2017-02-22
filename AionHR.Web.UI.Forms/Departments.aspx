@@ -120,16 +120,14 @@
 
                               <ext:Column  Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" width="75" Align="Center"/>
                             <ext:Column ID="ColReference" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference%>" DataIndex="reference" Flex="1" Hideable="false"/>
-                            <ext:Column   CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
-                            
+                            <ext:Column   CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false" >
+                                 <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
+
+                                </Renderer>
                                 </ext:Column>
-                            <ext:Column ID="ColTimeZone" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldTimeZone%>" DataIndex="timeZone" Flex="1" Hideable="false">
-                                <Renderer Handler="return 'UTC + ' + record.data['timeZone'] + ':00 ' " />     
-                                </ext:Column>
-                            <ext:Column ID="ColSegmentCode" Hidden="true" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldSegmentCode%>" DataIndex="segmentCode" Flex="1" Hideable="false"/>
-                           
-                           
-                            <ext:CheckColumn ID="ColInactive" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsInactive %>" DataIndex="isInactive" Width="75" Hideable="false" />
+                            <ext:Column  Visible ="false" ID="parentId" MenuDisabled="true" runat="server"  DataIndex="parentId" Flex="1" Hideable="false" />
+                            <ext:Column  Visible ="false" ID="supervisorId" MenuDisabled="true" runat="server"  DataIndex="supervisorId" Flex="1" Hideable="false" />
+                           <ext:CheckColumn ID="ColIsSegmented" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsSegmentedHead %>" DataIndex="isSegmentedHead" Hideable="false" />
 
                          
 

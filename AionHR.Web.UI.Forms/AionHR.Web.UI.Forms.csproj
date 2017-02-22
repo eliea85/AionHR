@@ -131,6 +131,7 @@
   <ItemGroup>
     <Content Include="resetPw.aspx" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\Departments.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\Branches.js" />
     <Content Include="Scripts\test.js" />

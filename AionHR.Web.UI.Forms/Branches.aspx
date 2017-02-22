@@ -121,10 +121,12 @@
                               <ext:Column  Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" width="75" Align="Center"/>
                             <ext:Column ID="ColReference" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference%>" DataIndex="reference" Flex="1" Hideable="false"/>
                             <ext:Column   CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
-                            
+                            <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
+
+                            </Renderer>
                                 </ext:Column>
                             <ext:Column ID="ColTimeZone" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldTimeZone%>" DataIndex="timeZone" Flex="1" Hideable="false">
-                                <Renderer Handler="return 'UTC + ' + record.data['timeZone'] + ':00 ' " />     
+                                <Renderer Handler="var sign = ''; if(record.data['timeZone']>=0) sign = '+'; return 'UTC '+sign + record.data['timeZone'] + ':00 ' " />     
                                 </ext:Column>
                             <ext:Column ID="ColSegmentCode" Hidden="true" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldSegmentCode%>" DataIndex="segmentCode" Flex="1" Hideable="false"/>
                            
@@ -299,7 +301,7 @@
                                 <ext:ComboBox runat="server" ID="timeZoneCombo"  SimpleSubmit="true" IDMode="Static" Name="timeZone" FieldLabel="<%$ Resources:FieldTimeZone%>">
                                     <Items>
                                         <ext:ListItem Text="-12 UTC" Value="-12" />
-                                        <ext:ListItem Text="-12 UTC" Value="-11" />
+                                        <ext:ListItem Text="-11 UTC" Value="-11" />
                                         <ext:ListItem Text="-10 UTC" Value="-10" />
                                         <ext:ListItem Text="-9 UTC" Value="-9" />
                                         <ext:ListItem Text="-8 UTC" Value="-8" />

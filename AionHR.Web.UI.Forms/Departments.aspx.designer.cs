@@ -184,31 +184,31 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.Column ColName;
         
         /// <summary>
-        /// ColTimeZone control.
+        /// parentId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Column ColTimeZone;
+        protected global::Ext.Net.Column parentId;
         
         /// <summary>
-        /// ColSegmentCode control.
+        /// supervisorId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Column ColSegmentCode;
+        protected global::Ext.Net.Column supervisorId;
         
         /// <summary>
-        /// ColInactive control.
+        /// ColIsSegmented control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.CheckColumn ColInactive;
+        protected global::Ext.Net.CheckColumn ColIsSegmented;
         
         /// <summary>
         /// colEdit control.

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementations\BaseService.cs" />
+    <Compile Include="Implementations\CommonErrors.cs" />
     <Compile Include="Implementations\CompanyStructureService.cs" />
     <Compile Include="Implementations\EmployeeService.cs" />
     <Compile Include="Implementations\MasterService.cs" />

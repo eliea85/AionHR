@@ -48,10 +48,13 @@ namespace AionHR.Web.UI.Forms
             }
 
         }
-
+        BoundedComboBox parents;
+            BoundedComboBox supervisors;
         protected void Page_Load(object sender, EventArgs e)
         {
+         
 
+            
 
             if (!X.IsAjaxRequest && !IsPostBack)
             {
@@ -60,7 +63,6 @@ namespace AionHR.Web.UI.Forms
                 HideShowButtons();
                 HideShowColumns();
                 FillLiveSearchLabels();
-
 
             }
 
@@ -164,19 +166,22 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        private void InitCombos(Department dept =null)
+        private void InitCombos(Department dept)
         {
-            BoundedComboBox parents = new BoundedComboBox("parentCombo", GetLocalResourceObject("FieldParentName").ToString(), "FillParent", "", GetLocalResourceObject("FieldParentName").ToString());
-            BoundedComboBox supervisors = new BoundedComboBox("svCombo", GetLocalResourceObject("FieldSvFullName").ToString(), "FillSupervisor", "", GetLocalResourceObject("FieldSvFullName").ToString());
-            if (dept != null)
-            {
-                supervisors.Select(dept.supervisorId);
-                parents.Select(dept.parentId);
-            }
+            parents = new BoundedComboBox("parentId", "name", "recordId", GetLocalResourceObject("FieldParentName").ToString(), "FillParent", "", GetLocalResourceObject("FieldParentName").ToString(), false);
+            supervisors = new BoundedComboBox("supervisorId", "fullName", "recordId", GetLocalResourceObject("FieldSvFullName").ToString(), "FillSupervisor", "", GetLocalResourceObject("FieldSvFullName").ToString(), true);
             BasicInfoTab.Items.Add(parents);
             BasicInfoTab.Items.Add(supervisors);
+            if (dept != null)
+            {
+                
+                parents.Select(dept.parentId);
+                supervisors.Select(dept.supervisorId);
+            }
             BasicInfoTab.UpdateContent();
             BasicInfoTab.UpdateLayout();
+           
+            
         }
 
         /// <summary>
@@ -223,7 +228,7 @@ namespace AionHR.Web.UI.Forms
             
             List<Department> data;
             ListRequest req = new ListRequest();
-            req.Filter = prms.Query;
+            
             ListResponse<Department> response = _branchService.ChildGetAll<Department>(req);
             data = response.Items;
             return new
@@ -232,26 +237,28 @@ namespace AionHR.Web.UI.Forms
             };
 
         }
-
+        [DirectMethod]
         public object FillSupervisor(string action, Dictionary<string, object> extraParams)
         {
-            StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+            
+               StoreRequestParameters prms = new StoreRequestParameters(extraParams);
 
 
 
             List<Employee> data;
             ListRequest req = new ListRequest();
-            req.Parameters.Add("size", "20");
-            req.Parameters.Add("_departmentId", "0");
-            req.Parameters.Add("_branchId", "0");
-            req.Parameters.Add("_startAt", "1");
+            
+            req.QueryStringParams.Add("_departmentId", "0");
+            req.QueryStringParams.Add("_branchId", "0");
+            req.StartAt = "1";
+            req.Size = "20";
             req.Filter = prms.Query;
-            req.Parameters.Add("_includeInactive", "true");
-            req.Parameters.Add("_sortBy", "firstName");
+            req.QueryStringParams.Add("_includeInactive", "true");
+            req.QueryStringParams.Add("_sortBy", "firstName");
 
 
             req.Filter = prms.Query;
-            ListResponse<Employee> response = _employeeService.ChildGetAll<Employee>(req);
+            ListResponse<Employee> response = _employeeService.GetAll<Employee>(req);
             data = response.Items;
             return new
             {
@@ -342,7 +349,7 @@ namespace AionHR.Web.UI.Forms
             //Reset all values of the relative object
             BasicInfoTab.Reset();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            InitCombos();
+            
             this.EditRecordWindow.Show();
         }
 

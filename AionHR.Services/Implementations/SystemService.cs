@@ -110,7 +110,7 @@ namespace AionHR.Services.Implementations
             return response;
         }
 
-        protected override dynamic GetRepoistory()
+        protected override dynamic GetRepository()
         {
             return childRepo;
         }

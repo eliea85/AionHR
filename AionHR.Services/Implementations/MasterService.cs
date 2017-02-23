@@ -26,6 +26,7 @@ namespace AionHR.Services.Implementations
         public Response<Account> GetAccount(AuthenticateRequest request)
         {
             Response<Account> response = new Response<Account>();
+            SessionHelper.ClearSession();
             SessionHelper.Set("AccountId", "0"); //To be checked as it is a strange behavior ( simulated from old code)
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -53,6 +54,7 @@ namespace AionHR.Services.Implementations
         public Response<Account> RequestAccountRecovery(AuthenticateRequest request)
         {
             Response<Account> response;
+            SessionHelper.ClearSession();
             SessionHelper.Set("AccountId", "0");
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
@@ -65,7 +67,7 @@ namespace AionHR.Services.Implementations
         }
 
   
-        protected override dynamic GetRepoistory()
+        protected override dynamic GetRepository()
         {
             return _accountRepository;
         }

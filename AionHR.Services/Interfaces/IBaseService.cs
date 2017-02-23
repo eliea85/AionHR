@@ -16,7 +16,7 @@ namespace AionHR.Services.Interfaces
 
         RecordResponse<T> Get<T>(RecordRequest request);
 
-        ListResponse<IEntity> GetAll<T>(ListRequest request);
+        ListResponse<T> GetAll<T>(ListRequest request);
 
         PostResponse<T> AddOrUpdate<T>(PostRequest<T> request);
 

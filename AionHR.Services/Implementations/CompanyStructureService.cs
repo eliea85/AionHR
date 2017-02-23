@@ -26,7 +26,7 @@ namespace AionHR.Services.Implementations
         }
        
 
-        protected override dynamic GetRepoistory()
+        protected override dynamic GetRepository()
         {
             return _companyRepository;
         }

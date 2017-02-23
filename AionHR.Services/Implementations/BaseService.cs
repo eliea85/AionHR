@@ -32,7 +32,7 @@ namespace AionHR.Services.Implementations
             return response;
         }
 
-        protected abstract  dynamic GetRepoistory();
+        protected abstract  dynamic GetRepository();
       
 
         public RecordResponse<T> Get<T>(RecordRequest request) 
@@ -42,19 +42,19 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
 
-            var webResponse =GetRepoistory().GetRecord(headers, queryParams);
+            var webResponse =GetRepository().GetRecord(headers, queryParams);
             CreateServiceResponse<RecordResponse<T>>(webResponse);
             response.result = (T)webResponse.record;
             return response;
 
         }
-        public ListResponse<IEntity> GetAll<T>(ListRequest request)
+        public ListResponse<T> GetAll<T>(ListRequest request)
         {
 
 
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            var webResponse = GetRepoistory().GetAll(headers, request.Parameters);
-            var response = CreateServiceResponse<ListResponse<IEntity>>(webResponse);
+            var webResponse = GetRepository().GetAll(headers, request.Parameters);
+            var response = CreateServiceResponse<ListResponse<T>>(webResponse);
             if (!response.Success)
             {
                 response.Message = webResponse.message;
@@ -70,7 +70,7 @@ namespace AionHR.Services.Implementations
         {
             PostResponse<T> response;
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            PostWebServiceResponse webResponse = GetRepoistory().AddOrUpdate(request.entity, headers);
+            PostWebServiceResponse webResponse = GetRepository().AddOrUpdate(request.entity, headers);
             response = CreateServiceResponse<PostResponse<T>>(webResponse);
             response.recordId = webResponse.recordId;
             return response;
@@ -82,7 +82,7 @@ namespace AionHR.Services.Implementations
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
-            var webResponse = GetRepoistory().Delete(headers, queryParams);
+            var webResponse = GetRepository().Delete(headers, queryParams);
             response = CreateServiceResponse<StatusResponse>(webResponse);
 
             return response;
@@ -95,7 +95,7 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
 
-            var webResponse = GetRepoistory().ChildGetRecord<TChild>(headers, queryParams);
+            var webResponse = GetRepository().ChildGetRecord<TChild>(headers, queryParams);
             CreateServiceResponse<RecordResponse<TChild>>(webResponse);
             response.result = webResponse.record;
             return response;
@@ -106,7 +106,7 @@ namespace AionHR.Services.Implementations
             ListResponse<TChild> response = new ListResponse<TChild>();
 
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            ListWebServiceResponse<TChild> webResponse = GetRepoistory().ChildGetAll<TChild>(headers, request.Parameters);
+            ListWebServiceResponse<TChild> webResponse = GetRepository().ChildGetAll<TChild>(headers, request.Parameters);
             response = CreateServiceResponse<ListResponse<TChild>>(webResponse);
             if (!response.Success)
             {
@@ -122,7 +122,7 @@ namespace AionHR.Services.Implementations
         {
             PostResponse<TChild> response;
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            PostWebServiceResponse webResponse = GetRepoistory().ChildAddOrUpdate<TChild>(request.entity, headers);
+            PostWebServiceResponse webResponse = GetRepository().ChildAddOrUpdate<TChild>(request.entity, headers);
             response = CreateServiceResponse<PostResponse<TChild>>(webResponse);
             response.recordId = webResponse.recordId;
             return response;

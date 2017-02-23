@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AionHR.Infrastructure.WebService;
 
 namespace AionHR.Repository.WebService.Repositories
 {
@@ -21,6 +22,21 @@ namespace AionHR.Repository.WebService.Repositories
         {
             base.ServiceURL = ApplicationSettingsFactory.GetApplicationSettings().BaseURL + serviceName;
             base.GetRecordMethodName = "getAC";
+            
+        }
+
+        public RecordWebServiceResponse<Account> RequestAccountRecovery(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
+        {
+            
+            var request = new HTTPWebServiceRequest();
+            request.MethodType = "GET";
+            request.URL = ServiceURL + "reqAN";
+            if (Headers != null)
+                request.Headers = Headers;
+            if (QueryStringParams != null)
+                request.QueryStringParams = QueryStringParams;
+
+            return request.GetAsync<RecordWebServiceResponse<Account>>();
         }
     }
 }

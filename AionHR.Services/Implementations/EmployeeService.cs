@@ -18,12 +18,10 @@ namespace AionHR.Services.Implementations
         
         public EmployeeService(IEmployeeRepository employeeRepository, SessionHelper sessionHelper) : base(sessionHelper)
         {
-            GetAllMethodName = "qryES";
-            GetRecordMethodName = "getEM";
-            AddOrUpdateMethodName = "setEM";
+            _employeeRepository = employeeRepository;
         }
 
-        protected override dynamic GetRepoistory()
+        protected override dynamic GetRepository()
         {
             return _employeeRepository;
         }

@@ -8,6 +8,7 @@ using AionHR.Model.Employees;
 using AionHR.Services.Messaging;
 using AionHR.Infrastructure.Session;
 using AionHR.Model.Employees.Profile;
+using AionHR.Infrastructure.Domain;
 
 namespace AionHR.Services.Implementations
 {
@@ -15,7 +16,7 @@ namespace AionHR.Services.Implementations
     {
         
         
-        public EmployeeService(IEmployeeRepository employeeRepository, SessionHelper sessionHelper) : base(sessionHelper, employeeRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository, SessionHelper sessionHelper) : base(sessionHelper,(IRepository<IEntity,string>) employeeRepository)
         {
             GetAllMethodName = "qryES";
             GetRecordMethodName = "getEM";

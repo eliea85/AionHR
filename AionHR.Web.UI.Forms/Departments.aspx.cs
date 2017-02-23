@@ -131,7 +131,7 @@ namespace AionHR.Web.UI.Forms
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
-                    InitPopup();
+                    InitCombos(response.result);
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -164,10 +164,17 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        private void InitPopup()
+        private void InitCombos(Department dept =null)
         {
-            BoundedComboBox b = new BoundedComboBox("parentCombo", GetLocalResourceObject("FieldParentName").ToString(), "FillParent", "", GetLocalResourceObject("FieldParentName").ToString());
-            BasicInfoTab.Items.Add(b);
+            BoundedComboBox parents = new BoundedComboBox("parentCombo", GetLocalResourceObject("FieldParentName").ToString(), "FillParent", "", GetLocalResourceObject("FieldParentName").ToString());
+            BoundedComboBox supervisors = new BoundedComboBox("svCombo", GetLocalResourceObject("FieldSvFullName").ToString(), "FillSupervisor", "", GetLocalResourceObject("FieldSvFullName").ToString());
+            if (dept != null)
+            {
+                supervisors.Select(dept.supervisorId);
+                parents.Select(dept.parentId);
+            }
+            BasicInfoTab.Items.Add(parents);
+            BasicInfoTab.Items.Add(supervisors);
             BasicInfoTab.UpdateContent();
             BasicInfoTab.UpdateLayout();
         }
@@ -214,10 +221,37 @@ namespace AionHR.Web.UI.Forms
 
 
             
-            List<Employee> data;
+            List<Department> data;
             ListRequest req = new ListRequest();
             req.Filter = prms.Query;
-            ListResponse<Employee> response = _employeeService.GetAll(req);
+            ListResponse<Department> response = _branchService.ChildGetAll<Department>(req);
+            data = response.Items;
+            return new
+            {
+                data
+            };
+
+        }
+
+        public object FillSupervisor(string action, Dictionary<string, object> extraParams)
+        {
+            StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+
+
+
+            List<Employee> data;
+            ListRequest req = new ListRequest();
+            req.Parameters.Add("size", "20");
+            req.Parameters.Add("_departmentId", "0");
+            req.Parameters.Add("_branchId", "0");
+            req.Parameters.Add("_startAt", "1");
+            req.Filter = prms.Query;
+            req.Parameters.Add("_includeInactive", "true");
+            req.Parameters.Add("_sortBy", "firstName");
+
+
+            req.Filter = prms.Query;
+            ListResponse<Employee> response = _employeeService.ChildGetAll<Employee>(req);
             data = response.Items;
             return new
             {
@@ -308,7 +342,7 @@ namespace AionHR.Web.UI.Forms
             //Reset all values of the relative object
             BasicInfoTab.Reset();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            
+            InitCombos();
             this.EditRecordWindow.Show();
         }
 

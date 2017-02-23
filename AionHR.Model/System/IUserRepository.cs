@@ -13,7 +13,8 @@ namespace AionHR.Model.System
     /// </summary>
     public interface IUserRepository:IRepository<UserInfo,string>
     {
-
-        
+         RecordWebServiceResponse<UserInfo> Authenticate(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+        RecordWebServiceResponse<UserInfo> ResetPassword(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+        RecordWebServiceResponse<UserInfo> RequestPasswordRecovery(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
     }
 }

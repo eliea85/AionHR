@@ -9,13 +9,14 @@ using AionHR.Model.MasterModule;
 using AionHR.Services.Messaging;
 using AionHR.Services.Messaging.System;
 using AionHR.Infrastructure.WebService;
+using AionHR.Infrastructure.Domain;
 
 namespace AionHR.Services.Implementations
 {
     public class MasterService : BaseService,IMasterService
     {
         
-        public MasterService(IAccountRepository accountRepository, SessionHelper helper):base(helper,accountRepository)
+        public MasterService(IAccountRepository accountRepository, SessionHelper helper):base(helper, (IRepository<IEntity, string>)accountRepository)
         {
             
         }
@@ -30,7 +31,7 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("_accountName", request.Account);
 
-            RecordWebServiceResponse<Account> accountRecord = _repository.GetRecord("getAC", headers, parameters);
+            var accountRecord = _repository.GetRecord(headers, parameters);
             if (accountRecord == null)
             {
                 response.Success = false;
@@ -43,8 +44,8 @@ namespace AionHR.Services.Implementations
                 response.Message = "InvalidAccount";
                 return response;
             }
-            response.result = accountRecord.record;
-            SessionHelper.Set("AccountId", accountRecord.record.accountId);
+            response.result = (Account)accountRecord.record;
+            SessionHelper.Set("AccountId", response.result.accountId);
             response.Success = true;
             return response;
         }

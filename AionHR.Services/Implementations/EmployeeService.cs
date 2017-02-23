@@ -11,7 +11,7 @@ using AionHR.Model.Employees.Profile;
 
 namespace AionHR.Services.Implementations
 {
-    public class EmployeeService : BaseService<Employee,string>, IEmployeeService
+    public class EmployeeService : BaseService, IEmployeeService
     {
         
         

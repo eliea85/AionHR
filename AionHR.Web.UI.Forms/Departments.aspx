@@ -128,6 +128,8 @@
                             <ext:Column  Visible ="false" ID="parentId" MenuDisabled="true" runat="server"  DataIndex="parentId" Flex="1" Hideable="false" />
                             <ext:Column  Visible ="false" ID="supervisorId" MenuDisabled="true" runat="server"  DataIndex="supervisorId" Flex="1" Hideable="false" />
                            <ext:CheckColumn ID="ColIsSegmented" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsSegmentedHead %>" DataIndex="isSegmentedHead" Hideable="false" />
+                            <ext:Column    ID="ColParentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldParentName%>" DataIndex="parentName" Flex="1" Hideable="false" />
+                                <ext:Column    ID="ColSvName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldSvFullName%>" DataIndex="svFullName" Flex="1" Hideable="false" />
 
                          
 
@@ -294,40 +296,10 @@
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                 <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources: FieldReference %>" DataIndex="reference" AllowBlank="false" />
-                                <ext:ComboBox runat="server" ID="timeZoneCombo"  SimpleSubmit="true" IDMode="Static" Name="timeZone" FieldLabel="<%$ Resources:FieldTimeZone%>">
-                                    <Items>
-                                        <ext:ListItem Text="-12 UTC" Value="-12" />
-                                        <ext:ListItem Text="-12 UTC" Value="-11" />
-                                        <ext:ListItem Text="-10 UTC" Value="-10" />
-                                        <ext:ListItem Text="-9 UTC" Value="-9" />
-                                        <ext:ListItem Text="-8 UTC" Value="-8" />
-                                        <ext:ListItem Text="-7 UTC" Value="-7" />
-                                        <ext:ListItem Text="-6 UTC" Value="-6" />
-                                        <ext:ListItem Text="-5 UTC" Value="-5" />
-                                        <ext:ListItem Text="-4 UTC" Value="-4" />
-                                        <ext:ListItem Text="-3 UTC" Value="-3" />
-                                        <ext:ListItem Text="-2 UTC" Value="-2" />
-                                        <ext:ListItem Text="-1 UTC" Value="-1" />
-                                        <ext:ListItem Text=" UTC" Value="0" />
-                                        <ext:ListItem Text="+1 UTC" Value="1" />
-                                        <ext:ListItem Text="+2 UTC" Value="2" />
-                                        <ext:ListItem Text="+3 UTC" Value="3" />
-                                        <ext:ListItem Text="+4 UTC" Value="4" />
-                                        <ext:ListItem Text="+5 UTC" Value="5" />
-                                        <ext:ListItem Text="+6 UTC" Value="6" />
-                                        <ext:ListItem Text="+7 UTC" Value="7" />
-                                        <ext:ListItem Text="+8 UTC" Value="8" />
-                                        <ext:ListItem Text="+9 UTC" Value="9" />
-                                        <ext:ListItem Text="+10 UTC" Value="10" />
-                                        <ext:ListItem Text="+11 UTC" Value="11" />
-                                        <ext:ListItem Text="+12 UTC" Value="12" />
-                                    </Items>
-                                </ext:ComboBox>
                                 
-                                <ext:Checkbox ID="isInactive" runat="server" FieldLabel="<%$ Resources: FieldIsInactive%>" DataIndex="isInactive" Name="isInactive" />
-                               
-
-                            </Items>
+                                
+                                <ext:Checkbox ID="isSegmentHeadCheck" runat="server" FieldLabel="<%$ Resources: FieldIsSegmentedHead%>" DataIndex="isInactive" Name="isInactive" />
+                               </Items>
 
                         </ext:FormPanel>
                         

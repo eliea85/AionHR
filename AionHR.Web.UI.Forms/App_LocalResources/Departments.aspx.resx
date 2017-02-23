@@ -132,6 +132,9 @@
   <data name="FieldName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="FieldParentName" xml:space="preserve">
+    <value>Parent</value>
+  </data>
   <data name="FieldRecordId" xml:space="preserve">
     <value>Record ID</value>
   </data>
@@ -140,6 +143,9 @@
   </data>
   <data name="FieldSegmentCode" xml:space="preserve">
     <value>Segment</value>
+  </data>
+  <data name="FieldSvFullName" xml:space="preserve">
+    <value>Supervisor</value>
   </data>
   <data name="FieldTimeZone" xml:space="preserve">
     <value>Time Zone</value>

@@ -22,7 +22,9 @@ namespace AionHR.Model.Employees.Profile
         public int? nationalityId { get; set; }
         public string countryName { get; set; }
         public string mobile { get; set; }
-        public string emailAccount { get; set; }
+        public string homeEmail { get; set; }
+
+        public string workEmail { get; set; }
         public int? positionId { get; set; }
         public string positionName { get; set; }
         public int? departmentId { get; set; }

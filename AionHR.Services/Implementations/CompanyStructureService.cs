@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Services.Implementations
 {
-    public class CompanyStructureService:BaseService<IEntity,string>,ICompanyStructureService
+    public class CompanyStructureService:BaseService,ICompanyStructureService
     {
 
         public enum CompanyStructureErrors

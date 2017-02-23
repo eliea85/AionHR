@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace AionHR.Services.Interfaces
 {
-    public interface IBaseService<T,TID>where T :IEntity
+    public interface IBaseService
     {
         SessionHelper SessionHelper { get; set; }
-        RecordResponse<T> Get(RecordRequest request);
+        RecordResponse<T> Get<T>(RecordRequest request)where T :IEntity;
 
-         ListResponse<T> GetAll(ListRequest request);
-       
+         ListResponse<T> GetAll<T>(ListRequest request)
 
-        PostResponse<T> AddOrUpdate(PostRequest<T> request);
-        StatusResponse Delete(RecordRequest request);
+
+        PostResponse<T> AddOrUpdate<T>(PostRequest<T> request) where T : IEntity;
+        StatusResponse Delete<T>(RecordRequest request) where T : IEntity;
 
 
         //child methods

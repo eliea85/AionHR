@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Services.Interfaces
 {
-    public interface IEmployeeService:IBaseService<Employee,string>
+    public interface IEmployeeService:IBaseService
     {
         
     }

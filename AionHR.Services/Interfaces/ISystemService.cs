@@ -8,7 +8,7 @@ namespace AionHR.Services.Interfaces
     /// <summary>
     /// Interface that hold the methods of a service
     /// </summary>
-    public interface ISystemService : IBaseService<UserInfo,string>
+    public interface ISystemService : IBaseService
     {
 
         /// <summary>

@@ -20,7 +20,7 @@ using AionHR.Web.UI.Forms.Utilities;
 using AionHR.Model.Company.News;
 using AionHR.Services.Messaging;
 using AionHR.Model.Company.Structure;
-
+using AionHR.Model.Employees.Profile;
 
 namespace AionHR.Web.UI.Forms
 {
@@ -29,6 +29,7 @@ namespace AionHR.Web.UI.Forms
 
         ICompanyStructureService _branchService = ServiceLocator.Current.GetInstance<ICompanyStructureService>();
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
+        IEmployeeService _employeeService = ServiceLocator.Current.GetInstance<IEmployeeService>();
         protected override void InitializeCulture()
         {
 
@@ -130,7 +131,7 @@ namespace AionHR.Web.UI.Forms
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
-                    
+                    InitPopup();
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -161,6 +162,14 @@ namespace AionHR.Web.UI.Forms
             }
 
 
+        }
+
+        private void InitPopup()
+        {
+            BoundedComboBox b = new BoundedComboBox("parentCombo", GetLocalResourceObject("FieldParentName").ToString(), "FillParent", "", GetLocalResourceObject("FieldParentName").ToString());
+            BasicInfoTab.Items.Add(b);
+            BasicInfoTab.UpdateContent();
+            BasicInfoTab.UpdateLayout();
         }
 
         /// <summary>
@@ -198,6 +207,24 @@ namespace AionHR.Web.UI.Forms
         }
 
 
+        [DirectMethod]
+        public object FillParent(string action, Dictionary<string, object> extraParams)
+        {
+            StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+
+
+            
+            List<Employee> data;
+            ListRequest req = new ListRequest();
+            req.Filter = prms.Query;
+            ListResponse<Employee> response = _employeeService.GetAll(req);
+            data = response.Items;
+            return new
+            {
+                data
+            };
+
+        }
 
 
 
@@ -281,7 +308,7 @@ namespace AionHR.Web.UI.Forms
             //Reset all values of the relative object
             BasicInfoTab.Reset();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            timeZoneCombo.Select(Session["TimeZone"].ToString());
+            
             this.EditRecordWindow.Show();
         }
 

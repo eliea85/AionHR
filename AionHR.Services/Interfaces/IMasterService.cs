@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Services.Interfaces
 {
-    public interface IMasterService:IBaseService<Account,string>
+    public interface IMasterService:IBaseService
     {
         Response<Account> GetAccount(AuthenticateRequest request);
 

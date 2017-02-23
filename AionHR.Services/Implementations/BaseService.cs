@@ -14,7 +14,7 @@ namespace AionHR.Services.Implementations
     /// <summary>
     /// Base service used to hold all common properties and common service methods
     /// </summary>
-    public abstract class BaseService<T,TID> where T :IEntity
+    public abstract class BaseService 
     {
         protected string GetRecordMethodName;
         protected string GetAllMethodName;
@@ -25,13 +25,13 @@ namespace AionHR.Services.Implementations
         protected Dictionary<Type, string> ChildAddOrUpdateLookup;
         protected Dictionary<Type, string> ChildDeleteLookup;
         public SessionHelper SessionHelper { get; set; }
-        public BaseService(SessionHelper sessionHelper,IRepository<T,TID> repository)
+        public BaseService(SessionHelper sessionHelper,IRepository<IEntity,string> repository)
         {
             SessionHelper = sessionHelper;
             _repository = repository;
         }
         
-        public IRepository<T,TID> _repository;
+        public IRepository<IEntity,string> _repository;
         protected TResponse CreateServiceResponse<TResponse>(BaseWebServiceResponse webResponse) where TResponse :ResponseBase,new()
         {
             TResponse response =new TResponse();
@@ -41,7 +41,7 @@ namespace AionHR.Services.Implementations
 
         
 
-        public RecordResponse<T> Get(RecordRequest request)
+        public RecordResponse<T> Get<T>(RecordRequest request) where T :IEntity
         {
             RecordResponse<T> response = new RecordResponse<T>();
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
@@ -50,27 +50,28 @@ namespace AionHR.Services.Implementations
 
             var webResponse = _repository.GetRecord(GetRecordMethodName, headers, queryParams);
             CreateServiceResponse<RecordResponse<T>>(webResponse);
-            response.result = webResponse.record;
+            response.result =(T) webResponse.record;
             return response;
 
         }
-        public ListResponse<T> GetAll(ListRequest request)
+        public ListResponse<T> GetAll<T>(ListRequest request)
         {
-            ListResponse<T> response = new ListResponse<T>();
+            
 
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            ListWebServiceResponse<T> webResponse = _repository.GetAll(GetAllMethodName, headers, request.Parameters);
-            response = CreateServiceResponse<ListResponse<T>>(webResponse);
+            var webResponse = _repository.GetAll(GetAllMethodName, headers, request.Parameters);
+            var response = CreateServiceResponse<ListResponse<T>>(webResponse);
             if (!response.Success)
             {
                 response.Message = webResponse.message;
             }
 
-            response.Items = webResponse.list.ToList();
+            response.Items = webResponse.list.ToList<T>();
             return response;
         }
 
-        public PostResponse<T> AddOrUpdate(PostRequest<T> request)
+        public PostResponse<T> AddOrUpdate<T>(PostRequest<T> request) where T:IEntity
+            
         {
             PostResponse<T> response;
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
@@ -80,7 +81,7 @@ namespace AionHR.Services.Implementations
             return response;
         }
 
-        public StatusResponse Delete(RecordRequest request)
+        public StatusResponse Delete<T>(RecordRequest request) where T : IEntity
         {
             StatusResponse response = new StatusResponse();
             var headers = SessionHelper.GetAuthorizationHeadersForUser();

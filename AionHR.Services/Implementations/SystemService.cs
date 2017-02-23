@@ -16,7 +16,7 @@ namespace AionHR.Services.Implementations
     /// <summary>
     /// Class responsible for all operation of the system.
     /// </summary>
-    public class SystemService : BaseService<UserInfo,string>, ISystemService
+    public class SystemService : BaseService, ISystemService
     {
 
       

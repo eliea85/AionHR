@@ -12,7 +12,7 @@ using AionHR.Infrastructure.WebService;
 
 namespace AionHR.Services.Implementations
 {
-    public class MasterService : BaseService<Account,String>,IMasterService
+    public class MasterService : BaseService,IMasterService
     {
         
         public MasterService(IAccountRepository accountRepository, SessionHelper helper):base(helper,accountRepository)
@@ -56,7 +56,7 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_email", request.UserName);
-            RecordWebServiceResponse<Account> webResponse=  _repository.GetRecord("reqAN", headers, queryParams);
+            var webResponse=  _repository.GetRecord("reqAN", headers, queryParams);
             response = CreateServiceResponse<Response<Account>>(webResponse);
             if (!response.Success)
                 response.Message = "";

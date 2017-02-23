@@ -152,6 +152,7 @@
       <DependentUpon>Common.resx</DependentUpon>
     </Compile>
     <Compile Include="BootStrapper.cs" />
+    <Compile Include="BoundedComboBox.cs" />
     <Compile Include="Branches.aspx.cs">
       <DependentUpon>Branches.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -230,6 +231,7 @@
     <Compile Include="resetPw.aspx.designer.cs">
       <DependentUpon>resetPw.aspx</DependentUpon>
     </Compile>
+    <Compile Include="StoreFactory.cs" />
     <Compile Include="StructureMapServiceLocator.cs" />
     <Compile Include="Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>

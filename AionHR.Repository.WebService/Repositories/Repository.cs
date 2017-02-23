@@ -13,7 +13,7 @@ namespace AionHR.Repository.WebService.Repositories
     /// </summary>
     /// <typeparam name="T">T is an IEntity</typeparam>
     /// <typeparam name="TEntityKey">the key of the entity</typeparam>
-    public abstract class Repository<T, TEntityKey> where T : IEntity
+    public abstract class Repository<T, TEntityKey> 
     {
         public string ServiceURL;
 

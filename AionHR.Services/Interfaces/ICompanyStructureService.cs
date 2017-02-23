@@ -10,7 +10,7 @@ using AionHR.Infrastructure.Domain;
 
 namespace AionHR.Services.Interfaces
 {
-    public interface ICompanyStructureService : IBaseService<IEntity,string>
+    public interface ICompanyStructureService : IBaseService
     {
         
     }

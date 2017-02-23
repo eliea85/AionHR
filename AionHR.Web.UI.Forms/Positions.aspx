@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Departments.aspx.cs" Inherits="AionHR.Web.UI.Forms.Departments" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Positions.aspx.cs" Inherits="AionHR.Web.UI.Forms.Positions" %>
 
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -22,7 +22,7 @@
         <ext:Hidden ID="textLoadFailed" runat="server" Text="<%$ Resources:Common , LoadFailed %>" />
         <ext:Hidden ID="titleSavingError" runat="server" Text="<%$ Resources:Common , TitleSavingError %>" />
         <ext:Hidden ID="titleSavingErrorMessage" runat="server" Text="<%$ Resources:Common , TitleSavingErrorMessage %>" />
-        <ext:Hidden ID="timeZoneOffset" runat="server" EnableViewState="true" />
+        
         <ext:Store
             ID="Store1"
             runat="server"
@@ -44,9 +44,9 @@
                         <ext:ModelField Name="recordId" />
                         <ext:ModelField Name="name" />
                         <ext:ModelField Name="reference" />
-                        <ext:ModelField Name="timeZone" />
-                        <ext:ModelField Name="segmentCode" />
-                        <ext:ModelField Name="isInactive" />
+                        <ext:ModelField Name="description" />
+                        <ext:ModelField Name="referToPositionId" />
+                        <ext:ModelField Name="referToPositionName" />
 
 
 
@@ -124,12 +124,10 @@
                                 <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
                                 </Renderer>
                             </ext:Column>
-                            <ext:Column Visible="false" ID="parentId" MenuDisabled="true" runat="server" DataIndex="parentId" Flex="1" Hideable="false" />
-                            <ext:Column Visible="false" ID="supervisorId" MenuDisabled="true" runat="server" DataIndex="supervisorId" Flex="1" Hideable="false" />
-                            <ext:CheckColumn ID="ColIsSegmented" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsSegmentedHead %>" DataIndex="isSegmentedHead" Hideable="false" />
-                            <ext:Column ID="ColParentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldParentName%>" DataIndex="parentName" Flex="1" Hideable="false" />
-                            <ext:Column ID="ColSvName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldSvFullName%>" DataIndex="svFullName" Flex="1" Hideable="false" />
-
+                            <ext:Column Visible="false" ID="ColrefererId" MenuDisabled="true" runat="server" DataIndex="referToPositionId" Flex="1" Hideable="false" />
+                            <ext:Column Visible="true" ID="ColrefererName" MenuDisabled="true" runat="server" DataIndex="referToPositionName" Text="<%$ Resources: FieldReferer %>" Flex="1" Hideable="false" />
+                            <ext:Column ID="ColDescription" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDescription %>" DataIndex="description" Hideable="false" />
+                          
 
 
                             <ext:Column runat="server"
@@ -294,35 +292,36 @@
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" DataIndex="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" DataIndex="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                 <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources: FieldReference %>" DataIndex="reference" AllowBlank="false" />
+                                <ext:TextField ID="description" runat="server" FieldLabel="<%$ Resources: FieldDescription %>" DataIndex="description" AllowBlank="true" />
 
 
-                                <ext:Checkbox ID="isSegmentHeadCheck" runat="server" FieldLabel="<%$ Resources: FieldIsSegmentedHead%>" DataIndex="isSegmentHead" Name="isInactive" />
-                               <%-- <ext:ComboBox runat="server" ID="supervisorCombo"
-                                    DisplayField="fullName"
+                                
+                                <ext:ComboBox runat="server" ID="referToPositionId"
+                                    DisplayField="name"
                                     ValueField="recordId"
                                     TypeAhead="false"
-                                    PageSize="10"
-                                    HideTrigger="true" 
-                                    MinChars="0"
-                                    TriggerAction="Query">
+                                   
+                                    FieldLabel ="<%$ Resources: FieldReferer %>"
+                                    
+                                    >
                                     <Store>
-                                        <ext:Store runat="server" ID="supervisorStore" AutoLoad="false">
+                                        <ext:Store runat="server" ID="supervisorStore" AutoLoad="true">
                                             <Model>
                                                 <ext:Model runat="server">
                                                     <Fields>
                                                         <ext:ModelField Name="recordId" />
-                                                        <ext:ModelField Name="fullName" />
+                                                        <ext:ModelField Name="name" />
                                                     </Fields>
                                                 </ext:Model>
                                             </Model>
                                             <Proxy>
-                                                <ext:PageProxy DirectFn="FillSupervisor"></ext:PageProxy>
+                                                <ext:PageProxy DirectFn="App.direct.FillParent"></ext:PageProxy>
                                             </Proxy>
 
                                         </ext:Store>
 
                                     </Store>
-                                </ext:ComboBox>--%>
+                                </ext:ComboBox>
                             </Items>
 
                         </ext:FormPanel>
@@ -335,7 +334,7 @@
 
                     <Listeners>
                         <Click Handler="CheckSession(); if (!#{BasicInfoTab}.getForm().isValid()) {return false;} " />
-                    </Listeners>    
+                    </Listeners>
                     <DirectEvents>
                         <Click OnEvent="SaveNewRecord" Failure="Ext.MessageBox.alert('#{titleSavingError}.value', '#{titleSavingErrorMessage}.value');">
                             <EventMask ShowMask="true" Target="CustomTarget" CustomTarget="={#{EditRecordWindow}.body}" />

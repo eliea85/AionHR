@@ -24,7 +24,7 @@ using AionHR.Model.Employees.Profile;
 
 namespace AionHR.Web.UI.Forms
 {
-    public partial class Departments : System.Web.UI.Page
+    public partial class Positions : System.Web.UI.Page
     {
 
         ICompanyStructureService _branchService = ServiceLocator.Current.GetInstance<ICompanyStructureService>();
@@ -49,12 +49,12 @@ namespace AionHR.Web.UI.Forms
 
         }
         BoundedComboBox parents;
-            BoundedComboBox supervisors;
+        BoundedComboBox supervisors;
         protected void Page_Load(object sender, EventArgs e)
         {
-         
 
-            
+
+
 
             if (!X.IsAjaxRequest && !IsPostBack)
             {
@@ -66,10 +66,7 @@ namespace AionHR.Web.UI.Forms
 
             }
 
-            if (timeZoneOffset.Text != "")
-            {
-                Session.Add("TimeZone", timeZoneOffset.Text);
-            }
+         
         }
 
 
@@ -129,7 +126,7 @@ namespace AionHR.Web.UI.Forms
                     //Step 1 : get the object from the Web Service 
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
-                    RecordResponse<Department> response = _branchService.ChildGetRecord<Department>(r);
+                    RecordResponse<Model.Company.Structure.Position> response = _branchService.ChildGetRecord<Model.Company.Structure.Position>(r);
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
@@ -166,22 +163,21 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        private void InitCombos(Department dept)
+        private void InitCombos(Model.Company.Structure.Position dept)
         {
-            parents = new BoundedComboBox("parentId", "name", "recordId", GetLocalResourceObject("FieldParentName").ToString(), "FillParent", "", GetLocalResourceObject("FieldParentName").ToString(), false);
-            supervisors = new BoundedComboBox("supervisorId", "fullName", "recordId", GetLocalResourceObject("FieldSvFullName").ToString(), "FillSupervisor", "", GetLocalResourceObject("FieldSvFullName").ToString(), true);
-            BasicInfoTab.Items.Add(parents);
-            BasicInfoTab.Items.Add(supervisors);
-            if (dept != null)
-            {
-                
-                parents.Select(dept.parentId);
-                supervisors.Select(dept.supervisorId);
-            }
-            BasicInfoTab.UpdateLayout();
-            BasicInfoTab.UpdateContent();
-            
-            
+            //parents = new BoundedComboBox("referToPositionId", "name", "recordId", GetLocalResourceObject("FieldReferer").ToString(), "FillParent", "", GetLocalResourceObject("FieldReferer").ToString(), false);
+
+            //BasicInfoTab.Items.Add(parents);
+
+            //if (dept != null)
+            //{
+
+            //    parents.Select(dept.referToPositionId);
+
+            //}
+            referToPositionId.Select(dept.referToPositionId);
+
+
         }
 
         /// <summary>
@@ -225,11 +221,11 @@ namespace AionHR.Web.UI.Forms
             StoreRequestParameters prms = new StoreRequestParameters(extraParams);
 
 
-            
-            List<Department> data;
+
+            List<Model.Company.Structure.Position> data;
             ListRequest req = new ListRequest();
-            
-            ListResponse<Department> response = _branchService.ChildGetAll<Department>(req);
+
+            ListResponse<Model.Company.Structure.Position> response = _branchService.ChildGetAll<Model.Company.Structure.Position>(req);
             data = response.Items;
             return new
             {
@@ -240,14 +236,14 @@ namespace AionHR.Web.UI.Forms
         [DirectMethod]
         public object FillSupervisor(string action, Dictionary<string, object> extraParams)
         {
-            
-               StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+
+            StoreRequestParameters prms = new StoreRequestParameters(extraParams);
 
 
 
             List<Employee> data;
             ListRequest req = new ListRequest();
-            
+
             req.QueryStringParams.Add("_departmentId", "0");
             req.QueryStringParams.Add("_branchId", "0");
             req.StartAt = "1";
@@ -349,7 +345,7 @@ namespace AionHR.Web.UI.Forms
             //Reset all values of the relative object
             BasicInfoTab.Reset();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            
+
             this.EditRecordWindow.Show();
         }
 
@@ -367,7 +363,7 @@ namespace AionHR.Web.UI.Forms
             //in this test will take a list of News
             ListRequest request = new ListRequest();
             request.Filter = "";
-            ListResponse<Department> branches = _branchService.ChildGetAll<Department>(request);
+            ListResponse<Model.Company.Structure.Position> branches = _branchService.ChildGetAll<Model.Company.Structure.Position > (request);
             if (!branches.Success)
                 return;
             this.Store1.DataSource = branches.Items;
@@ -387,8 +383,8 @@ namespace AionHR.Web.UI.Forms
             string id = e.ExtraParams["id"];
 
             string obj = e.ExtraParams["values"];
-            Department b = JsonConvert.DeserializeObject<Department>(obj);
-            
+            Model.Company.Structure.Position b = JsonConvert.DeserializeObject<Model.Company.Structure.Position>(obj);
+
             b.recordId = id;
             // Define the object to add or edit as null
 
@@ -399,9 +395,9 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    PostRequest<Department> request = new PostRequest<Department>();
+                    PostRequest<Model.Company.Structure.Position> request = new PostRequest<Model.Company.Structure.Position>();
                     request.entity = b;
-                    PostResponse<Department> r = _branchService.ChildAddOrUpdate<Department>(request);
+                    PostResponse<Model.Company.Structure.Position> r = _branchService.ChildAddOrUpdate<Model.Company.Structure.Position>(request);
                     b.recordId = r.recordId;
 
                     //check if the insert failed
@@ -451,9 +447,9 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                    PostRequest<Department> request = new PostRequest<Department>();
+                    PostRequest<Model.Company.Structure.Position> request = new PostRequest<Model.Company.Structure.Position>();
                     request.entity = b;
-                    PostResponse<Department> r = _branchService.ChildAddOrUpdate<Department>(request);                   //Step 1 Selecting the object or building up the object for update purpose
+                    PostResponse<Model.Company.Structure.Position> r = _branchService.ChildAddOrUpdate<Model.Company.Structure.Position>(request);                   //Step 1 Selecting the object or building up the object for update purpose
 
                     //Step 2 : saving to store
 
@@ -500,10 +496,10 @@ namespace AionHR.Web.UI.Forms
             }
             else return "1";
         }
-        
+
         protected void BasicInfoTab_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         [DirectMethod]

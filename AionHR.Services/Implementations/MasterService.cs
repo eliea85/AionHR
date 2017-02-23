@@ -16,7 +16,7 @@ namespace AionHR.Services.Implementations
     public class MasterService : BaseService,IMasterService
     {
         
-        public MasterService(IAccountRepository accountRepository, SessionHelper helper):base(helper, (IRepository<IEntity, string>)accountRepository)
+        public MasterService(IAccountRepository accountRepository, SessionHelper helper):base(helper, accountRepository)
         {
             
         }

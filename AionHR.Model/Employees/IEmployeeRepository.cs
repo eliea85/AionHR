@@ -11,7 +11,7 @@ namespace AionHR.Model.Employees
     /// <summary>
     /// Interface for the EmployeeRepository
     /// </summary>
-   public interface IEmployeeRepository:IRepository<Employee,string>
+   public interface IEmployeeRepository:IRepository<Employee,string>,ICommonRepository
     {
 
     }

@@ -11,7 +11,7 @@ namespace AionHR.Model.System
     /// <summary>
     /// Interface for user repository
     /// </summary>
-    public interface IUserRepository:IRepository<UserInfo,string>
+    public interface IUserRepository:IRepository<UserInfo,string>,ICommonRepository
     {
          RecordWebServiceResponse<UserInfo> Authenticate(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
         RecordWebServiceResponse<UserInfo> ResetPassword(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);

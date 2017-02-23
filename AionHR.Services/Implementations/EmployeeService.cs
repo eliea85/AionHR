@@ -16,7 +16,7 @@ namespace AionHR.Services.Implementations
     {
         
         
-        public EmployeeService(IEmployeeRepository employeeRepository, SessionHelper sessionHelper) : base(sessionHelper,(IRepository<IEntity,string>) employeeRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository, SessionHelper sessionHelper) : base(sessionHelper,employeeRepository)
         {
             GetAllMethodName = "qryES";
             GetRecordMethodName = "getEM";

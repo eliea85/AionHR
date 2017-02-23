@@ -25,13 +25,13 @@ namespace AionHR.Services.Implementations
         protected Dictionary<Type, string> ChildAddOrUpdateLookup;
         protected Dictionary<Type, string> ChildDeleteLookup;
         public SessionHelper SessionHelper { get; set; }
-        public BaseService(SessionHelper sessionHelper,IRepository<IEntity,string> repository)
+        public BaseService(SessionHelper sessionHelper,ICommonRepository repository)
         {
             SessionHelper = sessionHelper;
-            _repository = repository;
+            _repository = (IRepository < IEntity, string> )repository;
         }
-        
-        public IRepository<IEntity,string> _repository;
+
+        public IRepository<IEntity, string> _repository;
         protected TResponse CreateServiceResponse<TResponse>(BaseWebServiceResponse webResponse) where TResponse :ResponseBase,new()
         {
             TResponse response =new TResponse();

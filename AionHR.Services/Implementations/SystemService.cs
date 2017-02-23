@@ -24,7 +24,7 @@ namespace AionHR.Services.Implementations
 
         // public readonly SessionHelper _sessionHelper;
 
-        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper,(IRepository<IEntity,string>)userRepository)
+        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper,userRepository)
         {
             this.childRepo = userRepository;
             // _sessionHelper = sessionHelper;

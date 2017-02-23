@@ -11,7 +11,7 @@ namespace AionHR.Infrastructure.Domain
     /// Inteface to be implemented by all entities that need to exchange data
     /// </summary>
     /// <typeparam name="T">TEntity</typeparam>
-    public interface IRepository<T, TID> 
+    public interface IRepository<T, TID> where T :IEntity
     {
 
     

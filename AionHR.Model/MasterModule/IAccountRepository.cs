@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model.MasterModule
 {
-    public interface IAccountRepository:IRepository<Account,string>
+    public interface IAccountRepository:IRepository<Account,string>,ICommonRepository
     {
 
     }

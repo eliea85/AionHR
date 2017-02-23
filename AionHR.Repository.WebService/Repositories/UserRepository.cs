@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AionHR.Infrastructure.WebService;
+using AionHR.Infrastructure.Domain;
 
 namespace AionHR.Repository.WebService.Repositories
 {
     /// <summary>
     /// Class that handle the communcation between the model and the webservice. it encapsultes all the user relative methods
     /// </summary>
-    public class UserRepository : Repository<UserInfo, string>, IUserRepository
+    public class UserRepository : Repository<UserInfo, string>, IUserRepository,ICommonRepository
     {
         
        // the webservice name       

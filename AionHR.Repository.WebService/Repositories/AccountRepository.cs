@@ -20,6 +20,7 @@ namespace AionHR.Repository.WebService.Repositories
         public AccountRepository()
         {
             base.ServiceURL = ApplicationSettingsFactory.GetApplicationSettings().BaseURL + serviceName;
+            base.GetRecordMethodName = "getAC";
         }
     }
 }

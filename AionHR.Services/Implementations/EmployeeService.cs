@@ -14,14 +14,18 @@ namespace AionHR.Services.Implementations
 {
     public class EmployeeService : BaseService, IEmployeeService
     {
+        private IEmployeeRepository _employeeRepository;
         
-        
-        public EmployeeService(IEmployeeRepository employeeRepository, SessionHelper sessionHelper) : base(sessionHelper,employeeRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository, SessionHelper sessionHelper) : base(sessionHelper)
         {
             GetAllMethodName = "qryES";
             GetRecordMethodName = "getEM";
             AddOrUpdateMethodName = "setEM";
         }
-        
+
+        protected override dynamic GetRepoistory()
+        {
+            return _employeeRepository;
+        }
     }
 }

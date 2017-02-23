@@ -13,12 +13,12 @@ using AionHR.Infrastructure.Domain;
 
 namespace AionHR.Services.Implementations
 {
-    public class MasterService : BaseService<IRepository<Account,string>>,IMasterService
+    public class MasterService : BaseService,IMasterService
     {
-        
-        public MasterService(IAccountRepository accountRepository, SessionHelper helper):base(helper, (IRepository<IEntity, string>)accountRepository)
+        private IAccountRepository _accountRepository;
+        public MasterService(IAccountRepository accountRepository, SessionHelper helper):base(helper)
         {
-            
+            _accountRepository = accountRepository;
         }
 
 
@@ -31,7 +31,7 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("_accountName", request.Account);
 
-            var accountRecord = _repository.GetRecord(headers, parameters);
+            var accountRecord = _accountRepository.GetRecord(headers, parameters);
             if (accountRecord == null)
             {
                 response.Success = false;
@@ -57,11 +57,17 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_email", request.UserName);
-            var webResponse=  _repository.GetRecord(headers, queryParams);
+            var webResponse=  _accountRepository.GetRecord(headers, queryParams);
             response = CreateServiceResponse<Response<Account>>(webResponse);
             if (!response.Success)
                 response.Message = "";
             return response;
+        }
+
+  
+        protected override dynamic GetRepoistory()
+        {
+            return _accountRepository;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace AionHR.Services.Implementations
 
         // public readonly SessionHelper _sessionHelper;
 
-        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper,userRepository)
+        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper)
         {
             this.childRepo = userRepository;
             // _sessionHelper = sessionHelper;
@@ -110,6 +110,9 @@ namespace AionHR.Services.Implementations
             return response;
         }
 
-       
+        protected override dynamic GetRepoistory()
+        {
+            return childRepo;
+        }
     }
 }

@@ -13,10 +13,10 @@ using AionHR.Infrastructure.Domain;
 
 namespace AionHR.Services.Implementations
 {
-    public class MasterService : BaseService,IMasterService
+    public class MasterService : BaseService<IRepository<Account,string>>,IMasterService
     {
         
-        public MasterService(IAccountRepository accountRepository, SessionHelper helper):base(helper, accountRepository)
+        public MasterService(IAccountRepository accountRepository, SessionHelper helper):base(helper, (IRepository<IEntity, string>)accountRepository)
         {
             
         }

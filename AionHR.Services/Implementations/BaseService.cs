@@ -14,7 +14,7 @@ namespace AionHR.Services.Implementations
     /// <summary>
     /// Base service used to hold all common properties and common service methods
     /// </summary>
-    public abstract class BaseService 
+    public abstract class BaseService<RepositoryBaseType> where RepositoryBaseType:IRepository<IEntity,string>
     {
         protected string GetRecordMethodName;
         protected string GetAllMethodName;
@@ -30,7 +30,7 @@ namespace AionHR.Services.Implementations
             SessionHelper = sessionHelper;
             _repository = (IRepository < IEntity, string> )repository;
         }
-
+        RepositoryBaseType rep;
         public IRepository<IEntity, string> _repository;
         protected TResponse CreateServiceResponse<TResponse>(BaseWebServiceResponse webResponse) where TResponse :ResponseBase,new()
         {
@@ -47,7 +47,7 @@ namespace AionHR.Services.Implementations
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
-
+            
             var webResponse = _repository.GetRecord(headers, queryParams);
             CreateServiceResponse<RecordResponse<T>>(webResponse);
             response.result =(T) webResponse.record;
@@ -94,43 +94,6 @@ namespace AionHR.Services.Implementations
             return response;
         }
 
-        public RecordResponse<TChild> ChildGetRecord<TChild>(RecordRequest request)
-        {
-            RecordResponse<TChild> response = new RecordResponse<TChild>();
-            var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            Dictionary<string, string> queryParams = new Dictionary<string, string>();
-            queryParams.Add("_recordId", request.RecordID);
-            
-            var webResponse = _repository.ChildGetRecord<TChild>(headers, queryParams);
-            CreateServiceResponse<RecordResponse<TChild>>(webResponse);
-            response.result = webResponse.record;
-            return response;
-        }
-        public ListResponse<TChild> ChildGetAll<TChild>(ListRequest request)
-        {
-            ListResponse<TChild> response = new ListResponse<TChild>();
-
-            var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            ListWebServiceResponse<TChild> webResponse = _repository.ChildGetAll<TChild>( headers, request.Parameters);
-            response = CreateServiceResponse<ListResponse<TChild>>(webResponse);
-            if (!response.Success)
-            {
-                response.Message = webResponse.message;
-            }
-
-            response.Items = webResponse.list.ToList();
-            return response;
-
-        }
-
-        public PostResponse<TChild> ChildAddOrUpdate<TChild>(PostRequest<TChild> request)
-        {
-            PostResponse<TChild> response;
-            var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            PostWebServiceResponse webResponse = _repository.ChildAddOrUpdate<TChild>(request.entity, headers);
-            response = CreateServiceResponse<PostResponse<TChild>>(webResponse);
-            response.recordId = webResponse.recordId;
-            return response;
-        }
+       
     }
 }

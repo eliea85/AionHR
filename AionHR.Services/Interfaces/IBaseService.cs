@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Services.Interfaces
 {
-    public interface IBaseService
+    public interface IBaseService<IRepositoryBaseType>where IRepositoryBaseType:IRepository<IEntity,string>
     {
         SessionHelper SessionHelper { get; set; }
         RecordResponse<T> Get<T>(RecordRequest request)where T :IEntity;
@@ -21,11 +21,7 @@ namespace AionHR.Services.Interfaces
         StatusResponse Delete<T>(RecordRequest request) where T : IEntity;
 
 
-        //child methods
-        RecordResponse<TChild> ChildGetRecord<TChild>(RecordRequest request);
-         ListResponse<TChild> ChildGetAll<TChild>(ListRequest request);
-
-        PostResponse<TChild> ChildAddOrUpdate<TChild>(PostRequest<TChild> request);
+  
 
         
         

@@ -133,7 +133,7 @@ namespace AionHR.Web.UI.Forms
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
-                    InitCombos(response.result);
+                   // InitCombos(response.result);
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -260,10 +260,10 @@ namespace AionHR.Web.UI.Forms
             req.Filter = prms.Query;
             ListResponse<Employee> response = _employeeService.GetAll<Employee>(req);
             data = response.Items;
-            return new
-            {
-                data
-            };
+            //  return new
+            // {
+            return data;
+            //};
 
         }
 

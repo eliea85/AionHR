@@ -297,14 +297,14 @@
 
 
                                 <ext:Checkbox ID="isSegmentHeadCheck" runat="server" FieldLabel="<%$ Resources: FieldIsSegmentedHead%>" DataIndex="isSegmentHead" Name="isInactive" />
-                               <%-- <ext:ComboBox runat="server" ID="supervisorCombo"
+                                <ext:ComboBox runat="server" ID="supervisorCombo"
                                     DisplayField="fullName"
                                     ValueField="recordId"
                                     TypeAhead="false"
-                                    PageSize="10"
+                                  
                                     HideTrigger="true" 
-                                    MinChars="0"
-                                    TriggerAction="Query">
+                                    MinChars="3"
+                                    TriggerAction="Query" ForceSelection="false" >
                                     <Store>
                                         <ext:Store runat="server" ID="supervisorStore" AutoLoad="false">
                                             <Model>
@@ -316,13 +316,13 @@
                                                 </ext:Model>
                                             </Model>
                                             <Proxy>
-                                                <ext:PageProxy DirectFn="FillSupervisor"></ext:PageProxy>
+                                                <ext:PageProxy DirectFn="App.direct.FillSupervisor"></ext:PageProxy>
                                             </Proxy>
 
                                         </ext:Store>
 
                                     </Store>
-                                </ext:ComboBox>--%>
+                                </ext:ComboBox>
                             </Items>
 
                         </ext:FormPanel>

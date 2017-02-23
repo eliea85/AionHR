@@ -409,6 +409,24 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.Checkbox isSegmentHeadCheck;
         
         /// <summary>
+        /// supervisorCombo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.ComboBox supervisorCombo;
+        
+        /// <summary>
+        /// supervisorStore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Store supervisorStore;
+        
+        /// <summary>
         /// SaveButton control.
         /// </summary>
         /// <remarks>

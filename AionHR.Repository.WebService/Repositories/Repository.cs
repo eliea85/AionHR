@@ -16,6 +16,14 @@ namespace AionHR.Repository.WebService.Repositories
     public abstract class Repository<T, TEntityKey> 
     {
         public string ServiceURL;
+        protected string GetRecordMethodName;
+        protected string GetAllMethodName;
+        protected string AddOrUpdateMethodName;
+        protected string DeleteMethodName;
+        protected Dictionary<Type, string> ChildGetLookup;
+        protected Dictionary<Type, string> ChildGetAllLookup;
+        protected Dictionary<Type, string> ChildAddOrUpdateLookup;
+        protected Dictionary<Type, string> ChildDeleteLookup;
 
 
         /// <summary>
@@ -25,11 +33,11 @@ namespace AionHR.Repository.WebService.Repositories
         /// <param name="Headers">the addional data headers</param>
         /// <param name="QueryStringParams"> the query strings param shipped with the request</param>
         /// <returns>a record of the requested data inside the RecordWebserviceResponse</returns>
-        public RecordWebServiceResponse<T> GetRecord(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
+        public RecordWebServiceResponse<T> GetRecord( Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
         {
             var request = new HTTPWebServiceRequest();
             request.MethodType = "GET";
-            request.URL = ServiceURL + methodName;
+            request.URL = ServiceURL + GetRecordMethodName;
             if (Headers != null)
                 request.Headers = Headers;
             if (QueryStringParams != null)
@@ -46,11 +54,11 @@ namespace AionHR.Repository.WebService.Repositories
         /// <param name="Headers">the addional data headers</param>
         /// <param name="QueryStringParams"> the query strings param shipped with the request</param>
         /// <returns>a list of records of the requested data inside the ListWebServiceResponse</returns>
-        public ListWebServiceResponse<T> GetAll(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
+        public ListWebServiceResponse<T> GetAll(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
         {
             var request = new HTTPWebServiceRequest();
             request.MethodType = "GET";
-            request.URL = ServiceURL + methodName;
+            request.URL = ServiceURL + GetAllMethodName;
             if (Headers != null)
                 request.Headers = Headers;
             if (QueryStringParams != null)
@@ -61,11 +69,11 @@ namespace AionHR.Repository.WebService.Repositories
 
         }
 
-        public PostWebServiceResponse AddOrUpdate(string methodName, T entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
+        public PostWebServiceResponse AddOrUpdate( T entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
         {
             var request = new HTTPWebServiceRequest();
             request.MethodType = "POST";
-            request.URL = ServiceURL + methodName;
+            request.URL = ServiceURL + AddOrUpdateMethodName;
             if (Headers != null)
                 request.Headers = Headers;
             if (QueryStringParams != null)
@@ -75,11 +83,11 @@ namespace AionHR.Repository.WebService.Repositories
                 
         }
 
-        public BlankWebServiceResponse Delete(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
+        public BlankWebServiceResponse Delete( Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
         {
             var request = new HTTPWebServiceRequest();
             request.MethodType = "GET";
-            request.URL = ServiceURL + methodName;
+            request.URL = ServiceURL + DeleteMethodName;
             if (Headers != null)
                 request.Headers = Headers;
             if (QueryStringParams != null)
@@ -88,11 +96,11 @@ namespace AionHR.Repository.WebService.Repositories
             return request.GetAsync<BlankWebServiceResponse>();
         }
 
-       public RecordWebServiceResponse<TChild> ChildGetRecord<TChild>(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
+       public RecordWebServiceResponse<TChild> ChildGetRecord<TChild>(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
         {
             var request = new HTTPWebServiceRequest();
             request.MethodType = "GET";
-            request.URL = ServiceURL + methodName;
+            request.URL = ServiceURL + ChildGetLookup[typeof(TChild)];
             if (Headers != null)
                 request.Headers = Headers;
             if (QueryStringParams != null)
@@ -101,11 +109,11 @@ namespace AionHR.Repository.WebService.Repositories
             return request.GetAsync<RecordWebServiceResponse<TChild>>();
         }
 
-        public ListWebServiceResponse<TChild> ChildGetAll<TChild>(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
+        public ListWebServiceResponse<TChild> ChildGetAll<TChild>(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
         {
             var request = new HTTPWebServiceRequest();
             request.MethodType = "GET";
-            request.URL = ServiceURL + methodName;
+            request.URL = ServiceURL + ChildGetAllLookup[typeof(TChild)];
             if (Headers != null)
                 request.Headers = Headers;
             if (QueryStringParams != null)
@@ -115,11 +123,11 @@ namespace AionHR.Repository.WebService.Repositories
             return request.GetAsync<ListWebServiceResponse<TChild>>();
         }
 
-        public PostWebServiceResponse ChildAddOrUpdate<TChild>(string methodName, TChild entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
+        public PostWebServiceResponse ChildAddOrUpdate<TChild>( TChild entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)
         {
             var request = new HTTPWebServiceRequest();
             request.MethodType = "POST";
-            request.URL = ServiceURL + methodName;
+            request.URL = ServiceURL + ChildAddOrUpdateLookup[typeof(TChild)];
             if (Headers != null)
                 request.Headers = Headers;
             if (QueryStringParams != null)

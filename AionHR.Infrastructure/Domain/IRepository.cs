@@ -15,20 +15,20 @@ namespace AionHR.Infrastructure.Domain
     {
 
     
-        RecordWebServiceResponse<T> GetRecord( string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+        RecordWebServiceResponse<T> GetRecord( Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
 
        
-        ListWebServiceResponse<T> GetAll( string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+        ListWebServiceResponse<T> GetAll(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
 
-        PostWebServiceResponse AddOrUpdate(string methodName, T entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+        PostWebServiceResponse AddOrUpdate(T entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
 
-         BlankWebServiceResponse Delete(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+         BlankWebServiceResponse Delete(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
 
-         RecordWebServiceResponse<TChild> ChildGetRecord<TChild>(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+         RecordWebServiceResponse<TChild> ChildGetRecord<TChild>(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
 
-         ListWebServiceResponse<TChild> ChildGetAll<TChild>(string methodName, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+         ListWebServiceResponse<TChild> ChildGetAll<TChild>(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
 
-        PostWebServiceResponse ChildAddOrUpdate<TChild>(string methodName, TChild entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
+        PostWebServiceResponse ChildAddOrUpdate<TChild>(TChild entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
 
     }
 }

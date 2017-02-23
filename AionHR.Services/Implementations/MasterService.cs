@@ -56,7 +56,7 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_email", request.UserName);
-            var webResponse=  _repository.GetRecord("reqAN", headers, queryParams);
+            var webResponse=  _repository.GetRecord(headers, queryParams);
             response = CreateServiceResponse<Response<Account>>(webResponse);
             if (!response.Success)
                 response.Message = "";

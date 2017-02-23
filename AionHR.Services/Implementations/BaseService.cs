@@ -48,25 +48,26 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
 
-            var webResponse = _repository.GetRecord(GetRecordMethodName, headers, queryParams);
+            var webResponse = _repository.GetRecord(headers, queryParams);
             CreateServiceResponse<RecordResponse<T>>(webResponse);
             response.result =(T) webResponse.record;
             return response;
 
         }
-        public ListResponse<T> GetAll<T>(ListRequest request)
+        public ListResponse<IEntity> GetAll<T>(ListRequest request)
         {
             
 
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            var webResponse = _repository.GetAll(GetAllMethodName, headers, request.Parameters);
-            var response = CreateServiceResponse<ListResponse<T>>(webResponse);
+            var webResponse = _repository.GetAll( headers, request.Parameters);
+            var response = CreateServiceResponse<ListResponse<IEntity>>(webResponse);
             if (!response.Success)
             {
                 response.Message = webResponse.message;
             }
 
-            response.Items = webResponse.list.ToList<T>();
+            response.Items = webResponse.GetAll();
+
             return response;
         }
 
@@ -75,7 +76,7 @@ namespace AionHR.Services.Implementations
         {
             PostResponse<T> response;
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            PostWebServiceResponse webResponse = _repository.AddOrUpdate(AddOrUpdateMethodName, request.entity, headers);
+            PostWebServiceResponse webResponse = _repository.AddOrUpdate( request.entity, headers);
             response = CreateServiceResponse<PostResponse<T>>(webResponse);
             response.recordId = webResponse.recordId;
             return response;
@@ -87,7 +88,7 @@ namespace AionHR.Services.Implementations
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
-            var webResponse = _repository.Delete(DeleteMethodName, headers, queryParams);
+            var webResponse = _repository.Delete(headers, queryParams);
             response = CreateServiceResponse<StatusResponse>(webResponse);
 
             return response;
@@ -100,7 +101,7 @@ namespace AionHR.Services.Implementations
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
             
-            var webResponse = _repository.ChildGetRecord<TChild>(ChildGetLookup[typeof(TChild)], headers, queryParams);
+            var webResponse = _repository.ChildGetRecord<TChild>(headers, queryParams);
             CreateServiceResponse<RecordResponse<TChild>>(webResponse);
             response.result = webResponse.record;
             return response;
@@ -110,7 +111,7 @@ namespace AionHR.Services.Implementations
             ListResponse<TChild> response = new ListResponse<TChild>();
 
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            ListWebServiceResponse<TChild> webResponse = _repository.ChildGetAll<TChild>(ChildGetAllLookup[typeof(TChild)].ToString(), headers, request.Parameters);
+            ListWebServiceResponse<TChild> webResponse = _repository.ChildGetAll<TChild>( headers, request.Parameters);
             response = CreateServiceResponse<ListResponse<TChild>>(webResponse);
             if (!response.Success)
             {
@@ -126,7 +127,7 @@ namespace AionHR.Services.Implementations
         {
             PostResponse<TChild> response;
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            PostWebServiceResponse webResponse = _repository.ChildAddOrUpdate<TChild>(ChildAddOrUpdateLookup[typeof(TChild)], request.entity, headers);
+            PostWebServiceResponse webResponse = _repository.ChildAddOrUpdate<TChild>(request.entity, headers);
             response = CreateServiceResponse<PostResponse<TChild>>(webResponse);
             response.recordId = webResponse.recordId;
             return response;

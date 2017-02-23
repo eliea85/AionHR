@@ -14,7 +14,7 @@ namespace AionHR.Services.Interfaces
         SessionHelper SessionHelper { get; set; }
         RecordResponse<T> Get<T>(RecordRequest request)where T :IEntity;
 
-         ListResponse<T> GetAll<T>(ListRequest request)
+        ListResponse<IEntity> GetAll<T>(ListRequest request);
 
 
         PostResponse<T> AddOrUpdate<T>(PostRequest<T> request) where T : IEntity;

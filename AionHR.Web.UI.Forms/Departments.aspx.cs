@@ -139,9 +139,10 @@ namespace AionHR.Web.UI.Forms
                         supervisorStore.DataSource=GetEmployeeByID(response.result.supervisorId.ToString());
                         
                         supervisorStore.DataBind();
-                        svFullName.Select(response.result.supervisorId);
+                        supervisorId.Select(response.result.supervisorId);
                     }
-                   // InitCombos(response.result);
+                   
+                    // InitCombos(response.result);
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -417,8 +418,8 @@ namespace AionHR.Web.UI.Forms
             
             b.recordId = id;
             // Define the object to add or edit as null
-            if(svFullName.SelectedItem!= null)
-            b.svFullName = svFullName.SelectedItem.Value;
+            if(supervisorId.SelectedItem!= null)
+            b.svFullName = supervisorId.SelectedItem.Text;
             if (parentId.SelectedItem != null)
                 b.parentName = parentId.SelectedItem.Text;
             if (string.IsNullOrEmpty(id))
@@ -499,6 +500,8 @@ namespace AionHR.Web.UI.Forms
 
                         ModelProxy record = this.Store1.GetById(index);
                         BasicInfoTab.UpdateRecord(record);
+                        record.Set("svFullName", b.svFullName);
+                        record.Set("parentName", b.parentName);
                         record.Commit();
                         Notification.Show(new NotificationConfig
                         {

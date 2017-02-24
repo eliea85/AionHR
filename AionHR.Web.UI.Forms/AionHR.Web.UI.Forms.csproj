@@ -331,7 +331,7 @@
     <Content Include="App_LocalResources\Nationalities.aspx.resx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_LocalResources\Currencies.resx" />
+    <Content Include="App_LocalResources\Currencies.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

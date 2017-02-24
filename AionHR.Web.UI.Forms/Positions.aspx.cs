@@ -66,7 +66,7 @@ namespace AionHR.Web.UI.Forms
 
             }
 
-         
+
         }
 
 
@@ -363,7 +363,7 @@ namespace AionHR.Web.UI.Forms
             //in this test will take a list of News
             ListRequest request = new ListRequest();
             request.Filter = "";
-            ListResponse<Model.Company.Structure.Position> branches = _branchService.ChildGetAll<Model.Company.Structure.Position > (request);
+            ListResponse<Model.Company.Structure.Position> branches = _branchService.ChildGetAll<Model.Company.Structure.Position>(request);
             if (!branches.Success)
                 return;
             this.Store1.DataSource = branches.Items;
@@ -384,7 +384,8 @@ namespace AionHR.Web.UI.Forms
 
             string obj = e.ExtraParams["values"];
             Model.Company.Structure.Position b = JsonConvert.DeserializeObject<Model.Company.Structure.Position>(obj);
-
+            if (referToPositionId.SelectedItem != null)
+                b.referToPositionName = referToPositionId.SelectedItem.Text;
             b.recordId = id;
             // Define the object to add or edit as null
 
@@ -465,7 +466,10 @@ namespace AionHR.Web.UI.Forms
 
 
                         ModelProxy record = this.Store1.GetById(index);
+
+                       
                         BasicInfoTab.UpdateRecord(record);
+                        record.Set("referToPositionName", b.referToPositionName);
                         record.Commit();
                         Notification.Show(new NotificationConfig
                         {

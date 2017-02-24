@@ -43,6 +43,7 @@
 
                         <ext:ModelField Name="recordId" />
                         <ext:ModelField Name="name" />
+                        <ext:ModelField Name="reference" />
                       
                                </Fields>
                 </ext:Model>
@@ -119,6 +120,7 @@
 
                             </Renderer>
                                 </ext:Column>
+                            <ext:Column   ID="ColReference" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference %>" DataIndex="reference" Hideable="false" width="75" Align="Center"/>
                            
 
                             <ext:Column runat="server"
@@ -283,6 +285,7 @@
                             <Items>
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
+                                <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="reference" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                
 
                             </Items>

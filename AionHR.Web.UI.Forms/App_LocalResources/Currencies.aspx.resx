@@ -129,6 +129,9 @@
   <data name="FieldRecordId" xml:space="preserve">
     <value>Record ID</value>
   </data>
+  <data name="FieldReference" xml:space="preserve">
+    <value>Reference</value>
+  </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>Currencies</value>
   </data>

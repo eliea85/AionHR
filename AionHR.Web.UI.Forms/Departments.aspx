@@ -301,7 +301,7 @@
 
 
                                 <ext:Checkbox ID="isSegmentHeadCheck" runat="server" FieldLabel="<%$ Resources: FieldIsSegmentedHead%>" DataIndex="isSegmentHead" Name="isSegmentHead" InputValue="true" />
-                                <ext:ComboBox runat="server" ID="svFullName"
+                                <ext:ComboBox runat="server" ID="supervisorId"
                                     DisplayField="fullName"
                                     ValueField="recordId"
                                     TypeAhead="false"

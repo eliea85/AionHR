@@ -289,7 +289,7 @@
             <Items>
                 <ext:TabPanel ID="panelRecordDetails" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
                     <Items>
-                        <ext:FormPanel
+                        <ext:FormPanel 
                             ID="BasicInfoTab"
                             runat="server"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"
@@ -297,20 +297,20 @@
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
                             BodyPadding="5">
                             <Items>
-                                <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" DataIndex="recordId" />
                                 
-                                <ext:TextField ID="email" runat="server" FieldLabel="<%$ Resources: FieldEmail %>" DataIndex="email" InputType="Email" AllowBlank="false" />
+                                <ext:TextField ID="email" runat="server" FieldLabel="<%$ Resources: FieldEmail %>" DataIndex="email" InputType="Email" Vtype="email" AllowBlank="false" />
+                                <ext:TextField ID="recordId" Disabled="true"  Hidden="true" runat="server"  DataIndex="recordId" AllowBlank="false" />
 
 
                                 <ext:Checkbox ID="isInactiveCheck" runat="server" FieldLabel="<%$ Resources: FieldIsInActive%>" DataIndex="isInactive" Name="isInactive" InputValue="true" />
                                 <ext:Checkbox ID="isAdminCheck" runat="server" FieldLabel="<%$ Resources: FieldIsAdmin%>" DataIndex="isAdmin" Name="isAdmin" InputValue="true" />
                                 <ext:ComboBox runat="server" ID="employeeId"
                                     DisplayField="fullName"
-                                    ValueField="recordId"
+                                    ValueField="recordId" 
                                     TypeAhead="false"
                                    FieldLabel ="<%$ Resources: FieldFullName%>"
                                     HideTrigger="true"  SubmitValue="true"
-                                    MinChars="3"
+                                    MinChars="3" 
                                     TriggerAction="Query" ForceSelection="false" >
                                     <Store>
                                         <ext:Store runat="server" ID="supervisorStore" AutoLoad="false">
@@ -354,7 +354,7 @@
                 <ext:Button ID="SaveButton" runat="server" Text="<%$ Resources:Common, Save %>" Icon="Disk">
 
                     <Listeners>
-                        <Click Handler="CheckSession(); if (!#{BasicInfoTab}.getForm().isValid()) {return false;} " />
+                        <Click Handler="CheckSession(); if (!#{BasicInfoTab}.getForm().isValid()) { return false;}" />
                     </Listeners>    
                     <DirectEvents>
                         <Click OnEvent="SaveNewRecord" Failure="Ext.MessageBox.alert('#{titleSavingError}.value', '#{titleSavingErrorMessage}.value');">

@@ -23,9 +23,12 @@ namespace AionHR.Model.System
         public string email { get; set; }
         public string enableHijriCalendar { get; set; }
 
-        public bool isAdministrator { get; set; }
+        public bool isAdmin { get; set; }
+
+        public bool isInactive { get; set; }
         public string companyName { get; set; }
 
+        public string password { get; set; }
         public string fullName { get; set; }
     }
 }

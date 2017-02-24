@@ -134,13 +134,10 @@ namespace AionHR.Web.UI.Forms
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
 
-                    if (response.result.employeeId!="")
+                    if (response.result.employeeId!=null)
                     {
-                        supervisorStore.DataSource = GetEmployeeByID(response.result.employeeId.ToString());
-
-                        supervisorStore.DataBind();
-                        employeeId.DataBind();
-                        employeeId.Select(response.result.employeeId);
+                        
+                        employeeId.Select(response.result.fullName);
                     }
 
                     // InitCombos(response.result);
@@ -406,7 +403,7 @@ namespace AionHR.Web.UI.Forms
 
 
 
-
+        [DirectMethod]
         protected void SaveNewRecord(object sender, DirectEventArgs e)
         {
 
@@ -419,7 +416,8 @@ namespace AionHR.Web.UI.Forms
 
             b.recordId = id;
             // Define the object to add or edit as null
-           
+            if (employeeId.SelectedItem != null)
+                b.fullName = employeeId.SelectedItem.Text;
             
             if (string.IsNullOrEmpty(id))
             {
@@ -429,8 +427,10 @@ namespace AionHR.Web.UI.Forms
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
                     PostRequest<UserInfo> request = new PostRequest<UserInfo>();
+                    b.password = "123";
                     request.entity = b;
                     PostResponse<UserInfo> r = _systemService.ChildAddOrUpdate<UserInfo>(request);
+                    
                     b.recordId = r.recordId;
 
                     //check if the insert failed
@@ -481,6 +481,9 @@ namespace AionHR.Web.UI.Forms
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
                     PostRequest<UserInfo> request = new PostRequest<UserInfo>();
+                    b.password = "123";
+                    if (employeeId.SelectedItem != null)
+                        b.fullName = employeeId.SelectedItem.Text;
                     request.entity = b;
                     PostResponse<UserInfo> r = _systemService.ChildAddOrUpdate<UserInfo>(request);                   //Step 1 Selecting the object or building up the object for update purpose
 
@@ -499,8 +502,9 @@ namespace AionHR.Web.UI.Forms
 
                         ModelProxy record = this.Store1.GetById(index);
                         BasicInfoTab.UpdateRecord(record);
-                 
-                        record.Commit();
+                        record.Set("fullName", b.fullName);
+
+                        record.Commit();    
                         Notification.Show(new NotificationConfig
                         {
                             Title = Resources.Common.Notification,

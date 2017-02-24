@@ -136,11 +136,11 @@ namespace AionHR.Web.UI.Forms
 
                     if (response.result.supervisorId.HasValue)
                     {
-                        supervisorStore.DataSource=GetEmployeeByID(response.result.supervisorId.ToString());
+                       // supervisorStore.DataSource=GetEmployeeByID(response.result.supervisorId.ToString());
                         
-                        supervisorStore.DataBind();
-                        supervisorId.DataBind();
-                        supervisorId.Select(response.result.supervisorId);
+                       // supervisorStore.DataBind();
+                        //supervisorId.Select(0);
+                        supervisorId.SetValue(response.result.svFullName);// = 1;// SetValue(response.result.supervisorId);
                     }
                    
                     // InitCombos(response.result);
@@ -510,7 +510,7 @@ namespace AionHR.Web.UI.Forms
                             Icon = Icon.Information,
                             Html = Resources.Common.RecordUpdatedSucc
                         });
-                        this.EditRecordWindow.Close();
+
 
 
                     }

@@ -134,6 +134,7 @@
     <Content Include="Positions.aspx" />
     <Content Include="resetPw.aspx" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\Users.js" />
     <Content Include="Scripts\Nationalities.js" />
     <Content Include="Scripts\Branches.js" />
     <Content Include="Scripts\Departments.js" />
@@ -142,6 +143,7 @@
     <Content Include="Scripts\default.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Test.aspx" />
+    <Content Include="Users.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +267,13 @@
     <Compile Include="Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\LocalisationManager.cs" />
     <Compile Include="Utilities\TreeBuilder.cs" />
   </ItemGroup>
@@ -332,6 +341,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Currencies.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Users.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

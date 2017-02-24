@@ -28,6 +28,9 @@ namespace AionHR.Repository.WebService.Repositories
             ChildAddOrUpdateLookup.Add(typeof(Currency), "setCU");
             ChildGetAllLookup.Add(typeof(Currency), "qryCU");
             ChildGetLookup.Add(typeof(Currency), "getCU");
+            ChildAddOrUpdateLookup.Add(typeof(UserInfo), "setUS");
+            ChildGetAllLookup.Add(typeof(UserInfo), "qryUS");
+            ChildGetLookup.Add(typeof(UserInfo), "getUS");
         }
 
         public RecordWebServiceResponse<UserInfo> Authenticate(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)

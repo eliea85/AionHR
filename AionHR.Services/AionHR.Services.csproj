@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumerations\CompanyStructureErrors.cs" />
+    <Compile Include="Enumerations\EmployeeErrors.cs" />
+    <Compile Include="Enumerations\MasterModulesErrors.cs" />
+    <Compile Include="Enumerations\SystemErrors.cs" />
     <Compile Include="Implementations\BaseService.cs" />
     <Compile Include="Implementations\CommonErrors.cs" />
     <Compile Include="Implementations\CompanyStructureService.cs" />
@@ -68,9 +72,7 @@
     <Compile Include="Messaging\System\PasswordRecoveryResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enumerations\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\AionHR.Infrastructure\AionHR.Infrastructure.csproj">
       <Project>{9955b92f-f16c-49b9-99f3-4919d3327263}</Project>

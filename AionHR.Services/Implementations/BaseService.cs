@@ -37,14 +37,19 @@ namespace AionHR.Services.Implementations
 
         public RecordResponse<T> Get<T>(RecordRequest request) 
         {
-            RecordResponse<T> response = new RecordResponse<T>();
+            RecordResponse<T> response;
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
 
-            var webResponse =GetRepository().GetRecord(headers, queryParams);
-            CreateServiceResponse<RecordResponse<T>>(webResponse);
-            response.result = (T)webResponse.record;
+            RecordWebServiceResponse<T> webResponse =GetRepository().GetRecord(headers, queryParams);
+            response = CreateServiceResponse<RecordResponse<T>>(webResponse);
+            if(!response.Success)
+            {
+                response.Message = webResponse.statusId;
+            }
+            response.result = webResponse.record;
+
             return response;
 
         }
@@ -57,7 +62,8 @@ namespace AionHR.Services.Implementations
             var response = CreateServiceResponse<ListResponse<T>>(webResponse);
             if (!response.Success)
             {
-                response.Message = webResponse.message;
+                
+                
             }
 
             response.Items = webResponse.GetAll();

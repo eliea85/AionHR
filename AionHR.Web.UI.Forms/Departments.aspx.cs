@@ -139,6 +139,7 @@ namespace AionHR.Web.UI.Forms
                         supervisorStore.DataSource=GetEmployeeByID(response.result.supervisorId.ToString());
                         
                         supervisorStore.DataBind();
+                        supervisorId.DataBind();
                         supervisorId.Select(response.result.supervisorId);
                     }
                    
@@ -509,7 +510,7 @@ namespace AionHR.Web.UI.Forms
                             Icon = Icon.Information,
                             Html = Resources.Common.RecordUpdatedSucc
                         });
-
+                        this.EditRecordWindow.Close();
 
 
                     }

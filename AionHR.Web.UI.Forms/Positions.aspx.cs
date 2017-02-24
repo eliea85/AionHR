@@ -477,7 +477,7 @@ namespace AionHR.Web.UI.Forms
                             Icon = Icon.Information,
                             Html = Resources.Common.RecordUpdatedSucc
                         });
-
+                        this.EditRecordWindow.Close();
 
 
                     }

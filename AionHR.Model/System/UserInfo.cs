@@ -20,10 +20,12 @@ namespace AionHR.Model.System
 
         public string employeeId { get; set; }
         public string languageId { get; set; }
-        public string userName { get; set; }
+        public string email { get; set; }
         public string enableHijriCalendar { get; set; }
 
         public bool isAdministrator { get; set; }
         public string companyName { get; set; }
+
+        public string fullName { get; set; }
     }
 }

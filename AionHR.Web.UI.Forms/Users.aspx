@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Departments.aspx.cs" Inherits="AionHR.Web.UI.Forms.Departments" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Users.aspx.cs" Inherits="AionHR.Web.UI.Forms.Users" %>
+
 
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -9,7 +10,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
-    <script type="text/javascript" src="Scripts/Branches.js"></script>
+    <script type="text/javascript" src="Scripts/Users.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
 
 
@@ -42,15 +43,15 @@
                     <Fields>
 
                         <ext:ModelField Name="recordId" />
-                        <ext:ModelField Name="name" />
-                        <ext:ModelField Name="reference" />
-                        <ext:ModelField Name="supervisorId" />
-                        <ext:ModelField Name="svFullName" />
+                        <ext:ModelField Name="fullName" />
+                        <ext:ModelField Name="employeeId" />
+                        <ext:ModelField Name="languageId" />
+                        <ext:ModelField Name="email" />
                         
-                        <ext:ModelField Name="isSegmentHead" />
-                        <ext:ModelField Name="segmentCode" />
-                        <ext:ModelField Name="parentName" />
-                        <ext:ModelField Name="parentId" />
+                        
+                        <ext:ModelField Name="isInactive" />
+                        <ext:ModelField Name="isAdmin" />
+                        
 
 
 
@@ -125,17 +126,16 @@
                         <Columns>
 
                             <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
-                            <ext:Column ID="ColReference" MenuDisabled="true"  Sortable="true" runat="server" Text="<%$ Resources: FieldReference%>" DataIndex="reference" Flex="1" Hideable="false" />
-                            <ext:Column CellCls="cellLink" Sortable="true" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
-                                <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
+                            <ext:Column ID="ColFullName" MenuDisabled="true"  Sortable="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="fullName" Flex="1" Hideable="false" >
+                                 <Renderer Handler="return '<u>'+ record.data['fullName']+'</u>'">
                                 </Renderer>
                             </ext:Column>
-                            <ext:Column Visible="false" ID="ColparentId" MenuDisabled="true" runat="server" DataIndex="parentId" Flex="1" Hideable="false" />
-                            <ext:Column Visible="false" ID="ColsupervisorId" MenuDisabled="true" runat="server" DataIndex="supervisorId" Flex="1" Hideable="false" />
-                            <ext:CheckColumn ID="ColIsSegmented" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsSegmentedHead %>" DataIndex="isSegmentHead" Hideable="false" />
-                            <ext:Column ID="ColParentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldParentName%>" DataIndex="parentName" Flex="1" Hideable="false" />
-                            <ext:Column ID="ColSvName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldSvFullName%>" DataIndex="svFullName" Flex="1" Hideable="false" />
-
+                            
+                            <ext:Column CellCls="cellLink" Sortable="true" ID="ColEmail" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldEmail%>" DataIndex="email" Flex="1" Hideable="false"/>
+                               
+                            <ext:CheckColumn ID="ColIsInactive" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsInactive %>" DataIndex="isInactive" Hideable="false" />
+                            <ext:CheckColumn ID="ColIsAdmin" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsAdmin %>" DataIndex="isAdmin" Hideable="false" />
+                          
 
 
                             <ext:Column runat="server"
@@ -298,16 +298,17 @@
                             BodyPadding="5">
                             <Items>
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" DataIndex="recordId" />
-                                <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" DataIndex="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources: FieldReference %>" DataIndex="reference" AllowBlank="false" />
+                                
+                                <ext:TextField ID="email" runat="server" FieldLabel="<%$ Resources: FieldEmail %>" DataIndex="email" InputType="Email" AllowBlank="false" />
 
 
-                                <ext:Checkbox ID="isSegmentHeadCheck" runat="server" FieldLabel="<%$ Resources: FieldIsSegmentedHead%>" DataIndex="isSegmentHead" Name="isSegmentHead" InputValue="true" />
-                                <ext:ComboBox runat="server" ID="supervisorId"
+                                <ext:Checkbox ID="isInactiveCheck" runat="server" FieldLabel="<%$ Resources: FieldIsInActive%>" DataIndex="isInactive" Name="isInactive" InputValue="true" />
+                                <ext:Checkbox ID="isAdminCheck" runat="server" FieldLabel="<%$ Resources: FieldIsAdmin%>" DataIndex="isAdmin" Name="isAdmin" InputValue="true" />
+                                <ext:ComboBox runat="server" ID="employeeId"
                                     DisplayField="fullName"
                                     ValueField="recordId"
                                     TypeAhead="false"
-                                   FieldLabel ="<%$ Resources: FieldSvFullName%>"
+                                   FieldLabel ="<%$ Resources: FieldFullName%>"
                                     HideTrigger="true"  SubmitValue="true"
                                     MinChars="3"
                                     TriggerAction="Query" ForceSelection="false" >
@@ -329,31 +330,18 @@
 
                                     </Store>
                                 </ext:ComboBox>
-                                <ext:ComboBox runat="server" ID="parentId"
-                                    DisplayField="name"
-                                    ValueField="recordId"
+                                <ext:ComboBox runat="server" ID="languageId"
+                                     SubmitValue="true"
                                     TypeAhead="false"
-                                   FieldLabel ="<%$ Resources: FieldParentName%>"
+                                   FieldLabel ="<%$ Resources: FieldLanguageId%>"
                                     
                                    
-                                     ForceSelection="false" >
-                                    <Store>
-                                        <ext:Store runat="server" ID="Store2" AutoLoad="true">
-                                            <Model>
-                                                <ext:Model runat="server">
-                                                    <Fields>
-                                                        <ext:ModelField Name="recordId" />
-                                                        <ext:ModelField Name="fullName" />
-                                                    </Fields>
-                                                </ext:Model>
-                                            </Model>
-                                            <Proxy>
-                                                <ext:PageProxy DirectFn="App.direct.FillParent"></ext:PageProxy>
-                                            </Proxy>
+                                      >
+                                   <Items>
+                                       <ext:ListItem Text="<%$Resources:Common,EnglishLanguage %>" Value="1"/>
+                                           <ext:ListItem Text="<%$Resources:Common,ArabicLanguage %>" Value="3" />
 
-                                        </ext:Store>
-
-                                    </Store>
+                                   </Items>
                                 </ext:ComboBox>
                             </Items>
 

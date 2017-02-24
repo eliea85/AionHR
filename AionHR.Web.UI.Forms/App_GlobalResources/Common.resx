@@ -369,4 +369,13 @@
   <data name="SystemSettings" xml:space="preserve">
     <value>System Settings</value>
   </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="ArabicLanguage" xml:space="preserve">
+    <value>Arabic</value>
+  </data>
+  <data name="EnglishLanguage" xml:space="preserve">
+    <value>English</value>
+  </data>
 </root>

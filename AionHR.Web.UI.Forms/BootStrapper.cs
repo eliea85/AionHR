@@ -4,6 +4,7 @@ using AionHR.Infrastructure.Session;
 using AionHR.Infrastructure.Tokens;
 using AionHR.Model.Company.Structure;
 using AionHR.Model.Employees;
+using AionHR.Model.LeaveManagement;
 using AionHR.Model.MasterModule;
 using AionHR.Model.System;
 using AionHR.Repository.WebService.Repositories;
@@ -45,6 +46,7 @@ namespace AionHR.Web.UI.Forms
                 For<IEmployeeRepository>().Use<EmployeeRepository>();
                 For<ISystemRepository>().Use<SystemRepository>();
                 For<IAccountRepository>().Use<AccountRepository>();
+                For<ILeaveManagementRepository>().Use<LeaveManagementRepository>();
                 For<ICompanyStructureRepository>().Use<CompanyStructureRepository>();
 
                 //Services
@@ -52,6 +54,7 @@ namespace AionHR.Web.UI.Forms
                 For<IEmployeeService>().Use<EmployeeService>();
                 For<IMasterService>().Use<MasterService>();
                 For<ICompanyStructureService>().Use<CompanyStructureService>();
+                For<ILeaveManagementService>().Use<LeaveManagementService>();
             }
         }
     }

@@ -122,6 +122,11 @@
     <Content Include="Login.aspx" />
     <Content Include="Nationalities.aspx" />
     <Content Include="packages.config" />
+    <EmbeddedResource Include="App_LocalResources\VacationSchedules.aspx.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>VacationSchedules.aspx.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -134,6 +139,7 @@
     <Content Include="Positions.aspx" />
     <Content Include="resetPw.aspx" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\VacationSchedules.js" />
     <Content Include="Scripts\Users.js" />
     <Content Include="Scripts\Nationalities.js" />
     <Content Include="Scripts\Branches.js" />
@@ -144,6 +150,7 @@
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Test.aspx" />
     <Content Include="Users.aspx" />
+    <Content Include="VacationSchedules.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +163,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\VacationSchedules.aspx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VacationSchedules.aspx.resx</DependentUpon>
     </Compile>
     <Compile Include="BootStrapper.cs" />
     <Compile Include="BoundedComboBox.cs" />
@@ -276,6 +288,13 @@
     </Compile>
     <Compile Include="Utilities\LocalisationManager.cs" />
     <Compile Include="Utilities\TreeBuilder.cs" />
+    <Compile Include="VacationSchedules.aspx.cs">
+      <DependentUpon>VacationSchedules.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VacationSchedules.aspx.designer.cs">
+      <DependentUpon>VacationSchedules.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AionHR.Infrastructure\AionHR.Infrastructure.csproj">

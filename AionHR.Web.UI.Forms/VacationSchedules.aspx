@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Users.aspx.cs" Inherits="AionHR.Web.UI.Forms.Users" %>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VacationSchedules.aspx.cs" Inherits="AionHR.Web.UI.Forms.VacationSchedules" %>
 
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -10,7 +9,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
-    <script type="text/javascript" src="Scripts/Users.js"></script>
+    <script type="text/javascript" src="Scripts/VacationSchedules.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
 
 
@@ -23,7 +22,7 @@
         <ext:Hidden ID="textLoadFailed" runat="server" Text="<%$ Resources:Common , LoadFailed %>" />
         <ext:Hidden ID="titleSavingError" runat="server" Text="<%$ Resources:Common , TitleSavingError %>" />
         <ext:Hidden ID="titleSavingErrorMessage" runat="server" Text="<%$ Resources:Common , TitleSavingErrorMessage %>" />
-        <ext:Hidden ID="timeZoneOffset" runat="server" EnableViewState="true" />
+
         <ext:Store
             ID="Store1"
             runat="server"
@@ -43,14 +42,7 @@
                     <Fields>
 
                         <ext:ModelField Name="recordId" />
-                        <ext:ModelField Name="fullName" />
-                        <ext:ModelField Name="employeeId" />
-                        <ext:ModelField Name="languageId" />
-                        <ext:ModelField Name="email" />
-
-
-                        <ext:ModelField Name="isInactive" />
-                        <ext:ModelField Name="isAdmin" />
+                        <ext:ModelField Name="name" />
 
 
 
@@ -126,16 +118,11 @@
                         <Columns>
 
                             <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
-                            <ext:Column Visible="false" ID="ColEmployeeId" MenuDisabled="true" runat="server" DataIndex="employeeId" Hideable="false" Width="75" Align="Center" />
-                            <ext:Column ID="ColFullName" MenuDisabled="true" Sortable="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="fullName" Flex="1" Hideable="false">
-                                <Renderer Handler="return '<u>'+ record.data['fullName']+'</u>'">
+
+                            <ext:Column CellCls="cellLink" Sortable="true" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
+                                <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
                                 </Renderer>
                             </ext:Column>
-
-                            <ext:Column Sortable="true" ID="ColEmail" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldEmail%>" DataIndex="email" Flex="1" Hideable="false" />
-
-                            <ext:CheckColumn ID="ColIsInactive" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsInactive %>" DataIndex="isInactive" Hideable="false" />
-                            <ext:CheckColumn ID="ColIsAdmin" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsAdmin %>" DataIndex="isAdmin" Hideable="false" />
 
 
 
@@ -298,80 +285,24 @@
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
                             BodyPadding="5">
                             <Items>
-                                <ext:TextField ID="fullName" runat="server" FieldLabel="<%$ Resources: FieldEmail %>" DataIndex="fullName" AllowBlank="false" />
-                                <ext:TextField ID="email" runat="server" FieldLabel="<%$ Resources: FieldEmail %>" DataIndex="email" InputType="Email" Vtype="email" AllowBlank="false" />
-                                <ext:TextField ID="recordId" Disabled="true" Hidden="true" runat="server" DataIndex="recordId" AllowBlank="false" />
+                                <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" DataIndex="recordId" />
+                                <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" DataIndex="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
 
-
-                                <ext:Checkbox ID="isInactiveCheck" runat="server" FieldLabel="<%$ Resources: FieldIsInActive%>" DataIndex="isInactive" Name="isInactive" InputValue="true" />
-                                <ext:Checkbox ID="isAdminCheck" runat="server" FieldLabel="<%$ Resources: FieldIsAdmin%>" DataIndex="isAdmin" Name="isAdmin" InputValue="true" />
-                                <ext:ComboBox runat="server" ID="employeeId"
-                                    DisplayField="fullName"
-                                    ValueField="recordId"
-                                    TypeAhead="false"
-                                    FieldLabel="<%$ Resources: FieldEmployeeFullName%>"
-                                    HideTrigger="true" SubmitValue="true"
-                                    MinChars="3"
-                                    TriggerAction="Query" ForceSelection="false">
-                                    <Store>
-                                        <ext:Store runat="server" ID="supervisorStore" AutoLoad="false">
-                                            <Model>
-                                                <ext:Model runat="server">
-                                                    <Fields>
-                                                        <ext:ModelField Name="recordId" />
-                                                        <ext:ModelField Name="fullName" />
-                                                    </Fields>
-                                                </ext:Model>
-                                            </Model>
-                                            <Proxy>
-                                                <ext:PageProxy DirectFn="App.direct.FillSupervisor"></ext:PageProxy>
-                                            </Proxy>
-
-                                        </ext:Store>
-
-                                    </Store>
-                                </ext:ComboBox>
-                                <ext:ComboBox runat="server" ID="languageId"
-                                    SubmitValue="true"
-                                    TypeAhead="false"
-                                    FieldLabel="<%$ Resources: FieldLanguageId%>">
-                                    <Items>
-                                        <ext:ListItem Text="<%$Resources:Common,EnglishLanguage %>" Value="1" />
-                                        <ext:ListItem Text="<%$Resources:Common,ArabicLanguage %>" Value="3" />
-
-                                    </Items>
-                                </ext:ComboBox>
-
-                                <ext:TextField
-                                    ID="PasswordField"
-                                    runat="server"
-                                    FieldLabel="<%$ Resources: FieldPassword%>"
-                                    InputType="Password"
-                                    Name="password"
-                                    DataIndex ="password"
-                                    AllowBlank="false"
-                                    AnchorHorizontal="100%">
-                                    <Listeners>
-                                        <ValidityChange Handler="this.next().validate();" />
-                                        <Blur Handler="this.next().validate();" />
-                                    </Listeners>
-                                </ext:TextField>
-                                <ext:TextField
-                                    ID="PasswordConfirmation"
-                                    runat="server"
-                                    Vtype="password"
-                                    FieldLabel="<%$ Resources: FieldConfirmPassword%>"
-                                    InputType="Password"
-                                    MsgTarget="Side"
-                                    AnchorHorizontal="100%">
-                                    <CustomConfig>
-                                        <ext:ConfigItem Name="initialPassField" Value="PasswordField" Mode="Value" />
-                                    </CustomConfig>
-                                </ext:TextField>
                             </Items>
 
                         </ext:FormPanel>
+                        <ext:FormPanel
+                            ID="periodsTab"
+                            runat="server"
+                            Title="<%$ Resources: PeriodsTab %>"
+                            Icon="ApplicationSideList"
+                            DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
+                            BodyPadding="5">
+                            <Items>
+                              
+                            </Items>
 
+                        </ext:FormPanel>
                     </Items>
                 </ext:TabPanel>
             </Items>
@@ -379,7 +310,7 @@
                 <ext:Button ID="SaveButton" runat="server" Text="<%$ Resources:Common, Save %>" Icon="Disk">
 
                     <Listeners>
-                        <Click Handler="CheckSession(); if (!#{BasicInfoTab}.getForm().isValid()) { return false;}" />
+                        <Click Handler="CheckSession(); if (!#{BasicInfoTab}.getForm().isValid()) {return false;} " />
                     </Listeners>
                     <DirectEvents>
                         <Click OnEvent="SaveNewRecord" Failure="Ext.MessageBox.alert('#{titleSavingError}.value', '#{titleSavingErrorMessage}.value');">
@@ -404,4 +335,5 @@
     </form>
 </body>
 </html>
+
 

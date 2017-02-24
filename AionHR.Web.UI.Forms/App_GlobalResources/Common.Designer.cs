@@ -520,6 +520,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Leave Management.
+        /// </summary>
+        internal static string LeaveManagement {
+            get {
+                return ResourceManager.GetString("LeaveManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Live Search.
         /// </summary>
         internal static string LiveSearch {
@@ -745,7 +754,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Work Schedule.
+        ///   Looks up a localized string similar to Time Management.
         /// </summary>
         internal static string Scheduler {
             get {
@@ -799,6 +808,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time Attendance.
+        /// </summary>
+        internal static string TimeAttendance {
+            get {
+                return ResourceManager.GetString("TimeAttendance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error Saving Record.
         /// </summary>
         internal static string TitleSavingError {
@@ -831,6 +849,15 @@ namespace Resources {
         internal static string Users {
             get {
                 return ResourceManager.GetString("Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vacation Schedules.
+        /// </summary>
+        internal static string VacationSchedules {
+            get {
+                return ResourceManager.GetString("VacationSchedules", resourceCulture);
             }
         }
         

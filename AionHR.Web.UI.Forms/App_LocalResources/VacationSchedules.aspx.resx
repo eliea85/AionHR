@@ -118,39 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BasicInfoTabEditWindowTitle" xml:space="preserve">
-    <value>User Info</value>
+    <value>Department Info</value>
   </data>
   <data name="EditWindowsTitle" xml:space="preserve">
-    <value>Edit User</value>
+    <value>Edit Department</value>
   </data>
-  <data name="FieldConfirmPassword" xml:space="preserve">
-    <value>Confirm Password</value>
-  </data>
-  <data name="FieldEmail" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="FieldEmployeeFullName" xml:space="preserve">
-    <value>Employee</value>
-  </data>
-  <data name="FieldFullName" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="FieldIsAdmin" xml:space="preserve">
-    <value>Is Admin?</value>
-  </data>
-  <data name="FieldIsInActive" xml:space="preserve">
+  <data name="FieldIsInactive" xml:space="preserve">
     <value>Is Inactive?</value>
   </data>
-  <data name="FieldLanguageId" xml:space="preserve">
-    <value>Language</value>
+  <data name="FieldIsSegmentedHead" xml:space="preserve">
+    <value>Is Segmented Head</value>
   </data>
-  <data name="FieldPassword" xml:space="preserve">
-    <value>Password</value>
+  <data name="FieldName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="FieldParentName" xml:space="preserve">
+    <value>Parent</value>
   </data>
   <data name="FieldRecordId" xml:space="preserve">
     <value>Record ID</value>
   </data>
+  <data name="FieldReference" xml:space="preserve">
+    <value>Reference</value>
+  </data>
+  <data name="FieldSegmentCode" xml:space="preserve">
+    <value>Segment</value>
+  </data>
+  <data name="FieldSvFullName" xml:space="preserve">
+    <value>Supervisor</value>
+  </data>
+  <data name="FieldTimeZone" xml:space="preserve">
+    <value>Time Zone</value>
+  </data>
+  <data name="PeriodsTab" xml:space="preserve">
+    <value>Periods Tab</value>
+  </data>
   <data name="WindowTitle" xml:space="preserve">
-    <value>Users</value>
+    <value>Departments</value>
   </data>
 </root>

@@ -128,5 +128,25 @@ namespace AionHR.Web.UI.Forms.Utilities
             nodes.Add(rootParent);
             return nodes;
         }
+        internal NodeCollection BuildTimeManagementTree(NodeCollection nodes)
+        {
+            if (nodes == null)
+                nodes = new Ext.Net.NodeCollection();
+
+
+
+            Ext.Net.Node rootParent = BuildRootParentNode("rootParent", Resources.Common.Company, true);
+            Ext.Net.Node timeAt = BuildParentNode("rootParent_TA", Resources.Common.TimeAttendance, true, rootParent);
+            Ext.Net.Node leaveMgmt = BuildParentNode("rootParent_LM", Resources.Common.LeaveManagement, true, rootParent);
+
+            Ext.Net.Node vs = BuildLeafNode("rootParent_LM_VS", Resources.Common.VacationSchedules, "Group", true, leaveMgmt);
+
+            FillConfigItem(vs, "users", "VacationSchedules.aspx", Resources.Common.Users, "icon-Employees", "1");
+
+
+
+            nodes.Add(rootParent);
+            return nodes;
+        }
     }
 }

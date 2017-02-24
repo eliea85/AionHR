@@ -217,7 +217,7 @@
     <value>Reset Password</value>
   </data>
   <data name="Scheduler" xml:space="preserve">
-    <value>Work Schedule</value>
+    <value>Time Management</value>
   </data>
   <data name="SessionDisconnected" xml:space="preserve">
     <value>Session Disconnected !</value>
@@ -377,5 +377,14 @@
   </data>
   <data name="EnglishLanguage" xml:space="preserve">
     <value>English</value>
+  </data>
+  <data name="LeaveManagement" xml:space="preserve">
+    <value>Leave Management</value>
+  </data>
+  <data name="TimeAttendance" xml:space="preserve">
+    <value>Time Attendance</value>
+  </data>
+  <data name="VacationSchedules" xml:space="preserve">
+    <value>Vacation Schedules</value>
   </data>
 </root>

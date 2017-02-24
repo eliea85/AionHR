@@ -7,8 +7,16 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model.Employees.Leaves
 {
-    public class VactationSchedule:ModelBase
+    public class VacationSchedule:ModelBase,IEntity
     {
         public string name { get; set; }
+    }
+    public  class VacationSchedulePeriod 
+    {
+        public int vsId { get; set; }
+        public short seqNo { get; set; }
+        public short from { get; set; }
+        public short to { get; set; }
+        public short days { get; set; }
     }
 }

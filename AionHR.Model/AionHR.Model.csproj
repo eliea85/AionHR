@@ -91,7 +91,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\Attachement.cs" />
     <Compile Include="System\Currency.cs" />
-    <Compile Include="System\IUserRepository.cs" />
+    <Compile Include="System\ISystemRepository.cs" />
     <Compile Include="System\Nationality.cs" />
     <Compile Include="System\UserInfo.cs" />
   </ItemGroup>

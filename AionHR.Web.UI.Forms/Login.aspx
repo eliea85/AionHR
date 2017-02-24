@@ -98,7 +98,7 @@
                             BlankText="<%$ Resources: Common, MandatoryField %>"
                             EmptyText="<%$ Resources:  EnterYourAccount %>">
 
-                            <RemoteValidation Delay="2000" OnValidation="CheckField"  >
+                            <RemoteValidation Delay="4000" OnValidation="CheckField"  >
                                 <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
                                 </RemoteValidation>
                             <Listeners>

@@ -360,4 +360,13 @@
   <data name="Transfers" xml:space="preserve">
     <value>Transfers</value>
   </data>
+  <data name="Currencies" xml:space="preserve">
+    <value>Currencies</value>
+  </data>
+  <data name="Nationalities" xml:space="preserve">
+    <value>Nationalities</value>
+  </data>
+  <data name="SystemSettings" xml:space="preserve">
+    <value>System Settings</value>
+  </data>
 </root>

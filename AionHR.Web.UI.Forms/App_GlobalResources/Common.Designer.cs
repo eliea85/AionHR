@@ -268,6 +268,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currencies.
+        /// </summary>
+        internal static string Currencies {
+            get {
+                return ResourceManager.GetString("Currencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string Delete {
@@ -556,6 +565,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nationalities.
+        /// </summary>
+        internal static string Nationalities {
+            get {
+                return ResourceManager.GetString("Nationalities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Navigation.
         /// </summary>
         internal static string NavigationPane {
@@ -750,6 +768,15 @@ namespace Resources {
         internal static string SortDescText {
             get {
                 return ResourceManager.GetString("SortDescText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Settings.
+        /// </summary>
+        internal static string SystemSettings {
+            get {
+                return ResourceManager.GetString("SystemSettings", resourceCulture);
             }
         }
         

@@ -43,7 +43,7 @@ namespace AionHR.Web.UI.Forms
 
                 //Repositories
                 For<IEmployeeRepository>().Use<EmployeeRepository>();
-                For<IUserRepository>().Use<UserRepository>();
+                For<ISystemRepository>().Use<SystemRepository>();
                 For<IAccountRepository>().Use<AccountRepository>();
                 For<ICompanyStructureRepository>().Use<CompanyStructureRepository>();
 

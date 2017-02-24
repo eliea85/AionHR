@@ -24,12 +24,12 @@ namespace AionHR.Services.Implementations
 
         // public readonly SessionHelper _sessionHelper;
 
-        public SystemService(IUserRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper)
+        public SystemService(ISystemRepository userRepository, SessionHelper sessionHelper) : base(sessionHelper)
         {
             this.childRepo = userRepository;
             // _sessionHelper = sessionHelper;
         }
-        private IUserRepository childRepo;
+        private ISystemRepository childRepo;
 
         /// <summary>
         /// The concrete method that authenticate a user request 

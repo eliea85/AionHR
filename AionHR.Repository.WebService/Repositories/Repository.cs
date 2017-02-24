@@ -26,6 +26,14 @@ namespace AionHR.Repository.WebService.Repositories
         protected Dictionary<Type, string> ChildDeleteLookup;
 
 
+        public Repository()
+        {
+            ChildGetLookup = new Dictionary<Type, string>();
+            ChildGetAllLookup = new Dictionary<Type, string>();
+            ChildAddOrUpdateLookup = new Dictionary<Type, string>();
+            ChildDeleteLookup = new Dictionary<Type, string>();
+        }
+
         /// <summary>
         /// Generic method for getting a record T from the webservice
         /// </summary>

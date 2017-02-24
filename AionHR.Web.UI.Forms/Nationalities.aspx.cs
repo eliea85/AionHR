@@ -20,16 +20,14 @@ using AionHR.Web.UI.Forms.Utilities;
 using AionHR.Model.Company.News;
 using AionHR.Services.Messaging;
 using AionHR.Model.Company.Structure;
-using AionHR.Model.Employees.Profile;
+using AionHR.Model.System;
 
 namespace AionHR.Web.UI.Forms
 {
-    public partial class Departments : System.Web.UI.Page
+    public partial class Nationalities : System.Web.UI.Page
     {
-
-        ICompanyStructureService _branchService = ServiceLocator.Current.GetInstance<ICompanyStructureService>();
+        
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
-        IEmployeeService _employeeService = ServiceLocator.Current.GetInstance<IEmployeeService>();
         protected override void InitializeCulture()
         {
 
@@ -48,13 +46,10 @@ namespace AionHR.Web.UI.Forms
             }
 
         }
-        BoundedComboBox parents;
-            BoundedComboBox supervisors;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-         
 
-            
 
             if (!X.IsAjaxRequest && !IsPostBack)
             {
@@ -64,12 +59,9 @@ namespace AionHR.Web.UI.Forms
                 HideShowColumns();
                 FillLiveSearchLabels();
 
+
             }
 
-            if (timeZoneOffset.Text != "")
-            {
-                Session.Add("TimeZone", timeZoneOffset.Text);
-            }
         }
 
 
@@ -129,19 +121,11 @@ namespace AionHR.Web.UI.Forms
                     //Step 1 : get the object from the Web Service 
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
-                    RecordResponse<Department> response = _branchService.ChildGetRecord<Department>(r);
+                    RecordResponse<Nationality> response = _systemService.ChildGetRecord<Nationality>(r);
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
-
-                    if (response.result.supervisorId.HasValue)
-                    {
-                        supervisorStore.DataSource=GetEmployeeByID(response.result.supervisorId.ToString());
-                        
-                        supervisorStore.DataBind();
-                        svFullName.Select(response.result.supervisorId);
-                    }
-                   // InitCombos(response.result);
+                    
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -172,24 +156,6 @@ namespace AionHR.Web.UI.Forms
             }
 
 
-        }
-
-        private void InitCombos(Department dept)
-        {
-            parents = new BoundedComboBox("parentId", "name", "recordId", GetLocalResourceObject("FieldParentName").ToString(), "FillParent", "", GetLocalResourceObject("FieldParentName").ToString(), false);
-            supervisors = new BoundedComboBox("supervisorId", "fullName", "recordId", GetLocalResourceObject("FieldSvFullName").ToString(), "FillSupervisor", "", GetLocalResourceObject("FieldSvFullName").ToString(), true);
-            BasicInfoTab.Items.Add(parents);
-            BasicInfoTab.Items.Add(supervisors);
-            if (dept != null)
-            {
-                
-                parents.Select(dept.parentId);
-                supervisors.Select(dept.supervisorId);
-            }
-            BasicInfoTab.UpdateLayout();
-            BasicInfoTab.UpdateContent();
-            
-            
         }
 
         /// <summary>
@@ -227,72 +193,7 @@ namespace AionHR.Web.UI.Forms
         }
 
 
-        [DirectMethod]
-        public object FillParent(string action, Dictionary<string, object> extraParams)
-        {
-            StoreRequestParameters prms = new StoreRequestParameters(extraParams);
 
-
-            
-            List<Department> data;
-            ListRequest req = new ListRequest();
-            
-            ListResponse<Department> response = _branchService.ChildGetAll<Department>(req);
-            data = response.Items;
-            return new
-            {
-                data
-            };
-
-        }
-        [DirectMethod]
-        public object FillSupervisor(string action, Dictionary<string, object> extraParams)
-        {
-            
-               StoreRequestParameters prms = new StoreRequestParameters(extraParams);
-
-
-
-            List<Employee> data = GetEmployeesFiltered(prms.Query);
-            
-            //  return new
-            // {
-            return data;
-            //};
-
-        }
-
-        private List<Employee> GetEmployeeByID(string id)
-        {
-
-            RecordRequest req = new RecordRequest();
-            req.RecordID = id;
-
-
-
-            List<Employee> emps = new List<Employee>();
-            RecordResponse<Employee> emp = _employeeService.Get<Employee>(req);
-            emps.Add(emp.result);
-            return emps;
-        }
-        private List<Employee> GetEmployeesFiltered(string query)
-        {
-           
-            ListRequest req = new ListRequest();
-
-            req.QueryStringParams.Add("_departmentId", "0");
-            req.QueryStringParams.Add("_branchId", "0");
-            req.StartAt = "1";
-            req.Size = "20";
-            req.Filter = query;
-            req.QueryStringParams.Add("_includeInactive", "true");
-            req.QueryStringParams.Add("_sortBy", "firstName");
-
-
-            
-            ListResponse<Employee> response = _employeeService.GetAll<Employee>(req);
-            return response.Items;
-        }
 
 
         /// <summary>
@@ -375,7 +276,8 @@ namespace AionHR.Web.UI.Forms
             //Reset all values of the relative object
             BasicInfoTab.Reset();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            
+            string timeZone = Session["TimeZone"] as string;
+         
             this.EditRecordWindow.Show();
         }
 
@@ -392,12 +294,13 @@ namespace AionHR.Web.UI.Forms
 
             //in this test will take a list of News
             ListRequest request = new ListRequest();
+
             request.Filter = "";
-            ListResponse<Department> branches = _branchService.ChildGetAll<Department>(request);
-            if (!branches.Success)
+            ListResponse<Nationality> nationalities = _systemService.ChildGetAll<Nationality>(request);
+            if (!nationalities.Success)
                 return;
-            this.Store1.DataSource = branches.Items;
-            e.Total = branches.Count;
+            this.Store1.DataSource = nationalities.Items;
+            e.Total = nationalities.Count;
 
             this.Store1.DataBind();
         }
@@ -413,14 +316,11 @@ namespace AionHR.Web.UI.Forms
             string id = e.ExtraParams["id"];
 
             string obj = e.ExtraParams["values"];
-            Department b = JsonConvert.DeserializeObject<Department>(obj);
-            
+            Nationality b = JsonConvert.DeserializeObject<Nationality>(obj);
+           
             b.recordId = id;
             // Define the object to add or edit as null
-            if(svFullName.SelectedItem!= null)
-            b.svFullName = svFullName.SelectedItem.Value;
-            if (parentId.SelectedItem != null)
-                b.parentName = parentId.SelectedItem.Text;
+
             if (string.IsNullOrEmpty(id))
             {
 
@@ -428,9 +328,9 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    PostRequest<Department> request = new PostRequest<Department>();
+                    PostRequest<Nationality> request = new PostRequest<Nationality>();
                     request.entity = b;
-                    PostResponse<Department> r = _branchService.ChildAddOrUpdate<Department>(request);
+                    PostResponse<Nationality> r = _systemService.ChildAddOrUpdate<Nationality>(request);
                     b.recordId = r.recordId;
 
                     //check if the insert failed
@@ -480,9 +380,9 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                    PostRequest<Department> request = new PostRequest<Department>();
+                    PostRequest<Nationality> request = new PostRequest<Nationality>();
                     request.entity = b;
-                    PostResponse<Department> r = _branchService.ChildAddOrUpdate<Department>(request);                   //Step 1 Selecting the object or building up the object for update purpose
+                    PostResponse<Nationality> r = _systemService.ChildAddOrUpdate<Nationality>(request);                      //Step 1 Selecting the object or building up the object for update purpose
 
                     //Step 2 : saving to store
 
@@ -529,16 +429,16 @@ namespace AionHR.Web.UI.Forms
             }
             else return "1";
         }
-        
+
         protected void BasicInfoTab_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         [DirectMethod]
         public void StoreTimeZone(string z)
         {
-            Session["TimeZone"] = z;
+            Session.Add("TimeZone", z);
         }
     }
 }

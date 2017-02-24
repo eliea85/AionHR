@@ -30,9 +30,7 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
     CheckSession();
 
     
-    // in case 
-    if (columnIndex == 0)
-        return false;
+ 
     var t = e.getTarget(),
         columnId = this.columns[columnIndex].id; // Get column id
 
@@ -60,8 +58,7 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
 
 
 var getCellType = function (grid, rowIndex, cellIndex) {
-    if (cellIndex == 0)
-        return "";
+   
     var columnId = grid.columns[cellIndex].id; // Get column id
     return columnId;
 };

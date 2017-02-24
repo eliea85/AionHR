@@ -13,14 +13,18 @@ namespace AionHR.Repository.WebService.Repositories
     /// <summary>
     /// Class that handle the communcation between the model and the webservice. it encapsultes all the user relative methods
     /// </summary>
-    public class UserRepository : Repository<UserInfo, string>, IUserRepository,ICommonRepository
+    public class SystemRepository : Repository<UserInfo, string>, ISystemRepository,ICommonRepository
     {
         
        // the webservice name       
         private string serviceName = "SY.asmx/";
-        public UserRepository()
+        public SystemRepository()
         {            
-            base.ServiceURL = ApplicationSettingsFactory.GetApplicationSettings().BaseURL + serviceName ;            
+            base.ServiceURL = ApplicationSettingsFactory.GetApplicationSettings().BaseURL + serviceName ;
+
+            ChildAddOrUpdateLookup.Add(typeof(Nationality), "setNA");
+            ChildGetAllLookup.Add(typeof(Nationality), "qryNA");
+            ChildGetLookup.Add(typeof(Nationality), "getNA");         
         }
 
         public RecordWebServiceResponse<UserInfo> Authenticate(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)

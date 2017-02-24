@@ -23,7 +23,7 @@ namespace AionHR.Repository.WebService.Repositories
 
             base.ServiceURL = ApplicationSettingsFactory.GetApplicationSettings().BaseURL + serviceName;
             GetAllMethodName = "qryES";
-
+            GetRecordMethodName = "getEM1";
         }
 
 

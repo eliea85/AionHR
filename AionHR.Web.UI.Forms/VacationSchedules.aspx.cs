@@ -124,6 +124,7 @@ namespace AionHR.Web.UI.Forms
             {
                 case "ColName":
                     //Step 1 : get the object from the Web Service 
+                    panelRecordDetails.ActiveIndex = 0;
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
                     RecordResponse<VacationSchedule> response = _branchService.ChildGetRecord<VacationSchedule>(r);
@@ -131,8 +132,12 @@ namespace AionHR.Web.UI.Forms
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
 
-                   
-
+                    ListRequest req = new ListRequest();
+                    req.QueryStringParams.Add("_vsId", r.RecordID);
+                    ListResponse<VacationSchedulePeriod> periods = _branchService.ChildGetAll<VacationSchedulePeriod>(req);
+                    periodsGrid.Store[0].DataSource = periods.Items;
+                    periodsGrid.Store[0].DataBind();
+                    periodsGrid.DataBind();
                     // InitCombos(response.result);
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
@@ -350,6 +355,8 @@ namespace AionHR.Web.UI.Forms
 
             //Reset all values of the relative object
             BasicInfoTab.Reset();
+            periodsGrid.Store[0].DataSource = null;
+            periodsGrid.Store[0].DataBind();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
 
             this.EditRecordWindow.Show();
@@ -388,9 +395,9 @@ namespace AionHR.Web.UI.Forms
             //Getting the id to check if it is an Add or an edit as they are managed within the same form.
             string id = e.ExtraParams["id"];
 
-            string obj = e.ExtraParams["values"];
+            string obj = e.ExtraParams["schedule"];
             VacationSchedule b = JsonConvert.DeserializeObject<VacationSchedule>(obj);
-
+            string pers = e.ExtraParams["periods"];
             b.recordId = id;
             // Define the object to add or edit as null
           
@@ -414,6 +421,17 @@ namespace AionHR.Web.UI.Forms
                         X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
                         return;
                     }
+                    List<VacationSchedulePeriod> periods = periodsGrid.Store[0].DataSource as List<VacationSchedulePeriod>;
+                    bool result = AddPeriodsList(b.recordId, periods);
+                    
+
+                    if (!result)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
+                        return;
+                    }
+
                     else
                     {
 
@@ -456,6 +474,9 @@ namespace AionHR.Web.UI.Forms
                     PostRequest<VacationSchedule> request = new PostRequest<VacationSchedule>();
                     request.entity = b;
                     PostResponse<VacationSchedule> r = _branchService.ChildAddOrUpdate<VacationSchedule>(request);                   //Step 1 Selecting the object or building up the object for update purpose
+                    
+                    List<VacationSchedulePeriod> periods = periodsGrid.Store[0].DataSource as List<VacationSchedulePeriod>;
+                    bool result = AddPeriodsList(b.recordId, periods);
 
                     //Step 2 : saving to store
 
@@ -493,7 +514,25 @@ namespace AionHR.Web.UI.Forms
                 }
             }
         }
+        private bool AddPeriodsList(string scheduleIdString, List<VacationSchedulePeriod> periods)
+        {
+            short i = 0;
+            int scheduleId = Convert.ToInt32(scheduleIdString);
+            foreach (var period in periods)
+            {
+                period.seqNo = i++;
+                period.vsId = scheduleId;
+                PostRequest<VacationSchedulePeriod> periodRequest = new PostRequest<VacationSchedulePeriod>();
+                periodRequest.entity = period;
+                PostResponse<VacationSchedulePeriod> response = _branchService.ChildAddOrUpdate<VacationSchedulePeriod>(periodRequest);
+                if (!response.Success)
+                {
+                    return false;
+                }
 
+            }
+            return true;
+        }
         [DirectMethod]
         public string CheckSession()
         {

@@ -120,8 +120,23 @@
   <data name="BasicInfoTabEditWindowTitle" xml:space="preserve">
     <value>Department Info</value>
   </data>
+  <data name="BtnAddPeriod" xml:space="preserve">
+    <value>Add Period</value>
+  </data>
+  <data name="BtnRemovePeriod" xml:space="preserve">
+    <value>Remove Period</value>
+  </data>
+  <data name="BtnUpdate" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="EditWindowsTitle" xml:space="preserve">
     <value>Edit Department</value>
+  </data>
+  <data name="FieldDays" xml:space="preserve">
+    <value>Vacation Days</value>
+  </data>
+  <data name="FieldFrom" xml:space="preserve">
+    <value>From Months</value>
   </data>
   <data name="FieldIsInactive" xml:space="preserve">
     <value>Is Inactive?</value>
@@ -149,6 +164,12 @@
   </data>
   <data name="FieldTimeZone" xml:space="preserve">
     <value>Time Zone</value>
+  </data>
+  <data name="FieldTo" xml:space="preserve">
+    <value>To Months</value>
+  </data>
+  <data name="Periods" xml:space="preserve">
+    <value>Periods</value>
   </data>
   <data name="PeriodsTab" xml:space="preserve">
     <value>Periods Tab</value>

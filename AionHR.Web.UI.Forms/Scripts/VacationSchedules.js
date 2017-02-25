@@ -10,7 +10,37 @@ var attachRender = function () {
     return '<img class="imgAttach"  style="cursor:pointer;" src="Images/Tools/attach.png" />';
 };
 
+function addEmployee () {
+    var periodsGrid = App.periodsGrid,
+        store = periodsGrid.getStore();
 
+    periodsGrid.editingPlugin.cancelEdit();
+
+    
+    periodsGrid.getView().headerCt.setSortState(); // To update columns sort UI
+
+    store.insert(0, {
+        from: '0',
+        to: '1',
+        days: 2
+       
+    });
+
+    periodsGrid.editingPlugin.startEdit(0, 0);
+}
+
+function removeEmployee () {
+    var periodsGrid = App.periodsGrid,
+        sm = periodsGrid.getSelectionModel(),
+        store = periodsGrid.getStore();
+
+    periodsGrid.editingPlugin.cancelEdit();
+    store.remove(sm.getSelection());
+
+    if (store.getCount() > 0) {
+        sm.select(0);
+    }
+}
 function getTimeZone()
 {
    

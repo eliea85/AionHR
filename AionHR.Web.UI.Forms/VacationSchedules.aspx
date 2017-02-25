@@ -299,7 +299,105 @@
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
                             BodyPadding="5">
                             <Items>
-                              
+                                <ext:GridPanel
+                                    ID="periodsGrid"
+                                    runat="server"
+                                    Width="600"
+                                    Height="400"
+                                    Frame="true"
+                                    Title="<%$ Resources: Periods %>">
+                                    <Store>
+                                        <ext:Store ID="periodsStore" runat="server">
+                                           <Model>
+                                                <ext:Model runat="server" Name="Employee">
+                                                    <Fields>
+                                                        <ext:ModelField Name="from"  />
+                                                        <ext:ModelField Name="to"/>
+                                                        <ext:ModelField Name="days" />
+                                                       
+                                                    </Fields>
+                                                </ext:Model>
+                                            </Model>
+                                        </ext:Store>
+                                    </Store>
+                                    <Plugins>
+                                        <ext:RowEditing runat="server" ClicksToMoveEditor="1" AutoCancel="false" />
+                                    </Plugins>
+                                    <TopBar>
+                                        <ext:Toolbar runat="server">
+                                            <Items>
+                                                <ext:Button runat="server" Text="Add Period" Icon="UserAdd">
+                                                    <Listeners>
+                                                        <Click Fn="addEmployee" />
+                                                    </Listeners>
+                                                </ext:Button>
+                                                <ext:Button
+                                                    ID="btnRemoveEmployee"
+                                                    runat="server"
+                                                    Text="Remove Period"
+                                                    Icon="UserDelete"
+                                                    Disabled="true">
+                                                    <Listeners>
+                                                        <Click Fn="removeEmployee" />
+                                                    </Listeners>
+                                                </ext:Button>
+                                            </Items>
+                                        </ext:Toolbar>
+                                    </TopBar>
+                                    <ColumnModel>
+                                        <Columns>
+                                            <ext:RowNumbererColumn runat="server" Width="25" />
+                                            <ext:NumberColumn
+                                                runat="server"
+                                                Text="From Months"
+                                                DataIndex="from"
+                                                
+                                                Align="Center">
+                                                <Editor>
+                                                    <ext:NumberField
+                                                        runat="server"
+                                                        AllowBlank="false"
+                                                        MinValue="0"
+                                                        MaxValue="150" />
+                                                </Editor>
+                                            </ext:NumberColumn>
+                                            <ext:NumberColumn
+                                                runat="server"
+                                                Text="To Months"
+                                                DataIndex="to"
+                                                
+                                                Align="Center">
+                                                <Editor>
+                                                    <ext:NumberField
+                                                        runat="server"
+                                                        AllowBlank="false"
+                                                        MinValue="0"
+                                                        MaxValue="150" />
+                                                </Editor>
+                                            </ext:NumberColumn>
+                                            
+                                            
+                                            <ext:NumberColumn
+                                                runat="server"
+                                                Text="Vacation Days"
+                                                DataIndex="days"
+                                                
+                                                Align="Center">
+                                                <Editor>
+                                                    <ext:NumberField
+                                                        runat="server"
+                                                        AllowBlank="false"
+                                                        MinValue="0"
+                                                        MaxValue="150" />
+                                                </Editor>
+                                            </ext:NumberColumn>
+                                            
+                                        </Columns>
+                                    </ColumnModel>
+                                    <Listeners>
+                                        <SelectionChange Handler="App.btnRemoveEmployee.setDisabled(!selected.length);" />
+                                    </Listeners>
+                                </ext:GridPanel>
                             </Items>
 
                         </ext:FormPanel>
@@ -317,7 +415,8 @@
                             <EventMask ShowMask="true" Target="CustomTarget" CustomTarget="={#{EditRecordWindow}.body}" />
                             <ExtraParams>
                                 <ext:Parameter Name="id" Value="#{recordId}.getValue()" Mode="Raw" />
-                                <ext:Parameter Name="values" Value="#{BasicInfoTab}.getForm().getValues()" Mode="Raw" Encode="true" />
+                                <ext:Parameter Name="schedule" Value="#{BasicInfoTab}.getForm().getValues()" Mode="Raw" Encode="true" />
+                                <ext:Parameter Name="periods" Value="#{periodsTab}.getForm().getValues()" Mode="Raw" Encode="true" />
                             </ExtraParams>
                         </Click>
                     </DirectEvents>

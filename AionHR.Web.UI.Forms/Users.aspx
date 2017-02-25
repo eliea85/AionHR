@@ -127,6 +127,8 @@
 
                             <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
                             <ext:Column Visible="false" ID="ColEmployeeId" MenuDisabled="true" runat="server" DataIndex="employeeId" Hideable="false" Width="75" Align="Center" />
+                            <ext:Column Visible="false" ID="ColPassword" MenuDisabled="true" runat="server" DataIndex="password" Hideable="false" Width="75" Align="Center" />
+                            
                             <ext:Column ID="ColFullName" MenuDisabled="true" Sortable="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="fullName" Flex="1" Hideable="false">
                                 <Renderer Handler="return '<u>'+ record.data['fullName']+'</u>'">
                                 </Renderer>
@@ -298,7 +300,7 @@
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
                             BodyPadding="5">
                             <Items>
-                                <ext:TextField ID="fullName" runat="server" FieldLabel="<%$ Resources: FieldEmail %>" DataIndex="fullName" AllowBlank="false" />
+                                <ext:TextField ID="fullName" runat="server" FieldLabel="<%$ Resources: FieldFullName %>" DataIndex="fullName" AllowBlank="false" />
                                 <ext:TextField ID="email" runat="server" FieldLabel="<%$ Resources: FieldEmail %>" DataIndex="email" InputType="Email" Vtype="email" AllowBlank="false" />
                                 <ext:TextField ID="recordId" Disabled="true" Hidden="true" runat="server" DataIndex="recordId" AllowBlank="false" />
 
@@ -357,7 +359,7 @@
                                     </Listeners>
                                 </ext:TextField>
                                 <ext:TextField
-                                    ID="PasswordConfirmation"
+                                    ID="PasswordConfirmation" 
                                     runat="server"
                                     Vtype="password"
                                     FieldLabel="<%$ Resources: FieldConfirmPassword%>"

@@ -337,6 +337,33 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.FormPanel periodsTab;
         
         /// <summary>
+        /// periodsGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.GridPanel periodsGrid;
+        
+        /// <summary>
+        /// periodsStore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Store periodsStore;
+        
+        /// <summary>
+        /// btnRemoveEmployee control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Button btnRemoveEmployee;
+        
+        /// <summary>
         /// SaveButton control.
         /// </summary>
         /// <remarks>

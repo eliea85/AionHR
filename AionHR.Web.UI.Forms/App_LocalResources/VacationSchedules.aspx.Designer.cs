@@ -70,11 +70,56 @@ namespace AionHR.Web.UI.Forms.App_LocalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Period.
+        /// </summary>
+        internal static string BtnAddPeriod {
+            get {
+                return ResourceManager.GetString("BtnAddPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Period.
+        /// </summary>
+        internal static string BtnRemovePeriod {
+            get {
+                return ResourceManager.GetString("BtnRemovePeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string BtnUpdate {
+            get {
+                return ResourceManager.GetString("BtnUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Department.
         /// </summary>
         internal static string EditWindowsTitle {
             get {
                 return ResourceManager.GetString("EditWindowsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vacation Days.
+        /// </summary>
+        internal static string FieldDays {
+            get {
+                return ResourceManager.GetString("FieldDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From Months.
+        /// </summary>
+        internal static string FieldFrom {
+            get {
+                return ResourceManager.GetString("FieldFrom", resourceCulture);
             }
         }
         
@@ -156,6 +201,24 @@ namespace AionHR.Web.UI.Forms.App_LocalResources {
         internal static string FieldTimeZone {
             get {
                 return ResourceManager.GetString("FieldTimeZone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Months.
+        /// </summary>
+        internal static string FieldTo {
+            get {
+                return ResourceManager.GetString("FieldTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Periods.
+        /// </summary>
+        internal static string Periods {
+            get {
+                return ResourceManager.GetString("Periods", resourceCulture);
             }
         }
         

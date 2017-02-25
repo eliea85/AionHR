@@ -136,15 +136,14 @@ namespace AionHR.Web.UI.Forms
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     PasswordConfirmation.Text = response.result.password;
+                    
                     RecordRequest req = new RecordRequest();
                     if (response.result.employeeId != null)
                     {
                         req.RecordID = response.result.employeeId;
                         RecordResponse<Employee> emp = _employeeService.Get<Employee>(req);
-                        if (response.result.employeeId != null)
-                        {
                             employeeId.Select(emp.result.fullName);
-                        }
+                      
                     }
 
                     // InitCombos(response.result);
@@ -493,8 +492,7 @@ namespace AionHR.Web.UI.Forms
                     int index = Convert.ToInt32(id);//getting the id of the record
                     PostRequest<UserInfo> request = new PostRequest<UserInfo>();
 
-                    if (employeeId.SelectedItem != null)
-                        b.employeeId = employeeId.SelectedItem.Value;
+                  
                     
                     request.entity = b;
                     PostResponse<UserInfo> r = _systemService.ChildAddOrUpdate<UserInfo>(request);                   //Step 1 Selecting the object or building up the object for update purpose

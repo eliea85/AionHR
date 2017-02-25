@@ -421,7 +421,7 @@ namespace AionHR.Web.UI.Forms
                         X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
                         return;
                     }
-                    List<VacationSchedulePeriod> periods = periodsGrid.Store[0].DataSource as List<VacationSchedulePeriod>;
+                    List<VacationSchedulePeriod> periods = JsonConvert.DeserializeObject<List<VacationSchedulePeriod>>(pers);
                     bool result = AddPeriodsList(b.recordId, periods);
                     
 
@@ -474,8 +474,13 @@ namespace AionHR.Web.UI.Forms
                     PostRequest<VacationSchedule> request = new PostRequest<VacationSchedule>();
                     request.entity = b;
                     PostResponse<VacationSchedule> r = _branchService.ChildAddOrUpdate<VacationSchedule>(request);                   //Step 1 Selecting the object or building up the object for update purpose
-                    
-                    List<VacationSchedulePeriod> periods = periodsGrid.Store[0].DataSource as List<VacationSchedulePeriod>;
+                    DeleteVacationPeriodsRequest req = new DeleteVacationPeriodsRequest();
+                    req.ScheduleId = b.recordId;
+                    StatusResponse deleteDesponse = _branchService.ChildDelete<VacationSchedulePeriod>(req);
+                    if (!deleteDesponse.Success)
+                    {// handle error
+                    }
+                    List<VacationSchedulePeriod> periods = JsonConvert.DeserializeObject<List<VacationSchedulePeriod>>(pers);
                     bool result = AddPeriodsList(b.recordId, periods);
 
                     //Step 2 : saving to store
@@ -516,7 +521,7 @@ namespace AionHR.Web.UI.Forms
         }
         private bool AddPeriodsList(string scheduleIdString, List<VacationSchedulePeriod> periods)
         {
-            short i = 0;
+            short i = 1;
             int scheduleId = Convert.ToInt32(scheduleIdString);
             foreach (var period in periods)
             {

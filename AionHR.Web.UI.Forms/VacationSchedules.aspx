@@ -300,7 +300,7 @@
                             BodyPadding="5">
                             <Items>
                                 <ext:GridPanel
-                                    ID="periodsGrid" 
+                                    ID="periodsGrid"  FrameHeader="false"
                                     runat="server"
                                     Width="600"
                                     Height="400" Layout="FitLayout"

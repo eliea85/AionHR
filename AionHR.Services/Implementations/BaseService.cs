@@ -134,7 +134,17 @@ namespace AionHR.Services.Implementations
             return response;
         }
 
+        public StatusResponse ChildDelete<TChild>(RequestBase request)
+        {
+            StatusResponse response = new StatusResponse();
+            var headers = SessionHelper.GetAuthorizationHeadersForUser();
+            Dictionary<string, string> queryParams = new Dictionary<string, string>();
+            queryParams = request.Parameters;
+            var webResponse = GetRepository().ChildDelete<TChild>(headers, queryParams);
+            response = CreateServiceResponse<StatusResponse>(webResponse);
 
+            return response;
+        }
 
     }
 }

@@ -141,7 +141,7 @@ namespace AionHR.Web.UI.Forms.Utilities
 
             Ext.Net.Node vs = BuildLeafNode("rootParent_LM_VS", Resources.Common.VacationSchedules, "Group", true, leaveMgmt);
 
-            FillConfigItem(vs, "users", "VacationSchedules.aspx", Resources.Common.Users, "icon-Employees", "1");
+            FillConfigItem(vs, "users", "VacationSchedules.aspx", Resources.Common.VacationSchedules, "icon-Employees", "1");
 
 
 

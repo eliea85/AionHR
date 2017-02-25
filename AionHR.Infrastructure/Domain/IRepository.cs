@@ -30,5 +30,6 @@ namespace AionHR.Infrastructure.Domain
 
         PostWebServiceResponse ChildAddOrUpdate<TChild>(TChild entity, Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
 
+        BlankWebServiceResponse ChildDelete<TChild>(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null);
     }
 }

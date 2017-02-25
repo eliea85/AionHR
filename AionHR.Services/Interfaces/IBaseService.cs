@@ -27,5 +27,7 @@ namespace AionHR.Services.Interfaces
 
         PostResponse<TChild> ChildAddOrUpdate<TChild>(PostRequest<TChild> request);
 
+        StatusResponse ChildDelete<TChild>(RequestBase request);
+
     }
 }

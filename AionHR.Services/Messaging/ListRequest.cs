@@ -34,7 +34,7 @@ namespace AionHR.Services.Messaging
         /// <summary>
         /// /// parameter list shipped with the web request
         /// </summary>
-        public Dictionary<string, string> Parameters
+        public override Dictionary<string, string> Parameters
         {
 
             get

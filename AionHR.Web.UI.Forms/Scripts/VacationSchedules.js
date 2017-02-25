@@ -9,14 +9,40 @@ var deleteRender = function () {
 var attachRender = function () {
     return '<img class="imgAttach"  style="cursor:pointer;" src="Images/Tools/attach.png" />';
 };
+//Ext.apply(Ext.form.VTypes, {
+//    numberrange: function (val, field) {
+//        if (!val) {
+//            return;
+//        }
 
+//        if (field.startNumberField && (!field.numberRangeMax || (val != field.numberRangeMax))) {
+//            var start = Ext.getCmp(field.startNumberField);
+
+//            if (start) {
+//                start.setMaxValue(val);
+//                field.numberRangeMax = val;
+//                start.validate();
+//            }
+//        } else if (field.endNumberField && (!field.numberRangeMin || (val != field.numberRangeMin))) {
+//            var end = Ext.getCmp(field.endNumberField);
+
+//            if (end) {
+//                end.setMinValue(val);
+//                field.numberRangeMin = val;
+//                end.validate();
+//            }
+//        }
+
+//        return true;
+//    }
+//});
 function addEmployee () {
     var periodsGrid = App.periodsGrid,
         store = periodsGrid.getStore();
 
     periodsGrid.editingPlugin.cancelEdit();
 
-    
+    store.getSorters().removeAll();
     periodsGrid.getView().headerCt.setSortState(); // To update columns sort UI
 
     store.insert(0, {

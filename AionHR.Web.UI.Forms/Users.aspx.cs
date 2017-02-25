@@ -134,17 +134,29 @@ namespace AionHR.Web.UI.Forms
                     RecordResponse<UserInfo> response = _systemService.ChildGetRecord<UserInfo>(r);
 
                     //Step 2 : call setvalues with the retrieved object
-                    this.BasicInfoTab.SetValues(response.result);
-                    PasswordConfirmation.Text = response.result.password;
                     
-                    RecordRequest req = new RecordRequest();
-                    if (response.result.employeeId != null)
+                    PasswordConfirmation.Text = response.result.password;
+                    if (!String.IsNullOrEmpty(response.result.employeeId))
                     {
-                        req.RecordID = response.result.employeeId;
-                        RecordResponse<Employee> emp = _employeeService.Get<Employee>(req);
-                            employeeId.Select(emp.result.fullName);
-                      
+
+                        RecordRequest empRecord = new RecordRequest();
+                    empRecord.RecordID = response.result.employeeId;
+                    RecordResponse<Employee> empResponse = _employeeService.Get<Employee>(empRecord);
+
+                    RecordRequest req = new RecordRequest();
+                    
+                        employeeId.GetStore().Add(new object[]
+                           {
+                                new
+                                {
+                                    recordId = response.result.employeeId,
+                                    fullName =empResponse.result.fullName
+                                }
+                           });
+                        employeeId.SetValue(response.result.employeeId);
+
                     }
+                    this.BasicInfoTab.SetValues(response.result);
 
                     // InitCombos(response.result);
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;

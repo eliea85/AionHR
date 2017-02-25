@@ -300,12 +300,12 @@
                             BodyPadding="5">
                             <Items>
                                 <ext:GridPanel
-                                    ID="periodsGrid"  FrameHeader="false"
+                                    ID="periodsGrid"  
                                     runat="server"
                                     Width="600"
                                     Height="400" Layout="FitLayout"
-                                    Frame="true"
-                                    Title="<%$ Resources: Periods %>">
+                                    Frame="true" TitleCollapse="true"
+                                    >
                                     <Store>
                                         <ext:Store ID="periodsStore" runat="server">
                                            <Model>
@@ -354,9 +354,13 @@
                                                 
                                                 Align="Center">
                                                 <Editor>
+                                                     <%-- Vtype="numberrange"
+                                                        EndNumberField="toField"--%>
                                                     <ext:NumberField
                                                         runat="server"
+                                                         ID="fromField"
                                                         AllowBlank="false"
+                                                       
                                                         MinValue="0"
                                                         MaxValue="150" />
                                                 </Editor>
@@ -368,12 +372,17 @@
                                                 
                                                 Align="Center">
                                                 <Editor>
+                                                       <%--   StartNumberField="fromField"
+                                                         Vtype="numberrange"--%>
                                                     <ext:NumberField
                                                         runat="server"
+                                                        ID="toField"
                                                         AllowBlank="false"
                                                         MinValue="0"
+                                                  
                                                         MaxValue="150" />
                                                 </Editor>
+                                                
                                             </ext:NumberColumn>
                                             
                                             

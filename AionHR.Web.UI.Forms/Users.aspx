@@ -283,7 +283,7 @@
             Icon="PageEdit"
             Title="<%$ Resources:EditWindowsTitle %>"
             Width="450"
-            Height="330"
+            Height="350"
             AutoShow="false"
             Modal="true"
             Hidden="true"

@@ -355,7 +355,7 @@ namespace AionHR.Web.UI.Forms
 
             //Reset all values of the relative object
             BasicInfoTab.Reset();
-            periodsGrid.Store[0].DataSource = null;
+            periodsGrid.Store[0].DataSource = new List<VacationSchedulePeriod>();
             periodsGrid.Store[0].DataBind();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
 
@@ -471,12 +471,12 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                    PostRequest<VacationSchedule> request = new PostRequest<VacationSchedule>();
-                    request.entity = b;
-                    PostResponse<VacationSchedule> r = _branchService.ChildAddOrUpdate<VacationSchedule>(request);                   //Step 1 Selecting the object or building up the object for update purpose
-                    DeleteVacationPeriodsRequest req = new DeleteVacationPeriodsRequest();
-                    req.ScheduleId = b.recordId;
-                    StatusResponse deleteDesponse = _branchService.ChildDelete<VacationSchedulePeriod>(req);
+                    PostRequest<VacationSchedule> modifyHeaderRequest = new PostRequest<VacationSchedule>();
+                    modifyHeaderRequest.entity = b;
+                    PostResponse<VacationSchedule> r = _branchService.ChildAddOrUpdate<VacationSchedule>(modifyHeaderRequest);                   //Step 1 Selecting the object or building up the object for update purpose
+                    DeleteVacationPeriodsRequest deleteChildenRequest = new DeleteVacationPeriodsRequest();
+                    deleteChildenRequest.ScheduleId = b.recordId;
+                    StatusResponse deleteDesponse = _branchService.ChildDelete<VacationSchedulePeriod>(deleteChildenRequest);
                     if (!deleteDesponse.Success)
                     {// handle error
                     }

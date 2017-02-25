@@ -416,7 +416,7 @@
                             <ExtraParams>
                                 <ext:Parameter Name="id" Value="#{recordId}.getValue()" Mode="Raw" />
                                 <ext:Parameter Name="schedule" Value="#{BasicInfoTab}.getForm().getValues()" Mode="Raw" Encode="true" />
-                                <ext:Parameter Name="periods" Value="#{periodsTab}.getForm().getValues()" Mode="Raw" Encode="true" />
+                                <ext:Parameter Name="periods" Value="Ext.encode(#{periodsGrid}.getRowsValues({selectedOnly : false}))" Mode="Raw"  />
                             </ExtraParams>
                         </Click>
                     </DirectEvents>

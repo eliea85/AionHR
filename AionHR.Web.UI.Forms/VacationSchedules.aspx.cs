@@ -522,14 +522,14 @@ namespace AionHR.Web.UI.Forms
             {
                 period.seqNo = i++;
                 period.vsId = scheduleId;
-                PostRequest<VacationSchedulePeriod> periodRequest = new PostRequest<VacationSchedulePeriod>();
-                periodRequest.entity = period;
-                PostResponse<VacationSchedulePeriod> response = _branchService.ChildAddOrUpdate<VacationSchedulePeriod>(periodRequest);
-                if (!response.Success)
-                {
-                    return false;
-                }
-
+               
+            }
+            PostRequest<VacationSchedulePeriod[]> periodRequest = new PostRequest<VacationSchedulePeriod[]>();
+            periodRequest.entity = periods.ToArray() ;
+            PostResponse<VacationSchedulePeriod[]> response = _branchService.ChildAddOrUpdate<VacationSchedulePeriod[]>(periodRequest);
+            if (!response.Success)
+            {
+                return false;
             }
             return true;
         }

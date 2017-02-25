@@ -61,7 +61,7 @@ namespace AionHR.Web.UI.Forms.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Department Info.
+        ///   Looks up a localized string similar to Vacation Schedule Info.
         /// </summary>
         internal static string BasicInfoTabEditWindowTitle {
             get {
@@ -97,7 +97,7 @@ namespace AionHR.Web.UI.Forms.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Department.
+        ///   Looks up a localized string similar to Edit Vacation Schedule.
         /// </summary>
         internal static string EditWindowsTitle {
             get {
@@ -124,83 +124,11 @@ namespace AionHR.Web.UI.Forms.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Inactive?.
-        /// </summary>
-        internal static string FieldIsInactive {
-            get {
-                return ResourceManager.GetString("FieldIsInactive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Is Segmented Head.
-        /// </summary>
-        internal static string FieldIsSegmentedHead {
-            get {
-                return ResourceManager.GetString("FieldIsSegmentedHead", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string FieldName {
             get {
                 return ResourceManager.GetString("FieldName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Parent.
-        /// </summary>
-        internal static string FieldParentName {
-            get {
-                return ResourceManager.GetString("FieldParentName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Record ID.
-        /// </summary>
-        internal static string FieldRecordId {
-            get {
-                return ResourceManager.GetString("FieldRecordId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reference.
-        /// </summary>
-        internal static string FieldReference {
-            get {
-                return ResourceManager.GetString("FieldReference", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Segment.
-        /// </summary>
-        internal static string FieldSegmentCode {
-            get {
-                return ResourceManager.GetString("FieldSegmentCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Supervisor.
-        /// </summary>
-        internal static string FieldSvFullName {
-            get {
-                return ResourceManager.GetString("FieldSvFullName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Time Zone.
-        /// </summary>
-        internal static string FieldTimeZone {
-            get {
-                return ResourceManager.GetString("FieldTimeZone", resourceCulture);
             }
         }
         
@@ -232,7 +160,7 @@ namespace AionHR.Web.UI.Forms.App_LocalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Departments.
+        ///   Looks up a localized string similar to Vacation Schedules.
         /// </summary>
         internal static string WindowTitle {
             get {

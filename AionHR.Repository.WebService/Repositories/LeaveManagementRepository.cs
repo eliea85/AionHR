@@ -27,7 +27,7 @@ namespace AionHR.Repository.WebService.Repositories
             ChildGetAllLookup.Add(typeof(VacationSchedulePeriod), "qryVP");
 
             ChildAddOrUpdateLookup.Add(typeof(VacationSchedule), "setVS");
-            ChildAddOrUpdateLookup.Add(typeof(VacationSchedulePeriod), "setVP");
+            ChildAddOrUpdateLookup.Add(typeof(VacationSchedulePeriod[]), "arrSetVP");
         }
     }
 }

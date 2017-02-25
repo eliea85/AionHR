@@ -117,7 +117,7 @@
                     <ColumnModel ID="ColumnModel1" runat="server" SortAscText="<%$ Resources:Common , SortAscText %>" SortDescText="<%$ Resources:Common ,SortDescText  %>" SortClearText="<%$ Resources:Common ,SortClearText  %>" ColumnsText="<%$ Resources:Common ,ColumnsText  %>" EnableColumnHide="false" Sortable="true">
                         <Columns>
 
-                            <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
+                            <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server"  DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
 
                             <ext:Column CellCls="cellLink" Sortable="true" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
                                 <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
@@ -285,7 +285,7 @@
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
                             BodyPadding="5">
                             <Items>
-                                <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" DataIndex="recordId" />
+                                <ext:TextField ID="recordId" Hidden="true" runat="server"  Disabled="true" DataIndex="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" DataIndex="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
 
                             </Items>
@@ -300,10 +300,10 @@
                             BodyPadding="5">
                             <Items>
                                 <ext:GridPanel
-                                    ID="periodsGrid"
+                                    ID="periodsGrid" 
                                     runat="server"
                                     Width="600"
-                                    Height="400"
+                                    Height="400" Layout="FitLayout"
                                     Frame="true"
                                     Title="<%$ Resources: Periods %>">
                                     <Store>

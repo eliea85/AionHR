@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model.Attendance
 {
-    class AttendanceScheduleDay
+   public class AttendanceScheduleDay
     {
         public int scId { get; set; }
         public short dow { get; set; }

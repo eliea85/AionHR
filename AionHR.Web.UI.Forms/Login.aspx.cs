@@ -40,6 +40,8 @@ namespace AionHR.Web.UI.Forms
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ResourceManager1.RegisterIcon(Icon.Tick);
+            ResourceManager1.RegisterIcon(Icon.Error);
             if (Request.QueryString["timeout"] != null && Request.QueryString["timeout"].ToString() == "yes")
             {
                 lblError.Text = Resources.Common.SessionDisconnected;
@@ -111,15 +113,13 @@ namespace AionHR.Web.UI.Forms
             if (response.Success)
             {
 
-                tbAccountName.IndicatorIcon = Icon.Accept;
-                ResourceManager1.RegisterIcon(Icon.Accept);
+                
                 e.Success = true;
-                field.IndicatorTip = (String)GetLocalResourceObject("AccountValid");
+                
             }
             else
             {
-                tbAccountName.IndicatorIcon = Icon.Error;
-                ResourceManager1.RegisterIcon(Icon.Error);
+               
                 e.Success = false;
                 e.ErrorMessage = "Invalid Account";//should access local resources, just didn't figure how yet , only Resources.Common is accessible
 

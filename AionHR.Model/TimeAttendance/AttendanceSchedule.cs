@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model.Attendance
 {
-    class AttendanceSchedule:ModelBase
+    public class AttendanceSchedule:ModelBase
     {
         public string name { get; set; }
         public short fci_min_ot { get; set; }

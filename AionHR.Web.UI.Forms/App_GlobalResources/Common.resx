@@ -387,6 +387,9 @@
   <data name="VacationSchedules" xml:space="preserve">
     <value>Vacation Schedules</value>
   </data>
+  <data name="AttendanceSchedule" xml:space="preserve">
+    <value>Attendance Schedule</value>
+  </data>
   <data name="DayTypes" xml:space="preserve">
     <value>Day Types</value>
   </data>

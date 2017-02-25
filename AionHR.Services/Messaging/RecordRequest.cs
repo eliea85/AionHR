@@ -9,7 +9,7 @@ namespace AionHR.Services.Messaging
     /// <summary>
     /// Generic class used to fill a request to be used by a record retrieval service
     /// </summary>
-    public class RecordRequest:RequestBase
+    public class RecordRequest : RequestBase
     {
         /// <summary>
         /// Generic record request class
@@ -19,17 +19,22 @@ namespace AionHR.Services.Messaging
         /// parameter list shipped with the web request
         /// </summary>
         public Dictionary<string, string> parameters;
-
+        public Dictionary<string, string> QueryStringParams = new Dictionary<string, string>();
         /// <summary>
         /// parameter list shipped with the web request
         /// </summary>
-        public Dictionary<string, string> Parameters
+        public override Dictionary<string, string> Parameters
         {
 
             get
             {
                 parameters = new Dictionary<string, string>();
-                parameters.Add("_recordId", RecordID);              
+                if (!string.IsNullOrEmpty(RecordID))
+                    parameters.Add("_recordId", RecordID);
+                foreach (var item in QueryStringParams)
+                {
+                    parameters.Add(item.Key, item.Value);
+                }
                 return parameters;
             }
         }

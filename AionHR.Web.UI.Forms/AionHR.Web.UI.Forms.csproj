@@ -134,8 +134,10 @@
   <ItemGroup>
     <Content Include="Positions.aspx" />
     <Content Include="resetPw.aspx" />
+    <Content Include="Schedules.aspx" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\DayTypes.js" />
+    <Content Include="Scripts\Schedules.js" />
     <Content Include="Scripts\VacationSchedules.js" />
     <Content Include="Scripts\Users.js" />
     <Content Include="Scripts\Nationalities.js" />
@@ -269,6 +271,13 @@
     <Compile Include="resetPw.aspx.designer.cs">
       <DependentUpon>resetPw.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Schedules.aspx.cs">
+      <DependentUpon>Schedules.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Schedules.aspx.designer.cs">
+      <DependentUpon>Schedules.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StoreFactory.cs" />
     <Compile Include="StructureMapServiceLocator.cs" />
     <Compile Include="Test.aspx.cs">
@@ -370,6 +379,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\DayTypes.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Schedules.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

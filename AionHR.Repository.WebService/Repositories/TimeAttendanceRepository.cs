@@ -19,15 +19,23 @@ namespace AionHR.Repository.WebService.Repositories
             base.ServiceURL = ApplicationSettingsFactory.GetApplicationSettings().BaseURL + serviceName;
 
             ChildGetLookup.Add(typeof(DayType), "getDT");
-           
+            ChildGetLookup.Add(typeof(AttendanceSchedule), "getSC");
+            ChildGetLookup.Add(typeof(AttendanceScheduleDay), "getSD");
 
             ChildGetAllLookup.Add(typeof(DayType), "qryDT");
-           
+            ChildGetAllLookup.Add(typeof(AttendanceSchedule), "qrySC");
+            ChildGetAllLookup.Add(typeof(AttendanceScheduleDay), "qrySD");
+            ChildGetAllLookup.Add(typeof(AttendanceBreak), "qrySB");
 
             ChildAddOrUpdateLookup.Add(typeof(DayType), "setDT");
-            
+            ChildAddOrUpdateLookup.Add(typeof(AttendanceSchedule), "setSC");
+            ChildAddOrUpdateLookup.Add(typeof(AttendanceScheduleDay), "setSD");
+            ChildAddOrUpdateLookup.Add(typeof(AttendanceBreak[]), "arrSB");
 
-            
+            ChildDeleteLookup.Add(typeof(AttendanceBreak), "delSB");
+
+
+
         }
     }
 }

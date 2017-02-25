@@ -100,9 +100,9 @@ namespace AionHR.Services.Implementations
             var headers =SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
-
-            var webResponse = GetRepository().ChildGetRecord<TChild>(headers, queryParams);
-            CreateServiceResponse<RecordResponse<TChild>>(webResponse);
+            
+            var webResponse = GetRepository().ChildGetRecord<TChild>(headers, request.Parameters);
+            response = CreateServiceResponse<RecordResponse<TChild>>(webResponse);
             response.result = webResponse.record;
             return response;
         }

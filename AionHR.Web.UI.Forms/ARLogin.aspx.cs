@@ -45,8 +45,11 @@ namespace AionHR.Web.UI.Forms
             {
                 lblError.Text = Resources.Common.SessionDisconnected;
             }
-            if (Request.QueryString["accountId"] != null)
-                tbAccountName.Text = Request.QueryString["accountId"];
+            if (!IsPostBack && Request.QueryString["account"] != null)
+            {
+                tbAccountName.Text = Request.QueryString["account"];
+                DirectCheckField(tbAccountName.Text);
+            }
             SetExtLanguage();
             if (!X.IsAjaxRequest)
             {
@@ -109,6 +112,30 @@ namespace AionHR.Web.UI.Forms
 
             System.Threading.Thread.Sleep(500);
 
+        }
+        public object DirectCheckField(string value)
+        {
+            //return true;
+            AuthenticateRequest request = new AuthenticateRequest();
+            request.Account = value;
+
+            Response<Account> response = _masterService.GetAccount(request);
+
+            if (response.Success)
+            {
+
+                tbAccountName.IndicatorIcon = Icon.Accept;
+                ResourceManager1.RegisterIcon(Icon.Accept);
+
+            }
+            else
+            {
+                tbAccountName.IndicatorIcon = Icon.Error;
+                ResourceManager1.RegisterIcon(Icon.Error);
+
+            }
+            tbAccountName.ShowIndicator();
+            return response.Success;
         }
     }
 }

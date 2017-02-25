@@ -51,6 +51,7 @@
     <Compile Include="Implementations\EmployeeService.cs" />
     <Compile Include="Implementations\LeaveManagementService.cs" />
     <Compile Include="Implementations\MasterService.cs" />
+    <Compile Include="Implementations\TimeAttendanceService.cs" />
     <Compile Include="Interfaces\IBaseService.cs" />
     <Compile Include="Interfaces\ICompanyStructureService.cs" />
     <Compile Include="Interfaces\IEmployeeService.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Interfaces\ISystemService.cs" />
     <Compile Include="Implementations\SystemService.cs" />
     <Compile Include="Interfaces\IMasterService.cs" />
+    <Compile Include="Interfaces\ITimeAttendanceService.cs" />
     <Compile Include="Messaging\LeaveManagement\Requests.cs" />
     <Compile Include="Messaging\ListReponse.cs" />
     <Compile Include="Messaging\PostRequest.cs" />

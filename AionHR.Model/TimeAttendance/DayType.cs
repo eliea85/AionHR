@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model.Attendance
 {
-    class DayType:ModelBase
+    public class DayType:ModelBase
     {
         public string name { get; set; }
         public string color { get; set; }

@@ -94,6 +94,7 @@
     <Content Include="CSS\Tools.css" />
     <Content Include="Currencies.aspx" />
     <Content Include="Dashboard.aspx" />
+    <Content Include="DayTypes.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Departments.aspx" />
     <Content Include="Employees.aspx" />
@@ -122,11 +123,6 @@
     <Content Include="Login.aspx" />
     <Content Include="Nationalities.aspx" />
     <Content Include="packages.config" />
-    <EmbeddedResource Include="App_LocalResources\VacationSchedules.aspx.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>VacationSchedules.aspx.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -139,6 +135,7 @@
     <Content Include="Positions.aspx" />
     <Content Include="resetPw.aspx" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\DayTypes.js" />
     <Content Include="Scripts\VacationSchedules.js" />
     <Content Include="Scripts\Users.js" />
     <Content Include="Scripts\Nationalities.js" />
@@ -164,11 +161,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Common.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_LocalResources\VacationSchedules.aspx.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>VacationSchedules.aspx.resx</DependentUpon>
-    </Compile>
     <Compile Include="BootStrapper.cs" />
     <Compile Include="BoundedComboBox.cs" />
     <Compile Include="Branches.aspx.cs">
@@ -191,6 +183,13 @@
     </Compile>
     <Compile Include="Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DayTypes.aspx.cs">
+      <DependentUpon>DayTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DayTypes.aspx.designer.cs">
+      <DependentUpon>DayTypes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -363,6 +362,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Users.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\VacationSchedules.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\DayTypes.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

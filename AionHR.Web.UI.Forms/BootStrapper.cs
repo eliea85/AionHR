@@ -7,6 +7,7 @@ using AionHR.Model.Employees;
 using AionHR.Model.LeaveManagement;
 using AionHR.Model.MasterModule;
 using AionHR.Model.System;
+using AionHR.Model.TimeAttendance;
 using AionHR.Repository.WebService.Repositories;
 using AionHR.Services.Implementations;
 using AionHR.Services.Interfaces;
@@ -48,6 +49,7 @@ namespace AionHR.Web.UI.Forms
                 For<IAccountRepository>().Use<AccountRepository>();
                 For<ILeaveManagementRepository>().Use<LeaveManagementRepository>();
                 For<ICompanyStructureRepository>().Use<CompanyStructureRepository>();
+                For<ITimeAttendanceRepository>().Use<TimeAttendanceRepository>();
 
                 //Services
                 For<ISystemService>().Use<SystemService>();
@@ -55,6 +57,7 @@ namespace AionHR.Web.UI.Forms
                 For<IMasterService>().Use<MasterService>();
                 For<ICompanyStructureService>().Use<CompanyStructureService>();
                 For<ILeaveManagementService>().Use<LeaveManagementService>();
+                For<ITimeAttendanceService>().Use<TimeAttendanceService>();
             }
         }
     }

@@ -44,6 +44,11 @@ namespace AionHR.Web.UI.Forms
             {
                 lblError.Text = Resources.Common.SessionDisconnected;
             }
+            if (!IsPostBack && Request.QueryString["account"] != null)
+            {
+                tbAccountName.Text = Request.QueryString["account"];
+                DirectCheckField(tbAccountName.Text);
+            }
             if (!X.IsAjaxRequest)
             {
                 ResourceManager1.RegisterIcon(Icon.Tick);

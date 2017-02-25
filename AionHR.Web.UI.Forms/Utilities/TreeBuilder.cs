@@ -140,8 +140,10 @@ namespace AionHR.Web.UI.Forms.Utilities
             Ext.Net.Node leaveMgmt = BuildParentNode("rootParent_LM", Resources.Common.LeaveManagement, true, rootParent);
 
             Ext.Net.Node vs = BuildLeafNode("rootParent_LM_VS", Resources.Common.VacationSchedules, "Group", true, leaveMgmt);
+            Ext.Net.Node dts = BuildLeafNode("rootParent_TA_DT", Resources.Common.DayTypes, "Group", true, timeAt);
 
-            FillConfigItem(vs, "users", "VacationSchedules.aspx", Resources.Common.VacationSchedules, "icon-Employees", "1");
+            FillConfigItem(vs, "vacationSchedules", "VacationSchedules.aspx", Resources.Common.VacationSchedules, "icon-Employees", "1");
+            FillConfigItem(dts, "dayTypes", "DayTypes.aspx", Resources.Common.DayTypes, "icon-Employees", "1");
 
 
 

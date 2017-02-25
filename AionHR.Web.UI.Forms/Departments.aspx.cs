@@ -517,7 +517,7 @@ namespace AionHR.Web.UI.Forms
                             Html = Resources.Common.RecordUpdatedSucc
                         });
 
-
+                        this.EditRecordWindow.Close();
 
                     }
 

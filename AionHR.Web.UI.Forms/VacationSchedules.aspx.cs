@@ -474,11 +474,20 @@ namespace AionHR.Web.UI.Forms
                     PostRequest<VacationSchedule> modifyHeaderRequest = new PostRequest<VacationSchedule>();
                     modifyHeaderRequest.entity = b;
                     PostResponse<VacationSchedule> r = _branchService.ChildAddOrUpdate<VacationSchedule>(modifyHeaderRequest);                   //Step 1 Selecting the object or building up the object for update purpose
+                    if (!r.Success)//it maybe another check
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                        return;
+                    }
                     DeleteVacationPeriodsRequest deleteChildenRequest = new DeleteVacationPeriodsRequest();
                     deleteChildenRequest.ScheduleId = b.recordId;
                     StatusResponse deleteDesponse = _branchService.ChildDelete<VacationSchedulePeriod>(deleteChildenRequest);
-                    if (!deleteDesponse.Success)
-                    {// handle error
+                    if (!deleteDesponse.Success)//it maybe another check
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                        return;
                     }
                     List<VacationSchedulePeriod> periods = JsonConvert.DeserializeObject<List<VacationSchedulePeriod>>(pers);
                     bool result = AddPeriodsList(b.recordId, periods);
@@ -486,7 +495,7 @@ namespace AionHR.Web.UI.Forms
                     //Step 2 : saving to store
 
                     //Step 3 :  Check if request fails
-                    if (!r.Success)//it maybe another check
+                    if (!result)//it maybe another check
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
                         X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
@@ -506,7 +515,7 @@ namespace AionHR.Web.UI.Forms
                             Icon = Icon.Information,
                             Html = Resources.Common.RecordUpdatedSucc
                         });
-
+                        this.EditRecordWindow.Close();
 
 
                     }

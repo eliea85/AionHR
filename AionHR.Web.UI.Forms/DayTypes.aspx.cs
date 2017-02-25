@@ -20,22 +20,19 @@ using AionHR.Web.UI.Forms.Utilities;
 using AionHR.Model.Company.News;
 using AionHR.Services.Messaging;
 using AionHR.Model.Company.Structure;
-using AionHR.Model.Employees.Profile;
 using AionHR.Model.System;
-using AionHR.Services.Messaging.System;
+using AionHR.Model.Attendance;
 
 namespace AionHR.Web.UI.Forms
 {
-    public partial class Users : System.Web.UI.Page
+    public partial class DayTypes : System.Web.UI.Page
     {
-       
-        ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
-        IEmployeeService _employeeService = ServiceLocator.Current.GetInstance<IEmployeeService>();
+        ITimeAttendanceService _timeAttendanceService = ServiceLocator.Current.GetInstance<ITimeAttendanceService>();
         protected override void InitializeCulture()
         {
 
             bool rtl = true;
-            if (!_systemService.SessionHelper.CheckIfArabicSession())
+            if (!_timeAttendanceService.SessionHelper.CheckIfArabicSession())
             {
                 rtl = false;
                 base.InitializeCulture();
@@ -49,12 +46,9 @@ namespace AionHR.Web.UI.Forms
             }
 
         }
-        BoundedComboBox parents;
-        BoundedComboBox supervisors;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
 
 
             if (!X.IsAjaxRequest && !IsPostBack)
@@ -65,12 +59,9 @@ namespace AionHR.Web.UI.Forms
                 HideShowColumns();
                 FillLiveSearchLabels();
 
+
             }
 
-            if (timeZoneOffset.Text != "")
-            {
-                Session.Add("TimeZone", timeZoneOffset.Text);
-            }
         }
 
 
@@ -102,7 +93,7 @@ namespace AionHR.Web.UI.Forms
 
         private void SetExtLanguage()
         {
-            bool rtl = _systemService.SessionHelper.CheckIfArabicSession();
+            bool rtl = _timeAttendanceService.SessionHelper.CheckIfArabicSession();
             if (rtl)
             {
                 this.ResourceManager1.RTL = true;
@@ -117,53 +108,24 @@ namespace AionHR.Web.UI.Forms
             this.LiveSearchToolbar2.CaseSensitiveText = Resources.Common.CaseSensitive;
         }
 
-        private void DeactivatePassword( bool deactivate)
-        {
-            PasswordField.Hidden = deactivate;
-            PasswordConfirmation.Hidden = deactivate;
-            PasswordField.AllowBlank = deactivate;
-            PasswordConfirmation.AllowBlank = deactivate;
-        }
+
         protected void PoPuP(object sender, DirectEventArgs e)
         {
 
-            DeactivatePassword(false);
+
             int id = Convert.ToInt32(e.ExtraParams["id"]);
             string type = e.ExtraParams["type"];
             switch (type)
             {
-                case "ColFullName":
+                case "ColName":
                     //Step 1 : get the object from the Web Service 
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
-                    RecordResponse<UserInfo> response = _systemService.ChildGetRecord<UserInfo>(r);
+                    RecordResponse<DayType> response = _timeAttendanceService.ChildGetRecord<DayType>(r);
 
                     //Step 2 : call setvalues with the retrieved object
-                    
-                    PasswordConfirmation.Text = response.result.password;
-                    if (!String.IsNullOrEmpty(response.result.employeeId))
-                    {
-
-                        RecordRequest empRecord = new RecordRequest();
-                    empRecord.RecordID = response.result.employeeId;
-                    RecordResponse<Employee> empResponse = _employeeService.Get<Employee>(empRecord);
-
-                    RecordRequest req = new RecordRequest();
-                    
-                        employeeId.GetStore().Add(new object[]
-                           {
-                                new
-                                {
-                                    recordId = response.result.employeeId,
-                                    fullName =empResponse.result.fullName
-                                }
-                           });
-                        employeeId.SetValue(response.result.employeeId);
-
-                    }
                     this.BasicInfoTab.SetValues(response.result);
-
-                    // InitCombos(response.result);
+                    color.SelectedColor = response.result.color;
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -192,24 +154,6 @@ namespace AionHR.Web.UI.Forms
                 default:
                     break;
             }
-
-
-        }
-
-        private void InitCombos(Department dept)
-        {
-            parents = new BoundedComboBox("parentId", "name", "recordId", GetLocalResourceObject("FieldParentName").ToString(), "FillParent", "", GetLocalResourceObject("FieldParentName").ToString(), false);
-            supervisors = new BoundedComboBox("supervisorId", "fullName", "recordId", GetLocalResourceObject("FieldSvFullName").ToString(), "FillSupervisor", "", GetLocalResourceObject("FieldSvFullName").ToString(), true);
-            BasicInfoTab.Items.Add(parents);
-            BasicInfoTab.Items.Add(supervisors);
-            if (dept != null)
-            {
-
-                parents.Select(dept.parentId);
-                supervisors.Select(dept.supervisorId);
-            }
-            BasicInfoTab.UpdateLayout();
-            BasicInfoTab.UpdateContent();
 
 
         }
@@ -249,72 +193,7 @@ namespace AionHR.Web.UI.Forms
         }
 
 
-        [DirectMethod]
-        public object FillParent(string action, Dictionary<string, object> extraParams)
-        {
-            StoreRequestParameters prms = new StoreRequestParameters(extraParams);
 
-
-
-            List<UserInfo> data;
-            ListRequest req = new ListRequest();
-
-            ListResponse<UserInfo> response = _systemService.ChildGetAll<UserInfo>(req);
-            data = response.Items;
-            return new
-            {
-                data
-            };
-
-        }
-        [DirectMethod]
-        public object FillSupervisor(string action, Dictionary<string, object> extraParams)
-        {
-
-            StoreRequestParameters prms = new StoreRequestParameters(extraParams);
-
-
-
-            List<Employee> data = GetEmployeesFiltered(prms.Query);
-
-            //  return new
-            // {
-            return data;
-            //};
-
-        }
-
-        private List<Employee> GetEmployeeByID(string id)
-        {
-
-            RecordRequest req = new RecordRequest();
-            req.RecordID = id;
-
-
-
-            List<Employee> emps = new List<Employee>();
-            RecordResponse<Employee> emp = _employeeService.Get<Employee>(req);
-            emps.Add(emp.result);
-            return emps;
-        }
-        private List<Employee> GetEmployeesFiltered(string query)
-        {
-
-            ListRequest req = new ListRequest();
-
-            req.QueryStringParams.Add("_departmentId", "0");
-            req.QueryStringParams.Add("_branchId", "0");
-            req.StartAt = "1";
-            req.Size = "20";
-            req.Filter = query;
-            req.QueryStringParams.Add("_includeInactive", "true");
-            req.QueryStringParams.Add("_sortBy", "firstName");
-
-
-
-            ListResponse<Employee> response = _employeeService.GetAll<Employee>(req);
-            return response.Items;
-        }
 
 
         /// <summary>
@@ -396,9 +275,9 @@ namespace AionHR.Web.UI.Forms
 
             //Reset all values of the relative object
             BasicInfoTab.Reset();
-
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            DeactivatePassword(true);
+            string timeZone = Session["TimeZone"] as string;
+
             this.EditRecordWindow.Show();
         }
 
@@ -415,19 +294,20 @@ namespace AionHR.Web.UI.Forms
 
             //in this test will take a list of News
             ListRequest request = new ListRequest();
+
             request.Filter = "";
-            ListResponse<UserInfo> branches = _systemService.ChildGetAll<UserInfo>(request);
-            if (!branches.Success)
+            ListResponse<DayType> dayTypes = _timeAttendanceService.ChildGetAll<DayType>(request);
+            if (!dayTypes.Success)
                 return;
-            this.Store1.DataSource = branches.Items;
-            e.Total = branches.Count;
+            this.Store1.DataSource = dayTypes.Items;
+            e.Total = dayTypes.Count;
 
             this.Store1.DataBind();
         }
 
 
 
-        [DirectMethod]
+
         protected void SaveNewRecord(object sender, DirectEventArgs e)
         {
 
@@ -436,13 +316,11 @@ namespace AionHR.Web.UI.Forms
             string id = e.ExtraParams["id"];
 
             string obj = e.ExtraParams["values"];
-            UserInfo b = JsonConvert.DeserializeObject<UserInfo>(obj);
+            DayType b = JsonConvert.DeserializeObject<DayType>(obj);
 
             b.recordId = id;
             // Define the object to add or edit as null
-            if (employeeId.SelectedItem != null)
-                b.employeeId = employeeId.SelectedItem.Value;
-            
+
             if (string.IsNullOrEmpty(id))
             {
 
@@ -450,24 +328,13 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    PostRequest<UserInfo> request = new PostRequest<UserInfo>();
-                    b.password = "123";
+                    PostRequest<DayType> request = new PostRequest<DayType>();
                     request.entity = b;
-                    PostResponse<UserInfo> r = _systemService.ChildAddOrUpdate<UserInfo>(request);
-                    if (!r.Success)
-                    //check if the insert failed
-                    {
-                        //Show an error saving...
-                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
-                        return;
-                    }
+                    PostResponse<DayType> r = _timeAttendanceService.ChildAddOrUpdate<DayType>(request);
                     b.recordId = r.recordId;
-                    AuthenticateRequest req = new AuthenticateRequest();
-                    req.UserName = b.email;
-                    PasswordRecoveryResponse response = _systemService.RequestPasswordRecovery(req);
-                    if (!response.Success)
+
                     //check if the insert failed
+                    if (!r.Success)//it maybe be another condition
                     {
                         //Show an error saving...
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
@@ -487,7 +354,7 @@ namespace AionHR.Web.UI.Forms
                             Icon = Icon.Information,
                             Html = Resources.Common.RecordSavingSucc
                         });
-                       
+
                         this.EditRecordWindow.Close();
                         RowSelectionModel sm = this.GridPanel1.GetSelectionModel() as RowSelectionModel;
                         sm.DeselectAll();
@@ -513,13 +380,10 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                    PostRequest<UserInfo> request = new PostRequest<UserInfo>();
-
-                  
-                    
+                    PostRequest<DayType> request = new PostRequest<DayType>();
                     request.entity = b;
-                    PostResponse<UserInfo> r = _systemService.ChildAddOrUpdate<UserInfo>(request);                   //Step 1 Selecting the object or building up the object for update purpose
-                   
+                    PostResponse<DayType> r = _timeAttendanceService.ChildAddOrUpdate<DayType>(request);                      //Step 1 Selecting the object or building up the object for update purpose
+
                     //Step 2 : saving to store
 
                     //Step 3 :  Check if request fails
@@ -535,9 +399,7 @@ namespace AionHR.Web.UI.Forms
 
                         ModelProxy record = this.Store1.GetById(index);
                         BasicInfoTab.UpdateRecord(record);
-                        record.Set("fullName", b.fullName);
-
-                        record.Commit();    
+                        record.Commit();
                         Notification.Show(new NotificationConfig
                         {
                             Title = Resources.Common.Notification,
@@ -561,7 +423,7 @@ namespace AionHR.Web.UI.Forms
         [DirectMethod]
         public string CheckSession()
         {
-            if (!_systemService.SessionHelper.CheckUserLoggedIn())
+            if (!_timeAttendanceService.SessionHelper.CheckUserLoggedIn())
             {
                 return "0";
             }
@@ -576,7 +438,7 @@ namespace AionHR.Web.UI.Forms
         [DirectMethod]
         public void StoreTimeZone(string z)
         {
-            Session["TimeZone"] = z;
+            Session.Add("TimeZone", z);
         }
     }
 }

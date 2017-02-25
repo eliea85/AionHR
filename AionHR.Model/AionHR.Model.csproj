@@ -57,6 +57,7 @@
     <Compile Include="TimeAttendance\Check.cs" />
     <Compile Include="TimeAttendance\DayType.cs" />
     <Compile Include="TimeAttendance\Geofence.cs" />
+    <Compile Include="TimeAttendance\ITimeAttendanceRepository.cs" />
     <Compile Include="TimeAttendance\Router.cs" />
     <Compile Include="Company\Cases\Case.cs" />
     <Compile Include="Company\Cases\CaseComment.cs" />

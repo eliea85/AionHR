@@ -49,12 +49,12 @@ namespace AionHR.Web.UI.Forms
 
         }
         BoundedComboBox parents;
-            BoundedComboBox supervisors;
+        BoundedComboBox supervisors;
         protected void Page_Load(object sender, EventArgs e)
         {
-         
 
-            
+
+
 
             if (!X.IsAjaxRequest && !IsPostBack)
             {
@@ -132,17 +132,23 @@ namespace AionHR.Web.UI.Forms
                     RecordResponse<Department> response = _branchService.ChildGetRecord<Department>(r);
 
                     //Step 2 : call setvalues with the retrieved object
-                    this.BasicInfoTab.SetValues(response.result);
+
 
                     if (response.result.supervisorId.HasValue)
                     {
-                       // supervisorStore.DataSource=GetEmployeeByID(response.result.supervisorId.ToString());
-                        
-                       // supervisorStore.DataBind();
-                        //supervisorId.Select(0);
-                        supervisorId.SetValue(response.result.svFullName);// = 1;// SetValue(response.result.supervisorId);
+
+                        supervisorId.GetStore().Add(new object[]
+                           {
+                                new
+                                {
+                                    recordId = response.result.supervisorId,
+                                    fullName =response.result.svFullName
+                                }
+                           });
+                        supervisorId.SetValue(response.result.supervisorId);
+                     
                     }
-                   
+                    this.BasicInfoTab.SetValues(response.result);
                     // InitCombos(response.result);
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
@@ -184,14 +190,14 @@ namespace AionHR.Web.UI.Forms
             BasicInfoTab.Items.Add(supervisors);
             if (dept != null)
             {
-                
+
                 parents.Select(dept.parentId);
                 supervisors.Select(dept.supervisorId);
             }
             BasicInfoTab.UpdateLayout();
             BasicInfoTab.UpdateContent();
-            
-            
+
+
         }
 
         /// <summary>
@@ -235,10 +241,10 @@ namespace AionHR.Web.UI.Forms
             StoreRequestParameters prms = new StoreRequestParameters(extraParams);
 
 
-            
+
             List<Department> data;
             ListRequest req = new ListRequest();
-            
+
             ListResponse<Department> response = _branchService.ChildGetAll<Department>(req);
             data = response.Items;
             return new
@@ -250,13 +256,13 @@ namespace AionHR.Web.UI.Forms
         [DirectMethod]
         public object FillSupervisor(string action, Dictionary<string, object> extraParams)
         {
-            
-               StoreRequestParameters prms = new StoreRequestParameters(extraParams);
+
+            StoreRequestParameters prms = new StoreRequestParameters(extraParams);
 
 
 
             List<Employee> data = GetEmployeesFiltered(prms.Query);
-            
+
             //  return new
             // {
             return data;
@@ -279,7 +285,7 @@ namespace AionHR.Web.UI.Forms
         }
         private List<Employee> GetEmployeesFiltered(string query)
         {
-           
+
             ListRequest req = new ListRequest();
 
             req.QueryStringParams.Add("_departmentId", "0");
@@ -291,7 +297,7 @@ namespace AionHR.Web.UI.Forms
             req.QueryStringParams.Add("_sortBy", "firstName");
 
 
-            
+
             ListResponse<Employee> response = _employeeService.GetAll<Employee>(req);
             return response.Items;
         }
@@ -377,7 +383,7 @@ namespace AionHR.Web.UI.Forms
             //Reset all values of the relative object
             BasicInfoTab.Reset();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            
+
             this.EditRecordWindow.Show();
         }
 
@@ -416,11 +422,11 @@ namespace AionHR.Web.UI.Forms
 
             string obj = e.ExtraParams["values"];
             Department b = JsonConvert.DeserializeObject<Department>(obj);
-            
+
             b.recordId = id;
             // Define the object to add or edit as null
-            if(supervisorId.SelectedItem!= null)
-            b.svFullName = supervisorId.SelectedItem.Text;
+            if (supervisorId.SelectedItem != null)
+                b.svFullName = supervisorId.SelectedItem.Text;
             if (parentId.SelectedItem != null)
                 b.parentName = parentId.SelectedItem.Text;
             if (string.IsNullOrEmpty(id))
@@ -533,10 +539,10 @@ namespace AionHR.Web.UI.Forms
             }
             else return "1";
         }
-        
+
         protected void BasicInfoTab_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         [DirectMethod]

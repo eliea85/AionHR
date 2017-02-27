@@ -38,13 +38,13 @@ var attachRender = function () {
 //});
 function addEmployee() {
     
-    var sundayGrid = App.sundayGrid,
-        store = sundayGrid.getStore();
+    var breaksGrid = App.breaksGrid,
+        store = breaksGrid.getStore();
     
-    sundayGrid.editingPlugin.cancelEdit();
+    breaksGrid.editingPlugin.cancelEdit();
 
     store.getSorters().removeAll();
-    sundayGrid.getView().headerCt.setSortState(); // To update columns sort UI
+    breaksGrid.getView().headerCt.setSortState(); // To update columns sort UI
     
     store.insert(0, {
         name: 'new break',
@@ -54,55 +54,56 @@ function addEmployee() {
        
     });
 
-    sundayGrid.editingPlugin.startEdit(0, 0);
+    breaksGrid.editingPlugin.startEdit(0, 0);
 }
-function addEmployeeMonday() {
+function addBreak() {
 
-    var mondayGrid = App.mondayGrid,
-        store = mondayGrid.getStore();
+    var periodsGrid = App.periodsGrid,
+        store = periodsGrid.getStore();
 
-    mondayGrid.editingPlugin.cancelEdit();
+    periodsGrid.editingPlugin.cancelEdit();
 
     store.getSorters().removeAll();
-    mondayGrid.getView().headerCt.setSortState(); // To update columns sort UI
+    periodsGrid.getView().headerCt.setSortState(); // To update columns sort UI
 
     store.insert(0, {
         name: 'new break',
-        start: '9:00',
-        end: '10:00',
+        start:null,
+        end:null,
         isBenifit: false
 
     });
 
-    mondayGrid.editingPlugin.startEdit(0, 0);
+    periodsGrid.editingPlugin.startEdit(0, 0);
 }
 
+function removeBreak() {
+
+    var periodsGrid = App.periodsGrid,
+        sm = periodsGrid.getSelectionModel(),
+        store = periodsGrid.getStore();
+
+    periodsGrid.editingPlugin.cancelEdit();
+    store.remove(sm.getSelection());
+
+    if (store.getCount() > 0) {
+        sm.select(0);
+    }
+}
 function removeEmployee() {
     
-    var sundayGrid = App.sundayGrid,
-        sm = sundayGrid.getSelectionModel(),
-        store = sundayGrid.getStore();
+    var breaksGrid = App.breaksGrid,
+        sm = breaksGrid.getSelectionModel(),
+        store = breaksGrid.getStore();
 
-    sundayGrid.editingPlugin.cancelEdit();
+    breaksGrid.editingPlugin.cancelEdit();
     store.remove(sm.getSelection());
 
     if (store.getCount() > 0) {
         sm.select(0);
     }
 }
-function removeEmployeeMonday() {
 
-    var mondayGrid = App.mondayGrid,
-        sm = mondayGrid.getSelectionModel(),
-        store = mondayGrid.getStore();
-
-    mondayGrid.editingPlugin.cancelEdit();
-    store.remove(sm.getSelection());
-
-    if (store.getCount() > 0) {
-        sm.select(0);
-    }
-}
 function getTimeZone()
 {
    
@@ -140,7 +141,7 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
         //the ajax call is allowed
         return true;
     }
-    if (columnId == "ColName")
+    if (columnId == "ColName" || columnId=="colDetails"|| columnId=="colDayName")
         return true;
 
 
@@ -168,3 +169,17 @@ var enterKeyPressSearchHandler = function (el, event) {
         App.Store1.reload();
     }
 };
+function getDay(dow)
+{
+  
+    switch(dow)
+    {
+        case 1: return "sunday";
+        case 2: return "mmonday";
+        case 3: return "tuesday";
+        case 4: return "wednesday";
+        case 5: return "thursday";
+        case 6: return "friday";
+        case 7: return "saturday";
+    }
+}

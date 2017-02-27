@@ -32,7 +32,7 @@ namespace AionHR.Repository.WebService.Repositories
             ChildAddOrUpdateLookup.Add(typeof(AttendanceScheduleDay), "setSD");
             ChildAddOrUpdateLookup.Add(typeof(AttendanceBreak[]), "arrSB");
 
-            ChildDeleteLookup.Add(typeof(AttendanceBreak), "delSB");
+            ChildDeleteLookup.Add(typeof(AttendanceBreak), "detSB");
 
 
 

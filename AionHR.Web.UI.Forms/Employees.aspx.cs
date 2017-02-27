@@ -28,18 +28,23 @@ namespace AionHR.Web.UI.Forms
         [DirectMethod]
         public object BindData(string action, Dictionary<string, object> extraParams)
         {
-            
-                
+
+
             StoreRequestParameters prms = new StoreRequestParameters(extraParams);
 
             int total;
-            ListRequest req = new ListRequest();
+            EmployeeListRequest req = new EmployeeListRequest();
             req.Size = prms.Limit.ToString();
             req.StartAt = prms.Start.ToString();
-            req.QueryStringParams.Add("_departmentId", "0");
-            req.QueryStringParams.Add("_branchId", "0");
-            req.QueryStringParams.Add("_includeInactive", "true");
-            req.QueryStringParams.Add("_sortBy", "firstName");
+            
+            req.DepartmentId = "0";
+            req.BranchId = "0";
+            req.IncludeIsInactive = true;
+            req.SortBy = "firstName";
+
+            req.StartAt = "1";
+            req.Size = "20";
+          
             req.Filter = "";
             ListResponse<Employee> response = null;// _employeeService.GetAll<Employee>(req);
             var data = response.Items;

@@ -183,4 +183,10 @@
   <data name="MondayTab" xml:space="preserve">
     <value>Monday</value>
   </data>
+  <data name="DayBreaksForm" xml:space="preserve">
+    <value>Breaks of Day</value>
+  </data>
+  <data name="FieldDow" xml:space="preserve">
+    <value>Day Of Week</value>
+  </data>
 </root>

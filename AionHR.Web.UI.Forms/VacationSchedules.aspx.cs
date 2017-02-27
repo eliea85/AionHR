@@ -132,8 +132,8 @@ namespace AionHR.Web.UI.Forms
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
 
-                    ListRequest req = new ListRequest();
-                    req.QueryStringParams.Add("_vsId", r.RecordID);
+                    VacationPeriodsListRequest req = new VacationPeriodsListRequest();
+                    req.VacationScheduleId = r.RecordID;
                     ListResponse<VacationSchedulePeriod> periods = _branchService.ChildGetAll<VacationSchedulePeriod>(req);
                     periodsGrid.Store[0].DataSource = periods.Items;
                     periodsGrid.Store[0].DataBind();
@@ -258,17 +258,17 @@ namespace AionHR.Web.UI.Forms
         }
         private List<Employee> GetEmployeesFiltered(string query)
         {
+            
 
-            ListRequest req = new ListRequest();
+            EmployeeListRequest req = new EmployeeListRequest();
+            req.DepartmentId = "0";
+            req.BranchId = "0";
+            req.IncludeIsInactive = true;
+            req.SortBy = "firstName";
 
-            req.QueryStringParams.Add("_departmentId", "0");
-            req.QueryStringParams.Add("_branchId", "0");
             req.StartAt = "1";
             req.Size = "20";
             req.Filter = query;
-            req.QueryStringParams.Add("_includeInactive", "true");
-            req.QueryStringParams.Add("_sortBy", "firstName");
-
 
 
             ListResponse<Employee> response = _employeeService.GetAll<Employee>(req);

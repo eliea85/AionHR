@@ -242,15 +242,15 @@ namespace AionHR.Web.UI.Forms
 
 
             List<Employee> data;
-            ListRequest req = new ListRequest();
+            EmployeeListRequest req = new EmployeeListRequest();
+            req.DepartmentId = "0";
+            req.BranchId = "0";
+            req.IncludeIsInactive = true;
+            req.SortBy = "firstName";
 
-            req.QueryStringParams.Add("_departmentId", "0");
-            req.QueryStringParams.Add("_branchId", "0");
             req.StartAt = "1";
             req.Size = "20";
-            req.Filter = prms.Query;
-            req.QueryStringParams.Add("_includeInactive", "true");
-            req.QueryStringParams.Add("_sortBy", "firstName");
+            req.Filter = prms.Query ;
 
 
             req.Filter = prms.Query;

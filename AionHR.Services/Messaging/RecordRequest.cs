@@ -19,7 +19,9 @@ namespace AionHR.Services.Messaging
         /// parameter list shipped with the web request
         /// </summary>
         public Dictionary<string, string> parameters;
-        public Dictionary<string, string> QueryStringParams = new Dictionary<string, string>();
+
+
+        
         /// <summary>
         /// parameter list shipped with the web request
         /// </summary>
@@ -31,10 +33,7 @@ namespace AionHR.Services.Messaging
                 parameters = new Dictionary<string, string>();
                 if (!string.IsNullOrEmpty(RecordID))
                     parameters.Add("_recordId", RecordID);
-                foreach (var item in QueryStringParams)
-                {
-                    parameters.Add(item.Key, item.Value);
-                }
+             
                 return parameters;
             }
         }

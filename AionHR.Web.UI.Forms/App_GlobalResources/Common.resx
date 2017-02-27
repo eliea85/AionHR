@@ -393,4 +393,28 @@
   <data name="DayTypes" xml:space="preserve">
     <value>Day Types</value>
   </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="DayFriday" xml:space="preserve">
+    <value>DayFriday</value>
+  </data>
+  <data name="DayMonday" xml:space="preserve">
+    <value>DayMonday</value>
+  </data>
+  <data name="DaySaturday" xml:space="preserve">
+    <value>DaySaturday</value>
+  </data>
+  <data name="DaySunday" xml:space="preserve">
+    <value>DaySunday</value>
+  </data>
+  <data name="DayThursday" xml:space="preserve">
+    <value>DayThursday</value>
+  </data>
+  <data name="DayTuesday" xml:space="preserve">
+    <value>DayTuesday</value>
+  </data>
+  <data name="DayWednesday" xml:space="preserve">
+    <value>DayWednesday</value>
+  </data>
 </root>

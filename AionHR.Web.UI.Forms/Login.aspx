@@ -103,7 +103,7 @@
                                 </RemoteValidation>
                             <Listeners>
                                 
-                                <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-tick'); " />
+                                <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-tick');this.setIndicatorIconCls('icon-tick'); " />
                                 <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); " />
                             </Listeners>
 

@@ -151,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        internal static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Page.
         /// </summary>
         internal static string BeforePageText {
@@ -295,11 +304,74 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DayFriday.
+        /// </summary>
+        internal static string DayFriday {
+            get {
+                return ResourceManager.GetString("DayFriday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DayMonday.
+        /// </summary>
+        internal static string DayMonday {
+            get {
+                return ResourceManager.GetString("DayMonday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DaySaturday.
+        /// </summary>
+        internal static string DaySaturday {
+            get {
+                return ResourceManager.GetString("DaySaturday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DaySunday.
+        /// </summary>
+        internal static string DaySunday {
+            get {
+                return ResourceManager.GetString("DaySunday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DayThursday.
+        /// </summary>
+        internal static string DayThursday {
+            get {
+                return ResourceManager.GetString("DayThursday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DayTuesday.
+        /// </summary>
+        internal static string DayTuesday {
+            get {
+                return ResourceManager.GetString("DayTuesday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Day Types.
         /// </summary>
         internal static string DayTypes {
             get {
                 return ResourceManager.GetString("DayTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DayWednesday.
+        /// </summary>
+        internal static string DayWednesday {
+            get {
+                return ResourceManager.GetString("DayWednesday", resourceCulture);
             }
         }
         

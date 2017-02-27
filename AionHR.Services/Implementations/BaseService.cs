@@ -65,7 +65,7 @@ namespace AionHR.Services.Implementations
                 
                 
             }
-
+            response.count = webResponse.count;
             response.Items = webResponse.GetAll();
 
             return response;
@@ -116,9 +116,9 @@ namespace AionHR.Services.Implementations
             response = CreateServiceResponse<ListResponse<TChild>>(webResponse);
             if (!response.Success)
             {
-                response.Message = webResponse.message;
+                response.Message = string.IsNullOrEmpty(webResponse.message) ? "" : webResponse.message;
             }
-
+            response.count = webResponse.count;
             response.Items = webResponse.list.ToList();
             return response;
 

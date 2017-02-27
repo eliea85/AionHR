@@ -300,7 +300,7 @@ namespace AionHR.Web.UI.Forms
             if (!nationalities.Success)
                 return;
             this.Store1.DataSource = nationalities.Items;
-            e.Total = nationalities.Count;
+            e.Total = nationalities.count;
 
             this.Store1.DataBind();
         }

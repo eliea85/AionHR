@@ -123,6 +123,9 @@
     <Content Include="Login.aspx" />
     <Content Include="Nationalities.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\Sponsors.js" />
+    <Content Include="Sponsors.aspx" />
+    <Content Include="WorkingCalendars.aspx" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -162,6 +165,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\Sponsors.aspx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sponsors.aspx.resx</DependentUpon>
     </Compile>
     <Compile Include="BootStrapper.cs" />
     <Compile Include="BoundedComboBox.cs" />
@@ -210,6 +218,9 @@
     <Compile Include="Employees.aspx.cs">
       <DependentUpon>Employees.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Employees.aspx.designer.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
     </Compile>
     <Compile Include="ForgotAccount.aspx.cs">
       <DependentUpon>ForgotAccount.aspx</DependentUpon>
@@ -278,6 +289,13 @@
     <Compile Include="Schedules.aspx.designer.cs">
       <DependentUpon>Schedules.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Sponsors.aspx.cs">
+      <DependentUpon>Sponsors.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sponsors.aspx.designer.cs">
+      <DependentUpon>Sponsors.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StoreFactory.cs" />
     <Compile Include="StructureMapServiceLocator.cs" />
     <Compile Include="Test.aspx.cs">
@@ -302,6 +320,13 @@
     </Compile>
     <Compile Include="VacationSchedules.aspx.designer.cs">
       <DependentUpon>VacationSchedules.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WorkingCalendars.aspx.cs">
+      <DependentUpon>WorkingCalendars.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WorkingCalendars.aspx.designer.cs">
+      <DependentUpon>WorkingCalendars.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -382,6 +407,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Schedules.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\WorkingCalendars.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Employees.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Sponsors.aspx.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Sponsors.aspx.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

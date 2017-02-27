@@ -565,6 +565,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Female.
+        /// </summary>
+        internal static string Female {
+            get {
+                return ResourceManager.GetString("Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter.
         /// </summary>
         internal static string Filter {
@@ -642,6 +651,15 @@ namespace Resources {
         internal static string Loading {
             get {
                 return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Male.
+        /// </summary>
+        internal static string Male {
+            get {
+                return ResourceManager.GetString("Male", resourceCulture);
             }
         }
         
@@ -808,6 +826,69 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Christian.
+        /// </summary>
+        internal static string Religion0 {
+            get {
+                return ResourceManager.GetString("Religion0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Muslim.
+        /// </summary>
+        internal static string Religion1 {
+            get {
+                return ResourceManager.GetString("Religion1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jew.
+        /// </summary>
+        internal static string Religion2 {
+            get {
+                return ResourceManager.GetString("Religion2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Budha.
+        /// </summary>
+        internal static string Religion3 {
+            get {
+                return ResourceManager.GetString("Religion3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seikh.
+        /// </summary>
+        internal static string Religion4 {
+            get {
+                return ResourceManager.GetString("Religion4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hindu.
+        /// </summary>
+        internal static string Religion5 {
+            get {
+                return ResourceManager.GetString("Religion5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        internal static string Religion6 {
+            get {
+                return ResourceManager.GetString("Religion6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reports.
         /// </summary>
         internal static string Reports {
@@ -889,6 +970,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sponsors.
+        /// </summary>
+        internal static string Sponsors {
+            get {
+                return ResourceManager.GetString("Sponsors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to System Settings.
         /// </summary>
         internal static string SystemSettings {
@@ -948,6 +1038,15 @@ namespace Resources {
         internal static string VacationSchedules {
             get {
                 return ResourceManager.GetString("VacationSchedules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calendars.
+        /// </summary>
+        internal static string WorkingCalendars {
+            get {
+                return ResourceManager.GetString("WorkingCalendars", resourceCulture);
             }
         }
         

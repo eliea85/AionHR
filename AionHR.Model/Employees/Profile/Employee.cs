@@ -22,9 +22,9 @@ namespace AionHR.Model.Employees.Profile
         public int? nationalityId { get; set; }
         public string countryName { get; set; }
         public string mobile { get; set; }
-        public string homeEmail { get; set; }
+        public string homeMail { get; set; }
 
-        public string workEmail { get; set; }
+        public string workMail { get; set; }
         public int? positionId { get; set; }
         public string positionName { get; set; }
         public int? departmentId { get; set; }
@@ -32,7 +32,7 @@ namespace AionHR.Model.Employees.Profile
         public string mainDept { get; set; }
         public int? branchId { get; set; }
         public string branchName { get; set; }
-        public string picturePath { get; set; }
+        
         public DateTime? hireDate { get; set; }
         public int? lastDayWork { get; set; }
         public DateTime? contractEndingDate { get; set; }

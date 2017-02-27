@@ -109,3 +109,38 @@ public class DeleteDayBreaksRequest : RequestBase
         }
     }
 }
+public class CalendarYearsListRequest : ListRequest
+{
+    public string CalendarId { get; set; }
+    
+    public Dictionary<string, string> parameters;
+    public override Dictionary<string, string> Parameters
+    {
+        get
+        {
+            parameters = new Dictionary<string, string>();
+            parameters.Add("_caId", CalendarId);
+            
+            return parameters;
+        }
+    }
+}
+
+public class CalendarDayListRequest : ListRequest
+{
+    public string CalendarId { get; set; }
+    public string Year { get; set; }
+
+    public Dictionary<string, string> parameters;
+    public override Dictionary<string, string> Parameters
+    {
+        get
+        {
+            parameters = new Dictionary<string, string>();
+            parameters.Add("_caId", CalendarId);
+            parameters.Add("_year", Year);
+
+            return parameters;
+        }
+    }
+}

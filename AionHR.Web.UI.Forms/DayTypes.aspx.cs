@@ -300,7 +300,7 @@ namespace AionHR.Web.UI.Forms
             if (!dayTypes.Success)
                 return;
             this.Store1.DataSource = dayTypes.Items;
-            e.Total = dayTypes.Count;
+            e.Total = dayTypes.count;
 
             this.Store1.DataBind();
         }

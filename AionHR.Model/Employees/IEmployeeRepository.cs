@@ -13,6 +13,6 @@ namespace AionHR.Model.Employees
     /// </summary>
    public interface IEmployeeRepository:IRepository<Employee,string>,ICommonRepository
     {
-
+        
     }
 }

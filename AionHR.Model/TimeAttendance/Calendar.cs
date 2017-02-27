@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model.Attendance
 {
-    public class Calendar:ModelBase
+    public class WorkingCalendar:ModelBase
     {
         public string name { get; set; }
     }

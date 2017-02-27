@@ -299,7 +299,7 @@ namespace AionHR.Web.UI.Forms
             if (!currencies.Success)
                 return;
             this.Store1.DataSource = currencies.Items;
-            e.Total = currencies.Count;
+            e.Total = currencies.count;
 
             this.Store1.DataBind();
         }

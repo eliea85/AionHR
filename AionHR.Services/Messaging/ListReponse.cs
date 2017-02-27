@@ -10,6 +10,6 @@ namespace AionHR.Services.Messaging
     {
         public List<T> Items { get; set;}
 
-        public int Count { get; set; }
+        public int count { get; set; }
     }
 }

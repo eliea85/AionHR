@@ -139,7 +139,7 @@
                         </Listeners>
 
                     </ext:TreePanel>
-                    <ext:Panel
+                <%--    <ext:Panel
                         ID="pnlAlignMiddle"
                         runat="server"
                         Title="Buttons"
@@ -182,7 +182,7 @@
 
                     <ext:Panel runat="server" Title="Settings" />
                     <ext:Panel runat="server" Title="Even More Stuff" />
-                    <ext:Panel runat="server" Title="My Stuff" />
+                    <ext:Panel runat="server" Title="My Stuff" />--%>
 
 
                 </Items>

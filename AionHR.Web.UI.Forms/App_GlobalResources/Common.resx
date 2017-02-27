@@ -417,4 +417,37 @@
   <data name="DayWednesday" xml:space="preserve">
     <value>DayWednesday</value>
   </data>
+  <data name="Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="Religion0" xml:space="preserve">
+    <value>Christian</value>
+  </data>
+  <data name="Religion1" xml:space="preserve">
+    <value>Muslim</value>
+  </data>
+  <data name="Religion2" xml:space="preserve">
+    <value>Jew</value>
+  </data>
+  <data name="Religion3" xml:space="preserve">
+    <value>Budha</value>
+  </data>
+  <data name="Religion4" xml:space="preserve">
+    <value>Seikh</value>
+  </data>
+  <data name="Religion5" xml:space="preserve">
+    <value>Hindu</value>
+  </data>
+  <data name="Religion6" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Sponsors" xml:space="preserve">
+    <value>Sponsors</value>
+  </data>
+  <data name="WorkingCalendars" xml:space="preserve">
+    <value>Calendars</value>
+  </data>
 </root>

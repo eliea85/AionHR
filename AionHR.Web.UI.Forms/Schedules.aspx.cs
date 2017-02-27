@@ -431,7 +431,7 @@ namespace AionHR.Web.UI.Forms
             if (!branches.Success)
                 return;
             this.Store1.DataSource = branches.Items;
-            e.Total = branches.Count;
+            e.Total = branches.count;
 
             this.Store1.DataBind();
         }

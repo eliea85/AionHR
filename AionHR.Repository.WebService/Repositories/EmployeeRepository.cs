@@ -23,7 +23,14 @@ namespace AionHR.Repository.WebService.Repositories
 
             base.ServiceURL = ApplicationSettingsFactory.GetApplicationSettings().BaseURL + serviceName;
             GetAllMethodName = "qryES";
+            AddOrUpdateMethodName = "setEM";
             GetRecordMethodName = "getEM1";
+
+            ChildGetAllLookup.Add(typeof(Sponsor), "qrySP");
+
+            ChildGetLookup.Add(typeof(Sponsor), "getSP");
+
+            ChildAddOrUpdateLookup.Add(typeof(Sponsor), "setSP"); 
         }
 
 

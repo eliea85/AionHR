@@ -20,9 +20,9 @@ namespace AionHR.Infrastructure.WebService
     {
 
         public HTTPWebServiceRequest()
-        {            
+        {
             QueryStringParams = new Dictionary<string, string>();
-            Headers = new Dictionary<string, string>();           
+            Headers = new Dictionary<string, string>();
             Resolver = new CustomResolver();
         }
 
@@ -47,11 +47,11 @@ namespace AionHR.Infrastructure.WebService
         /// the additional headers
         /// </summary>
         public Dictionary<string, string> Headers { get; set; }
-        
+
         /// <summary>
         /// the resolver userd to resolve json 
         /// </summary>
-        public CustomResolver Resolver{ get; set; }
+        public CustomResolver Resolver { get; set; }
 
         /// <summary>
         /// the requested url
@@ -82,7 +82,7 @@ namespace AionHR.Infrastructure.WebService
             }
         }
 
-     
+
         /// <summary>
         /// Build an error message for logging
         /// </summary>
@@ -92,8 +92,8 @@ namespace AionHR.Infrastructure.WebService
             string message = string.Empty;
             string AccountID = string.Empty;
             string UserID = string.Empty;
-            Headers.TryGetValue("AccountId",out AccountID);
-            Headers.TryGetValue("UserId",out UserID);
+            Headers.TryGetValue("AccountId", out AccountID);
+            Headers.TryGetValue("UserId", out UserID);
             message += " : | " + AccountID + " | " + UserID;
             return message;
         }
@@ -110,7 +110,7 @@ namespace AionHR.Infrastructure.WebService
                 WebRequest req = HttpWebRequest.Create(RequestUrl);
                 req.Method = MethodType;
 
-              
+
                 if (Headers.Count > 0)
                     BuildHeaders(req);
 
@@ -131,7 +131,7 @@ namespace AionHR.Infrastructure.WebService
             }
             catch (Exception ex)
             {
-                
+
                 string exception = BuildLogMessage() + " : " + ex.Message;
                 LoggingFactory.GetLogger().Log(exception);
                 return default(T);
@@ -140,7 +140,7 @@ namespace AionHR.Infrastructure.WebService
 
         public PostWebServiceResponse PostAsync<T>(T item)
         {
-            PostWebServiceResponse response = new PostWebServiceResponse() ;
+            PostWebServiceResponse response = new PostWebServiceResponse();
             try
             {
                 WebRequest req = HttpWebRequest.Create(RequestUrl);
@@ -168,8 +168,8 @@ namespace AionHR.Infrastructure.WebService
                 {
                     settings.ContractResolver = Resolver;
                 }
-                
-                
+
+
                 response = JsonConvert.DeserializeObject<PostWebServiceResponse>(x, settings);
                 return response;
             }
@@ -183,28 +183,56 @@ namespace AionHR.Infrastructure.WebService
             }
         }
 
-       public PostWebServiceResponse PostFormDataAsync<T>(T item)
+        public PostWebServiceResponse PostAsyncWithBinary<T>(T item, string fileName, byte[] buffer)
         {
             PostWebServiceResponse response = new PostWebServiceResponse();
             try
             {
-                HttpClient client = new HttpClient();
-                
-                WebRequest req = HttpWebRequest.Create(RequestUrl);
-                req.Method = MethodType;
-                req.ContentType = "multipart/form-data";
+                //  HttpClient client = new HttpClient();
 
+                //Defining the unique boundary
+                string boundary = "----" + DateTime.Now.Ticks.ToString("x");
+                WebRequest req = HttpWebRequest.Create(RequestUrl);
                 if (Headers.Count > 0)
                     BuildHeaders(req);
-                Body = JsonConvert.SerializeObject(item);
+                req.Method = MethodType;//Post
+                req.ContentType = "multipart/form-data; boundary=" + boundary;
                 Stream stream = req.GetRequestStream();
-                StreamWriter wr = new StreamWriter(stream);
-                wr.Write(Body);
-                wr.Flush();
-                wr.Close();
-                stream.Close();
-                //req.ContentLength = stream.Length;
 
+
+                //Body need to be extended for each part of the request 
+                // Add header for JSON part
+
+                Body += "\r\n--" + boundary + "\r\n";
+                Body += "Content-Disposition: form-data; name='entity'\r\n";//entity is relative to the object we r sending
+                Body += "Content-Type: application/json\r\n\r\n";//defining the content type for this part of request
+                // Add document object data in JSON
+                Body += JsonConvert.SerializeObject(item);
+
+
+                //Now we need to add the header for the binary part inside the body
+
+                Body += "\r\n--" + boundary + "\r\n"; ;
+                Body += "Content-Disposition: form-data; name='file'; filename='" + fileName + "'\r\n";
+                Body += "Content-Type: binary/octet-stream\r\n\r\n";
+
+
+                //Now we need  to write the headers to the request 
+                // Add header data to request
+                byte[] data = System.Text.Encoding.ASCII.GetBytes(Body);
+                stream.Write(data, 0, data.Length);
+
+                // Add binary file to request
+                stream.Write(buffer, 0, buffer.Length);
+
+                // Finalizing by adding the footer of the request or what we call trailer
+                byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+                stream.Write(trailer, 0, trailer.Length);
+                stream.Close();
+
+
+                // Do the post and get the response.
+            
                 var r = req.GetResponse();
                 Stream s = r.GetResponseStream();
                 StreamReader reader = new StreamReader(s, true);

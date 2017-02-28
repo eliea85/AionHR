@@ -9,12 +9,13 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
+    <script type="text/javascript" src="Scripts/moment.js"></script>
     <script type="text/javascript" src="Scripts/Schedules.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
 
 
 </head>
-<body style="background: url(Images/bg.png) repeat;" onload="getTimeZone();">
+<body style="background: url(Images/bg.png) repeat;">
     <form id="Form1" runat="server">
         <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="1200000" />
 
@@ -176,7 +177,7 @@
                                 Resizable="false">
                                 <Renderer Fn="attachRender" />
                             </ext:Column>
-                             <ext:Column runat="server"
+                            <ext:Column runat="server"
                                 ID="colDetails"
                                 Text="<%$ Resources:Common, Attach %>"
                                 Hideable="false"
@@ -187,7 +188,7 @@
                                 MenuDisabled="true"
                                 Resizable="false">
                                 <Renderer Fn="attachRender" />
-                                 </ext:Column>
+                            </ext:Column>
 
 
                         </Columns>
@@ -279,7 +280,7 @@
                     </SelectionModel>
                 </ext:GridPanel>
 
-                <ext:GridPanel runat="server"  Title="<%$ Resources: WindowTitle %>" Header="true" ID="scheduleDays">
+                <ext:GridPanel runat="server" Title="<%$ Resources: WindowTitle %>" Header="true" ID="scheduleDays">
                     <DirectEvents>
                         <CellClick OnEvent="PoPuP">
                             <EventMask ShowMask="true" />
@@ -291,8 +292,7 @@
                         </CellClick>
                     </DirectEvents>
                     <Store>
-                        <ext:Store ID="scheduleStore"  runat="server"
-                            >
+                        <ext:Store ID="scheduleStore" runat="server">
                             <Model>
                                 <ext:Model runat="server" IDProperty="dow">
                                     <Fields>
@@ -319,13 +319,12 @@
                                         </Click>
                                     </DirectEvents>
                                 </ext:Button>
-                               <ext:Button ID="Button5" runat="server" Text="<%$ Resources:Common , Add %>" Icon="Add">
+                                <ext:Button ID="Button5" runat="server" Text="<%$ Resources:Common , Add %>" Icon="Add">
                                     <Listeners>
                                         <Click Handler="CheckSession();" />
                                     </Listeners>
                                     <DirectEvents>
                                         <Click OnEvent="AddNewDay">
-                                            
                                         </Click>
                                     </DirectEvents>
                                 </ext:Button>
@@ -335,12 +334,12 @@
 
                     </TopBar>
                     <ColumnModel>
-                        <Columns >
-                            <ext:Column runat="server" ID="colDayName" Text="<%$ Resources: FieldDow %>" DataIndex="dow" >
+                        <Columns>
+                            <ext:Column runat="server" ID="colDayName" Text="<%$ Resources: FieldDow %>" DataIndex="dow">
                                 <Renderer Handler="return getDay(record.data['dow']);" />
                             </ext:Column>
-                            <ext:Column runat="server" ID="firstInCol" Text="<%$ Resources: FieldFirstIn %>"  DataIndex="firstIn" />
-                            <ext:Column runat="server" ID="lastOutCol" Text="<%$ Resources: FieldLastOut %>"  DataIndex="lastOut" />
+                            <ext:Column runat="server" ID="firstInCol" Text="<%$ Resources: FieldFirstIn %>" DataIndex="firstIn" />
+                            <ext:Column runat="server" ID="lastOutCol" Text="<%$ Resources: FieldLastOut %>" DataIndex="lastOut" />
                         </Columns>
                     </ColumnModel>
                 </ext:GridPanel>
@@ -388,7 +387,7 @@
                             </Items>
 
                         </ext:FormPanel>
-                       
+
 
                     </Items>
                 </ext:TabPanel>
@@ -405,7 +404,7 @@
                             <ExtraParams>
                                 <ext:Parameter Name="id" Value="#{recordId}.getValue()" Mode="Raw" />
                                 <ext:Parameter Name="schedule" Value="#{BasicInfoTab}.getForm().getValues()" Mode="Raw" Encode="true" />
-                                
+
                             </ExtraParams>
                         </Click>
                     </DirectEvents>
@@ -418,7 +417,7 @@
             </Buttons>
         </ext:Window>
 
-         <ext:Window
+        <ext:Window
             ID="EditDayBreaks"
             runat="server"
             Icon="PageEdit"
@@ -432,37 +431,36 @@
 
             <Items>
                 <ext:TabPanel ID="TabPanel1" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
-                   
+
                     <Items>
                         <ext:FormPanel
                             ID="dayBreaksForm"
                             runat="server"
                             Title="<%$ Resources:DayBreaksForm %>"
                             Icon="ApplicationSideList"
-                            DefaultAnchor="100%" 
+                            DefaultAnchor="100%"
                             BodyPadding="5">
                             <Items>
                                 <ext:TextField ID="fieldScId" Hidden="true" runat="server" Disabled="true" DataIndex="scId" />
                                 <ext:TextField ID="fieldDow" Hidden="true" runat="server" Disabled="true" DataIndex="dow" />
-                                <ext:TextField ID="firstIn" FieldLabel="First In" runat="server"  DataIndex="firstIn" />
+                                <ext:TextField ID="firstIn" FieldLabel="First In" runat="server" DataIndex="firstIn" />
                                 <ext:TextField ID="lastOut" runat="server" FieldLabel="Last Out" DataIndex="lastOut" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                               <ext:GridPanel
-                                    ID="periodsGrid"  
+                                <ext:GridPanel
+                                    ID="periodsGrid"
                                     runat="server"
                                     Width="600"
                                     Height="400" Layout="FitLayout"
-                                    Frame="true" TitleCollapse="true"
-                                    >
+                                    Frame="true" TitleCollapse="true">
                                     <Store>
                                         <ext:Store ID="periodsStore" runat="server">
-                                           <Model>
+                                            <Model>
                                                 <ext:Model runat="server" Name="Employee" IDProperty="dow">
                                                     <Fields>
-                                                        <ext:ModelField Name="name"  />
-                                                        <ext:ModelField Name="start"/>
-                                                        <ext:ModelField Name="end" />
+                                                        <ext:ModelField Name="name" />
+                                                        <ext:ModelField Name="start"  />
+                                                        <ext:ModelField Name="end"  />
                                                         <ext:ModelField Name="isBenefitOT" />
-                                                       
+
                                                     </Fields>
                                                 </ext:Model>
                                             </Model>
@@ -495,62 +493,55 @@
                                     <ColumnModel>
                                         <Columns>
                                             <ext:RowNumbererColumn runat="server" Width="25" />
-                                            <ext:Column  runat="server"
+                                            <ext:Column runat="server"
                                                 Text="Name"
                                                 DataIndex="name"
-                                                
                                                 Align="Center">
                                                 <Editor>
-                                                    <ext:TextField ID="breakNameField" AllowBlank="false" runat="server"  />
-                                                </Editor>
-                                                </ext:Column>
-                                            <ext:Column
-                                                runat="server"
-                                                Text="From"
-                                                DataIndex="start"
-                                                
-                                                Align="Center">
-                                                <Editor>
-                                                     <%-- Vtype="numberrange"
-                                                        EndNumberField="toField"--%>
-                                                    <ext:TimeField
-                                                        runat="server"
-                                                         ID="fromField"
-                                                        AllowBlank="false"
-                                                       
-                                                        
-                                                         />
+                                                    <ext:TextField ID="breakNameField" AllowBlank="false" runat="server" />
                                                 </Editor>
                                             </ext:Column>
                                             <ext:Column
                                                 runat="server"
-                                                Text="To"
-                                                DataIndex="end" 
-                                                
+                                                Text="From"
+                                                DataIndex="start"
                                                 Align="Center">
                                                 <Editor>
-                                                       <%--   StartNumberField="fromField"
+                                                    <%-- Vtype="numberrange"
+                                                        EndNumberField="toField"--%>
+                                                    <ext:TimeField
+                                                        runat="server"
+                                                        ID="fromField"
+                                                        AllowBlank="false"/>
+                                                </Editor>
+                                                <Renderer Handler="if(isValidDate(record.data['start'])){var dt = new Date(record.data['start']); var dtString = moment(dt).format('HH:mm'); return dtString; } else return record.data['start']; ">
+                                                </Renderer>
+                                            </ext:Column>
+                                            <ext:Column
+                                                runat="server"
+                                                Text="To"
+                                                DataIndex="end"
+                                                Align="Center">
+                                                <Editor>
+                                                    <%--   StartNumberField="fromField"
                                                          Vtype="numberrange"--%>
                                                     <ext:TimeField
                                                         runat="server"
                                                         ID="toField"
-                                                        AllowBlank="false"
-                                                        
-                                                  
-                                                         />
+                                                        AllowBlank="false" />
                                                 </Editor>
-                                                
+                                                   <Renderer Handler="if(isValidDate(record.data['end'])){var dt = new Date(record.data['end']); var dtString = moment(dt).format('HH:mm'); return dtString;} else return record.data['end']; "/>
                                             </ext:Column>
                                             <ext:CheckColumn runat="server" Text="Is Benifit of Over Time" DataIndex="isBenefitOT">
                                                 <Editor>
                                                     <ext:Checkbox runat="server"
                                                         ID="isBenifitCheckbox" />
-                                                        
+
                                                 </Editor>
                                             </ext:CheckColumn>
-                                            
-                                           
-                                            
+
+
+
                                         </Columns>
                                     </ColumnModel>
                                     <Listeners>
@@ -560,7 +551,7 @@
                             </Items>
 
                         </ext:FormPanel>
-                        
+
 
                     </Items>
                 </ext:TabPanel>
@@ -578,7 +569,7 @@
                                 <ext:Parameter Name="scId" Value="#{fieldScId}.getValue()" Mode="Raw" />
                                 <ext:Parameter Name="dow" Value="#{fieldDow}.getValue()" Mode="Raw" />
                                 <ext:Parameter Name="day" Value="#{dayBreaksForm}.getForm().getValues()" Mode="Raw" Encode="true" />
-                                <ext:Parameter Name="breaks" Value="Ext.encode(#{periodsGrid}.getRowsValues({selectedOnly : false}))" Mode="Raw"  />
+                                <ext:Parameter Name="breaks" Value="Ext.encode(#{periodsGrid}.getRowsValues({selectedOnly : false}))" Mode="Raw" />
                             </ExtraParams>
                         </Click>
                     </DirectEvents>

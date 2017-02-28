@@ -144,3 +144,30 @@ public class CalendarDayListRequest : ListRequest
         }
     }
 }
+
+
+public class CalendarDayRecordRequest:RecordRequest
+{
+    public string CaId { get; set; }
+    
+    public string year { get; set; }
+
+    public string DayId { get; set; }
+
+   
+
+    public override Dictionary<string, string> Parameters
+    {
+
+        get
+        {
+            parameters = new Dictionary<string, string>();
+            parameters.Add("_caId",CaId );
+            parameters.Add("_dayId", DayId);
+            parameters.Add("_year", year);
+         
+
+            return parameters;
+        }
+    }
+}

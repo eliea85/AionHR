@@ -138,14 +138,14 @@ namespace AionHR.Web.UI.Forms
                     //panelRecordDetails.ActiveIndex = 0;
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
-                    RecordResponse<AttendanceSchedule> response = _branchService.ChildGetRecord<AttendanceSchedule>(r);
+                    RecordResponse<WorkingCalendar> response = _branchService.ChildGetRecord<WorkingCalendar>(r);
 
                     ////Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     //_systemService.SessionHelper.Set("currentSchedule",r.RecordID);
                     //// InitCombos(response.result);
-                    this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
-                    this.EditRecordWindow.Show();
+                    this.EditCalendarWindow.Title = Resources.Common.EditWindowsTitle;
+                    this.EditCalendarWindow.Show();
                     //FillDow("1");
 
 
@@ -154,12 +154,12 @@ namespace AionHR.Web.UI.Forms
                 case "colDayName":
                     ////Step 1 : get the object from the Web Service 
                     //panelRecordDetails.ActiveIndex = 0;
-                    FillDow(id.ToString());
+                    //FillDow(id.ToString());
 
                     //_systemService.SessionHelper.Set("currentSchedule",r.RecordID);
                     //// InitCombos(response.result);
-                    this.EditDayBreaks.Title = Resources.Common.EditWindowsTitle;
-                    this.EditDayBreaks.Show();
+                    //this.EditDayBreaks.Title = Resources.Common.EditWindowsTitle;
+                    //this.EditDayBreaks.Show();
                     //FillDow("1");
 
 
@@ -168,21 +168,37 @@ namespace AionHR.Web.UI.Forms
                 case "colDetails":
                     //panelRecordDetails.ActiveIndex = 0;
 
-                    AttendanceScheduleDayListRequest daysRequest = new AttendanceScheduleDayListRequest();
-                    daysRequest.ScheduleId = id.ToString();
+                    CalendarYearsListRequest yearsRequest = new CalendarYearsListRequest();
+                    yearsRequest.CalendarId = id.ToString();
 
-                    ListResponse<AttendanceScheduleDay> daysResponse = _branchService.ChildGetAll<AttendanceScheduleDay>(daysRequest);
+                    ListResponse<CalendarYear> daysResponse = _branchService.ChildGetAll<CalendarYear>(yearsRequest);
 
 
                     //Step 2 : call setvalues with the retrieved object
-                    scheduleDays.Store[0].DataSource = daysResponse.Items;
-                    scheduleDays.Store[0].DataBind();
-                    CurrentSchedule.Text = id.ToString();
-                    _systemService.SessionHelper.Set("currentSchedule", id.ToString());
+                    calendarYears.Store[0].DataSource = daysResponse.Items;
+                    calendarYears.Store[0].DataBind();
+                    CurrentCalendar.Text = id.ToString();
+                    
                     Viewport1.ActiveIndex = 1;
                     // InitCombos(response.result);
                     break;
+                case "colYearDetails":
+                    //panelRecordDetails.ActiveIndex = 0;
 
+                    //CalendarYearsListRequest yearsRequest = new CalendarYearsListRequest();
+                    //yearsRequest.CalendarId = id.ToString();
+
+                    //ListResponse<CalendarYear> daysResponse = _branchService.ChildGetAll<CalendarYear>(yearsRequest);
+
+
+                    ////Step 2 : call setvalues with the retrieved object
+                    //calendarYears.Store[0].DataSource = daysResponse.Items;
+                    //calendarYears.Store[0].DataBind();
+                    CurrentYear.Text = id.ToString();
+                    LoadDays();
+                    Viewport1.ActiveIndex = 2;
+                    // InitCombos(response.result);
+                    break;
 
                 case "colDelete":
                     X.Msg.Confirm(Resources.Common.Confirmation, Resources.Common.DeleteOneRecord, new MessageBoxButtonsConfig
@@ -210,6 +226,25 @@ namespace AionHR.Web.UI.Forms
                     break;
             }
 
+
+        }
+
+        private void LoadDays()
+        {
+            CalendarDayListRequest req = new CalendarDayListRequest();
+            List<DayType> dtypes = LoadDayTypes();
+
+            req.CalendarId = CurrentCalendar.Text;
+            req.Year = CurrentYear.Text;
+            ListResponse<Model.Attendance.CalendarDay> daysResponse = _branchService.ChildGetAll<Model.Attendance.CalendarDay>(req);
+            foreach (var item in daysResponse.Items)
+            {
+                string dayId = item.dayId;
+                string Month = dayId[4].ToString() + dayId[5].ToString();
+                string Day = dayId[6].ToString() + dayId[7].ToString();
+                tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].InnerHtml = "<span class='hidden'>" + Month + Day + "</span> <span class='scheduleid'>" + item.scId.ToString() + "</span><span class='daytypeid'>" + item.dayTypeId.ToString() + "</span>";
+                tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].Attributes.Add("style", "background-color:" + dtypes.Where(x => x.recordId == item.dayTypeId.ToString()).First().color) ;
+            }
 
         }
 
@@ -398,19 +433,19 @@ namespace AionHR.Web.UI.Forms
             //Reset all values of the relative object
             BasicInfoTab.Reset();
 
-            this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
+            this.EditCalendarWindow.Title = Resources.Common.AddNewRecord;
 
-            this.EditRecordWindow.Show();
+            this.EditCalendarWindow.Show();
         }
         protected void AddNewDay(object sender, DirectEventArgs e)
         {
 
             //Reset all values of the relative object
-            dayBreaksForm.Reset();
+            calendarYearForm.Reset();
 
-            this.EditDayBreaks.Title = Resources.Common.AddNewRecord;
+            this.EditYearDetails.Title = Resources.Common.AddNewRecord;
 
-            this.EditDayBreaks.Show();
+            this.EditYearDetails.Show();
         }
 
         protected void Store1_RefreshData(object sender, StoreReadDataEventArgs e)
@@ -446,9 +481,9 @@ namespace AionHR.Web.UI.Forms
             //Getting the id to check if it is an Add or an edit as they are managed within the same form.
             string id = e.ExtraParams["id"];
 
-            string obj = e.ExtraParams["schedule"];
-            AttendanceSchedule b = JsonConvert.DeserializeObject<AttendanceSchedule>(obj);
-            string pers = e.ExtraParams["periods"];
+            string obj = e.ExtraParams["calendar"];
+            WorkingCalendar b = JsonConvert.DeserializeObject<WorkingCalendar>(obj);
+            
             b.recordId = id;
             // Define the object to add or edit as null
 
@@ -459,9 +494,9 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    PostRequest<AttendanceSchedule> request = new PostRequest<AttendanceSchedule>();
+                    PostRequest<WorkingCalendar> request = new PostRequest<WorkingCalendar>();
                     request.entity = b;
-                    PostResponse<AttendanceSchedule> r = _branchService.ChildAddOrUpdate<AttendanceSchedule>(request);
+                    PostResponse<WorkingCalendar> r = _branchService.ChildAddOrUpdate<WorkingCalendar>(request);
                     b.recordId = r.recordId;
 
                     //check if the insert failed
@@ -489,7 +524,7 @@ namespace AionHR.Web.UI.Forms
                             Html = Resources.Common.RecordSavingSucc
                         });
 
-                        this.EditRecordWindow.Close();
+                        this.EditCalendarWindow.Close();
                         RowSelectionModel sm = this.GridPanel1.GetSelectionModel() as RowSelectionModel;
                         sm.DeselectAll();
                         sm.Select(b.recordId.ToString());
@@ -514,9 +549,9 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                    PostRequest<AttendanceSchedule> modifyHeaderRequest = new PostRequest<AttendanceSchedule>();
+                    PostRequest<WorkingCalendar> modifyHeaderRequest = new PostRequest<WorkingCalendar>();
                     modifyHeaderRequest.entity = b;
-                    PostResponse<AttendanceSchedule> r = _branchService.ChildAddOrUpdate<AttendanceSchedule>(modifyHeaderRequest);                   //Step 1 Selecting the object or building up the object for update purpose
+                    PostResponse<WorkingCalendar> r = _branchService.ChildAddOrUpdate<WorkingCalendar>(modifyHeaderRequest);                   //Step 1 Selecting the object or building up the object for update purpose
                     if (!r.Success)//it maybe another check
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
@@ -541,7 +576,7 @@ namespace AionHR.Web.UI.Forms
                             Icon = Icon.Information,
                             Html = Resources.Common.RecordUpdatedSucc
                         });
-                        this.EditRecordWindow.Close();
+                        this.EditCalendarWindow.Close();
 
 
                     }
@@ -615,124 +650,137 @@ namespace AionHR.Web.UI.Forms
             //sundayGrid.DataBind();
         }
 
-        private void FillDow(string dow)
+        protected void SaveCalendarYear(object sender, DirectEventArgs e)
         {
-            AttendanceScheduleDayRecordRequest dayRequest = new AttendanceScheduleDayRecordRequest();
+            string caId = e.ExtraParams["caId"];
 
-            dayRequest.ScheduleId = CurrentSchedule.Text;// _systemService.SessionHelper.Get("currentSchedule").ToString();
-            dayRequest.DayOfWeek = dow;
-            RecordResponse<AttendanceScheduleDay> dayResponse = _branchService.ChildGetRecord<AttendanceScheduleDay>(dayRequest);
+            string year = e.ExtraParams["year"];
+            CalendarYear b = JsonConvert.DeserializeObject<CalendarYear>(year);
 
-            ////Step 2 : call setvalues with the retrieved object
-            this.dayBreaksForm.SetValues(dayResponse.result);
+            b.caId = Convert.ToInt32(CurrentCalendar.Text);
 
-            AttendanceDayBreaksListRequest breaksRequest = new AttendanceDayBreaksListRequest();
-            breaksRequest.ScheduleId = dayRequest.ScheduleId;
-            breaksRequest.DayOfWeek = dow;
-            ListResponse<AttendanceBreak> breaks = _branchService.ChildGetAll<AttendanceBreak>(breaksRequest);
-            periodsGrid.Store[0].DataSource = breaks.Items;
-            periodsGrid.Store[0].DataBind();
-        }
+            PostRequest<CalendarYear> request = new PostRequest<CalendarYear>();
+            request.entity = b;
+            PostResponse<CalendarYear> response = _branchService.ChildAddOrUpdate<CalendarYear>(request);
 
-        protected void SaveDayBreaks(object sender, DirectEventArgs e)
-        {
-
-
-            //Getting the id to check if it is an Add or an edit as they are managed within the same form.
-
-            string dayJ = e.ExtraParams["day"];
-            string breaksJ = e.ExtraParams["breaks"];
-
-            AttendanceScheduleDay day = JsonConvert.DeserializeObject<AttendanceScheduleDay>(dayJ);
-            List<AttendanceBreak> breaks = JsonConvert.DeserializeObject<List<AttendanceBreak>>(breaksJ);
-            day.scId = Convert.ToInt32(e.ExtraParams["scId"]);
-            day.dow = Convert.ToInt16(e.ExtraParams["dow"]);
-
-            // Define the object to add or edit as null
-
-
-
-            try
-            {
-                //getting the id of the record
-                PostRequest<AttendanceScheduleDay> modifyHeaderRequest = new PostRequest<AttendanceScheduleDay>();
-                modifyHeaderRequest.entity = day;
-                PostResponse<AttendanceScheduleDay> r = _branchService.ChildAddOrUpdate<AttendanceScheduleDay>(modifyHeaderRequest);                   //Step 1 Selecting the object or building up the object for update purpose
-                if (!r.Success)//it maybe another check
-                {
-                    X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
-                    return;
-                }
-
-                DeleteDayBreaksRequest deleteBreaksRequest = new DeleteDayBreaksRequest();
-                deleteBreaksRequest.ScheduleId = day.scId.ToString();
-                deleteBreaksRequest.Dow = day.dow.ToString();
-                StatusResponse deleteResponse = _branchService.ChildDelete<AttendanceBreak>(deleteBreaksRequest);
-                if (!deleteResponse.Success)//it maybe another check
-                {
-                    X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
-                    return;
-                }
-                bool result = AddBreaksList(day.scId.ToString(), day.dow.ToString(), breaks);
-                if (!result)//it maybe another check
-                {
-                    X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
-                    return;
-                }
-
-                else
-                {
-
-
-                    ModelProxy record = this.Store1.GetById(day.dow);
-                    BasicInfoTab.UpdateRecord(record);
-
-                    record.Commit();
-                    Notification.Show(new NotificationConfig
-                    {
-                        Title = Resources.Common.Notification,
-                        Icon = Icon.Information,
-                        Html = Resources.Common.RecordUpdatedSucc
-                    });
-                    this.EditRecordWindow.Close();
-
-
-                }
-
-            }
-            catch (Exception ex)
+            if (!response.Success)//it maybe another check
             {
                 X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
                 X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                return;
             }
 
+            //Step 2 : saving to store
 
+
+            else
+            {
+
+
+                this.scheduleStore.Insert(0, b);
+
+                //Display successful notification
+                Notification.Show(new NotificationConfig
+                {
+                    Title = Resources.Common.Notification,
+                    Icon = Icon.Information,
+                    Html = Resources.Common.RecordSavingSucc
+                });
+
+                this.EditYearDetails.Close();
+                RowSelectionModel sm = this.calendarYears.GetSelectionModel() as RowSelectionModel;
+                sm.DeselectAll();
+                sm.Select(b.year.ToString());
+
+
+            }
 
         }
 
-        private bool AddBreaksList(string scheduleIdString, string dow, List<AttendanceBreak> breaks)
+
+        protected void SaveDayConfig(object sender, DirectEventArgs e)
         {
-            short i = 1;
-            int scheduleId = Convert.ToInt32(scheduleIdString);
-            foreach (var period in breaks)
+           
+
+            string day = e.ExtraParams["day"];
+            Model.Attendance.CalendarDay b = JsonConvert.DeserializeObject<Model.Attendance.CalendarDay>(day);
+
+            b.caId = Convert.ToInt32(CurrentCalendar.Text);
+            b.dayId = CurrentYear.Text + dayId.Text;
+            b.year = Convert.ToInt32(CurrentYear.Text);
+            
+            PostRequest<Model.Attendance.CalendarDay> request = new PostRequest<Model.Attendance.CalendarDay>();
+            request.entity = b;
+            PostResponse<Model.Attendance.CalendarDay> response = _branchService.ChildAddOrUpdate<Model.Attendance.CalendarDay>(request);
+
+            if (!response.Success)//it maybe another check
             {
-                period.seqNo = i++;
-                period.scId = scheduleId;
+                X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                return;
+            }
+
+            //Step 2 : saving to store
+
+
+            else
+            {
+
+
+                this.scheduleStore.Insert(0, b);
+
+                //Display successful notification
+                Notification.Show(new NotificationConfig
+                {
+                    Title = Resources.Common.Notification,
+                    Icon = Icon.Information,
+                    Html = Resources.Common.RecordSavingSucc
+                });
+
+                this.EditYearDetails.Close();
+                RowSelectionModel sm = this.calendarYears.GetSelectionModel() as RowSelectionModel;
+                sm.DeselectAll();
+                sm.Select(b.year.ToString());
 
 
             }
-            PostRequest<AttendanceBreak[]> periodRequest = new PostRequest<AttendanceBreak[]>();
-            periodRequest.entity = breaks.ToArray();
-            PostResponse<AttendanceBreak[]> response = _branchService.ChildAddOrUpdate<AttendanceBreak[]>(periodRequest);
-            if (!response.Success)
-            {
-                return false;
-            }
-            return true;
+
         }
 
+        [DirectMethod]
+        public void OpenDayConfig(string day)
+        {
+            dayId.Text = CurrentYear.Text + day;
+
+            CalendarDayRecordRequest request = new CalendarDayRecordRequest();
+            request.CaId = CurrentCalendar.Text;
+            request.DayId = dayId.Text;
+            request.year = CurrentYear.Text;
+            RecordResponse<Model.Attendance.CalendarDay> dayObj = _branchService.ChildGetRecord<Model.Attendance.CalendarDay>(request);
+            dayConfigWindow.Show();
+            schedulesStore.DataSource = LoadSchedules();
+            schedulesStore.DataBind();
+            dayTypesStore.DataSource = LoadDayTypes();
+            dayTypesStore.DataBind();
+
+            if (dayObj.Success)
+            {
+                scheduleId.Select(dayObj.result.scId);
+                dayTypeId.Select(dayObj.result.dayTypeId);
+            }
+        }
+
+        private List<AttendanceSchedule> LoadSchedules()
+        {
+            ListRequest req = new ListRequest();
+            ListResponse<AttendanceSchedule> schedules = _branchService.ChildGetAll<AttendanceSchedule>(req);
+            return schedules.Items;
+        }
+        private List<DayType> LoadDayTypes()
+        {
+            ListRequest req = new ListRequest();
+            ListResponse<DayType> schedules = _branchService.ChildGetAll<DayType>(req);
+            return schedules.Items;
+        }
     }
 }

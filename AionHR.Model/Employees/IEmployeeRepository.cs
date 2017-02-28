@@ -1,4 +1,5 @@
 ﻿using AionHR.Infrastructure.Domain;
+using AionHR.Infrastructure.WebService;
 using AionHR.Model.Employees.Profile;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,6 @@ namespace AionHR.Model.Employees
     /// </summary>
    public interface IEmployeeRepository:IRepository<Employee,string>,ICommonRepository
     {
-        
+        PostWebServiceResponse AddOrUpdateEmployeeWithImage(Employee emp, string imgName, byte[] imgDate,Dictionary<string,string> headers = null);
     }
 }

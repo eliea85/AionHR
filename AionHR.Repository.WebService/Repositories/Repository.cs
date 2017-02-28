@@ -25,7 +25,6 @@ namespace AionHR.Repository.WebService.Repositories
         protected Dictionary<Type, string> ChildAddOrUpdateLookup;
         protected Dictionary<Type, string> ChildDeleteLookup;
 
-
         public Repository()
         {
             ChildGetLookup = new Dictionary<Type, string>();

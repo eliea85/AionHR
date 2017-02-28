@@ -480,9 +480,20 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                    PostRequest<Employee> request = new PostRequest<Employee>();
-                    request.entity = b;
-                    PostResponse<Employee> r = _employeeService.AddOrUpdate<Employee>(request);                      //Step 1 Selecting the object or building up the object for update purpose
+                    EmployeeAddOrUpdateRequest request = new EmployeeAddOrUpdateRequest();
+                    
+                    byte[] fileData = null;
+                    using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
+                    {
+                        fileData = binaryReader.ReadBytes(picturePath.PostedFile.ContentLength);
+                    }
+
+
+                    request.empData = b;
+                    request.fileName = picturePath.PostedFile.FileName;
+                    request.imageData = fileData;
+
+                    PostResponse<Employee> r = _employeeService.AddOrUpdateEmployeeWithPhoto(request);                   
 
                     //Step 2 : saving to store
 

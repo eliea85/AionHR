@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AionHR.Infrastructure.Domain;
 using AionHR.Infrastructure.Configuration;
 using AionHR.Model.Employees.Profile;
+using AionHR.Infrastructure.WebService;
 
 namespace AionHR.Repository.WebService.Repositories
 {
@@ -18,6 +19,7 @@ namespace AionHR.Repository.WebService.Repositories
         /// the service name
         /// </summary>
         private string serviceName = "EP.asmx/";
+        private string addOrRemoveEmployeeWithImageMethodName = "setEM";
         public EmployeeRepository()
         {
 
@@ -33,9 +35,15 @@ namespace AionHR.Repository.WebService.Repositories
             ChildAddOrUpdateLookup.Add(typeof(Sponsor), "setSP"); 
         }
 
+        public PostWebServiceResponse AddOrUpdateEmployeeWithImage(Employee emp, string imgName, byte[] imgDate,Dictionary<string,string> headers = null)
+        {
+            var request = new HTTPWebServiceRequest();
+            request.MethodType = "POST";
+            request.URL = ServiceURL + addOrRemoveEmployeeWithImageMethodName;
+            if (headers != null)
+                request.Headers = headers;
 
-
-
-
+            return request.PostAsyncWithBinary<Employee>(emp, imgName, imgDate);
+        }
     }
 }

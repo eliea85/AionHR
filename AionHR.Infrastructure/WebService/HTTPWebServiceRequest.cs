@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -203,13 +204,23 @@ namespace AionHR.Infrastructure.WebService
                 //Body need to be extended for each part of the request 
                 // Add header for JSON part
 
-                Body += "\r\n--" + boundary + "\r\n";
-                Body += "Content-Disposition: form-data; name='entity'\r\n";//entity is relative to the object we r sending
-                Body += "Content-Type: application/json\r\n\r\n";//defining the content type for this part of request
+                Body += "multipart / form - data; boundary = " + boundary;
+               // Body += "Content-Disposition: form-data; name='entity'\r\n";//entity is relative to the object we r sending
+                //Body += "Content-Type: application/json\r\n\r\n";//defining the content type for this part of request
                 // Add document object data in JSON
-                Body += JsonConvert.SerializeObject(item);
+                //Body += JsonConvert.SerializeObject(item);
 
-
+                foreach (PropertyInfo prop in typeof(T).GetProperties())
+                {
+                    object val = prop.GetValue(item, null);
+                    if (val == null)
+                        continue;
+                    Body += string.Format("Content-Disposition: form-data; name=\"{0}\"", prop.Name);
+                    Body += "\r\n--" + boundary + "\r\n"; ;
+                    
+                    Body += string.Format(prop.GetValue(item, null).ToString());
+                    Body += "\r\n--" + boundary + "\r\n"; ;
+                }
                 //Now we need to add the header for the binary part inside the body
 
                 Body += "\r\n--" + boundary + "\r\n"; ;

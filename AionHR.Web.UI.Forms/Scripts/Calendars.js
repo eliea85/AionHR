@@ -123,10 +123,10 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
     CheckSession();
 
     
- 
+    
     var t = e.getTarget(),
         columnId = this.columns[columnIndex].id; // Get column id
-
+    
     if (t.className == "imgEdit" && columnId == "colEdit") {
         //the ajax call is allowed
 
@@ -141,8 +141,12 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
         //the ajax call is allowed
         return true;
     }
-    if (columnId == "ColName" || columnId=="colDetails"|| columnId=="colDayName" )
+    if (columnId == "ColName" || columnId == "colDetails" || columnId == "colDayName" || columnId == "colYearDetails")
+    {
+        
         return true;
+    }
+        
 
 
     //forbidden
@@ -183,3 +187,13 @@ function getDay(dow)
         case 7: return "saturday";
     }
 }
+$(document).ready(function () {
+    $("#tbCalendar td").click(function () {
+        
+        if (!$(this).hasClass('notexist')) {
+            currentDayId = $(this).find('.hidden:first').html();
+
+            App.direct.OpenDayConfig(currentDayId);
+        }
+    });
+});

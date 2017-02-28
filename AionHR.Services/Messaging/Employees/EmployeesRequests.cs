@@ -1,4 +1,5 @@
-﻿using AionHR.Services.Messaging;
+﻿using AionHR.Model.Employees.Profile;
+using AionHR.Services.Messaging;
 using System.Collections.Generic;
 
 public class EmployeeListRequest:ListRequest
@@ -33,4 +34,12 @@ public class EmployeeListRequest:ListRequest
             return parameters;
         }
     }
+}
+
+public class EmployeeAddOrUpdateRequest
+{
+    public Employee empData { get; set; }
+    public byte[] imageData { get; set; }
+
+    public string fileName { get; set; }
 }

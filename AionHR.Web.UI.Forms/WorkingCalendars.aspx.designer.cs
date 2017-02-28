@@ -3847,13 +3847,13 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.FormPanel dayConfigForm;
         
         /// <summary>
-        /// scheduleId control.
+        /// scId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.ComboBox scheduleId;
+        protected global::Ext.Net.ComboBox scId;
         
         /// <summary>
         /// schedulesStore control.

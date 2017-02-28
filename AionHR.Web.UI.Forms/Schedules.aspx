@@ -459,6 +459,7 @@
                                                         <ext:ModelField Name="name" />
                                                         <ext:ModelField Name="start"  />
                                                         <ext:ModelField Name="end"  />
+                                                         
                                                         <ext:ModelField Name="isBenefitOT" />
 
                                                     </Fields>
@@ -509,13 +510,13 @@
                                                 <Editor>
                                                     <%-- Vtype="numberrange"
                                                         EndNumberField="toField"--%>
-                                                    <ext:TimeField
+                                                    <ext:TextField
                                                         runat="server"
                                                         ID="fromField"
                                                         AllowBlank="false"/>
                                                 </Editor>
-                                                <Renderer Handler="if(isValidDate(record.data['start'])){var dt = new Date(record.data['start']); var dtString = moment(dt).format('HH:mm'); return dtString; } else return record.data['start']; ">
-                                                </Renderer>
+                                                <%--<Renderer Handler="if(isValidDate(record.data['start'])){var dt = new Date(record.data['start']); var dtString = moment(dt).format('HH:mm'); return dtString; } else return record.data['start']; ">--%>
+                                                <%--</Renderer>--%>
                                             </ext:Column>
                                             <ext:Column
                                                 runat="server"
@@ -525,16 +526,16 @@
                                                 <Editor>
                                                     <%--   StartNumberField="fromField"
                                                          Vtype="numberrange"--%>
-                                                    <ext:TimeField
+                                                    <ext:TextField
                                                         runat="server"
                                                         ID="toField"
                                                         AllowBlank="false" />
                                                 </Editor>
-                                                   <Renderer Handler="if(isValidDate(record.data['end'])){var dt = new Date(record.data['end']); var dtString = moment(dt).format('HH:mm'); return dtString;} else return record.data['end']; "/>
+                                                   <%--<Renderer Handler="if(isValidDate(record.data['end'])){var dt = new Date(record.data['end']); var dtString = moment(dt).format('HH:mm'); return dtString;} else return record.data['end']; "/>--%>
                                             </ext:Column>
-                                            <ext:CheckColumn runat="server" Text="Is Benifit of Over Time" DataIndex="isBenefitOT">
+                                            <ext:CheckColumn runat="server" Text="Is Benifit of Over Time" DataIndex="isBenefitOT" >
                                                 <Editor>
-                                                    <ext:Checkbox runat="server"
+                                                    <ext:Checkbox runat="server" SubmitValue="true" InputValue="true"
                                                         ID="isBenifitCheckbox" />
 
                                                 </Editor>

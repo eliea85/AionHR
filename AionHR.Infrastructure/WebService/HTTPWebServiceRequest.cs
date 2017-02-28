@@ -192,7 +192,7 @@ namespace AionHR.Infrastructure.WebService
                 //  HttpClient client = new HttpClient();
 
                 //Defining the unique boundary
-                string boundary = "----" + DateTime.Now.Ticks.ToString("x");
+                string boundary = "----WebKitFormBoundary" + DateTime.Now.Ticks.ToString("x");
                 WebRequest req = HttpWebRequest.Create(RequestUrl);
                 if (Headers.Count > 0)
                     BuildHeaders(req);
@@ -204,26 +204,25 @@ namespace AionHR.Infrastructure.WebService
                 //Body need to be extended for each part of the request 
                 // Add header for JSON part
 
-                Body += "multipart / form - data; boundary = " + boundary;
-               // Body += "Content-Disposition: form-data; name='entity'\r\n";//entity is relative to the object we r sending
+
+                // Body += "Content-Disposition: form-data; name='entity'\r\n";//entity is relative to the object we r sending
                 //Body += "Content-Type: application/json\r\n\r\n";//defining the content type for this part of request
                 // Add document object data in JSON
                 //Body += JsonConvert.SerializeObject(item);
-
+                Body += "\r\n--" + boundary + "\r\n"; ;
                 foreach (PropertyInfo prop in typeof(T).GetProperties())
                 {
                     object val = prop.GetValue(item, null);
                     if (val == null)
                         continue;
-                    Body += string.Format("Content-Disposition: form-data; name=\"{0}\"", prop.Name);
-                    Body += "\r\n--" + boundary + "\r\n"; ;
+                    Body += string.Format("Content-Disposition: form-data; name=\"{0}\"\r\n\r\n", prop.Name);
+                   
                     
                     Body += string.Format(prop.GetValue(item, null).ToString());
                     Body += "\r\n--" + boundary + "\r\n"; ;
                 }
                 //Now we need to add the header for the binary part inside the body
 
-                Body += "\r\n--" + boundary + "\r\n"; ;
                 Body += "Content-Disposition: form-data; name='file'; filename='" + fileName + "'\r\n";
                 Body += "Content-Type: binary/octet-stream\r\n\r\n";
 

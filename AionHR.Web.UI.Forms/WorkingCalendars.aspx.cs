@@ -242,7 +242,7 @@ namespace AionHR.Web.UI.Forms
                 string dayId = item.dayId;
                 string Month = dayId[4].ToString() + dayId[5].ToString();
                 string Day = dayId[6].ToString() + dayId[7].ToString();
-                tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].InnerHtml = "<span class='hidden'>" + Month + Day + "</span> <span class='scheduleid'>" + item.scId.ToString() + "</span><span class='daytypeid'>" + item.dayTypeId.ToString() + "</span>";
+                tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].InnerHtml = "<span >" + Month + Day + "</span>";// <span class='scheduleid'>" + item.scId.ToString() + "</span><span class='daytypeid'>" + item.dayTypeId.ToString() + "</span>";
                 tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].Attributes.Add("style", "background-color:" + dtypes.Where(x => x.recordId == item.dayTypeId.ToString()).First().color) ;
             }
 
@@ -706,7 +706,7 @@ namespace AionHR.Web.UI.Forms
             Model.Attendance.CalendarDay b = JsonConvert.DeserializeObject<Model.Attendance.CalendarDay>(day);
 
             b.caId = Convert.ToInt32(CurrentCalendar.Text);
-            b.dayId = CurrentYear.Text + dayId.Text;
+            b.dayId =  dayId.Text;
             b.year = Convert.ToInt32(CurrentYear.Text);
             
             PostRequest<Model.Attendance.CalendarDay> request = new PostRequest<Model.Attendance.CalendarDay>();
@@ -750,6 +750,9 @@ namespace AionHR.Web.UI.Forms
         [DirectMethod]
         public void OpenDayConfig(string day)
         {
+            scId.Clear();
+            dayTypeId.Clear();
+
             dayId.Text = CurrentYear.Text + day;
 
             CalendarDayRecordRequest request = new CalendarDayRecordRequest();
@@ -763,9 +766,9 @@ namespace AionHR.Web.UI.Forms
             dayTypesStore.DataSource = LoadDayTypes();
             dayTypesStore.DataBind();
 
-            if (dayObj.Success)
+            if (dayObj.result!=null)
             {
-                scheduleId.Select(dayObj.result.scId);
+                scId.Select(dayObj.result.scId);
                 dayTypeId.Select(dayObj.result.dayTypeId);
             }
         }

@@ -631,7 +631,7 @@ namespace AionHR.Web.UI.Forms {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TimeField fromField;
+        protected global::Ext.Net.TextField fromField;
         
         /// <summary>
         /// toField control.
@@ -640,7 +640,7 @@ namespace AionHR.Web.UI.Forms {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TimeField toField;
+        protected global::Ext.Net.TextField toField;
         
         /// <summary>
         /// isBenifitCheckbox control.

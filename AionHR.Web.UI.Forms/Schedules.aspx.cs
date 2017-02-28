@@ -721,7 +721,9 @@ namespace AionHR.Web.UI.Forms
             {
                 period.seqNo = i++;
                 period.scId = scheduleId;
-
+                //Added to sent the time only as string
+                period.start = Convert.ToDateTime(period.start).ToString("HH:mm");
+                period.end = Convert.ToDateTime(period.end).ToString("HH:mm");
 
             }
             PostRequest<AttendanceBreak[]> periodRequest = new PostRequest<AttendanceBreak[]>();

@@ -16,35 +16,35 @@ namespace AionHR.Services.Implementations
     /// </summary>
     public abstract class BaseService
     {
-       
+
         public SessionHelper SessionHelper { get; set; }
         public BaseService(SessionHelper sessionHelper)
         {
             SessionHelper = sessionHelper;
-           
+
         }
-        
-       
-        protected TResponse CreateServiceResponse<TResponse>(BaseWebServiceResponse webResponse) where TResponse :ResponseBase,new()
+
+
+        protected TResponse CreateServiceResponse<TResponse>(BaseWebServiceResponse webResponse) where TResponse : ResponseBase, new()
         {
-            TResponse response =new TResponse();
-            response.Success = webResponse!=null && webResponse.statusId == "1";
+            TResponse response = new TResponse();
+            response.Success = webResponse != null && webResponse.statusId == "1";
             return response;
         }
 
-        protected abstract  dynamic GetRepository();
-      
+        protected abstract dynamic GetRepository();
 
-        public RecordResponse<T> Get<T>(RecordRequest request) 
+
+        public RecordResponse<T> Get<T>(RecordRequest request)
         {
             RecordResponse<T> response;
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
 
-            RecordWebServiceResponse<T> webResponse =GetRepository().GetRecord(headers, queryParams);
+            RecordWebServiceResponse<T> webResponse = GetRepository().GetRecord(headers, queryParams);
             response = CreateServiceResponse<RecordResponse<T>>(webResponse);
-            if(!response.Success)
+            if (!response.Success)
             {
                 response.Message = webResponse.statusId;
             }
@@ -62,8 +62,8 @@ namespace AionHR.Services.Implementations
             var response = CreateServiceResponse<ListResponse<T>>(webResponse);
             if (!response.Success)
             {
-                
-                
+
+
             }
             response.count = webResponse.count;
             response.Items = webResponse.GetAll();
@@ -97,10 +97,10 @@ namespace AionHR.Services.Implementations
         public RecordResponse<TChild> ChildGetRecord<TChild>(RecordRequest request)
         {
             RecordResponse<TChild> response = new RecordResponse<TChild>();
-            var headers =SessionHelper.GetAuthorizationHeadersForUser();
+            var headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams.Add("_recordId", request.RecordID);
-            
+
             var webResponse = GetRepository().ChildGetRecord<TChild>(headers, request.Parameters);
             response = CreateServiceResponse<RecordResponse<TChild>>(webResponse);
             response.result = webResponse.record;
@@ -119,7 +119,8 @@ namespace AionHR.Services.Implementations
                 response.Message = string.IsNullOrEmpty(webResponse.message) ? "" : webResponse.message;
             }
             response.count = webResponse.count;
-            response.Items = webResponse.list.ToList();
+            if (webResponse.list != null)
+                response.Items = webResponse.list.ToList();
             return response;
 
         }

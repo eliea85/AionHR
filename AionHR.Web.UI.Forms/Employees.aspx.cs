@@ -30,7 +30,7 @@ namespace AionHR.Web.UI.Forms
 {
     public partial class Employees : System.Web.UI.Page
     {
-        
+
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
         IEmployeeService _employeeService = ServiceLocator.Current.GetInstance<IEmployeeService>();
         ICompanyStructureService _companyStructureService = ServiceLocator.Current.GetInstance<ICompanyStructureService>();
@@ -65,7 +65,7 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-                FillLiveSearchLabels();
+             
 
 
             }
@@ -113,12 +113,7 @@ namespace AionHR.Web.UI.Forms
 
             }
         }
-        private void FillLiveSearchLabels()
-        {
-            this.LiveSearchToolbar2.SearchText = Resources.Common.LiveSearch;
-            this.LiveSearchToolbar2.RegExpText = Resources.Common.RegularExpression;
-            this.LiveSearchToolbar2.CaseSensitiveText = Resources.Common.CaseSensitive;
-        }
+      
 
 
         protected void PoPuP(object sender, DirectEventArgs e)
@@ -127,7 +122,7 @@ namespace AionHR.Web.UI.Forms
 
             int id = Convert.ToInt32(e.ExtraParams["id"]);
             string type = e.ExtraParams["type"];
-            
+
             switch (type)
             {
                 case "ColName":
@@ -140,7 +135,7 @@ namespace AionHR.Web.UI.Forms
                     this.BasicInfoTab.SetValues(response.result);
                     InitCombos();
                     SelectCombos(response.result);
-                   
+
                     //timeZoneCombo.Select(response.result.timeZone.ToString());
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
@@ -183,30 +178,33 @@ namespace AionHR.Web.UI.Forms
             vsId.Select(result.vsId);
             caId.Select(result.caId);
 
-            gender.Set("gender" + result.gender.ToString(),true);
+            gender.Set("gender" + result.gender.ToString(), true);
+            if (!string.IsNullOrEmpty(result.pictureUrl))
+                imgControl.ImageUrl = result.pictureUrl;
+
         }
         private void InitCombos()
         {
             FillBranch();
-            
+
 
             FillDepartment();
-            
+
 
             FillPosition();
-            
+
 
             FillNationality();
-           
+
 
             FillSponsor();
-            
+
 
             FillVacationSchedule();
-            
+
 
             FillWorkingCalendar();
-            
+
 
 
         }
@@ -331,7 +329,7 @@ namespace AionHR.Web.UI.Forms
             InitCombos();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
 
-           // timeZoneCombo.Select(_systemService.SessionHelper.GetTimeZone());
+            // timeZoneCombo.Select(_systemService.SessionHelper.GetTimeZone());
             this.EditRecordWindow.Show();
         }
 
@@ -347,21 +345,24 @@ namespace AionHR.Web.UI.Forms
             empRequest.IncludeIsInactive = true;
             empRequest.SortBy = "firstName";
             empRequest.Size = e.Limit.ToString();
-            empRequest.StartAt = e.Start.ToString() ;
-            
+            empRequest.StartAt = e.Start.ToString();
+
             ListResponse<Employee> emps = _employeeService.GetAll<Employee>(empRequest);
             e.Total = emps.count;
-            this.Store1.DataSource = emps.Items;
-            this.Store1.DataBind();
+            if (emps.Items != null)
+            {
+                this.Store1.DataSource = emps.Items;
+                this.Store1.DataBind();
+            }
         }
 
         private void FillNationality()
         {
             ListRequest nationalityRequest = new ListRequest();
-            ListResponse < Nationality >  resp= _systemService.ChildGetAll<Nationality>(nationalityRequest);
+            ListResponse<Nationality> resp = _systemService.ChildGetAll<Nationality>(nationalityRequest);
             NationalityStore.DataSource = resp.Items;
             NationalityStore.DataBind();
-            
+
         }
 
         private void FillPosition()
@@ -483,7 +484,7 @@ namespace AionHR.Web.UI.Forms
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
                     EmployeeAddOrUpdateRequest request = new EmployeeAddOrUpdateRequest();
-                    
+
                     byte[] fileData = null;
                     using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
                     {
@@ -495,7 +496,7 @@ namespace AionHR.Web.UI.Forms
                     request.fileName = picturePath.PostedFile.FileName;
                     request.imageData = fileData;
 
-                    PostResponse<Employee> r = _employeeService.AddOrUpdateEmployeeWithPhoto(request);                   
+                    PostResponse<Employee> r = _employeeService.AddOrUpdateEmployeeWithPhoto(request);
 
                     //Step 2 : saving to store
 

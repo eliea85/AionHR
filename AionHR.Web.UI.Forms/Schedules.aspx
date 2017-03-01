@@ -180,7 +180,7 @@
                             </ext:Column>
                             <ext:Column runat="server"
                                 ID="colDetails"
-                                Text="<%$ Resources:Common, Attach %>"
+                                Text="<%$ Resources:EditDaysButton %>"
                                 Hideable="false"
                                 Width="60"
                                 Align="Center"
@@ -200,28 +200,7 @@
                             <Items>
                                 <ext:StatusBar ID="StatusBar1" runat="server" />
                                 <ext:ToolbarFill />
-                                <ext:LiveSearchToolbar ID="LiveSearchToolbar2" runat="server">
-                                    <Items>
-
-
-                                        <ext:Button ID="Button10" runat="server"
-                                            ToolTip="Yellow highlight"
-                                            IconCls="x-yellow-highlight"
-                                            Pressed="true"
-                                            EnableToggle="true"
-                                            ToggleGroup="highlightColor"
-                                            ToggleHandler="function(b, state) {if(state) {this.up('gridpanel').liveSearchPlugin.matchCls = 'x-livesearch-match';}}" />
-
-                                        <ext:Button ID="Button11" runat="server"
-                                            ToolTip="Blue highlight"
-                                            IconCls="x-blue-highlight"
-                                            EnableToggle="true"
-                                            ToggleGroup="highlightColor"
-                                            ToggleHandler="function(b, state) {if(state) {this.up('gridpanel').liveSearchPlugin.matchCls = 'x-blue-livesearch-match';}}" />
-
-                                        <ext:Button ID="Button12" runat="server" Text="<%$ Resources:Common , Refresh %>" Handler="CheckSession();var p = this.up('gridpanel').liveSearchPlugin; p.search(p.value);" />
-                                    </Items>
-                                </ext:LiveSearchToolbar>
+                                
                             </Items>
                         </ext:Toolbar>
 
@@ -266,15 +245,7 @@
                         <ext:GridView ID="GridView1" runat="server" />
                     </View>
 
-                    <Plugins>
-                        <ext:LiveSearchGridPanel ID="LiveSearchGridPanel1" runat="server">
-                            <Listeners>
-                                <RegExpError Handler="#{StatusBar1}.setStatus({text: message, iconCls: 'x-status-error'});" />
-                                <BeforeSearch Handler="#{StatusBar1}.setStatus({text: '', iconCls: ''});" />
-                                <Search Handler="if(count>0){#{StatusBar1}.setStatus({text: count + ' ' + #{textMatch}.value , iconCls: 'x-status-valid'});}" />
-                            </Listeners>
-                        </ext:LiveSearchGridPanel>
-                    </Plugins>
+                    
                     <SelectionModel>
                         <ext:RowSelectionModel ID="rowSelectionModel" runat="server" Mode="Single" StopIDModeInheritance="true" />
                         <%--<ext:CheckboxSelectionModel ID="CheckboxSelectionModel1" runat="server" Mode="Multi" StopIDModeInheritance="true" />--%>
@@ -355,7 +326,7 @@
             Icon="PageEdit"
             Title="<%$ Resources:EditWindowsTitle %>"
             Width="450"
-            Height="330"
+            Height="480"
             AutoShow="false"
             Modal="true"
             Hidden="true"
@@ -474,7 +445,7 @@
                                     <TopBar>
                                         <ext:Toolbar runat="server">
                                             <Items>
-                                                <ext:Button runat="server" Text="Add Break" Icon="UserAdd">
+                                                <ext:Button runat="server" Text="<%$ Resources:BtnAddPeriod %>" Icon="UserAdd">
                                                     <Listeners>
                                                         <Click Fn="addBreak" />
                                                     </Listeners>
@@ -482,7 +453,7 @@
                                                 <ext:Button
                                                     ID="Button2"
                                                     runat="server"
-                                                    Text="Remove Break"
+                                                    Text="<%$ Resources:BtnRemovePeriod %>"
                                                     Icon="UserDelete"
                                                     Disabled="true">
                                                     <Listeners>
@@ -496,7 +467,7 @@
                                         <Columns>
                                             <ext:RowNumbererColumn runat="server" Width="25" />
                                             <ext:Column runat="server"
-                                                Text="Name"
+                                                Text="<%$ Resources:Break %>"
                                                 DataIndex="name"
                                                 Align="Center">
                                                 <Editor>
@@ -505,7 +476,7 @@
                                             </ext:Column>
                                             <ext:Column
                                                 runat="server"
-                                                Text="From"
+                                                Text="<%$ Resources:FieldFrom %>"
                                                 DataIndex="start"
                                                 Align="Center">
                                                 <Editor>
@@ -527,7 +498,7 @@
                                             </ext:Column>
                                             <ext:Column
                                                 runat="server"
-                                                Text="To"
+                                                Text="<%$ Resources:FieldTo %>"
                                                 DataIndex="end"
                                                 Align="Center">
                                                 <Editor>
@@ -549,7 +520,7 @@
                                                 </Editor>
                                                 <%--<Renderer Handler="if(isValidDate(record.data['end'])){var dt = new Date(record.data['end']); var dtString = moment(dt).format('HH:mm'); return dtString;} else return record.data['end']; "/>--%>
                                             </ext:Column>
-                                            <ext:CheckColumn runat="server" Text="Is Benifit of Over Time" DataIndex="isBenefitOT">
+                                            <ext:CheckColumn runat="server" Text="<%$ Resources:FieldIsBenifit %>" DataIndex="isBenefitOT">
                                                 <Editor>
                                                     <ext:Checkbox runat="server"  InputValue="true"
                                                         ID="isBenefitOT" />

@@ -189,28 +189,7 @@
                             <Items>
                                 <ext:StatusBar ID="StatusBar1" runat="server" />
                                 <ext:ToolbarFill />
-                                <ext:LiveSearchToolbar ID="LiveSearchToolbar2" runat="server">
-                                    <Items>
-
-
-                                        <ext:Button ID="Button10" runat="server"
-                                            ToolTip="Yellow highlight"
-                                            IconCls="x-yellow-highlight"
-                                            Pressed="true"
-                                            EnableToggle="true"
-                                            ToggleGroup="highlightColor"
-                                            ToggleHandler="function(b, state) {if(state) {this.up('gridpanel').liveSearchPlugin.matchCls = 'x-livesearch-match';}}" />
-
-                                        <ext:Button ID="Button11" runat="server"
-                                            ToolTip="Blue highlight"
-                                            IconCls="x-blue-highlight"
-                                            EnableToggle="true"
-                                            ToggleGroup="highlightColor"
-                                            ToggleHandler="function(b, state) {if(state) {this.up('gridpanel').liveSearchPlugin.matchCls = 'x-blue-livesearch-match';}}" />
-
-                                        <ext:Button ID="Button12" runat="server" Text="<%$ Resources:Common , Refresh %>" Handler="CheckSession();var p = this.up('gridpanel').liveSearchPlugin; p.search(p.value);" />
-                                    </Items>
-                                </ext:LiveSearchToolbar>
+                               
                             </Items>
                         </ext:Toolbar>
 

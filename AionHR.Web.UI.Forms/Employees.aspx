@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
     <script type="text/javascript" src="Scripts/Branches.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
-    10
+    
 
 </head>
 <body style="background: url(Images/bg.png) repeat;" >
@@ -195,28 +195,7 @@
                             <Items>
                                 <ext:StatusBar ID="StatusBar1" runat="server" />
                                 <ext:ToolbarFill />
-                                <ext:LiveSearchToolbar ID="LiveSearchToolbar2" runat="server">
-                                    <Items>
-
-
-                                        <ext:Button ID="Button10" runat="server"
-                                            ToolTip="Yellow highlight"
-                                            IconCls="x-yellow-highlight"
-                                            Pressed="true"
-                                            EnableToggle="true"
-                                            ToggleGroup="highlightColor"
-                                            ToggleHandler="function(b, state) {if(state) {this.up('gridpanel').liveSearchPlugin.matchCls = 'x-livesearch-match';}}" />
-
-                                        <ext:Button ID="Button11" runat="server"
-                                            ToolTip="Blue highlight"
-                                            IconCls="x-blue-highlight"
-                                            EnableToggle="true"
-                                            ToggleGroup="highlightColor"
-                                            ToggleHandler="function(b, state) {if(state) {this.up('gridpanel').liveSearchPlugin.matchCls = 'x-blue-livesearch-match';}}" />
-
-                                        <ext:Button ID="Button12" runat="server" Text="<%$ Resources:Common , Refresh %>" Handler="CheckSession();var p = this.up('gridpanel').liveSearchPlugin; p.search(p.value);" />
-                                    </Items>
-                                </ext:LiveSearchToolbar>
+                              
                             </Items>
                         </ext:Toolbar>
 
@@ -261,15 +240,7 @@
                         <ext:GridView ID="GridView1" runat="server" />
                     </View>
 
-                    <Plugins>
-                        <ext:LiveSearchGridPanel ID="LiveSearchGridPanel1" runat="server">
-                            <Listeners>
-                                <RegExpError Handler="#{StatusBar1}.setStatus({text: message, iconCls: 'x-status-error'});" />
-                                <BeforeSearch Handler="#{StatusBar1}.setStatus({text: '', iconCls: ''});" />
-                                <Search Handler="if(count>0){#{StatusBar1}.setStatus({text: count + ' ' + #{textMatch}.value , iconCls: 'x-status-valid'});}" />
-                            </Listeners>
-                        </ext:LiveSearchGridPanel>
-                    </Plugins>
+                 
                     <SelectionModel>
                         <ext:RowSelectionModel ID="rowSelectionModel" runat="server" Mode="Single" StopIDModeInheritance="true" />
                         <%--<ext:CheckboxSelectionModel ID="CheckboxSelectionModel1" runat="server" Mode="Multi" StopIDModeInheritance="true" />--%>
@@ -287,7 +258,7 @@
             Icon="PageEdit"
             Title="<%$ Resources:EditWindowsTitle %>"
             Width="800"
-            Height="450"
+            Height="500"
             AutoShow="false"
             Modal="true"
             Hidden="true"
@@ -315,17 +286,13 @@
                                         <ext:TextField ID="homeEmail" runat="server" FieldLabel="<%$ Resources:FieldHomeEmail%>" Name="homeMail" Vtype="email"  BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="workEmail" runat="server" FieldLabel="<%$ Resources:FieldWorkEmail%>" Name="workMail" Vtype="email" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="mobile" runat="server" FieldLabel="<%$ Resources:FieldMobile%>" Name="mobile"  AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                        <ext:FileUploadField ID="picturePath" runat="server" FieldLabel="<%$ Resources:FieldPicturePath%>" />
+                                        
                                         <ext:RadioGroup ID="gender" AllowBlank="false" runat="server" GroupName="gender" FieldLabel="<%$ Resources:FieldGender%>">
                                             <Items>
                                                 <ext:Radio runat="server" ID="gender0" Name="gender" InputValue="0" BoxLabel="<%$ Resources:Common ,Male%>" />
                                                 <ext:Radio runat="server" ID="gender1" Name="gender" InputValue="1" BoxLabel="<%$ Resources:Common ,Female%>" />
                                             </Items>
                                         </ext:RadioGroup>
-                                    </Items>
-                                </ext:Panel>
-                                <ext:Panel runat="server">
-                                    <Items>
                                         <ext:ComboBox ID="religionCombo" runat="server" FieldLabel="<%$ Resources:FieldReligion%>" Name="religion" IDMode="Static" SubmitValue="true">
                                             <Items>
                                                 <ext:ListItem Text="<%$ Resources:Common, Religion0%>" Value="0"></ext:ListItem>
@@ -343,6 +310,11 @@
                                             FieldLabel="<%$ Resources:FieldDateOfBirth%>"
                                             MsgTarget="Side"
                                             AllowBlank="false" />
+                                    </Items>
+                                </ext:Panel>
+                                <ext:Panel runat="server">
+                                    <Items>
+                                        
                                         <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="nationalityId" Name="nationalityId" FieldLabel="<%$ Resources:FieldNationality%>" SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="NationalityStore">
@@ -453,7 +425,12 @@
                                         <ext:Checkbox ID="isInactive" runat="server" FieldLabel="<%$ Resources: FieldIsInactive%>" Name="isInactive" InputValue="true" />
                                     </Items>
                                 </ext:Panel>
-
+                                <ext:Panel runat="server">
+                                    <Items>
+                                        <ext:Image runat="server" ID="imgControl" Width="200" Height="200"  />
+                                        <ext:FileUploadField ID="picturePath" runat="server"  />
+                                    </Items>
+                                </ext:Panel>
                             </Items>
 
                         </ext:FormPanel>

@@ -192,7 +192,7 @@
                     <ext:Panel ID="tabHome" Closable="false" runat="server" Title="<%$ Resources:Common , Home %>" Icon="House" >
                         <Loader ID="Loader1"
                             runat="server"
-                            Url="Test.aspx"
+                            Url="Employees.aspx"
                             Mode="Frame" 
                             ShowMask="true">
                             <LoadMask ShowMask="true" />

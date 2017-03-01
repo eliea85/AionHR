@@ -63,7 +63,7 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-                FillLiveSearchLabels();
+                
 
             }
 
@@ -107,12 +107,7 @@ namespace AionHR.Web.UI.Forms
 
             }
         }
-        private void FillLiveSearchLabels()
-        {
-            this.LiveSearchToolbar2.SearchText = Resources.Common.LiveSearch;
-            this.LiveSearchToolbar2.RegExpText = Resources.Common.RegularExpression;
-            this.LiveSearchToolbar2.CaseSensitiveText = Resources.Common.CaseSensitive;
-        }
+   
 
         protected void Prev_Click(object sender, DirectEventArgs e)
         {
@@ -242,7 +237,7 @@ namespace AionHR.Web.UI.Forms
                 string dayId = item.dayId;
                 string Month = dayId[4].ToString() + dayId[5].ToString();
                 string Day = dayId[6].ToString() + dayId[7].ToString();
-                HtmlTableCell c = (HtmlTableCell)FindControl("td" + Month + Day);
+                
 
 
 
@@ -737,8 +732,11 @@ namespace AionHR.Web.UI.Forms
             else
             {
 
-
-                this.scheduleStore.Insert(0, b);
+                RecordRequest r = new RecordRequest();
+                r.RecordID = b.dayTypeId.ToString();
+                RecordResponse<DayType> dayType = _branchService.ChildGetRecord<DayType>(r);
+                string color = dayType.result.color;
+                X.Call("colorify", "td" +b.dayId.Substring(4,4), "#" + color.Trim());
 
                 //Display successful notification
                 Notification.Show(new NotificationConfig
@@ -777,8 +775,8 @@ namespace AionHR.Web.UI.Forms
 
             if (dayObj.result!=null)
             {
-                scId.Select(dayObj.result.scId);
-                dayTypeId.Select(dayObj.result.dayTypeId);
+                scId.Select(dayObj.result.scId.ToString());
+                dayTypeId.Select(dayObj.result.dayTypeId.ToString());
             }
         }
 
@@ -792,6 +790,8 @@ namespace AionHR.Web.UI.Forms
         {
             ListRequest req = new ListRequest();
             ListResponse<DayType> schedules = _branchService.ChildGetAll<DayType>(req);
+            colorsStore.DataSource = schedules.Items;
+            colorsStore.DataBind();
             return schedules.Items;
         }
     }

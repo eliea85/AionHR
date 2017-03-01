@@ -55,7 +55,7 @@ namespace AionHR.Web.UI.Forms
             {
                 ResourceManager1.RegisterIcon(Icon.Tick);
                 ResourceManager1.RegisterIcon(Icon.Error);
-        }
+            }
         }
 
         protected void login_Click(object sender, EventArgs e)
@@ -68,12 +68,15 @@ namespace AionHR.Web.UI.Forms
             if (response.Success)
             {
                 //Redirecting..
-                Response.Redirect("Default.aspx", true);
+               // if (response.User.languageId == "3" && !_systemService.SessionHelper.CheckIfArabicSession())
+                    
+                    Response.Redirect("Default.aspx", true);
+
             }
             else
             {
                 lblError.Text = (String)GetLocalResourceObject(response.Message);
-                
+
             }
         }
 
@@ -84,14 +87,14 @@ namespace AionHR.Web.UI.Forms
             AuthenticateRequest request = new AuthenticateRequest();
             request.Account = value;
 
-           Response<Account> response= _masterService.GetAccount(request);
+            Response<Account> response = _masterService.GetAccount(request);
 
-            if(response.Success)
+            if (response.Success)
             {
-                
+
                 tbAccountName.IndicatorIcon = Icon.Accept;
                 ResourceManager1.RegisterIcon(Icon.Accept);
-                
+
             }
             else
             {
@@ -113,25 +116,25 @@ namespace AionHR.Web.UI.Forms
             if (response.Success)
             {
 
-                
+
                 e.Success = true;
-                
+
             }
             else
             {
-               
+
                 e.Success = false;
                 e.ErrorMessage = "Invalid Account";//should access local resources, just didn't figure how yet , only Resources.Common is accessible
 
             }
             tbAccountName.ShowIndicator();
-            
+
         }
 
         protected void forgotpw_Event(object sender, EventArgs e)
         {
             Response.Redirect("~/ForgotPassword.aspx");
 
+        }
     }
-}
 }

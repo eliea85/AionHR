@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BasicInfoTabEditWindowTitle" xml:space="preserve">
-    <value>Vacation Schedule Info</value>
+    <value>Attendance Calendar Info</value>
   </data>
   <data name="BtnAddPeriod" xml:space="preserve">
     <value>Add Period</value>
@@ -187,13 +187,13 @@
     <value>Sunday</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
-    <value>Vacation Schedules</value>
+    <value>Attendance Calendars</value>
   </data>
   <data name="CalendarYearFormTitle" xml:space="preserve">
     <value>Calendar Years</value>
   </data>
   <data name="EditCalendarWindowTitle" xml:space="preserve">
-    <value>Edit Calendar Details</value>
+    <value>Add Year</value>
   </data>
   <data name="FieldCalendarName" xml:space="preserve">
     <value>Calendar Name</value>
@@ -209,5 +209,17 @@
   </data>
   <data name="Schedule" xml:space="preserve">
     <value>Schedule</value>
+  </data>
+  <data name="CalendarDays" xml:space="preserve">
+    <value>Calendar Days</value>
+  </data>
+  <data name="CalendarYearsTitle" xml:space="preserve">
+    <value>Calendar Years</value>
+  </data>
+  <data name="EditCalendar" xml:space="preserve">
+    <value>Edit Calendar Days</value>
+  </data>
+  <data name="EditYears" xml:space="preserve">
+    <value>Edit Years</value>
   </data>
 </root>

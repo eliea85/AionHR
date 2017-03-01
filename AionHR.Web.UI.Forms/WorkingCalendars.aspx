@@ -180,7 +180,7 @@
                             </ext:Column>
                              <ext:Column runat="server"
                                 ID="colDetails"
-                                Text="<%$ Resources:Common, Attach %>"
+                                Text="<%$ Resources:EditYears %>"
                                 Hideable="false"
                                 Width="60"
                                 Align="Center"
@@ -200,28 +200,7 @@
                             <Items>
                                 <ext:StatusBar ID="StatusBar1" runat="server" />
                                 <ext:ToolbarFill />
-                                <ext:LiveSearchToolbar ID="LiveSearchToolbar2" runat="server">
-                                    <Items>
-
-
-                                        <ext:Button ID="Button10" runat="server"
-                                            ToolTip="Yellow highlight"
-                                            IconCls="x-yellow-highlight"
-                                            Pressed="true"
-                                            EnableToggle="true"
-                                            ToggleGroup="highlightColor"
-                                            ToggleHandler="function(b, state) {if(state) {this.up('gridpanel').liveSearchPlugin.matchCls = 'x-livesearch-match';}}" />
-
-                                        <ext:Button ID="Button11" runat="server"
-                                            ToolTip="Blue highlight"
-                                            IconCls="x-blue-highlight"
-                                            EnableToggle="true"
-                                            ToggleGroup="highlightColor"
-                                            ToggleHandler="function(b, state) {if(state) {this.up('gridpanel').liveSearchPlugin.matchCls = 'x-blue-livesearch-match';}}" />
-
-                                        <ext:Button ID="Button12" runat="server" Text="<%$ Resources:Common , Refresh %>" Handler="CheckSession();var p = this.up('gridpanel').liveSearchPlugin; p.search(p.value);" />
-                                    </Items>
-                                </ext:LiveSearchToolbar>
+                           
                             </Items>
                         </ext:Toolbar>
 
@@ -266,22 +245,14 @@
                         <ext:GridView ID="GridView1" runat="server" />
                     </View>
 
-                    <Plugins>
-                        <ext:LiveSearchGridPanel ID="LiveSearchGridPanel1" runat="server">
-                            <Listeners>
-                                <RegExpError Handler="#{StatusBar1}.setStatus({text: message, iconCls: 'x-status-error'});" />
-                                <BeforeSearch Handler="#{StatusBar1}.setStatus({text: '', iconCls: ''});" />
-                                <Search Handler="if(count>0){#{StatusBar1}.setStatus({text: count + ' ' + #{textMatch}.value , iconCls: 'x-status-valid'});}" />
-                            </Listeners>
-                        </ext:LiveSearchGridPanel>
-                    </Plugins>
+                    
                     <SelectionModel>
                         <ext:RowSelectionModel ID="rowSelectionModel" runat="server" Mode="Single" StopIDModeInheritance="true" />
                         <%--<ext:CheckboxSelectionModel ID="CheckboxSelectionModel1" runat="server" Mode="Multi" StopIDModeInheritance="true" />--%>
                     </SelectionModel>
                 </ext:GridPanel>
 
-                <ext:GridPanel runat="server"  Title="<%$ Resources: WindowTitle %>" Header="true" ID="calendarYears">
+                <ext:GridPanel runat="server"  Title="<%$ Resources: CalendarYearsTitle %>" Header="true" ID="calendarYears">
                       <View>
                         <ext:GridView ID="GridView2" runat="server" />
                     </View>
@@ -351,7 +322,7 @@
                             <ext:Column runat="server" ID="colYear" Text="<%$ Resources: Year %>"  DataIndex="year" />
                              <ext:Column runat="server"
                                 ID="colYearDetails"
-                                Text="<%$ Resources:Common, Attach %>"
+                                Text="<%$ Resources:EditCalendar %>"
                                 Hideable="false"
                                 Width="60"
                                 Align="Center"
@@ -365,9 +336,31 @@
                     </ColumnModel>
                 </ext:GridPanel>
 
-                <ext:Panel runat="server" >
-                    <Content>
-                        <div style="margin-top: 40px">
+                <ext:Panel runat="server" Layout="ColumnLayout"  Title="<%$ Resources: CalendarDays %>">
+                    
+                    <TopBar>
+                        <ext:Toolbar ID="Toolbar4" runat="server" ClassicButtonStyle="false">
+                            <Items>
+                                <ext:Button ID="Button7" runat="server" Text="<%$ Resources:Common , Back %>" Icon="PageBack">
+                                    <Listeners>
+                                        <Click Handler="CheckSession();" />
+                                    </Listeners>
+                                    <DirectEvents>
+                                        <Click OnEvent="Prev_Click">
+                                            <ExtraParams>
+                                                <ext:Parameter Name="index" Value="#{viewport1}.items.indexOf(#{viewport1}.layout.activeItem)" Mode="Raw" />
+                                            </ExtraParams>
+                                        </Click>
+                                    </DirectEvents>
+                                </ext:Button>
+                             
+
+                            </Items>
+                        </ext:Toolbar>
+
+                    </TopBar>
+                    <Content >
+                        <div style="margin-top: 0px;margin-left:200px;">
         <table runat="server" id="tbCalendar" cellpadding="5" cellspacing="0" clientidmode="Static">
             <tr>
                 <th>
@@ -2012,7 +2005,41 @@
         </table>
     </div>
                     </Content>
-                    
+                    <Items>
+                        <ext:GridPanel ID="colorsGrid" runat="server"  Width="200">
+                            <Store>
+                                <ext:Store runat="server"  ID="colorsStore">
+                                    <Model>
+                                        <ext:Model runat="server" IDProperty="recordId" >
+                                            <Fields>
+                                                <ext:ModelField Name="recordId" />
+                                                <ext:ModelField Name="name" />
+                                                <ext:ModelField Name="color" />
+
+
+                                            </Fields>
+                                        </ext:Model>
+
+                                    </Model>
+                                </ext:Store>
+                                
+                            </Store>
+                            <ColumnModel>
+                                <Columns>
+                                    <ext:Column runat="server" DataIndex="recordId" Visible ="false" />
+                                    <ext:Column runat="server" DataIndex="name"   Text="Day Type" />
+                                    <ext:ComponentColumn runat="server" Text="Color" DataIndex="color" Flex="1">
+                                <Component>
+                                    <ext:ColorField runat="server" ReadOnly="true" />
+                                </Component>
+                                <Listeners>
+                                    <Bind Handler="cmp.setValue(record.get('color'));" />
+                                </Listeners>
+                            </ext:ComponentColumn>
+                                </Columns>
+                            </ColumnModel>
+                        </ext:GridPanel>
+                    </Items>
                     </ext:Panel>
             </Items>
         </ext:Viewport>

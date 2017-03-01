@@ -12,15 +12,16 @@ namespace AionHR.Infrastructure.WebService
     /// <typeparam name="T">IEntity</typeparam>
     public class ListWebServiceResponse<T> : BaseWebServiceResponse
     {
-        
+
         public T[] list;
 
         public int count;
 
         public List<T> GetAll()
         {
-            return list.ToList<T>();
-
+            if (list != null)
+                return list.ToList<T>();
+            else return new List<T>();
         }
 
 

@@ -177,28 +177,7 @@
                             <Items>
                                 <ext:StatusBar ID="StatusBar1" runat="server" />
                                 <ext:ToolbarFill />
-                                <ext:LiveSearchToolbar ID="LiveSearchToolbar2" runat="server">
-                                    <Items>
-
-
-                                        <ext:Button ID="Button10" runat="server"
-                                            ToolTip="Yellow highlight"
-                                            IconCls="x-yellow-highlight"
-                                            Pressed="true"
-                                            EnableToggle="true"
-                                            ToggleGroup="highlightColor"
-                                            ToggleHandler="function(b, state) {if(state) {this.up('gridpanel').liveSearchPlugin.matchCls = 'x-livesearch-match';}}" />
-
-                                        <ext:Button ID="Button11" runat="server"
-                                            ToolTip="Blue highlight"
-                                            IconCls="x-blue-highlight"
-                                            EnableToggle="true"
-                                            ToggleGroup="highlightColor"
-                                            ToggleHandler="function(b, state) {if(state) {this.up('gridpanel').liveSearchPlugin.matchCls = 'x-blue-livesearch-match';}}" />
-
-                                        <ext:Button ID="Button12" runat="server" Text="<%$ Resources:Common , Refresh %>" Handler="CheckSession();var p = this.up('gridpanel').liveSearchPlugin; p.search(p.value);" />
-                                    </Items>
-                                </ext:LiveSearchToolbar>
+                               
                             </Items>
                         </ext:Toolbar>
 
@@ -243,15 +222,7 @@
                         <ext:GridView ID="GridView1" runat="server" />
                     </View>
 
-                    <Plugins>
-                        <ext:LiveSearchGridPanel ID="LiveSearchGridPanel1" runat="server">
-                            <Listeners>
-                                <RegExpError Handler="#{StatusBar1}.setStatus({text: message, iconCls: 'x-status-error'});" />
-                                <BeforeSearch Handler="#{StatusBar1}.setStatus({text: '', iconCls: ''});" />
-                                <Search Handler="if(count>0){#{StatusBar1}.setStatus({text: count + ' ' + #{textMatch}.value , iconCls: 'x-status-valid'});}" />
-                            </Listeners>
-                        </ext:LiveSearchGridPanel>
-                    </Plugins>
+                 
                     <SelectionModel>
                         <ext:RowSelectionModel ID="rowSelectionModel" runat="server" Mode="Single" StopIDModeInheritance="true" />
                         <%--<ext:CheckboxSelectionModel ID="CheckboxSelectionModel1" runat="server" Mode="Multi" StopIDModeInheritance="true" />--%>

@@ -63,7 +63,7 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-                FillLiveSearchLabels();
+              
 
             }
 
@@ -107,12 +107,7 @@ namespace AionHR.Web.UI.Forms
 
             }
         }
-        private void FillLiveSearchLabels()
-        {
-            this.LiveSearchToolbar2.SearchText = Resources.Common.LiveSearch;
-            this.LiveSearchToolbar2.RegExpText = Resources.Common.RegularExpression;
-            this.LiveSearchToolbar2.CaseSensitiveText = Resources.Common.CaseSensitive;
-        }
+      
 
         protected void Prev_Click(object sender, DirectEventArgs e)
         {

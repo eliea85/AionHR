@@ -44,5 +44,7 @@ namespace AionHR.Model.Employees.Profile
         public int? caId { get; set; }
         public string caName { get; set; }
         public bool isInactive { get; set; }
+
+        public string pictureUrl { get; set; }
     }
 }

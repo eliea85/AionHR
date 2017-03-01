@@ -71,7 +71,7 @@ namespace AionHR.Services.Implementations
 
             SessionHelper.Set("UserId", userRecord.record.recordId);
             SessionHelper.Set("key", SessionHelper.GetToken(SessionHelper.Get("AccountId").ToString(), userRecord.record.recordId));
-
+            response.User = userRecord.record;
             response.Success = true;
             return response;
 

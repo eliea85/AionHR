@@ -14,6 +14,6 @@ namespace AionHR.Model.Attendance
         public string name { get; set; }
         public string start { get; set; }
         public string end { get; set; }
-        public bool isBenefitOT { get; set; }
+        public bool? isBenefitOT { get; set; }
     }
 }

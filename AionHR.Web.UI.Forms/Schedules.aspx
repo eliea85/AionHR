@@ -279,7 +279,7 @@
                     <TopBar>
                         <ext:Toolbar ID="Toolbar3" runat="server" ClassicButtonStyle="false">
                             <Items>
-                                <ext:Button ID="Button1" runat="server" Text="<%$ Resources:Common , Back %>" Icon="PageBack">
+                                <ext:Button ID="Button1" runat="server" Text="<%$ Resources:Common , Back %>" Icon="PageWhiteGo">
                                     <Listeners>
                                         <Click Handler="CheckSession();" />
                                     </Listeners>

@@ -169,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Biometric Devices.
+        /// </summary>
+        internal static string BiometricDevices {
+            get {
+                return ResourceManager.GetString("BiometricDevices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Branches.
         /// </summary>
         internal static string Branches {

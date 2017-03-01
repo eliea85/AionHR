@@ -24,6 +24,7 @@ namespace AionHR.Repository.WebService.Repositories
             ChildGetLookup.Add(typeof(WorkingCalendar), "getCA");
             ChildGetLookup.Add(typeof(CalendarYear), "getCY");
             ChildGetLookup.Add(typeof(CalendarDay), "getCD");
+            ChildGetLookup.Add(typeof(BiometricDevice), "getBM");
 
             ChildGetAllLookup.Add(typeof(DayType), "qryDT");
             ChildGetAllLookup.Add(typeof(AttendanceSchedule), "qrySC");
@@ -32,6 +33,7 @@ namespace AionHR.Repository.WebService.Repositories
             ChildGetAllLookup.Add(typeof(WorkingCalendar), "qryCA");
             ChildGetAllLookup.Add(typeof(CalendarYear), "qryCY");
             ChildGetAllLookup.Add(typeof(CalendarDay), "qryCD");
+            ChildGetAllLookup.Add(typeof(BiometricDevice), "qryBM");
 
             ChildAddOrUpdateLookup.Add(typeof(DayType), "setDT");
             ChildAddOrUpdateLookup.Add(typeof(AttendanceSchedule), "setSC");
@@ -40,6 +42,7 @@ namespace AionHR.Repository.WebService.Repositories
             ChildAddOrUpdateLookup.Add(typeof(WorkingCalendar), "setCA");
             ChildAddOrUpdateLookup.Add(typeof(CalendarYear), "setCY");
             ChildAddOrUpdateLookup.Add(typeof(CalendarDay), "setCD");
+            ChildAddOrUpdateLookup.Add(typeof(BiometricDevice), "setBM");
 
             ChildDeleteLookup.Add(typeof(AttendanceBreak), "detSB");
 

@@ -43,13 +43,14 @@ namespace AionHR.Web.UI.Forms
         {
             if (Request.QueryString["timeout"] != null && Request.QueryString["timeout"].ToString() == "yes")
             {
-                lblError.Text = Resources.Common.SessionDisconnected;
+                //lblError.Text = Resources.Common.SessionDisconnected;
             }
             if (!IsPostBack && Request.QueryString["account"] != null)
             {
                 tbAccountName.Text = Request.QueryString["account"];
                 DirectCheckField(tbAccountName.Text);
             }
+           
             SetExtLanguage();
             if (!X.IsAjaxRequest)
             {
@@ -78,7 +79,13 @@ namespace AionHR.Web.UI.Forms
             if (response.Success)
             {
                 //Redirecting..
+                if (response.User.languageId == "3")
+                    _systemService.SessionHelper.SetLanguage("ar");
+                else
+                    _systemService.SessionHelper.SetLanguage("en");
+
                 Response.Redirect("Default.aspx", true);
+
             }
             else
             {
@@ -136,6 +143,11 @@ namespace AionHR.Web.UI.Forms
             }
             tbAccountName.ShowIndicator();
             return response.Success;
+        }
+        protected void forgotpw_Event(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ForgotPassword.aspx");
+
         }
     }
 }

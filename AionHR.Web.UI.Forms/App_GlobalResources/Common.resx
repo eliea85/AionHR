@@ -450,4 +450,7 @@
   <data name="WorkingCalendars" xml:space="preserve">
     <value>Calendars</value>
   </data>
+  <data name="BiometricDevices" xml:space="preserve">
+    <value>Biometric Devices</value>
+  </data>
 </root>

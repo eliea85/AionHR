@@ -160,6 +160,10 @@ var enterKeyPressSearchHandler = function (el, event) {
         App.Store1.reload();
     }
 };
+
+var colorify = function (tdID, color) {
+    $("#" + tdID).attr("style", "background:" + color);
+};
 function getDay(dow)
 {
   

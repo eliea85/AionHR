@@ -243,8 +243,15 @@ namespace AionHR.Web.UI.Forms
                 string Month = dayId[4].ToString() + dayId[5].ToString();
                 string Day = dayId[6].ToString() + dayId[7].ToString();
                 HtmlTableCell c = (HtmlTableCell)FindControl("td" + Month + Day);
+
+
+
                 string color = dtypes.Where(x => x.recordId == item.dayTypeId.ToString()).First().color;
-                c.BgColor = "#"+color;
+                X.Call("colorify", "td" + Month + Day, "#" + color.Trim());
+
+
+
+
                 //c.Style.Add("backgroud-color", "#" + color);
                 //tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].InnerHtml = "<span >" + Month + Day + "</span>";// <span class='scheduleid'>" + item.scId.ToString() + "</span><span class='daytypeid'>" + item.dayTypeId.ToString() + "</span>";
                 //tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].Attributes.Add("style", "background-color:#" + dtypes.Where(x => x.recordId == item.dayTypeId.ToString()).First().color) ;

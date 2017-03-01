@@ -621,6 +621,7 @@ namespace AionHR.Web.UI.Forms
 
             dayRequest.ScheduleId = CurrentSchedule.Text;// _systemService.SessionHelper.Get("currentSchedule").ToString();
             dayRequest.DayOfWeek = dow;
+            CurrentDow.Text = dow;
             RecordResponse<AttendanceScheduleDay> dayResponse = _branchService.ChildGetRecord<AttendanceScheduleDay>(dayRequest);
 
             ////Step 2 : call setvalues with the retrieved object
@@ -646,7 +647,7 @@ namespace AionHR.Web.UI.Forms
             AttendanceScheduleDay day = JsonConvert.DeserializeObject<AttendanceScheduleDay>(dayJ);
             List<AttendanceBreak> breaks = JsonConvert.DeserializeObject<List<AttendanceBreak>>(breaksJ);
             day.scId = Convert.ToInt32(e.ExtraParams["scId"]);
-            day.dow = Convert.ToInt16(e.ExtraParams["dow"]);
+            day.dow = Convert.ToInt16(CurrentDow.Text);
 
             // Define the object to add or edit as null
 
@@ -675,7 +676,7 @@ namespace AionHR.Web.UI.Forms
                     X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
                     return;
                 }
-                bool result = AddBreaksList(day.scId.ToString(), day.dow.ToString(), breaks);
+                bool result = AddBreaksList(day.scId.ToString(), day.dow, breaks);
                 if (!result)//it maybe another check
                 {
                     X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
@@ -713,7 +714,7 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        private bool AddBreaksList(string scheduleIdString,string dow, List<AttendanceBreak> breaks)
+        private bool AddBreaksList(string scheduleIdString,short dow, List<AttendanceBreak> breaks)
         {
             short i = 1;
             int scheduleId = Convert.ToInt32(scheduleIdString);
@@ -721,6 +722,7 @@ namespace AionHR.Web.UI.Forms
             {
                 period.seqNo = i++;
                 period.scId = scheduleId;
+                period.dow = dow;
                 //Added to sent the time only as string
 
 
@@ -734,7 +736,16 @@ namespace AionHR.Web.UI.Forms
             }
             return true;
         }
-
-
+        [DirectMethod]
+        public object CheckTime(string value)
+        {
+           
+            int hours = Convert.ToInt32((value[0] + value[1]).ToString());
+            int mins = Convert.ToInt32((value[3] + value[4]).ToString());
+            if (hours > 23 || mins>59)
+                return false;
+            return true;
+        }
+       
     }
 }

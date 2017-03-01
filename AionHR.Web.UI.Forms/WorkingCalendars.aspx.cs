@@ -242,8 +242,12 @@ namespace AionHR.Web.UI.Forms
                 string dayId = item.dayId;
                 string Month = dayId[4].ToString() + dayId[5].ToString();
                 string Day = dayId[6].ToString() + dayId[7].ToString();
-                tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].InnerHtml = "<span >" + Month + Day + "</span>";// <span class='scheduleid'>" + item.scId.ToString() + "</span><span class='daytypeid'>" + item.dayTypeId.ToString() + "</span>";
-                tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].Attributes.Add("style", "background-color:" + dtypes.Where(x => x.recordId == item.dayTypeId.ToString()).First().color) ;
+                HtmlTableCell c = (HtmlTableCell)FindControl("td" + Month + Day);
+                string color = dtypes.Where(x => x.recordId == item.dayTypeId.ToString()).First().color;
+                c.BgColor = "#"+color;
+                //c.Style.Add("backgroud-color", "#" + color);
+                //tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].InnerHtml = "<span >" + Month + Day + "</span>";// <span class='scheduleid'>" + item.scId.ToString() + "</span><span class='daytypeid'>" + item.dayTypeId.ToString() + "</span>";
+                //tbCalendar.Rows[int.Parse(Month)].Cells[int.Parse(Day)].Attributes.Add("style", "background-color:#" + dtypes.Where(x => x.recordId == item.dayTypeId.ToString()).First().color) ;
             }
 
         }
@@ -737,10 +741,8 @@ namespace AionHR.Web.UI.Forms
                     Html = Resources.Common.RecordSavingSucc
                 });
 
-                this.EditYearDetails.Close();
-                RowSelectionModel sm = this.calendarYears.GetSelectionModel() as RowSelectionModel;
-                sm.DeselectAll();
-                sm.Select(b.year.ToString());
+                this.dayConfigWindow.Close();
+               
 
 
             }

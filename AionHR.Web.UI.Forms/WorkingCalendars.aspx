@@ -20,7 +20,7 @@
     <script type="text/javascript" src="Scripts/Calendars.js"></script>
 
 </head>
-<body style="background: url(Images/bg.png) repeat;" onload="getTimeZone();">
+<body style="background: url(Images/bg.png) repeat;" >
     <form id="Form1" runat="server">
         <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="1200000" />
 
@@ -469,7 +469,7 @@
                 <th>
                     01
                 </th>
-                <td id="td0101">
+                <td id="td0101"> 
                     <span class="hidden">0101</span> <span class="scheduleid"></span><span class="daytypeid">
                     </span>
                 </td>

@@ -24,6 +24,7 @@
         <ext:Hidden ID="titleSavingError" runat="server" Text="<%$ Resources:Common , TitleSavingError %>" />
         <ext:Hidden ID="titleSavingErrorMessage" runat="server" Text="<%$ Resources:Common , TitleSavingErrorMessage %>" />
         <ext:Hidden ID="CurrentSchedule" runat="server" />
+        <ext:Hidden ID="CurrentDow"  runat="server" />
         <ext:Store
             ID="Store1"
             runat="server"
@@ -454,12 +455,12 @@
                                     <Store>
                                         <ext:Store ID="periodsStore" runat="server">
                                             <Model>
-                                                <ext:Model runat="server" Name="Employee" IDProperty="dow">
+                                                <ext:Model runat="server" Name="Employee" >
                                                     <Fields>
                                                         <ext:ModelField Name="name" />
-                                                        <ext:ModelField Name="start"  />
-                                                        <ext:ModelField Name="end"  />
-                                                         
+                                                        <ext:ModelField Name="start" />
+                                                        <ext:ModelField Name="end" />
+                                                        
                                                         <ext:ModelField Name="isBenefitOT" />
 
                                                     </Fields>
@@ -510,10 +511,16 @@
                                                 <Editor>
                                                     <%-- Vtype="numberrange"
                                                         EndNumberField="toField"--%>
-                                                    <ext:TextField
-                                                        runat="server"
-                                                        ID="fromField"
-                                                        AllowBlank="false"/>
+                                                    <ext:TextField runat="server" Note="~9.99" ID="fromField">
+                                                        <Plugins>
+                                                            <ext:InputMask runat="server" Mask="99:99" >
+                                                               
+                                                            </ext:InputMask>
+                                                            
+                                                        </Plugins>
+                                                     
+                                                        <RemoteValidation DirectFn="App.direct.CheckTime" />
+                                                    </ext:TextField>
                                                 </Editor>
                                                 <%--<Renderer Handler="if(isValidDate(record.data['start'])){var dt = new Date(record.data['start']); var dtString = moment(dt).format('HH:mm'); return dtString; } else return record.data['start']; ">--%>
                                                 <%--</Renderer>--%>
@@ -529,11 +536,20 @@
                                                     <ext:TextField
                                                         runat="server"
                                                         ID="toField"
-                                                        AllowBlank="false" />
+                                                        AllowBlank="false" >
+                                                           <Plugins>
+                                                            <ext:InputMask runat="server" Mask="99:99" >
+                                                               
+                                                            </ext:InputMask>
+                                                            
+                                                        </Plugins>
+                                                     
+                                                        <RemoteValidation DirectFn="App.direct.CheckTime" />
+                                                        </ext:TextField>
                                                 </Editor>
-                                                   <%--<Renderer Handler="if(isValidDate(record.data['end'])){var dt = new Date(record.data['end']); var dtString = moment(dt).format('HH:mm'); return dtString;} else return record.data['end']; "/>--%>
+                                                <%--<Renderer Handler="if(isValidDate(record.data['end'])){var dt = new Date(record.data['end']); var dtString = moment(dt).format('HH:mm'); return dtString;} else return record.data['end']; "/>--%>
                                             </ext:Column>
-                                            <ext:CheckColumn runat="server" Text="Is Benifit of Over Time" DataIndex="isBenefitOT" >
+                                            <ext:CheckColumn runat="server" Text="Is Benifit of Over Time" DataIndex="isBenefitOT">
                                                 <Editor>
                                                     <ext:Checkbox runat="server" SubmitValue="true" InputValue="true"
                                                         ID="isBenifitCheckbox" />

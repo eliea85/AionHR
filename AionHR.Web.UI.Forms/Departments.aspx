@@ -234,15 +234,7 @@
                         <ext:GridView ID="GridView1" runat="server" />
                     </View>
 
-                    <Plugins>
-                        <ext:LiveSearchGridPanel ID="LiveSearchGridPanel1" runat="server">
-                            <Listeners>
-                                <RegExpError Handler="#{StatusBar1}.setStatus({text: message, iconCls: 'x-status-error'});" />
-                                <BeforeSearch Handler="#{StatusBar1}.setStatus({text: '', iconCls: ''});" />
-                                <Search Handler="if(count>0){#{StatusBar1}.setStatus({text: count + ' ' + #{textMatch}.value , iconCls: 'x-status-valid'});}" />
-                            </Listeners>
-                        </ext:LiveSearchGridPanel>
-                    </Plugins>
+                 
                     <SelectionModel>
                         <ext:RowSelectionModel ID="rowSelectionModel" runat="server" Mode="Single" StopIDModeInheritance="true" />
                         <%--<ext:CheckboxSelectionModel ID="CheckboxSelectionModel1" runat="server" Mode="Multi" StopIDModeInheritance="true" />--%>

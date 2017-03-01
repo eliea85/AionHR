@@ -101,7 +101,11 @@
                            
                                 <RemoteValidation OnValidation="CheckField" />
 
-                           
+                             <Listeners>
+                                
+                                <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-tick');this.setIndicatorIconCls('icon-tick'); " />
+                                <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); " />
+                            </Listeners>
                             </ext:TextField>
 
                         <ext:TextField ID="tbUsername"
@@ -150,9 +154,12 @@
                             </Listeners>
                         </ext:Button>
                              <ext:Button ID="btnForgot" runat="server" Text="<%$ Resources:Common , ResetPassword %>">
-                            <Listeners>
-                                
-                            </Listeners>
+                         <DirectEvents>
+                                <Click OnEvent="forgotpw_Event">
+                                    <EventMask ShowMask="true" Msg="<%$ Resources:Common , Loading %>" MinDelay="500" />
+                                </Click>
+                            </DirectEvents>
+
                         </ext:Button>
                     </Buttons>
                 </ext:FormPanel>

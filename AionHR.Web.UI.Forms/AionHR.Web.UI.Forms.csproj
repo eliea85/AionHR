@@ -83,6 +83,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BiometricDevices.aspx" />
     <Content Include="Branches.aspx" />
     <Content Include="CSS\Calendars.css" />
     <Content Include="CSS\Common.css" />
@@ -173,6 +174,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Sponsors.aspx.resx</DependentUpon>
+    </Compile>
+    <Compile Include="BiometricDevices.aspx.cs">
+      <DependentUpon>BiometricDevices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BiometricDevices.aspx.designer.cs">
+      <DependentUpon>BiometricDevices.aspx</DependentUpon>
     </Compile>
     <Compile Include="BootStrapper.cs" />
     <Compile Include="BoundedComboBox.cs" />
@@ -422,6 +430,9 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Sponsors.aspx.Designer.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\BiometricDevices.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

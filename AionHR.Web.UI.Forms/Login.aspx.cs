@@ -44,7 +44,7 @@ namespace AionHR.Web.UI.Forms
             ResourceManager1.RegisterIcon(Icon.Error);
             if (Request.QueryString["timeout"] != null && Request.QueryString["timeout"].ToString() == "yes")
             {
-                lblError.Text = Resources.Common.SessionDisconnected;
+                //lblError.Text = Resources.Common.SessionDisconnected;
             }
             if (!IsPostBack && Request.QueryString["account"] != null)
             {
@@ -68,8 +68,11 @@ namespace AionHR.Web.UI.Forms
             if (response.Success)
             {
                 //Redirecting..
-               // if (response.User.languageId == "3" && !_systemService.SessionHelper.CheckIfArabicSession())
-                    
+                if (response.User.languageId == "3")
+                    _systemService.SessionHelper.SetLanguage("ar");
+                else
+                    _systemService.SessionHelper.SetLanguage("en");
+                
                     Response.Redirect("Default.aspx", true);
 
             }
@@ -131,6 +134,7 @@ namespace AionHR.Web.UI.Forms
 
         }
 
+       
         protected void forgotpw_Event(object sender, EventArgs e)
         {
             Response.Redirect("~/ForgotPassword.aspx");

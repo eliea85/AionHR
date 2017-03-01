@@ -84,11 +84,11 @@
                     Width="400"
                     Frame="true"
                     BodyPadding="20" AutoUpdateLayout="true"
-                    DefaultButton="btnLogin" Border="false" Shadow="true" DefaultAnchor="100%">
+                    DefaultButton="btnLogin" Border="false" Shadow="true" >
 
                     <Items>
                         <ext:TextField
-                            ID="tbAccountName"
+                            ID="tbAccountName"   
                             runat="server"
                             AutoFocus="true"
                             IsRemoteValidation="true"                           
@@ -109,7 +109,7 @@
 
                         </ext:TextField>
 
-                        <ext:TextField ID="tbUsername"
+                        <ext:TextField ID="tbUsername" 
                             runat="server"
                             BlankText="<%$ Resources:Common, MandatoryField %>"
                             AllowBlank="false"

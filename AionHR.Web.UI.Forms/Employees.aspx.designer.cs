@@ -220,42 +220,6 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.Column ColHireDate;
         
         /// <summary>
-        /// FieldIsInactive control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.CheckColumn FieldIsInactive;
-        
-        /// <summary>
-        /// FieldLastTaCheck control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Column FieldLastTaCheck;
-        
-        /// <summary>
-        /// FieldTaCheckStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.CheckColumn FieldTaCheckStatus;
-        
-        /// <summary>
-        /// ColInactive control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.CheckColumn ColInactive;
-        
-        /// <summary>
         /// colEdit control.
         /// </summary>
         /// <remarks>

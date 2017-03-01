@@ -49,9 +49,7 @@
                         <ext:ModelField Name="positionName" />
                         <ext:ModelField Name="branchName" />
                         <ext:ModelField Name="hireDate" />
-                        <ext:ModelField Name="isInactive" />
-                        <ext:ModelField Name="lastTACheck" />
-                        <ext:ModelField Name="lastTACheckStatus" />
+                       
 
 
 
@@ -127,22 +125,16 @@
 
                             <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
                             <ext:Column ID="ColReference" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference%>" DataIndex="reference" Flex="1" Hideable="false" />
-                            <ext:Column ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="fullName" Flex="1" Hideable="false">
+                            <ext:Column ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="fullName" Flex="3" Hideable="false">
                                 <Renderer Handler="return '<u>'+ record.data['fullName']+'</u>'">
                                 </Renderer>
                             </ext:Column>
-                            <ext:Column ID="ColDepartmentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDepartment%>" DataIndex="departmentName" Flex="1" Hideable="false">
+                            <ext:Column ID="ColDepartmentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDepartment%>" DataIndex="departmentName" Flex="2" Hideable="false">
                             </ext:Column>
-                            <ext:Column ID="ColPositionName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldPosition%>" DataIndex="positionName" Flex="1" Hideable="false" />
-                            <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="1" Hideable="false" />
-                            <ext:Column ID="ColHireDate" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHireDate%>" DataIndex="hireDate" Flex="1" Hideable="false" />
-                            <ext:CheckColumn ID="FieldIsInactive" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsInactive%>" DataIndex="isInactive" Flex="1" Hideable="false" />
-                            <ext:Column ID="FieldLastTaCheck" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldLastTACheck%>" DataIndex="lastTACheck" Flex="1" Hideable="false" />
-                            <ext:CheckColumn ID="FieldTaCheckStatus" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldLastTACheckStatus%>" DataIndex="lastTaCheckStatus" Flex="1" Hideable="false" />
-
-                            <ext:CheckColumn ID="ColInactive" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsInactive %>" DataIndex="isInactive" Width="75" Hideable="false" />
-
-
+                            <ext:Column ID="ColPositionName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldPosition%>" DataIndex="positionName" Flex="2" Hideable="false" />
+                            <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="2" Hideable="false" />
+                            <ext:Column ID="ColHireDate" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHireDate%>" DataIndex="hireDate" Flex="2" Hideable="false" />
+                          
 
                             <ext:Column runat="server"
                                 ID="colEdit" Visible="false"
@@ -315,7 +307,7 @@
                                 <ext:Panel runat="server">
                                     <Items>
                                         
-                                        <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="nationalityId" Name="nationalityId" FieldLabel="<%$ Resources:FieldNationality%>" SimpleSubmit="true">
+                                        <ext:ComboBox runat="server" ValueField="recordId" AllowBlank="false" DisplayField="name" ID="nationalityId" Name="nationalityId" FieldLabel="<%$ Resources:FieldNationality%>" SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="NationalityStore">
                                                     <Model>
@@ -329,7 +321,7 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                        <ext:ComboBox ValueField="recordId" DisplayField="name" runat="server" ID="positionId" Name="positionId" FieldLabel="<%$ Resources:FieldPosition%>"  SimpleSubmit="true">
+                                        <ext:ComboBox ValueField="recordId" AllowBlank="false" DisplayField="name" runat="server" ID="positionId" Name="positionId" FieldLabel="<%$ Resources:FieldPosition%>"  SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="positionStore">
                                                     <Model>
@@ -343,7 +335,7 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                        <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="departmentId" Name="departmentId" FieldLabel="<%$ Resources:FieldDepartment%>"  SimpleSubmit="true">
+                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="departmentId" Name="departmentId" FieldLabel="<%$ Resources:FieldDepartment%>"  SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="departmentStore">
                                                     <Model>
@@ -357,7 +349,7 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                        <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="branchId" Name="branchId" FieldLabel="<%$ Resources:FieldBranch%>"  SimpleSubmit="true">
+                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="branchId" Name="branchId" FieldLabel="<%$ Resources:FieldBranch%>"  SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="BranchStore">
                                                     <Model>
@@ -391,7 +383,7 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                        <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="vsId" Name="vsId" FieldLabel="<%$ Resources:FieldVacationSchedule%>"  SimpleSubmit="true">
+                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="vsId" Name="vsId" FieldLabel="<%$ Resources:FieldVacationSchedule%>"  SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="VacationScheduleStore">
                                                     <Model>
@@ -405,7 +397,7 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                         <ext:ComboBox runat="server" ID="caId" ValueField="recordId" DisplayField="name" Name="caId" FieldLabel="<%$ Resources:FieldWorkingCalendar%>"  SimpleSubmit="true">
+                                         <ext:ComboBox runat="server" ID="caId" AllowBlank="false" ValueField="recordId" DisplayField="name" Name="caId" FieldLabel="<%$ Resources:FieldWorkingCalendar%>"  SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="CalendarStore">
                                                     <Model>
@@ -427,8 +419,12 @@
                                 </ext:Panel>
                                 <ext:Panel runat="server">
                                     <Items>
-                                        <ext:Image runat="server" ID="imgControl" Width="200" Height="200"  />
-                                        <ext:FileUploadField ID="picturePath" runat="server"  />
+                                        <ext:Image runat="server" ID="imgControl" Width="200" Height="200"  >
+                                            <Listeners>
+                                                <Click Handler="App.picturePath" />
+                                            </Listeners>
+                                            </ext:Image>
+                                        <ext:FileUploadField ID="picturePath" runat="server"  Visible="false"  />
                                     </Items>
                                 </ext:Panel>
                             </Items>

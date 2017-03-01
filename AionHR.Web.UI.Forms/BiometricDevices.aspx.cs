@@ -21,14 +21,16 @@ using AionHR.Model.Company.News;
 using AionHR.Services.Messaging;
 using AionHR.Model.Company.Structure;
 using AionHR.Model.System;
-using AionHR.Model.Employees.Profile;
+using AionHR.Model.TimeAttendance;
 
 namespace AionHR.Web.UI.Forms
 {
-    public partial class Sponsors : System.Web.UI.Page
+    public partial class BiometricDevices : System.Web.UI.Page
     {
+
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
-        IEmployeeService _employeeService = ServiceLocator.Current.GetInstance<IEmployeeService>();
+        ICompanyStructureService _companyStructureService = ServiceLocator.Current.GetInstance<ICompanyStructureService>();
+        ITimeAttendanceService _timeAttendanceService = ServiceLocator.Current.GetInstance<ITimeAttendanceService>();
         protected override void InitializeCulture()
         {
 
@@ -58,7 +60,7 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-             
+
 
 
             }
@@ -102,7 +104,7 @@ namespace AionHR.Web.UI.Forms
 
             }
         }
-      
+
 
 
         protected void PoPuP(object sender, DirectEventArgs e)
@@ -117,11 +119,13 @@ namespace AionHR.Web.UI.Forms
                     //Step 1 : get the object from the Web Service 
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
-                    RecordResponse<Sponsor> response = _employeeService.ChildGetRecord<Sponsor>(r);
+                    RecordResponse<BiometricDevice> response = _timeAttendanceService.ChildGetRecord<BiometricDevice>(r);
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
-
+                    FillBranch();
+                    if (response.result.branchId != null)
+                        branchId.Select(response.result.branchId);
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -292,7 +296,7 @@ namespace AionHR.Web.UI.Forms
             ListRequest request = new ListRequest();
 
             request.Filter = "";
-            ListResponse<Sponsor> nationalities = _employeeService.ChildGetAll<Sponsor>(request);
+            ListResponse<BiometricDevice> nationalities = _timeAttendanceService.ChildGetAll<BiometricDevice>(request);
             if (!nationalities.Success)
                 return;
             this.Store1.DataSource = nationalities.Items;
@@ -312,7 +316,7 @@ namespace AionHR.Web.UI.Forms
             string id = e.ExtraParams["id"];
 
             string obj = e.ExtraParams["values"];
-            Sponsor b = JsonConvert.DeserializeObject<Sponsor>(obj);
+            BiometricDevice b = JsonConvert.DeserializeObject<BiometricDevice>(obj);
 
             b.recordId = id;
             // Define the object to add or edit as null
@@ -324,9 +328,9 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    PostRequest<Sponsor> request = new PostRequest<Sponsor>();
+                    PostRequest<BiometricDevice> request = new PostRequest<BiometricDevice>();
                     request.entity = b;
-                    PostResponse<Sponsor> r = _employeeService.ChildAddOrUpdate<Sponsor>(request);
+                    PostResponse<BiometricDevice> r = _timeAttendanceService.ChildAddOrUpdate<BiometricDevice>(request);
                     b.recordId = r.recordId;
 
                     //check if the insert failed
@@ -376,9 +380,9 @@ namespace AionHR.Web.UI.Forms
                 try
                 {
                     int index = Convert.ToInt32(id);//getting the id of the record
-                    PostRequest<Sponsor> request = new PostRequest<Sponsor>();
+                    PostRequest<BiometricDevice> request = new PostRequest<BiometricDevice>();
                     request.entity = b;
-                    PostResponse<Sponsor> r = _employeeService.ChildAddOrUpdate<Sponsor>(request);                      //Step 1 Selecting the object or building up the object for update purpose
+                    PostResponse<BiometricDevice> r = _timeAttendanceService.ChildAddOrUpdate<BiometricDevice>(request);                      //Step 1 Selecting the object or building up the object for update purpose
 
                     //Step 2 : saving to store
 
@@ -435,6 +439,14 @@ namespace AionHR.Web.UI.Forms
         public void StoreTimeZone(string z)
         {
             Session.Add("TimeZone", z);
+        }
+
+        private void FillBranch()
+        {
+            ListRequest branchesRequest = new ListRequest();
+            ListResponse<Branch> resp = _companyStructureService.ChildGetAll<Branch>(branchesRequest);
+            BranchStore.DataSource = resp.Items;
+            BranchStore.DataBind();
         }
     }
 }

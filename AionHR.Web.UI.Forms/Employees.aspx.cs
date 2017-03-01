@@ -130,7 +130,9 @@ namespace AionHR.Web.UI.Forms
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
                     RecordResponse<Employee> response = _employeeService.Get<Employee>(r);
-
+                    BasicInfoTab.Reset();
+                    picturePath.Clear();
+                    picturePath.
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     InitCombos();
@@ -178,7 +180,10 @@ namespace AionHR.Web.UI.Forms
             vsId.Select(result.vsId);
             caId.Select(result.caId);
 
-            gender.Set("gender" + result.gender.ToString(), true);
+            if (result.gender == 1)
+                gender1.Checked = true;
+            else
+                gender0.Checked = true;
             if (!string.IsNullOrEmpty(result.pictureUrl))
                 imgControl.ImageUrl = result.pictureUrl;
 
@@ -326,6 +331,7 @@ namespace AionHR.Web.UI.Forms
 
             //Reset all values of the relative object
             BasicInfoTab.Reset();
+            picturePath.Clear();
             InitCombos();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
 
@@ -342,7 +348,7 @@ namespace AionHR.Web.UI.Forms
             empRequest.BranchId = "0";
             empRequest.DepartmentId = "0";
             empRequest.Filter = "";
-            empRequest.IncludeIsInactive = true;
+            empRequest.IncludeIsInactive = false;
             empRequest.SortBy = "firstName";
             empRequest.Size = e.Limit.ToString();
             empRequest.StartAt = e.Start.ToString();

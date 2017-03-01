@@ -252,7 +252,7 @@
                     </SelectionModel>
                 </ext:GridPanel>
 
-                <ext:GridPanel runat="server" Title="<%$ Resources: WindowTitle %>" Header="true" ID="scheduleDays">
+                <ext:GridPanel runat="server" Title="<%$ Resources: WindowTitle %>" Header="true" ID="scheduleDays" >
                     <DirectEvents>
                         <CellClick OnEvent="PoPuP">
                             <EventMask ShowMask="true" />
@@ -279,7 +279,7 @@
                     <TopBar>
                         <ext:Toolbar ID="Toolbar3" runat="server" ClassicButtonStyle="false">
                             <Items>
-                                <ext:Button ID="Button1" runat="server" Text="<%$ Resources:Common , Back %>" Icon="PageBack">
+                                <ext:Button ID="Button1" runat="server" Text="<%$ Resources:Common , Back %>" Icon="PageBreak">
                                     <Listeners>
                                         <Click Handler="CheckSession();" />
                                     </Listeners>

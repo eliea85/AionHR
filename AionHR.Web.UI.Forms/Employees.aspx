@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
     <script type="text/javascript" src="Scripts/Branches.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
-
+    10
 
 </head>
 <body style="background: url(Images/bg.png) repeat;" >
@@ -275,6 +275,7 @@
                         <%--<ext:CheckboxSelectionModel ID="CheckboxSelectionModel1" runat="server" Mode="Multi" StopIDModeInheritance="true" />--%>
                     </SelectionModel>
                 </ext:GridPanel>
+
             </Items>
         </ext:Viewport>
 
@@ -317,8 +318,8 @@
                                         <ext:FileUploadField ID="picturePath" runat="server" FieldLabel="<%$ Resources:FieldPicturePath%>" />
                                         <ext:RadioGroup ID="gender" AllowBlank="false" runat="server" GroupName="gender" FieldLabel="<%$ Resources:FieldGender%>">
                                             <Items>
-                                                <ext:Radio runat="server" Name="gender" InputValue="0" BoxLabel="<%$ Resources:Common ,Male%>" />
-                                                <ext:Radio runat="server" Name="gender" InputValue="1" BoxLabel="<%$ Resources:Common ,Female%>" />
+                                                <ext:Radio runat="server" ID="gender0" Name="gender" InputValue="0" BoxLabel="<%$ Resources:Common ,Male%>" />
+                                                <ext:Radio runat="server" ID="gender1" Name="gender" InputValue="1" BoxLabel="<%$ Resources:Common ,Female%>" />
                                             </Items>
                                         </ext:RadioGroup>
                                     </Items>

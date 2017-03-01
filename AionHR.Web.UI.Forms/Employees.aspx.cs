@@ -182,6 +182,8 @@ namespace AionHR.Web.UI.Forms
             sponsorId.Select(result.sponsorId);
             vsId.Select(result.vsId);
             caId.Select(result.caId);
+
+            gender.Set("gender" + result.gender.ToString(),true);
         }
         private void InitCombos()
         {

@@ -688,8 +688,8 @@ namespace AionHR.Web.UI.Forms
                 {
 
 
-                    ModelProxy record = this.Store1.GetById(day.dow);
-                    BasicInfoTab.UpdateRecord(record);
+                    ModelProxy record = this.scheduleStore.GetById(day.dow);
+                    dayBreaksForm.UpdateRecord(record);
 
                     record.Commit();
                     Notification.Show(new NotificationConfig
@@ -698,7 +698,7 @@ namespace AionHR.Web.UI.Forms
                         Icon = Icon.Information,
                         Html = Resources.Common.RecordUpdatedSucc
                     });
-                    this.EditRecordWindow.Close();
+                    this.EditDayBreaks.Close();
 
 
                 }

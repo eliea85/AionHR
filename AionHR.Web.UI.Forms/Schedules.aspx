@@ -551,8 +551,8 @@
                                             </ext:Column>
                                             <ext:CheckColumn runat="server" Text="Is Benifit of Over Time" DataIndex="isBenefitOT">
                                                 <Editor>
-                                                    <ext:Checkbox runat="server" SubmitValue="true" InputValue="true"
-                                                        ID="isBenifitCheckbox" />
+                                                    <ext:Checkbox runat="server"  InputValue="true"
+                                                        ID="isBenefitOT" />
 
                                                 </Editor>
                                             </ext:CheckColumn>

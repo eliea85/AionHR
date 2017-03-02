@@ -22,7 +22,7 @@
         <ext:Hidden ID="textLoadFailed" runat="server" Text="<%$ Resources:Common , LoadFailed %>" />
         <ext:Hidden ID="titleSavingError" runat="server" Text="<%$ Resources:Common , TitleSavingError %>" />
         <ext:Hidden ID="titleSavingErrorMessage" runat="server" Text="<%$ Resources:Common , TitleSavingErrorMessage %>" />
-        <ext:Hidden ID="timeZoneOffset" runat="server" EnableViewState="true" />
+        <ext:Hidden ID="CurrentDepartment" runat="server" EnableViewState="true" />
         <ext:Store
             ID="Store1"
             runat="server"

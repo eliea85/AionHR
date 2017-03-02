@@ -54,15 +54,4 @@ var getCellType = function (grid, rowIndex, cellIndex) {
 };
 
 
-var enterKeyPressSearchHandler = function (el, event) {
 
-    var enter = false;
-    if (event.getKey() == event.ENTER) {
-        if (el.getValue().length > 0)
-        { enter = true; }
-    }
-
-    if (enter === true) {
-        App.Store1.reload();
-    }
-};

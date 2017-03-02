@@ -48,6 +48,7 @@
                         <ext:ModelField Name="phone" />
                         <ext:ModelField Name="fax" />
                         <ext:ModelField Name="mobile" />
+                        <ext:ModelField Name="email" />
                         
                       
                                </Fields>
@@ -273,6 +274,7 @@
                                 <ext:TextField ID="mobile" runat="server" FieldLabel="<%$ Resources:FieldMobile%>" Name="mobile" />
                                 <ext:TextField ID="phone" runat="server" FieldLabel="<%$ Resources:FieldPhone%>" Name="phone" />
                                 <ext:TextField ID="email" runat="server" FieldLabel="<%$ Resources:FieldEmail%>" Name="email" />
+                                <ext:TextField ID="fax" runat="server" FieldLabel="<%$ Resources:FieldFax%>" Name="fax" />
                                
 
                             </Items>

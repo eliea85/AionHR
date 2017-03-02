@@ -40,7 +40,7 @@ namespace AionHR.Model.Employees.Profile
         public int? sponsorId { get; set; }
         public string sponsorName { get; set; }
         public int? vsId { get; set; }
-        public int? vsName { get; set; }
+        public string vsName { get; set; }
         public int? caId { get; set; }
         public string caName { get; set; }
         public bool isInactive { get; set; }

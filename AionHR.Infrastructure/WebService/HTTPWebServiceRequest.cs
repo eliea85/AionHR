@@ -216,15 +216,20 @@ namespace AionHR.Infrastructure.WebService
                     if (val == null)
                         continue;
                     Body += string.Format("Content-Disposition: form-data; name=\"{0}\"\r\n\r\n", prop.Name);
-                   
-                    
+
+
                     Body += string.Format(prop.GetValue(item, null).ToString());
                     Body += "\r\n--" + boundary + "\r\n"; ;
                 }
                 //Now we need to add the header for the binary part inside the body
 
-                Body += "Content-Disposition: form-data; name='file'; filename='" + fileName + "'\r\n";
-                Body += "Content-Type: binary/octet-stream\r\n\r\n";
+               
+                if (buffer != null)
+                {
+                    Body += "Content-Disposition: form-data; name='file'; filename='" + fileName + "'\r\n";
+                    stream.Write(buffer, 0, buffer.Length);
+                    Body += "Content-Type: binary/octet-stream\r\n\r\n";
+                }
 
 
                 //Now we need  to write the headers to the request 
@@ -233,7 +238,7 @@ namespace AionHR.Infrastructure.WebService
                 stream.Write(data, 0, data.Length);
 
                 // Add binary file to request
-                stream.Write(buffer, 0, buffer.Length);
+               
 
                 // Finalizing by adding the footer of the request or what we call trailer
                 byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
@@ -242,7 +247,7 @@ namespace AionHR.Infrastructure.WebService
 
 
                 // Do the post and get the response.
-            
+
                 var r = req.GetResponse();
                 Stream s = r.GetResponseStream();
                 StreamReader reader = new StreamReader(s, true);

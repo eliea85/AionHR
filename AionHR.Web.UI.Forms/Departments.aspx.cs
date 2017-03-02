@@ -66,10 +66,6 @@ namespace AionHR.Web.UI.Forms
 
             }
 
-            if (timeZoneOffset.Text != "")
-            {
-                Session.Add("TimeZone", timeZoneOffset.Text);
-            }
         }
 
 
@@ -118,6 +114,7 @@ namespace AionHR.Web.UI.Forms
 
             int id = Convert.ToInt32(e.ExtraParams["id"]);
             string type = e.ExtraParams["type"];
+            CurrentDepartment.Text = id.ToString();
             switch (type)
             {
                 case "ColName":
@@ -282,9 +279,9 @@ namespace AionHR.Web.UI.Forms
         {
 
             EmployeeListRequest req = new EmployeeListRequest();
-            req.DepartmentId = "0";
+            req.DepartmentId = CurrentDepartment.Text;
             req.BranchId = "0";
-            req.IncludeIsInactive = true;
+            req.IncludeIsInactive = false;
             req.SortBy = "firstName";
            
             req.StartAt = "1";

@@ -68,6 +68,7 @@ namespace AionHR.Web.UI.Forms
                 HideShowColumns();
                 FillBranch();
                 FillDepartment();
+                dayId.SelectedDate = DateTime.Today;
                 RefreshGrid(null, null, null, null);
 
             }
@@ -121,7 +122,7 @@ namespace AionHR.Web.UI.Forms
         protected void PoPuP(object sender, DirectEventArgs e)
         {
 
-
+            return;
             int id = Convert.ToInt32(e.ExtraParams["id"]);
             string type = e.ExtraParams["type"];
 
@@ -129,9 +130,9 @@ namespace AionHR.Web.UI.Forms
             {
                 case "ColName":
                     //Step 1 : get the object from the Web Service 
-                    RecordRequest r = new RecordRequest();
-                    r.RecordID = id.ToString();
-                    RecordResponse<Employee> response = _employeeService.Get<Employee>(r);
+                   // //RecordRequest r = new RecordRequest();
+                   // r.RecordID = id.ToString();
+                   // RecordResponse<Employee> response = _employeeService.Get<Employee>(r);
 
                     break;
 
@@ -282,53 +283,56 @@ namespace AionHR.Web.UI.Forms
         {
             AttendnanceDayListRequest req = new AttendnanceDayListRequest();
 
-            if (!string.IsNullOrEmpty(branchId.Text))
+            if (!string.IsNullOrEmpty(branchId.Text) && branchId.Value.ToString()!="0")
             {
                 req.BranchId = branchId.Value.ToString();
-                ColBranchName.Visible = false;
-                
+                GridPanel1.ColumnModel.Columns.Where(a=>a.ID== "ColBranchName").First().SetHidden(true);
+
 
             }
             else
             {
                 req.BranchId = "0";
-                ColBranchName.Visible = true;
+                GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColBranchName").First().SetHidden(false);
             }
 
-            if (!string.IsNullOrEmpty(departmentId.Text))
+            if (!string.IsNullOrEmpty(departmentId.Text) && departmentId.Value.ToString() != "0")
             {
                 req.DepartmentId = departmentId.Value.ToString();
-                ColDepartmentName.Visible = false;
+                GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColDepartmentName").First().SetHidden(true);
 
             }
             else
             {
                 req.DepartmentId = "0";
-                ColDepartmentName.Visible = true;
+                GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColDepartmentName").First().SetHidden(false);
             }
             
             if (dayId.SelectedValue != null)
             {
-                req.DayId = dayId.SelectedDate.ToString("yyyymmdd");
-                ColDay.Visible = false;
+                req.DayId = dayId.SelectedDate.ToString("yyyyMMdd");
+                GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColDay").First().SetHidden(true);
+           
 
             }
             else
             {
                 req.DayId = "";
-                ColDay.Visible = true;
+                GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColDay").First().SetHidden(false);
             }
             
-            if (!string.IsNullOrEmpty(employeeId.Text))
+            if (!string.IsNullOrEmpty(employeeId.Text) && employeeId.Value.ToString() != "0")
             {
                 req.EmployeeId = employeeId.Value.ToString();
-                ColName.Visible = false;
+                GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColName").First().SetHidden(true);
+                
 
             }
             else
             {
                 req.EmployeeId = "0";
-                ColName.Visible = true;
+                GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColName").First().SetHidden(false);
+                
             }
 
             req.Month = "0";

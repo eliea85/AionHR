@@ -332,6 +332,7 @@ namespace AionHR.Web.UI.Forms
             //Reset all values of the relative object
             BasicInfoTab.Reset();
             picturePath.Clear();
+            imgControl.ImageUrl = "";
             InitCombos();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
 
@@ -347,7 +348,7 @@ namespace AionHR.Web.UI.Forms
             EmployeeListRequest empRequest = new EmployeeListRequest();
             empRequest.BranchId = "0";
             empRequest.DepartmentId = "0";
-            empRequest.Filter = "";
+            empRequest.Filter = searchTrigger.Text;
             empRequest.IncludeIsInactive = false;
             empRequest.SortBy = "firstName";
             empRequest.Size = e.Limit.ToString();
@@ -429,7 +430,13 @@ namespace AionHR.Web.UI.Forms
             b.isInactive = isInactive.Checked;
             b.recordId = id;
             // Define the object to add or edit as null
-
+            if (branchId.SelectedItem != null)
+                b.branchName = branchId.SelectedItem.Text;
+            if (departmentId.SelectedItem != null)
+                b.departmentName = departmentId.SelectedItem.Text;
+            if (positionId.SelectedItem != null)
+                b.positionName = positionId.SelectedItem.Text;
+            b.fullName = b.firstName + " " + b.middleName + " " + b.lastName + " ";
             if (string.IsNullOrEmpty(id))
             {
 
@@ -437,16 +444,27 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    byte[] fileData = null;
-                    using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
-                    {
-                        fileData = binaryReader.ReadBytes(picturePath.PostedFile.ContentLength);
-                    }
                     EmployeeAddOrUpdateRequest request = new EmployeeAddOrUpdateRequest();
 
+                    byte[] fileData = null;
+                    if (picturePath.PostedFile != null)
+                    {
+                        using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
+                        {
+                            fileData = binaryReader.ReadBytes(picturePath.PostedFile.ContentLength);
+                        }
+                        request.fileName = picturePath.PostedFile.FileName;
+                        request.imageData = fileData;
+                    }
+                    else
+                    {
+                        request.imageData = fileData;
+                        request.fileName = "";
+                    }
                     request.empData = b;
-                    request.fileName = picturePath.PostedFile.FileName;
-                    request.imageData = fileData;
+
+
+
                     PostResponse<Employee> r = _employeeService.AddOrUpdateEmployeeWithPhoto(request);
                     b.recordId = r.recordId;
 
@@ -460,17 +478,7 @@ namespace AionHR.Web.UI.Forms
                     }
                     else
                     {
-                        try
-                        {
-                            b.branchName = branchId.SelectedItem.Text;
-                            b.caName = caId.SelectedItem.Text;
-                            b.departmentName = departmentId.SelectedItem.Text;
-                            b.countryName = nationalityId.SelectedItem.Text;
-                            b.positionName = positionId.SelectedItem.Text;
-                            b.sponsorName = sponsorId.SelectedItem.Text;
-                            b.fullName = b.firstName + b.middleName + b.lastName;
-                        }
-                        catch { }
+
                         //Add this record to the store 
                         this.Store1.Insert(0, b);
 
@@ -510,15 +518,23 @@ namespace AionHR.Web.UI.Forms
                     EmployeeAddOrUpdateRequest request = new EmployeeAddOrUpdateRequest();
 
                     byte[] fileData = null;
-                    using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
+                    if (picturePath.PostedFile != null)
                     {
-                        fileData = binaryReader.ReadBytes(picturePath.PostedFile.ContentLength);
+                        using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
+                        {
+                            fileData = binaryReader.ReadBytes(picturePath.PostedFile.ContentLength);
+                        }
+                        request.fileName = picturePath.PostedFile.FileName;
+                        request.imageData = fileData;
                     }
-
-
+                    else
+                    {
+                        request.imageData = fileData;
+                        request.fileName = "";
+                    }
                     request.empData = b;
-                    request.fileName = picturePath.PostedFile.FileName;
-                    request.imageData = fileData;
+                   
+                    
 
                     PostResponse<Employee> r = _employeeService.AddOrUpdateEmployeeWithPhoto(request);
 
@@ -534,31 +550,13 @@ namespace AionHR.Web.UI.Forms
                     else
                     {
 
-                        b.branchName = branchId.SelectedItem.Text;
-                        b.caName = caId.SelectedItem.Text;
-                        b.departmentName = departmentId.SelectedItem.Text;
-                        b.countryName = nationalityId.SelectedItem.Text;
-                        b.positionName = positionId.SelectedItem.Text;
-                        if (b.sponsorId.HasValue && b.sponsorId.Value > 0)
-                            b.sponsorName = sponsorId.SelectedItem.Text;
-                        b.fullName = b.firstName + " " + b.middleName + " " + b.lastName;
-
 
                         ModelProxy record = this.Store1.GetById(index);
                         BasicInfoTab.UpdateRecord(record);
-                        try
-                        {
-                            record.Set("branchName", b.branchName);
-                            record.Set("caName", b.caName);
-                            record.Set("departmentName", b.caName);
-                            record.Set("countryName", b.caName);
-                            record.Set("positionName", b.caName);
-                            record.Set("sponsorName", b.caName);
-                            record.Set("fullName", b.fullName);
-
-                        }
-                        catch { }
-
+                        record.Set("branchName", b.branchName);
+                        record.Set("departmentName", b.departmentName);
+                        record.Set("positionName", b.positionName);
+                        record.Set("fullName", b.fullName);
                         record.Commit();
                         Notification.Show(new NotificationConfig
                         {
@@ -594,5 +592,7 @@ namespace AionHR.Web.UI.Forms
         {
 
         }
+
+        
     }
 }

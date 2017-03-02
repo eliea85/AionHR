@@ -85,7 +85,7 @@
                             <Items>
                                 <ext:FormPanel runat="server" ID="filtersForm" Layout="HBoxLayout">
                                     <Items>
-                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="branchId" Name="branchId" FieldLabel="<%$ Resources:FieldBranch%>" SimpleSubmit="true">
+                                        <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="branchId" Name="branchId" FieldLabel="<%$ Resources:FieldBranch%>" SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="branchStore">
                                                     <Model>
@@ -108,7 +108,7 @@
                                                 </Select>
                                             </DirectEvents>
                                         </ext:ComboBox>
-                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="departmentId" Name="departmentId" FieldLabel="<%$ Resources:FieldDepartment%>" SimpleSubmit="true">
+                                        <ext:ComboBox runat="server"  ValueField="recordId" DisplayField="name" ID="departmentId" Name="departmentId" FieldLabel="<%$ Resources:FieldDepartment%>" SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="departmentStore">
                                                     <Model>
@@ -184,7 +184,7 @@
                                     </DirectEvents>
                                 </ext:Button>
                                 <ext:ToolbarFill ID="ToolbarFillExport" runat="server" />
-                                <ext:TextField ID="searchTrigger" runat="server" EnableKeyEvents="true" Width="180">
+                                <ext:TextField Visible="false" ID="searchTrigger" runat="server" EnableKeyEvents="true" Width="180">
                                     <Triggers>
                                         <ext:FieldTrigger Icon="Search" />
                                     </Triggers>

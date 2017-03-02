@@ -65,7 +65,7 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-             
+
 
 
             }
@@ -113,7 +113,7 @@ namespace AionHR.Web.UI.Forms
 
             }
         }
-      
+
 
 
         protected void PoPuP(object sender, DirectEventArgs e)
@@ -132,7 +132,7 @@ namespace AionHR.Web.UI.Forms
                     RecordResponse<Employee> response = _employeeService.Get<Employee>(r);
                     BasicInfoTab.Reset();
                     picturePath.Clear();
-                    
+
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     InitCombos();
@@ -437,9 +437,17 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    PostRequest<Employee> request = new PostRequest<Employee>();
-                    request.entity = b;
-                    PostResponse<Employee> r = _employeeService.AddOrUpdate<Employee>(request);
+                    byte[] fileData = null;
+                    using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
+                    {
+                        fileData = binaryReader.ReadBytes(picturePath.PostedFile.ContentLength);
+                    }
+                    EmployeeAddOrUpdateRequest request = new EmployeeAddOrUpdateRequest();
+
+                    request.empData = b;
+                    request.fileName = picturePath.PostedFile.FileName;
+                    request.imageData = fileData;
+                    PostResponse<Employee> r = _employeeService.AddOrUpdateEmployeeWithPhoto(request);
                     b.recordId = r.recordId;
 
                     //check if the insert failed
@@ -452,7 +460,17 @@ namespace AionHR.Web.UI.Forms
                     }
                     else
                     {
-
+                        try
+                        {
+                            b.branchName = branchId.SelectedItem.Text;
+                            b.caName = caId.SelectedItem.Text;
+                            b.departmentName = departmentId.SelectedItem.Text;
+                            b.countryName = nationalityId.SelectedItem.Text;
+                            b.positionName = positionId.SelectedItem.Text;
+                            b.sponsorName = sponsorId.SelectedItem.Text;
+                            b.fullName = b.firstName + b.middleName + b.lastName;
+                        }
+                        catch { }
                         //Add this record to the store 
                         this.Store1.Insert(0, b);
 
@@ -516,9 +534,31 @@ namespace AionHR.Web.UI.Forms
                     else
                     {
 
+                        b.branchName = branchId.SelectedItem.Text;
+                        b.caName = caId.SelectedItem.Text;
+                        b.departmentName = departmentId.SelectedItem.Text;
+                        b.countryName = nationalityId.SelectedItem.Text;
+                        b.positionName = positionId.SelectedItem.Text;
+                        if (b.sponsorId.HasValue && b.sponsorId.Value > 0)
+                            b.sponsorName = sponsorId.SelectedItem.Text;
+                        b.fullName = b.firstName + " " + b.middleName + " " + b.lastName;
+
 
                         ModelProxy record = this.Store1.GetById(index);
                         BasicInfoTab.UpdateRecord(record);
+                        try
+                        {
+                            record.Set("branchName", b.branchName);
+                            record.Set("caName", b.caName);
+                            record.Set("departmentName", b.caName);
+                            record.Set("countryName", b.caName);
+                            record.Set("positionName", b.caName);
+                            record.Set("sponsorName", b.caName);
+                            record.Set("fullName", b.fullName);
+
+                        }
+                        catch { }
+
                         record.Commit();
                         Notification.Show(new NotificationConfig
                         {

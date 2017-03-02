@@ -338,7 +338,7 @@ namespace AionHR.Web.UI.Forms
                     {
                         //Show an error saving...
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
+                        X.Msg.Alert(Resources.Common.ErrorSavingRecord,r.Message ).Show();
                         return;
                     }
                     else
@@ -368,7 +368,7 @@ namespace AionHR.Web.UI.Forms
                 {
                     //Error exception displaying a messsage box
                     X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
+                    X.Msg.Alert(Resources.Common.ErrorSavingRecord,ex.Message ).Show();
                 }
 
 
@@ -390,7 +390,7 @@ namespace AionHR.Web.UI.Forms
                     if (!r.Success)//it maybe another check
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                        X.Msg.Alert(Resources.Common.ErrorUpdatingRecord, r.Message).Show();
                         return;
                     }
                     else
@@ -415,7 +415,7 @@ namespace AionHR.Web.UI.Forms
                 catch (Exception ex)
                 {
                     X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                    X.Msg.Alert(Resources.Common.ErrorUpdatingRecord, ex.Message ).Show();
                 }
             }
         }

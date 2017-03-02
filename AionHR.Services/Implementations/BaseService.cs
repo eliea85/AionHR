@@ -28,7 +28,17 @@ namespace AionHR.Services.Implementations
         protected TResponse CreateServiceResponse<TResponse>(BaseWebServiceResponse webResponse) where TResponse : ResponseBase, new()
         {
             TResponse response = new TResponse();
-            response.Success = webResponse != null && webResponse.statusId == "1";
+            if(webResponse == null)
+            {
+                response.Success = false;
+                response.Message = "Unknown Error!";
+            }
+            else
+            {
+                response.Success = webResponse.statusId == "1";
+                response.Message = webResponse.message;
+            }
+            
             return response;
         }
 

@@ -722,7 +722,7 @@ namespace AionHR.Web.UI.Forms
             if (!response.Success)//it maybe another check
             {
                 X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                X.Msg.Alert(Resources.Common.ErrorUpdatingRecord,response.Message).Show();
                 return;
             }
 

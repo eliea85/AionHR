@@ -85,7 +85,7 @@
                     Frame="true"
                     BodyPadding="20"
 
-                    DefaultButton="btnLogin" Border="false" Shadow="true" DefaultAnchor="100%">
+                    DefaultButton="btnLogin" Border="false" Shadow="true" >
                     
                     <Items>
                           <ext:TextField

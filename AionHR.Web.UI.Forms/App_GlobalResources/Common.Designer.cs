@@ -142,6 +142,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attendance Day.
+        /// </summary>
+        internal static string AttendanceDay {
+            get {
+                return ResourceManager.GetString("AttendanceDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Attendance Schedule.
         /// </summary>
         internal static string AttendanceSchedule {

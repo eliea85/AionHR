@@ -34,6 +34,7 @@ namespace AionHR.Repository.WebService.Repositories
             ChildGetAllLookup.Add(typeof(CalendarYear), "qryCY");
             ChildGetAllLookup.Add(typeof(CalendarDay), "qryCD");
             ChildGetAllLookup.Add(typeof(BiometricDevice), "qryBM");
+            ChildGetAllLookup.Add(typeof(AttendanceDay), "qryAD");
 
             ChildAddOrUpdateLookup.Add(typeof(DayType), "setDT");
             ChildAddOrUpdateLookup.Add(typeof(AttendanceSchedule), "setSC");

@@ -10,6 +10,15 @@ namespace AionHR.Model.Attendance
     {
         public string dayId { get; set; }
         public int employeeId { get; set; }
+
+        public int branchId { get; set; }
+        public string fullName { get; set; }
+
+        public string departmentName { get; set; }
+        public string branchName { get; set; }
+       
+
+        public int departmentId { get; set; }
         public string checkIn { get; set; }
         public string checkOut { get; set; }
         public string workingTime { get; set; }

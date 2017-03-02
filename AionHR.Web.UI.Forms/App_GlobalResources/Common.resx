@@ -453,4 +453,7 @@
   <data name="BiometricDevices" xml:space="preserve">
     <value>Biometric Devices</value>
   </data>
+  <data name="AttendanceDay" xml:space="preserve">
+    <value>Attendance Day</value>
+  </data>
 </root>

@@ -28,7 +28,7 @@ namespace AionHR.Services.Messaging
         /// <summary>
         /// parameter list shipped with the web request
         /// </summary>
-        private Dictionary<string, string> parameters;
+        protected Dictionary<string, string> parameters;
 
         
         /// <summary>

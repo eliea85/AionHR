@@ -132,7 +132,7 @@ namespace AionHR.Web.UI.Forms
                     RecordResponse<Employee> response = _employeeService.Get<Employee>(r);
                     BasicInfoTab.Reset();
                     picturePath.Clear();
-                    picturePath.
+                    
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     InitCombos();

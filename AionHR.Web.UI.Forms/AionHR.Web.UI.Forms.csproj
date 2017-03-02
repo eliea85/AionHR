@@ -130,6 +130,7 @@
     <Content Include="Scripts\Sponsors.js" />
     <Content Include="Sponsors.aspx" />
     <Content Include="Test.aspx" />
+    <Content Include="TimeAttendanceView.aspx" />
     <Content Include="WorkingCalendars.aspx" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.Debug.config">
@@ -316,6 +317,13 @@
     <Compile Include="Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TimeAttendanceView.aspx.cs">
+      <DependentUpon>TimeAttendanceView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TimeAttendanceView.aspx.designer.cs">
+      <DependentUpon>TimeAttendanceView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -433,6 +441,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\BiometricDevices.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\TimeAttendanceView.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

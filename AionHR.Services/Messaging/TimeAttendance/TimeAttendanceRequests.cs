@@ -171,3 +171,36 @@ public class CalendarDayRecordRequest:RecordRequest
         }
     }
 }
+public class AttendnanceDayListRequest:ListRequest
+{
+    public string EmployeeId { get; set; }
+    public string DayId { get; set; }
+    public string Month { get; set; }
+    public string Year { get; set; }
+
+    public string BranchId { get; set; }
+    public string DepartmentId { get; set; }
+
+    public string SortBy { get; set; }
+
+    public override Dictionary<string, string> Parameters
+    {
+
+        get
+        {
+            parameters = new Dictionary<string, string>();
+            parameters.Add("_employeeId", EmployeeId);
+            parameters.Add("_dayId", DayId);
+            parameters.Add("_month", Month);
+            parameters.Add("_year", Year);
+            parameters.Add("_branchId", BranchId);
+            parameters.Add("_departmentId", DepartmentId);
+            parameters.Add("_size", Size);
+            parameters.Add("_sortBy", SortBy);
+            parameters.Add("_startAt", StartAt);
+
+
+            return parameters;
+        }
+    }
+}

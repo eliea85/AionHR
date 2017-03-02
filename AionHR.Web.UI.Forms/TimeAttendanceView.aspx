@@ -81,98 +81,86 @@
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
 
                     <TopBar>
-                        <ext:Toolbar ID="Toolbar1" runat="server" ClassicButtonStyle="false">
+                        <ext:Toolbar ID="Toolbar1" runat="server" ClassicButtonStyle="false" Dock="Top">
+                          
+                            <Defaults>
+                              <ext:Parameter Name="width" Value="220" Mode="Raw" />
+                                <ext:Parameter Name="labelWidth" Value="70" Mode="Raw" />
+                            </Defaults>
                             <Items>
-                                <ext:FormPanel runat="server" ID="filtersForm" Layout="HBoxLayout">
-                                    <Items>
-                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="branchId" Name="branchId" FieldLabel="<%$ Resources:FieldBranch%>" SimpleSubmit="true">
-                                            <Store>
-                                                <ext:Store runat="server" ID="branchStore">
-                                                    <Model>
-                                                        <ext:Model runat="server">
-                                                            <Fields>
-                                                                <ext:ModelField Name="recordId" />
-                                                                <ext:ModelField Name="name" />
-                                                            </Fields>
-                                                        </ext:Model>
-                                                    </Model>
-                                                </ext:Store>
-                                            </Store>
-                                           <DirectEvents>
-                                                <Select OnEvent="SaveNewRecord" Failure="Ext.MessageBox.alert('#{titleSavingError}.value', '#{titleSavingErrorMessage}.value');">
+                                <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="branchId" Name="branchId" FieldLabel="<%$ Resources:FieldBranch%>">
+                                    <Store>
+                                        <ext:Store runat="server" ID="branchStore">
+                                            <Model>
+                                                <ext:Model runat="server">
+                                                    <Fields>
+                                                        <ext:ModelField Name="recordId" />
+                                                        <ext:ModelField Name="name" />
+                                                    </Fields>
+                                                </ext:Model>
+                                            </Model>
+                                        </ext:Store>
+                                    </Store>
+                                    <Listeners>
+                                        <Select Handler="#{Store1}.reload()" />
+                                    </Listeners>
 
-                                                    <ExtraParams>
+                                </ext:ComboBox>
+                                
+                                <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="departmentId" Name="departmentId" FieldLabel="<%$ Resources:FieldDepartment%>">
+                                    <Store>
+                                        <ext:Store runat="server" ID="departmentStore">
+                                            <Model>
+                                                <ext:Model runat="server">
+                                                    <Fields>
+                                                        <ext:ModelField Name="recordId" />
+                                                        <ext:ModelField Name="name" />
+                                                    </Fields>
+                                                </ext:Model>
+                                            </Model>
+                                        </ext:Store>
+                                    </Store>
+                                    <Listeners>
+                                        <Select Handler="#{Store1}.reload()" />
+                                    </Listeners>
 
-                                                        <ext:Parameter Name="values" Value="#{filtersForm}.getValues(false, false, false, true)" Mode="Raw" Encode="true" />
-                                                    </ExtraParams>
-                                                </Select>
-                                            </DirectEvents>
-                                        </ext:ComboBox>
-                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="departmentId" Name="departmentId" FieldLabel="<%$ Resources:FieldDepartment%>" SimpleSubmit="true">
-                                            <Store>
-                                                <ext:Store runat="server" ID="departmentStore">
-                                                    <Model>
-                                                        <ext:Model runat="server">
-                                                            <Fields>
-                                                                <ext:ModelField Name="recordId" />
-                                                                <ext:ModelField Name="name" />
-                                                            </Fields>
-                                                        </ext:Model>
-                                                    </Model>
-                                                </ext:Store>
-                                            </Store>
-                                           
-                                            <DirectEvents>
-                                                <Select OnEvent="SaveNewRecord" Failure="Ext.MessageBox.alert('#{titleSavingError}.value', '#{titleSavingErrorMessage}.value');">
-
-                                                    <ExtraParams>
-
-                                                        <ext:Parameter Name="values" Value="#{filtersForm}.getValues(false, false, false, true)" Mode="Raw" Encode="true" />
-                                                    </ExtraParams>
-                                                </Select>
-                                            </DirectEvents>
-                                        </ext:ComboBox>
-                                        <ext:ComboBox runat="server" ID="employeeId"
-                                            DisplayField="fullName"
-                                            ValueField="recordId"
-                                            TypeAhead="false"
-                                            FieldLabel="<%$ Resources: FieldEmployee%>"
-                                            HideTrigger="true" SubmitValue="true"
-                                            MinChars="3"
-                                            TriggerAction="Query" ForceSelection="false">
-                                            <Store>
-                                                <ext:Store runat="server" ID="EmployeeStore" AutoLoad="false">
-                                                    <Model>
-                                                        <ext:Model runat="server">
-                                                            <Fields>
-                                                                <ext:ModelField Name="recordId" />
-                                                                <ext:ModelField Name="fullName" />
-                                                            </Fields>
-                                                        </ext:Model>
-                                                    </Model>
-                                                    <Proxy>
-                                                        <ext:PageProxy DirectFn="App.direct.FillEmployee"></ext:PageProxy>
-                                                    </Proxy>
-
-                                                </ext:Store>
-
-                                            </Store>
-                                         <DirectEvents>
-                                                <Select OnEvent="SaveNewRecord" Failure="Ext.MessageBox.alert('#{titleSavingError}.value', '#{titleSavingErrorMessage}.value');">
-
-                                                    <ExtraParams>
-
-                                                        <ext:Parameter Name="values" Value="#{filtersForm}.getValues(false, false, false, true)" Mode="Raw" Encode="true" />
-                                                    </ExtraParams>
-                                                </Select>
-                                            </DirectEvents>
-                                        </ext:ComboBox>
-                                        <ext:DateField runat="server" ID="dayId" />
-                                    </Items>
-                                </ext:FormPanel>
+                                </ext:ComboBox>
+                                <ext:ComboBox runat="server" ID="employeeId"
+                                    DisplayField="fullName"
+                                    ValueField="recordId"
+                                    TypeAhead="false"
+                                    FieldLabel="<%$ Resources: FieldEmployee%>"
+                                    HideTrigger="true" SubmitValue="true"
+                                    MinChars="3"
+                                    TriggerAction="Query" ForceSelection="false">
+                                    <Store>
+                                        <ext:Store runat="server" ID="EmployeeStore" AutoLoad="false">
+                                            <Model>
+                                                <ext:Model runat="server">
+                                                    <Fields>
+                                                        <ext:ModelField Name="recordId" />
+                                                        <ext:ModelField Name="fullName" />
+                                                    </Fields>
+                                                </ext:Model>
+                                            </Model>
+                                            <Proxy>
+                                                <ext:PageProxy DirectFn="App.direct.FillEmployee"></ext:PageProxy>
+                                            </Proxy>
+                                        </ext:Store>
+                                    </Store>
+                                    <Listeners>
+                                        <Select Handler="#{Store1}.reload()" />
+                                    </Listeners>
+                                </ext:ComboBox>
+                                <ext:DateField runat="server" ID="dayId" FieldLabel="Date ">
+                                    <Listeners>
+                                        <Change Handler="#{Store1}.reload()" />
+                                    </Listeners>
+                                </ext:DateField>
 
 
-                                <ext:ToolbarSeparator></ext:ToolbarSeparator>
+
+
                                 <ext:Button Visible="false" ID="btnDeleteSelected" runat="server" Text="<%$ Resources:Common , DeleteAll %>" Icon="Delete">
                                     <Listeners>
                                         <Click Handler="CheckSession();"></Click>
@@ -184,7 +172,7 @@
                                     </DirectEvents>
                                 </ext:Button>
                                 <ext:ToolbarFill ID="ToolbarFillExport" runat="server" />
-                                <ext:TextField ID="searchTrigger" runat="server" EnableKeyEvents="true" Width="180">
+                                <ext:TextField ID="searchTrigger" runat="server" EnableKeyEvents="true" Width="150">
                                     <Triggers>
                                         <ext:FieldTrigger Icon="Search" />
                                     </Triggers>
@@ -205,7 +193,7 @@
                             <ext:Column ID="ColDay" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDay%>" DataIndex="dayId" Flex="1" Hideable="false" />
                             <ext:Column ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="fullName" Flex="3" Hideable="false">
                             </ext:Column>
-                            <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="2" Hideable="false" />
+                            <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="2" Hideable="true" />
                             <ext:Column ID="ColDepartmentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDepartment%>" DataIndex="departmentName" Flex="2" Hideable="false">
                             </ext:Column>
                             <ext:Column ID="ColCheckIn" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckIn%>" DataIndex="checkIn" Flex="2" Hideable="false" />

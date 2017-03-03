@@ -58,7 +58,8 @@ namespace AionHR.Web.UI.Forms
             }
         }
 
-        protected void login_Click(object sender, EventArgs e)
+        [DirectMethod]
+        public string Authenticate(string accountName ,string userName, string password)
         {
             AuthenticateRequest request = new AuthenticateRequest();
             request.Account = tbAccountName.Text;
@@ -72,16 +73,20 @@ namespace AionHR.Web.UI.Forms
                     _systemService.SessionHelper.SetLanguage("ar");
                 else
                     _systemService.SessionHelper.SetLanguage("en");
-                
-                    Response.Redirect("Default.aspx", true);
+
+                return "1";//Succeded
 
             }
             else
             {
                 lblError.Text = (String)GetLocalResourceObject(response.Message);
+                return "error";//Error in authentication
 
             }
         }
+
+
+        
 
         [DirectMethod]
         public object DirectCheckField(string value)

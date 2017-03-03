@@ -127,19 +127,19 @@
 
                             <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
 
-                            <ext:Column CellCls="cellLink" Sortable="true" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
+                            <ext:Column CellCls="cellLink" Sortable="true" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="2" Hideable="false">
                                 <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
                                 </Renderer>
                             </ext:Column>
 
-                            <ext:Column ID="Colfci_min_ot" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldfci_min_ot%>" DataIndex="fci_min_ot" Hideable="false" Width="75" Align="Center" />
-                            <ext:Column ID="Colfci_max_lt" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldfci_max_lt%>" DataIndex="fci_max_lt" Hideable="false" Width="75" Align="Center" />
-                            <ext:Column ID="Collco_max_el" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldlco_max_el%>" DataIndex="lco_max_el" Hideable="false" Width="75" Align="Center" />
-                            <ext:Column ID="Collco_min_ot" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldlco_min_ot%>" DataIndex="lco_min_ot" Hideable="false" Width="75" Align="Center" />
-                            <ext:Column ID="Collco_max_ot" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldlco_max_ot%>" DataIndex="lco_max_ot" Hideable="false" Width="75" Align="Center" />
+                            <ext:Column ID="Colfci_min_ot" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldfci_min_ot%>" DataIndex="fci_min_ot" Hideable="false" Width="75" Align="Center" Flex="1" />
+                            <ext:Column ID="Colfci_max_lt" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldfci_max_lt%>" DataIndex="fci_max_lt" Hideable="false" Width="75" Align="Center" Flex="1" />
+                            <ext:Column ID="Collco_max_el" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldlco_max_el%>" DataIndex="lco_max_el" Hideable="false" Width="75" Align="Center" Flex="1" />
+                            <ext:Column ID="Collco_min_ot" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldlco_min_ot%>" DataIndex="lco_min_ot" Hideable="false" Width="75" Align="Center" Flex="1" />
+                            <ext:Column ID="Collco_max_ot" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldlco_max_ot%>" DataIndex="lco_max_ot" Hideable="false" Width="75" Align="Center"  Flex="1"/>
 
 
-                            <ext:Column runat="server"
+                            <ext:Column runat="server" 
                                 ID="colEdit" Visible="false"
                                 Text="<%$ Resources:Common, Edit %>"
                                 Width="60"
@@ -166,7 +166,7 @@
                                 <Renderer Fn="deleteRender" />
 
                             </ext:Column>
-                            <ext:Column runat="server"
+                            <ext:Column runat="server" 
                                 ID="colAttach"
                                 Text="<%$ Resources:Common, Attach %>"
                                 Hideable="false"
@@ -178,7 +178,7 @@
                                 Resizable="false">
                                 <Renderer Fn="attachRender" />
                             </ext:Column>
-                            <ext:Column runat="server"
+                            <ext:Column runat="server" Flex="1"
                                 ID="colDetails"
                                 Text="<%$ Resources:EditDaysButton %>"
                                 Hideable="false"
@@ -349,11 +349,11 @@
                             <Items>
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" Disabled="true" DataIndex="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" DataIndex="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                <ext:NumberField ID="fci_min_ot" runat="server" FieldLabel="<%$ Resources:Fieldfci_min_ot%>" DataIndex="fci_min_ot" AllowBlank="true" />
-                                <ext:NumberField ID="fci_max_lt" runat="server" FieldLabel="<%$ Resources:Fieldfci_max_lt%>" DataIndex="fci_max_lt" AllowBlank="true" />
-                                <ext:NumberField ID="lco_max_el" runat="server" FieldLabel="<%$ Resources:Fieldlco_max_el%>" DataIndex="lco_max_el" AllowBlank="true" />
-                                <ext:NumberField ID="lco_min_ot" runat="server" FieldLabel="<%$ Resources:Fieldlco_min_ot%>" DataIndex="lco_min_ot" AllowBlank="true" />
-                                <ext:NumberField ID="lco_max_ot" runat="server" FieldLabel="<%$ Resources:Fieldlco_max_ot%>" DataIndex="lco_max_ot" AllowBlank="true" />
+                                <ext:NumberField ID="fci_min_ot" runat="server" FieldLabel="<%$ Resources:Fieldfci_min_ot%>" DataIndex="fci_min_ot" AllowBlank="true"  EmptyText="0" />
+                                <ext:NumberField ID="fci_max_lt" runat="server" FieldLabel="<%$ Resources:Fieldfci_max_lt%>" DataIndex="fci_max_lt" AllowBlank="true"  EmptyText="0"/>
+                                <ext:NumberField ID="lco_max_el" runat="server" FieldLabel="<%$ Resources:Fieldlco_max_el%>" DataIndex="lco_max_el" AllowBlank="true" EmptyText="0" />
+                                <ext:NumberField ID="lco_min_ot" runat="server" FieldLabel="<%$ Resources:Fieldlco_min_ot%>" DataIndex="lco_min_ot" AllowBlank="true"  EmptyText="0"/>
+                                <ext:NumberField ID="lco_max_ot" runat="server" FieldLabel="<%$ Resources:Fieldlco_max_ot%>" DataIndex="lco_max_ot" AllowBlank="true" EmptyText="0" />
 
 
                             </Items>

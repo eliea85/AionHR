@@ -29,7 +29,7 @@
             RemoteSort="True"
             RemoteFilter="true"
             OnReadData="Store1_RefreshData"
-            PageSize="10" IDMode="Explicit" Namespace="App">
+            PageSize="30" IDMode="Explicit" Namespace="App">
             <Proxy>
                 <ext:PageProxy>
                     <Listeners>
@@ -120,13 +120,13 @@
 
                             <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
                             <ext:Column ID="ColReference" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference%>" DataIndex="reference" Flex="1" Hideable="false" />
-                            <ext:Column CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
+                            <ext:Column CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="2" Hideable="false">
                                 <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
                                 </Renderer>
                             </ext:Column>
                             <ext:Column Visible="false" ID="ColrefererId" MenuDisabled="true" runat="server" DataIndex="referToPositionId" Flex="1" Hideable="false" />
                             <ext:Column Visible="true" ID="ColrefererName" MenuDisabled="true" runat="server" DataIndex="referToPositionName" Text="<%$ Resources: FieldReferer %>" Flex="1" Hideable="false" />
-                            <ext:Column ID="ColDescription" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDescription %>" DataIndex="description" Hideable="false" />
+                            <ext:Column ID="ColDescription" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDescription %>" Flex="1" DataIndex="description" Hideable="false" />
                           
 
 
@@ -262,7 +262,7 @@
                             <Items>
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" DataIndex="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" DataIndex="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources: FieldReference %>" DataIndex="reference" AllowBlank="false" />
+                                <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources: FieldReference %>" DataIndex="reference" />
                                 <ext:TextField ID="description" runat="server" FieldLabel="<%$ Resources: FieldDescription %>" DataIndex="description" AllowBlank="true" />
 
 

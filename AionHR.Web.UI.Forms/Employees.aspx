@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
     <script type="text/javascript" src="Scripts/Branches.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
-    
+
 
 </head>
-<body style="background: url(Images/bg.png) repeat;" >
+<body style="background: url(Images/bg.png) repeat;">
     <form id="Form1" runat="server">
         <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="1200000" />
 
@@ -30,7 +30,7 @@
             RemoteSort="True"
             RemoteFilter="true"
             OnReadData="Store1_RefreshData"
-            PageSize="10" IDMode="Explicit" Namespace="App" IsPagingStore="true">
+            PageSize="30" IDMode="Explicit" Namespace="App" IsPagingStore="true">
             <Proxy>
                 <ext:PageProxy>
                     <Listeners>
@@ -49,7 +49,7 @@
                         <ext:ModelField Name="positionName" />
                         <ext:ModelField Name="branchName" />
                         <ext:ModelField Name="hireDate" />
-                       
+
 
 
 
@@ -79,7 +79,7 @@
                     Border="false"
                     Icon="User"
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
-                    
+
                     <TopBar>
                         <ext:Toolbar ID="Toolbar1" runat="server" ClassicButtonStyle="false">
                             <Items>
@@ -111,6 +111,7 @@
                                     </Triggers>
                                     <Listeners>
                                         <KeyPress Fn="enterKeyPressSearchHandler" Buffer="100" />
+                                        <FocusLeave Handler="#{Store1}.reload();" />
                                         <TriggerClick Handler="#{Store1}.reload();" />
                                     </Listeners>
                                 </ext:TextField>
@@ -133,8 +134,10 @@
                             </ext:Column>
                             <ext:Column ID="ColPositionName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldPosition%>" DataIndex="positionName" Flex="2" Hideable="false" />
                             <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="2" Hideable="false" />
-                            <ext:Column ID="ColHireDate" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHireDate%>" DataIndex="hireDate" Flex="2" Hideable="false" />
-                          
+                            <ext:Column ID="ColHireDate" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHireDate%>" DataIndex="hireDate" Flex="2" Hideable="false">
+                                <Renderer Handler="var s = record.data['hireDate'].split('T'); return s[0];"></Renderer>
+                            </ext:Column>
+
 
                             <ext:Column runat="server"
                                 ID="colEdit" Visible="false"
@@ -187,7 +190,7 @@
                             <Items>
                                 <ext:StatusBar ID="StatusBar1" runat="server" />
                                 <ext:ToolbarFill />
-                              
+
                             </Items>
                         </ext:Toolbar>
 
@@ -219,9 +222,9 @@
                         <Render Handler="CheckSession(); this.on('cellclick', cellClick);" />
                     </Listeners>
                     <DirectEvents>
-                       
+
                         <CellClick OnEvent="PoPuP">
-                            
+
                             <EventMask ShowMask="true" />
                             <ExtraParams>
                                 <ext:Parameter Name="id" Value="record.getId()" Mode="Raw" />
@@ -234,7 +237,7 @@
                         <ext:GridView ID="GridView1" runat="server" />
                     </View>
 
-                 
+
                     <SelectionModel>
                         <ext:RowSelectionModel ID="rowSelectionModel" runat="server" Mode="Single" StopIDModeInheritance="true" />
                         <%--<ext:CheckboxSelectionModel ID="CheckboxSelectionModel1" runat="server" Mode="Multi" StopIDModeInheritance="true" />--%>
@@ -272,15 +275,18 @@
                                 <ext:Panel runat="server">
                                     <Items>
                                         <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
-                                        <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="reference" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
+                                        <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="reference" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="firstName" runat="server" FieldLabel="<%$ Resources:FieldFirstName%>" Name="firstName" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                        <ext:TextField ID="middleName" runat="server" FieldLabel="<%$ Resources:FieldMiddleName%>" Name="middleName" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                        <ext:TextField ID="lastName" runat="server" FieldLabel="<%$ Resources:FieldLastName%>" Name="lastName"  BlankText="<%$ Resources:Common, MandatoryField%>" />
+                                        <ext:TextField ID="middleName" runat="server" FieldLabel="<%$ Resources:FieldMiddleName%>" Name="middleName" BlankText="<%$ Resources:Common, MandatoryField%>" />
+                                        <ext:TextField ID="lastName" runat="server" FieldLabel="<%$ Resources:FieldLastName%>" Name="lastName" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="familyName" runat="server" FieldLabel="<%$ Resources:FieldFamilyName%>" Name="familyName" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                        <ext:TextField ID="homeEmail" runat="server" FieldLabel="<%$ Resources:FieldHomeEmail%>" Name="homeMail" Vtype="email"  BlankText="<%$ Resources:Common, MandatoryField%>" />
+                                        <ext:TextField ID="homeEmail" runat="server" FieldLabel="<%$ Resources:FieldHomeEmail%>" Name="homeMail" Vtype="email" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="workEmail" runat="server" FieldLabel="<%$ Resources:FieldWorkEmail%>" Name="workMail" Vtype="email" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                        <ext:TextField ID="mobile" runat="server" FieldLabel="<%$ Resources:FieldMobile%>" Name="mobile"  AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                        
+                                        <ext:TextField ID="mobile" runat="server" FieldLabel="<%$ Resources:FieldMobile%>" Name="mobile" BlankText="<%$ Resources:Common, MandatoryField%>">
+                                            <Plugins>
+                                                <ext:InputMask runat="server" Mask="99999?9999" />
+                                            </Plugins>
+                                        </ext:TextField>
                                         <ext:RadioGroup ID="gender" AllowBlank="false" runat="server" GroupName="gender" FieldLabel="<%$ Resources:FieldGender%>">
                                             <Items>
                                                 <ext:Radio runat="server" ID="gender0" Name="gender" InputValue="0" BoxLabel="<%$ Resources:Common ,Male%>" />
@@ -298,7 +304,7 @@
                                                 <ext:ListItem Text="<%$ Resources:Common, Religion6%>" Value="6"></ext:ListItem>
                                             </Items>
                                         </ext:ComboBox>
-                                        <ext:DateField 
+                                        <ext:DateField
                                             runat="server"
                                             Name="birthDate"
                                             FieldLabel="<%$ Resources:FieldDateOfBirth%>"
@@ -308,8 +314,8 @@
                                 </ext:Panel>
                                 <ext:Panel runat="server">
                                     <Items>
-                                        
-                                        <ext:ComboBox runat="server" ValueField="recordId" AllowBlank="false" DisplayField="name" ID="nationalityId" Name="nationalityId" FieldLabel="<%$ Resources:FieldNationality%>" SimpleSubmit="true">
+
+                                        <ext:ComboBox runat="server" ValueField="recordId" AllowBlank="false" DisplayField="name" ID="nationalityId" Name="nationalityId" FieldLabel="<%$ Resources:FieldNationality%>" SimpleSubmit="true" >
                                             <Store>
                                                 <ext:Store runat="server" ID="NationalityStore">
                                                     <Model>
@@ -322,8 +328,12 @@
                                                     </Model>
                                                 </ext:Store>
                                             </Store>
+                                            <RightButtons>
+                                                <ext:Button runat="server" Icon="Add">
+                                                </ext:Button>
+                                            </RightButtons>
                                         </ext:ComboBox>
-                                        <ext:ComboBox ValueField="recordId" AllowBlank="false" DisplayField="name" runat="server" ID="positionId" Name="positionId" FieldLabel="<%$ Resources:FieldPosition%>"  SimpleSubmit="true">
+                                        <ext:ComboBox ValueField="recordId" AllowBlank="false" DisplayField="name" runat="server" ID="positionId" Name="positionId" FieldLabel="<%$ Resources:FieldPosition%>" SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="positionStore">
                                                     <Model>
@@ -337,7 +347,7 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="departmentId" Name="departmentId" FieldLabel="<%$ Resources:FieldDepartment%>"  SimpleSubmit="true">
+                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="departmentId" Name="departmentId" FieldLabel="<%$ Resources:FieldDepartment%>" SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="departmentStore">
                                                     <Model>
@@ -351,7 +361,7 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="branchId" Name="branchId" FieldLabel="<%$ Resources:FieldBranch%>"  SimpleSubmit="true">
+                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="branchId" Name="branchId" FieldLabel="<%$ Resources:FieldBranch%>" SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="BranchStore">
                                                     <Model>
@@ -365,13 +375,13 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                         <ext:DateField 
+                                        <ext:DateField
                                             runat="server"
                                             Name="contractEndingDate"
                                             FieldLabel="<%$ Resources:ContractEndingDate%>"
                                             MsgTarget="Side"
                                             AllowBlank="false" />
-                                         <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="sponsorId" Name="sponsorId" FieldLabel="<%$ Resources:FieldSponsor%>"  SimpleSubmit="true">
+                                        <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="sponsorId" Name="sponsorId" FieldLabel="<%$ Resources:FieldSponsor%>" SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="SponsorStore">
                                                     <Model>
@@ -385,7 +395,7 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="vsId" Name="vsId" FieldLabel="<%$ Resources:FieldVacationSchedule%>"  SimpleSubmit="true">
+                                        <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="vsId" Name="vsId" FieldLabel="<%$ Resources:FieldVacationSchedule%>" SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="VacationScheduleStore">
                                                     <Model>
@@ -399,7 +409,7 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                         <ext:ComboBox runat="server" ID="caId" AllowBlank="false" ValueField="recordId" DisplayField="name" Name="caId" FieldLabel="<%$ Resources:FieldWorkingCalendar%>"  SimpleSubmit="true">
+                                        <ext:ComboBox runat="server" ID="caId" AllowBlank="false" ValueField="recordId" DisplayField="name" Name="caId" FieldLabel="<%$ Resources:FieldWorkingCalendar%>" SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="CalendarStore">
                                                     <Model>
@@ -415,18 +425,18 @@
                                         </ext:ComboBox>
                                         <ext:TextField ID="birthPlace" runat="server" FieldLabel="<%$ Resources:FieldBirthPlace%>" Name="placeOfBirth" AllowBlank="false" />
 
-                                       
+
                                         <ext:Checkbox ID="isInactive" runat="server" FieldLabel="<%$ Resources: FieldIsInactive%>" Name="isInactive" InputValue="true" />
                                     </Items>
                                 </ext:Panel>
                                 <ext:Panel runat="server">
                                     <Items>
-                                        <ext:Image runat="server" ID="imgControl" Width="200" Height="200"  >
+                                        <ext:Image runat="server" ID="imgControl" Width="200" Height="200">
                                             <Listeners>
                                                 <Click Handler="App.picturePath" />
                                             </Listeners>
-                                            </ext:Image>
-                                        <ext:FileUploadField ID="picturePath" runat="server"   ButtonOnly="true"  />
+                                        </ext:Image>
+                                        <ext:FileUploadField ID="picturePath" runat="server" ButtonOnly="true" />
                                     </Items>
                                 </ext:Panel>
                             </Items>

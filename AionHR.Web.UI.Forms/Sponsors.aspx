@@ -132,7 +132,7 @@
                             <ext:Column  ID="colPhone" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldPhone%>" DataIndex="phone" Flex="1" Hideable="false"/>
                             <ext:Column  ID="ColMobile" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldMobile%>" DataIndex="mobile" Flex="1" Hideable="false"/>
                             <ext:Column  ID="ColFax" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldFax%>" DataIndex="fax" Flex="1" Hideable="false"/>
-                            <ext:Column  ID="ColEmail" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldEmail%>" DataIndex="email" Flex="1" Hideable="false"/>
+                            <ext:Column  ID="ColEmail" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldEmail%>"  DataIndex="email" Flex="1" Hideable="false"/>
 
 
 
@@ -271,9 +271,17 @@
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                 <ext:TextField ID="address" runat="server" FieldLabel="<%$ Resources:FieldAddress%>" Name="address" />
                                 <ext:TextField ID="city" runat="server" FieldLabel="<%$ Resources:FieldCity%>" Name="city" />
-                                <ext:TextField ID="mobile" runat="server" FieldLabel="<%$ Resources:FieldMobile%>" Name="mobile" />
-                                <ext:TextField ID="phone" runat="server" FieldLabel="<%$ Resources:FieldPhone%>" Name="phone" />
-                                <ext:TextField ID="email" runat="server" FieldLabel="<%$ Resources:FieldEmail%>" Name="email" />
+                                <ext:TextField ID="mobile" runat="server" FieldLabel="<%$ Resources:FieldMobile%>" Name="mobile" >
+                                    <Plugins>
+                                        <ext:InputMask Mask="99999?99999" />
+                                    </Plugins>
+                                    </ext:TextField>
+                                <ext:TextField ID="phone" runat="server" FieldLabel="<%$ Resources:FieldPhone%>" Name="phone" >
+                                     <Plugins>
+                                        <ext:InputMask Mask="99999?99999" />
+                                    </Plugins>
+                                    </ext:TextField>
+                                <ext:TextField Vtype="email" ID="email" runat="server" FieldLabel="<%$ Resources:FieldEmail%>" Name="email" />
                                 <ext:TextField ID="fax" runat="server" FieldLabel="<%$ Resources:FieldFax%>" Name="fax" />
                                
 
@@ -285,7 +293,7 @@
                 </ext:TabPanel>
             </Items>
             <Buttons>
-                <ext:Button ID="SaveButton" runat="server" Text="<%$ Resources:Common, Save %>" Icon="Disk">
+                <ext:Button ID="SaveButton" runat="server" Text="<%$ Resources:Common, Save %>" Icon="Disk" TabIndex="1">
 
                     <Listeners>
                         <Click Handler="CheckSession(); if (!#{BasicInfoTab}.getForm().isValid()) {return false;} " />
@@ -300,7 +308,7 @@
                         </Click>
                     </DirectEvents>
                 </ext:Button>
-                <ext:Button ID="CancelButton" runat="server" Text="<%$ Resources:Common , Cancel %>" Icon="Cancel">
+                <ext:Button ID="CancelButton" runat="server" Text="<%$ Resources:Common , Cancel %>" Icon="Cancel" TabIndex="2">
                     <Listeners>
                         <Click Handler="this.up('window').hide();" />
                     </Listeners>

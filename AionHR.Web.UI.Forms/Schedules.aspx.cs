@@ -443,7 +443,7 @@ namespace AionHR.Web.UI.Forms
 
             string obj = e.ExtraParams["schedule"];
             AttendanceSchedule b = JsonConvert.DeserializeObject<AttendanceSchedule>(obj);
-            string pers = e.ExtraParams["periods"];
+            
             b.recordId = id;
             // Define the object to add or edit as null
 

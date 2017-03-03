@@ -276,8 +276,8 @@ namespace AionHR.Web.UI.Forms
             //Reset all values of the relative object
             BasicInfoTab.Reset();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            string timeZone = Session["TimeZone"] as string;
 
+            FillBranch();
             this.EditRecordWindow.Show();
         }
 

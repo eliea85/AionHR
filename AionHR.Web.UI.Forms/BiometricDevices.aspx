@@ -113,13 +113,13 @@
                         <Columns>
 
                               <ext:Column  Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" width="75" Align="Center"/>
-                          
+                          <ext:Column   ID="colReference" MenuDisabled="true" runat="server"  Text="<%$ Resources: FieldReference %>" DataIndex="reference" Flex="1" Hideable="false" width="75" Align="Center"/>
                             <ext:Column   CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
                             <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
 
                             </Renderer>
                                 </ext:Column>
-                            <ext:Column   ID="colReference" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference %>" DataIndex="reference" Hideable="false" width="75" Align="Center"/>
+                            
                            
 
                             <ext:Column runat="server"
@@ -255,7 +255,7 @@
                             <Items>
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="reference" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
+                                <ext:TextField ID="reference" AllowBlank="false" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="reference"  BlankText="<%$ Resources:Common, MandatoryField%>" />
                                    <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="branchId" Name="branchId" FieldLabel="<%$ Resources:FieldBranch%>"  SimpleSubmit="true">
                                             <Store>
                                                 <ext:Store runat="server" ID="BranchStore">

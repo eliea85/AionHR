@@ -590,7 +590,7 @@ namespace AionHR.Web.UI.Forms
 
         protected void BasicInfoTab_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         

@@ -112,7 +112,8 @@
                                     </Triggers>
                                     <Listeners>
                                         <KeyPress Fn="enterKeyPressSearchHandler" Buffer="100" />
-                                        <TriggerClick Handler="#{Store1}.reload();" />
+                                        <TriggerClick Handler="  #{Store1}.reload();" />
+                                        <FocusLeave Handler=" #{Store1}.reload();" />
                                     </Listeners>
                                 </ext:TextField>
 

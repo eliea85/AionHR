@@ -27,20 +27,21 @@ namespace AionHR.Web.UI.Forms
 
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
         IMasterService _masterService = ServiceLocator.Current.GetInstance<IMasterService>();
-        private TextField sender;
 
         protected override void InitializeCulture()
         {
 
             base.InitializeCulture();
-            //User came to arabic login so set the language to arabic           
-            _systemService.SessionHelper.SetLanguage("ar");
-            LocalisationManager.Instance.SetArabicLocalisation();
+            //User came to english login so set the language to english           
+            _systemService.SessionHelper.SetLanguage("en");
+            LocalisationManager.Instance.SetEnglishLocalisation();
 
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ResourceManager1.RegisterIcon(Icon.Tick);
+            ResourceManager1.RegisterIcon(Icon.Error);
             if (Request.QueryString["timeout"] != null && Request.QueryString["timeout"].ToString() == "yes")
             {
                 //lblError.Text = Resources.Common.SessionDisconnected;
@@ -50,29 +51,18 @@ namespace AionHR.Web.UI.Forms
                 tbAccountName.Text = Request.QueryString["account"];
                 DirectCheckField(tbAccountName.Text);
             }
-           
-            SetExtLanguage();
             if (!X.IsAjaxRequest)
             {
                 ResourceManager1.RegisterIcon(Icon.Tick);
                 ResourceManager1.RegisterIcon(Icon.Error);
             }
-
         }
 
-        private void SetExtLanguage()
-        {
-            
-                this.ResourceManager1.RTL = true;
-                this.Viewport1.RTL = true;
-
-           
-        }
-
-        protected void login_Click(object sender, EventArgs e)
+        [DirectMethod]
+        public string Authenticate(string accountName, string userName, string password)
         {
             AuthenticateRequest request = new AuthenticateRequest();
-            request.Account = tbAccountName.Text;
+
             request.UserName = tbUsername.Text;
             request.Password = tbPassword.Text;
             AuthenticateResponse response = _systemService.Authenticate(request);
@@ -84,46 +74,25 @@ namespace AionHR.Web.UI.Forms
                 else
                     _systemService.SessionHelper.SetLanguage("en");
 
-                Response.Redirect("Default.aspx", true);
+                return "1";//Succeded
 
             }
             else
             {
                 lblError.Text = (String)GetLocalResourceObject(response.Message);
-                
+                return "error";//Error in authentication
+
             }
         }
 
-        protected void CheckField(object sender, RemoteValidationEventArgs e)
-        {
-            TextField field = (TextField)sender;
-            AuthenticateRequest request = new AuthenticateRequest();
-            request.Account = field.Text;
-
-            Response<Account> response = _masterService.GetAccount(request);
-
-            if (response.Success)
-            {
-
-                e.Success = true;
-                field.IndicatorTip = (String)GetLocalResourceObject("AccountValid");
-            }
-            else
-            {
 
 
-                e.Success = false;
-                e.ErrorMessage = (String)GetLocalResourceObject(response.Message); 
 
-            }
-
-            System.Threading.Thread.Sleep(500);
-
-        }
+        [DirectMethod]
         public object DirectCheckField(string value)
         {
             //return true;
-            AuthenticateRequest request = new AuthenticateRequest();
+            GetAccountRequest request = new GetAccountRequest();
             request.Account = value;
 
             Response<Account> response = _masterService.GetAccount(request);
@@ -144,6 +113,33 @@ namespace AionHR.Web.UI.Forms
             tbAccountName.ShowIndicator();
             return response.Success;
         }
+        protected void CheckField(object sender, RemoteValidationEventArgs e)
+        {
+            TextField field = (TextField)sender;
+            GetAccountRequest request = new GetAccountRequest();
+            request.Account = field.Text;
+
+            Response<Account> response = _masterService.GetAccount(request);
+
+            if (response.Success)
+            {
+
+
+                e.Success = true;
+
+            }
+            else
+            {
+
+                e.Success = false;
+                e.ErrorMessage = "Invalid Account";//should access local resources, just didn't figure how yet , only Resources.Common is accessible
+
+            }
+            tbAccountName.ShowIndicator();
+
+        }
+
+
         protected void forgotpw_Event(object sender, EventArgs e)
         {
             Response.Redirect("~/ForgotPassword.aspx");

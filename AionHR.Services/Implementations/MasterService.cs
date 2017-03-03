@@ -23,16 +23,14 @@ namespace AionHR.Services.Implementations
 
 
 
-        public Response<Account> GetAccount(AuthenticateRequest request)
+        public Response<Account> GetAccount(GetAccountRequest request)
         {
             Response<Account> response = new Response<Account>();
             SessionHelper.ClearSession();
             SessionHelper.Set("AccountId", "0"); //To be checked as it is a strange behavior ( simulated from old code)
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("_accountName", request.Account);
-
-            var accountRecord = _accountRepository.GetRecord(headers, parameters);
+            
+            var accountRecord = _accountRepository.GetRecord(headers, request.Parameters);
             if (accountRecord == null)
             {
                 response.Success = false;
@@ -51,15 +49,14 @@ namespace AionHR.Services.Implementations
             return response;
         }
 
-        public Response<Account> RequestAccountRecovery(AuthenticateRequest request)
+        public Response<Account> RequestAccountRecovery(AccountRecoveryRequest request)
         {
             Response<Account> response;
             SessionHelper.ClearSession();
             SessionHelper.Set("AccountId", "0");
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
-            Dictionary<string, string> queryParams = new Dictionary<string, string>();
-            queryParams.Add("_email", request.UserName);
-            var webResponse=  _accountRepository.GetRecord(headers, queryParams);
+            
+            var webResponse=  _accountRepository.GetRecord(headers, request.Parameters);
             response = CreateServiceResponse<Response<Account>>(webResponse);
             if (!response.Success)
                 response.Message = "";

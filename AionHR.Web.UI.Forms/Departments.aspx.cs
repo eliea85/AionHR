@@ -48,8 +48,7 @@ namespace AionHR.Web.UI.Forms
             }
 
         }
-        BoundedComboBox parents;
-        BoundedComboBox supervisors;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -174,24 +173,7 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        private void InitCombos(Department dept)
-        {
-            parents = new BoundedComboBox("parentId", "name", "recordId", GetLocalResourceObject("FieldParentName").ToString(), "FillParent", "", GetLocalResourceObject("FieldParentName").ToString(), false);
-            supervisors = new BoundedComboBox("supervisorId", "fullName", "recordId", GetLocalResourceObject("FieldSvFullName").ToString(), "FillSupervisor", "", GetLocalResourceObject("FieldSvFullName").ToString(), true);
-            BasicInfoTab.Items.Add(parents);
-            BasicInfoTab.Items.Add(supervisors);
-            if (dept != null)
-            {
-
-                parents.Select(dept.parentId);
-                supervisors.Select(dept.supervisorId);
-            }
-            BasicInfoTab.UpdateLayout();
-            BasicInfoTab.UpdateContent();
-
-
-        }
-
+      
         /// <summary>
         /// This direct method will be called after confirming the delete
         /// </summary>
@@ -393,7 +375,7 @@ namespace AionHR.Web.UI.Forms
 
             //in this test will take a list of News
             ListRequest request = new ListRequest();
-            request.Filter = "";
+            request.Filter = searchTrigger.Text;
             ListResponse<Department> branches = _branchService.ChildGetAll<Department>(request);
             if (!branches.Success)
                 return;

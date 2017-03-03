@@ -112,7 +112,7 @@
 
                         <ext:TextField ID="tbUsername"
                             runat="server"
-                            MsgTarget="Side"
+                            MsgTarget="Side" Vtype="email"
                             BlankText="<%$ Resources:Common, MandatoryField %>"
                             AllowBlank="false"
                             FieldLabel="<%$ Resources:  UserID %>"

@@ -291,7 +291,7 @@
                                         </Click>
                                     </DirectEvents>
                                 </ext:Button>
-                                <ext:Button ID="Button5" runat="server" Text="<%$ Resources:Common , Add %>" Icon="Add">
+                                <ext:Button ID="Button5" runat="server" Text="<%$ Resources:Common , Add %>" Icon="Add" Visible="false">
                                     <Listeners>
                                         <Click Handler="CheckSession();" />
                                     </Listeners>
@@ -349,11 +349,12 @@
                             <Items>
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" Disabled="true" DataIndex="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" DataIndex="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                <ext:NumberField ID="fci_min_ot" runat="server" FieldLabel="<%$ Resources:Fieldfci_min_ot%>" DataIndex="fci_min_ot" AllowBlank="true"  EmptyText="0" />
-                                <ext:NumberField ID="fci_max_lt" runat="server" FieldLabel="<%$ Resources:Fieldfci_max_lt%>" DataIndex="fci_max_lt" AllowBlank="true"  EmptyText="0"/>
-                                <ext:NumberField ID="lco_max_el" runat="server" FieldLabel="<%$ Resources:Fieldlco_max_el%>" DataIndex="lco_max_el" AllowBlank="true" EmptyText="0" />
-                                <ext:NumberField ID="lco_min_ot" runat="server" FieldLabel="<%$ Resources:Fieldlco_min_ot%>" DataIndex="lco_min_ot" AllowBlank="true"  EmptyText="0"/>
-                                <ext:NumberField ID="lco_max_ot" runat="server" FieldLabel="<%$ Resources:Fieldlco_max_ot%>" DataIndex="lco_max_ot" AllowBlank="true" EmptyText="0" />
+                                <ext:NumberField ID="fci_min_ot" runat="server" FieldLabel="<%$ Resources:Fieldfci_min_ot%>" DataIndex="fci_min_ot" AllowBlank="false"  EmptyText="0" MinValue="0"   />
+                                   
+                                <ext:NumberField ID="fci_max_lt" runat="server" FieldLabel="<%$ Resources:Fieldfci_max_lt%>" DataIndex="fci_max_lt" AllowBlank="false"  EmptyText="0" MinValue="0" />
+                                <ext:NumberField ID="lco_max_el" runat="server" FieldLabel="<%$ Resources:Fieldlco_max_el%>" DataIndex="lco_max_el" AllowBlank="false" EmptyText="0"  MinValue="0" />
+                                <ext:NumberField ID="lco_min_ot" runat="server" FieldLabel="<%$ Resources:Fieldlco_min_ot%>" DataIndex="lco_min_ot" AllowBlank="false"  EmptyText="0" MinValue="0" />
+                                <ext:NumberField ID="lco_max_ot" runat="server" FieldLabel="<%$ Resources:Fieldlco_max_ot%>" DataIndex="lco_max_ot" AllowBlank="false" EmptyText="0"  MinValue="0" />
 
 
                             </Items>

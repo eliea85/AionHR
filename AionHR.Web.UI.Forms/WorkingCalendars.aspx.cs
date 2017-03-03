@@ -49,8 +49,7 @@ namespace AionHR.Web.UI.Forms
             }
 
         }
-        BoundedComboBox parents;
-        BoundedComboBox supervisors;
+    
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -793,6 +792,12 @@ namespace AionHR.Web.UI.Forms
             colorsStore.DataSource = schedules.Items;
             colorsStore.DataBind();
             return schedules.Items;
+        }
+
+        protected void Unnamed_Event(object sender, DirectEventArgs e)
+        {
+            LoadDayTypes();
+            legendsWindow.Show();
         }
     }
 }

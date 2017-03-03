@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
     <script type="text/javascript" src="Scripts/Branches.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
-
+     <script type="text/javascript" src="Scripts/moment.js"></script>
 
 </head>
 <body style="background: url(Images/bg.png) repeat;">
@@ -189,11 +189,13 @@
 
                     </TopBar>
 
-                    <ColumnModel ID="ColumnModel1" runat="server" SortAscText="<%$ Resources:Common , SortAscText %>" SortDescText="<%$ Resources:Common ,SortDescText  %>" SortClearText="<%$ Resources:Common ,SortClearText  %>" ColumnsText="<%$ Resources:Common ,ColumnsText  %>" EnableColumnHide="false" Sortable="false">
+                    <ColumnModel ID="ColumnModel1" runat="server" SortAscText="<%$ Resources:Common , SortAscText %>" SortDescText="<%$ Resources:Common ,SortDescText  %>" SortClearText="<%$ Resources:Common ,SortClearText  %>" ColumnsText="<%$ Resources:Common ,ColumnsText  %>" EnableColumnHide="false" Sortable="true">
                         <Columns>
 
-                            <ext:Column ID="ColDay" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDay%>" DataIndex="dayId" Flex="1" Hideable="false" >
-                           
+                            <ext:Column ID="ColDay" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDay%>" DataIndex="dayId" Flex="2" Hideable="false" >
+                                <Renderer Handler="var s =  moment(record.data['dayId'],'YYYYMMDD'); return s.calendar();">
+                                    
+                                </Renderer>
                             </ext:Column>
                             <ext:Column ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="fullName" Flex="3" Hideable="false">
                             </ext:Column>
@@ -288,19 +290,7 @@
                         </ext:PagingToolbar>
 
                     </BottomBar>
-                    <Listeners>
-                        <Render Handler="this.on('cellclick', cellClick);" />
-                    </Listeners>
-                    <DirectEvents>
-                        <CellClick OnEvent="PoPuP">
-                            <EventMask ShowMask="true" />
-                            <ExtraParams>
-                                <ext:Parameter Name="id" Value="record.getId()" Mode="Raw" />
-                                <ext:Parameter Name="type" Value="getCellType( this, rowIndex, cellIndex)" Mode="Raw" />
-                            </ExtraParams>
-
-                        </CellClick>
-                    </DirectEvents>
+                  
                     <View>
                         <ext:GridView ID="GridView1" runat="server" />
                     </View>

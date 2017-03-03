@@ -30,7 +30,7 @@ namespace AionHR.Services.Messaging
 
             get
             {
-                parameters = new Dictionary<string, string>();
+                parameters = base.Parameters;
                 if (!string.IsNullOrEmpty(RecordID))
                     parameters.Add("_recordId", RecordID);
              

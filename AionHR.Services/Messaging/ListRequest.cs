@@ -39,7 +39,7 @@ namespace AionHR.Services.Messaging
 
             get
             {
-                parameters = new Dictionary<string, string>();
+                parameters = base.Parameters;
                 parameters.Add("_filter", Filter);
                 parameters.Add("_size", Size);
                 parameters.Add("_startAt", StartAt);

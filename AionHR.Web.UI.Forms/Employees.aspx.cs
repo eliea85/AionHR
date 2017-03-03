@@ -350,7 +350,7 @@ namespace AionHR.Web.UI.Forms
             empRequest.DepartmentId = "0";
             empRequest.Filter = searchTrigger.Text;
             empRequest.IncludeIsInactive = false;
-            empRequest.SortBy = "firstName";
+            empRequest.SortBy = e.Sort[0].Property;
             empRequest.Size = e.Limit.ToString();
             empRequest.StartAt = e.Start.ToString();
 
@@ -533,8 +533,8 @@ namespace AionHR.Web.UI.Forms
                         request.fileName = "";
                     }
                     request.empData = b;
-                   
-                    
+
+
 
                     PostResponse<Employee> r = _employeeService.AddOrUpdateEmployeeWithPhoto(request);
 
@@ -552,11 +552,12 @@ namespace AionHR.Web.UI.Forms
 
 
                         ModelProxy record = this.Store1.GetById(index);
-                        BasicInfoTab.UpdateRecord(record);
+                        //BasicInfoTab.UpdateRecord(record);
                         record.Set("branchName", b.branchName);
                         record.Set("departmentName", b.departmentName);
                         record.Set("positionName", b.positionName);
                         record.Set("fullName", b.fullName);
+                        record.Set("hireDate", b.hireDate.Value.ToString("yyyy-MM-dd"));
                         record.Commit();
                         Notification.Show(new NotificationConfig
                         {
@@ -588,11 +589,7 @@ namespace AionHR.Web.UI.Forms
             else return "1";
         }
 
-        protected void BasicInfoTab_Load(object sender, EventArgs e)
-        {
-            
-        }
-
+  
         
     }
 }

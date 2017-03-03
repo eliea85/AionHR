@@ -10,8 +10,7 @@ public class EmployeeListRequest:ListRequest
     public bool IncludeIsInactive { get; set; }
 
     public string SortBy { get; set; }
-
-    private Dictionary<string, string> parameters;
+    
 
     
     /// <summary>
@@ -22,10 +21,8 @@ public class EmployeeListRequest:ListRequest
 
         get
         {
-            parameters = new Dictionary<string, string>();
-            parameters.Add("_filter", Filter);
-            parameters.Add("_size", Size);
-            parameters.Add("_startAt", StartAt);
+            parameters = base.Parameters;
+           
             parameters.Add("_departmentId", DepartmentId);
             parameters.Add("_branchId", BranchId);
             parameters.Add("_includeInactive", IncludeIsInactive.ToString());

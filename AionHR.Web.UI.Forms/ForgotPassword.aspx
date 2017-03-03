@@ -75,50 +75,50 @@
                 <ext:VBoxLayoutConfig Align="Center" />
             </LayoutConfig>
             <Items>
-                <ext:FormPanel 
+                <ext:FormPanel
                     ID="panelLogin"
                     runat="server"
-                    Closable="false"
-                    Resizable="false"
                     Icon="LockGo"
-                    Title="Forget Password"
+                    Title="<%$ Resources:RequestPasswordRecovery %>"
                     Draggable="false"
                     Width="400"
-                    Modal="false"
                     Frame="true"
-                    BodyPadding="20"
                     Layout="FormLayout"
+                    BodyPadding="10" AutoUpdateLayout="false" DefaultAnchor="100%"
                     DefaultButton="btnLogin" Border="false" Shadow="true">
+                    <FieldDefaults PreserveIndicatorIcon="true" />
 
                     <Items>
                         <ext:TextField
                             ID="tbAccountName"
-                            runat="server" Anchor="-5" 
+                            runat="server"
                             AutoFocus="true"
-                             IsRemoteValidation="true" 
-                            FieldLabel="Account Name"
-                            AllowBlank="false"  
-                            BlankText=""
-                            EmptyText=""  >
-                           
-                                <RemoteValidation Delay="2000" OnValidation="CheckField"  >
+                            IsRemoteValidation="true"
+                            MsgTarget="Side"
+                            FieldLabel="<%$ Resources:  Account %>"
+                            AllowBlank="false"
+                            BlankText="<%$ Resources: Common, MandatoryField %>"
+                            EmptyText="<%$ Resources:  EnterYourAccount %>">
+
+                            <RemoteValidation Delay="2000" OnValidation="CheckField">
                                 <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
-                                </RemoteValidation>
+                            </RemoteValidation>
                             <Listeners>
-                                
-                                <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-accept'); " />
+
+                                <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-tick');this.setIndicatorIconCls('icon-tick'); " />
                                 <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); " />
                             </Listeners>
-                           
-                            </ext:TextField>
+
+                        </ext:TextField>
 
                         <ext:TextField ID="tbUsername"
                             runat="server"
-                            BlankText=""
+                            MsgTarget="Side" Vtype="email"
+                            BlankText="<%$ Resources:Common, MandatoryField %>"
                             AllowBlank="false"
-                            FieldLabel=" Email"
-                            EmptyText="" />
-                        
+                            FieldLabel="<%$ Resources:  UserID %>"
+                            EmptyText="<%$ Resources:  EnterYourID %>" />
+
                         <ext:FieldContainer runat="server" ID="lblErroContainer" FieldLabel="">
                             <Items>
                                 <ext:Label ID="lblError"
@@ -143,8 +143,8 @@
                                 </Click>
                             </DirectEvents>
                         </ext:Button>
-                    
-                        
+
+
                     </Buttons>
                 </ext:FormPanel>
             </Items>

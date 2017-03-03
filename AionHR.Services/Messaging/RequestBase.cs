@@ -8,12 +8,12 @@ namespace AionHR.Services.Messaging
 {
     public class RequestBase
     {
-
+        
         public virtual Dictionary<string,string> Parameters
         {
             get
             {
-                return null;
+                return new Dictionary<string, string>();
             }
         }
     }

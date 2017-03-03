@@ -75,7 +75,7 @@
                 <ext:VBoxLayoutConfig Align="Center" />
             </LayoutConfig>
             <Items>
-                <ext:FormPanel
+                 <ext:FormPanel
                     ID="panelLogin"
                     runat="server"
                     Icon="LockGo"
@@ -83,52 +83,53 @@
                     Draggable="false"
                     Width="400"
                     Frame="true"
-                    BodyPadding="20"
-
-                    DefaultButton="btnLogin" Border="false" Shadow="true" >
-                    
+                    Layout="FormLayout" RTL="true"
+                    BodyPadding="10" AutoUpdateLayout="false" DefaultAnchor="100%"
+                    DefaultButton="btnLogin" Border="false" Shadow="true">
+                    <FieldDefaults PreserveIndicatorIcon="true" />
                     <Items>
-                          <ext:TextField
-                            ID="tbAccountName" 
-                            runat="server" 
+                        <ext:TextField
+                            ID="tbAccountName"
+                            runat="server"
                             AutoFocus="true"
-                             IsRemoteValidation="true" 
+                            IsRemoteValidation="true"
+                            MsgTarget="Side"
                             FieldLabel="<%$ Resources:  Account %>"
-                            AllowBlank="false" 
-                              MsgTarget="Side"
+                            AllowBlank="false"
                             BlankText="<%$ Resources: Common, MandatoryField %>"
-                            EmptyText="<%$ Resources:  EnterYourAccount %>"  >
-                           
-                                <RemoteValidation OnValidation="CheckField" />
+                            EmptyText="<%$ Resources:  EnterYourAccount %>">
 
-                             <Listeners>
-                                
+                            <RemoteValidation Delay="2000" OnValidation="CheckField">
+                                <EventMask ShowMask="true" CustomTarget="#{panelLogin}" />
+                            </RemoteValidation>
+                            <Listeners>
+
                                 <RemoteValidationValid Handler="this.setIndicatorIconCls('icon-tick');this.setIndicatorIconCls('icon-tick'); " />
                                 <RemoteValidationInvalid Handler="this.setIndicatorIconCls('icon-error'); " />
                             </Listeners>
-                            </ext:TextField>
+
+                        </ext:TextField>
 
                         <ext:TextField ID="tbUsername"
                             runat="server"
+                            MsgTarget="Side" Vtype="email"
                             BlankText="<%$ Resources:Common, MandatoryField %>"
                             AllowBlank="false"
-                            
                             FieldLabel="<%$ Resources:  UserID %>"
                             EmptyText="<%$ Resources:  EnterYourID %>" />
                         <ext:TextField ID="tbPassword"
                             runat="server"
                             AllowBlank="false"
+                            MsgTarget="Side"
                             BlankText="<%$ Resources:Common , MandatoryField %>"
                             FieldLabel="<%$ Resources: Password %>"
                             EmptyText="<%$ Resources: EnterYourPassword %>"
                             InputType="Password" />
-
                         <ext:FieldContainer runat="server" ID="lblErroContainer" FieldLabel="">
                             <Items>
                                 <ext:Label ID="lblError"
                                     runat="server"
                                     Text=""
-                                    
                                     Visible="true"
                                     Cls="error" />
                             </Items>
@@ -138,28 +139,39 @@
                         <ext:Button ID="btnLogin" runat="server" Text="<%$ Resources:  Login %>">
                             <Listeners>
                                 <Click Handler="
-                            if (!#{panelLogin}.validate()) {                                
-                                return false;
-                            }" />
+                                        if (!#{panelLogin}.validate()) {                                
+                                            return false;
+                                        }
+                                    
+                                      Ext.net.Mask.show({msg:App.lblLoading.getValue(),el:#{panelLogin}.id});
+                                    
+                                    App.direct.Authenticate(#{tbAccountName}.value,#{tbUsername}.value,#{tbPassword}.value, {
+                    success: function (result) { 
+                       if(result=='1')
+                                    {
+                                    window.open('Default.aspx','_self');
+                                    }
+                                    else
+                                    {
+                                    Ext.net.Mask.hide();
+                                    }
+                    }
+                  
+                }); " />
                             </Listeners>
-                            <DirectEvents>
-                                <Click OnEvent="login_Click">
-                                    <EventMask ShowMask="true" Msg="<%$ Resources:Common , Loading %>" MinDelay="500" />
-                                </Click>
-                            </DirectEvents>
+                          
                         </ext:Button>
                         <ext:Button ID="btnReset" runat="server" Text="<%$ Resources:Common , Reset %>">
                             <Listeners>
                                 <Click Handler="#{panelLogin}.reset();" />
                             </Listeners>
                         </ext:Button>
-                             <ext:Button ID="btnForgot" runat="server" Text="<%$ Resources:Common , ResetPassword %>">
-                         <DirectEvents>
+                        <ext:Button ID="btnForgot" runat="server" Text="<%$ Resources:Common , ResetPassword %>">
+                            <DirectEvents>
                                 <Click OnEvent="forgotpw_Event">
                                     <EventMask ShowMask="true" Msg="<%$ Resources:Common , Loading %>" MinDelay="500" />
                                 </Click>
                             </DirectEvents>
-
                         </ext:Button>
                     </Buttons>
                 </ext:FormPanel>

@@ -188,16 +188,16 @@ public class AttendnanceDayListRequest:ListRequest
 
         get
         {
-            parameters = new Dictionary<string, string>();
+            parameters = base.Parameters;
             parameters.Add("_employeeId", EmployeeId);
             parameters.Add("_dayId", DayId);
             parameters.Add("_month", Month);
             parameters.Add("_year", Year);
             parameters.Add("_branchId", BranchId);
             parameters.Add("_departmentId", DepartmentId);
-            parameters.Add("_size", Size);
+            
             parameters.Add("_sortBy", SortBy);
-            parameters.Add("_startAt", StartAt);
+            
 
 
             return parameters;

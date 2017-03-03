@@ -69,7 +69,7 @@ namespace AionHR.Web.UI.Forms
                 FillBranch();
                 FillDepartment();
                 dayId.SelectedDate = DateTime.Today;
-                RefreshGrid(null, null, null, null);
+
 
             }
 
@@ -117,52 +117,6 @@ namespace AionHR.Web.UI.Forms
             }
         }
 
-
-
-        protected void PoPuP(object sender, DirectEventArgs e)
-        {
-
-            return;
-            int id = Convert.ToInt32(e.ExtraParams["id"]);
-            string type = e.ExtraParams["type"];
-
-            switch (type)
-            {
-                case "ColName":
-                    //Step 1 : get the object from the Web Service 
-                   // //RecordRequest r = new RecordRequest();
-                   // r.RecordID = id.ToString();
-                   // RecordResponse<Employee> response = _employeeService.Get<Employee>(r);
-
-                    break;
-
-                case "colDelete":
-                    X.Msg.Confirm(Resources.Common.Confirmation, Resources.Common.DeleteOneRecord, new MessageBoxButtonsConfig
-                    {
-                        Yes = new MessageBoxButtonConfig
-                        {
-                            //We are call a direct request metho for deleting a record
-                            Handler = String.Format("App.direct.DeleteRecord({0})", id),
-                            Text = Resources.Common.Yes
-                        },
-                        No = new MessageBoxButtonConfig
-                        {
-                            Text = Resources.Common.No
-                        }
-
-                    }).Show();
-                    break;
-
-                case "colAttach":
-
-                    //Here will show up a winow relatice to attachement depending on the case we are working on
-                    break;
-                default:
-                    break;
-            }
-
-
-        }
 
 
 
@@ -283,10 +237,10 @@ namespace AionHR.Web.UI.Forms
         {
             AttendnanceDayListRequest req = new AttendnanceDayListRequest();
 
-            if (!string.IsNullOrEmpty(branchId.Text) && branchId.Value.ToString()!="0")
+            if (!string.IsNullOrEmpty(branchId.Text) && branchId.Value.ToString() != "0")
             {
                 req.BranchId = branchId.Value.ToString();
-                GridPanel1.ColumnModel.Columns.Where(a=>a.ID== "ColBranchName").First().SetHidden(true);
+                GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColBranchName").First().SetHidden(true);
 
 
             }
@@ -307,12 +261,13 @@ namespace AionHR.Web.UI.Forms
                 req.DepartmentId = "0";
                 GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColDepartmentName").First().SetHidden(false);
             }
-            
-            if (dayId.SelectedValue != null)
+
+            if (dayId.SelectedDate != DateTime.MinValue)
+
             {
                 req.DayId = dayId.SelectedDate.ToString("yyyyMMdd");
                 GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColDay").First().SetHidden(true);
-           
+
 
             }
             else
@@ -320,19 +275,19 @@ namespace AionHR.Web.UI.Forms
                 req.DayId = "";
                 GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColDay").First().SetHidden(false);
             }
-            
+
             if (!string.IsNullOrEmpty(employeeId.Text) && employeeId.Value.ToString() != "0")
             {
                 req.EmployeeId = employeeId.Value.ToString();
                 GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColName").First().SetHidden(true);
-                
+
 
             }
             else
             {
                 req.EmployeeId = "0";
                 GridPanel1.ColumnModel.Columns.Where(a => a.ID == "ColName").First().SetHidden(false);
-                
+
             }
 
             req.Month = "0";
@@ -344,86 +299,13 @@ namespace AionHR.Web.UI.Forms
             return req;
         }
 
-        private AttendnanceDayListRequest GetAttendanceDayRequest(string branchId,string departmentId,string employeeId,string dayId)
-        {
-            AttendnanceDayListRequest req = new AttendnanceDayListRequest();
-
-            if (!string.IsNullOrEmpty(branchId))
-            {
-                req.BranchId = branchId;
-                ColBranchName.Visible = false;
-
-
-            }
-            else
-            {
-                req.BranchId = "0";
-                ColBranchName.Visible = true;
-            }
-
-            if (!string.IsNullOrEmpty(departmentId))
-            {
-                req.DepartmentId = departmentId;
-                ColDepartmentName.Visible = false;
-
-            }
-            else
-            {
-                req.DepartmentId = "0";
-                ColDepartmentName.Visible = true;
-            }
-
-            if (!string.IsNullOrEmpty(dayId))
-            {
-                req.DayId = dayId;
-                ColDay.Visible = false;
-
-            }
-            else
-            {
-                req.DayId = "";
-                ColDay.Visible = true;
-            }
-
-            if (!string.IsNullOrEmpty(employeeId))
-            {
-                req.EmployeeId = employeeId;
-                ColName.Visible = false;
-
-            }
-            else
-            {
-                req.EmployeeId = "0";
-                ColName.Visible = true;
-            }
-
-            req.Month = "0";
-            req.Year = "0";
-            req.Size = "30";
-            req.StartAt = "1";
-            req.Filter = "";
-            req.SortBy = "firstName";
-            return req;
-        }
-
-        private void RefreshGrid(string departmentId, string branchId,string employeeId,string dayId)
-        {
-            AttendnanceDayListRequest req = GetAttendanceDayRequest(branchId,departmentId,employeeId,dayId);
-            ListResponse<AttendanceDay> daysResponse = _timeAttendanceService.ChildGetAll<AttendanceDay>(req);
-            var data = daysResponse.Items;
-            if (daysResponse.Items != null)
-            {
-                this.Store1.DataSource = daysResponse.Items;
-                this.Store1.DataBind();
-            }
-            
-        }
         protected void Store1_RefreshData(object sender, StoreReadDataEventArgs e)
         {
 
             //GEtting the filter from the page
 
             AttendnanceDayListRequest req = GetAttendanceDayRequest();
+
             ListResponse<AttendanceDay> daysResponse = _timeAttendanceService.ChildGetAll<AttendanceDay>(req);
             var data = daysResponse.Items;
             if (daysResponse.Items != null)
@@ -465,10 +347,6 @@ namespace AionHR.Web.UI.Forms
             else return "1";
         }
 
-        protected void BasicInfoTab_Load(object sender, EventArgs e)
-        {
-
-        }
 
 
         [DirectMethod]
@@ -508,12 +386,7 @@ namespace AionHR.Web.UI.Forms
             return response.Items;
         }
 
-        protected void SaveNewRecord(object sender, DirectEventArgs e)
-        {
-            string s = e.ExtraParams["values"];
-            AttendnanceDayListRequest req = JSON.Deserialize<AttendnanceDayListRequest>(s);
-            RefreshGrid(req.DepartmentId, req.BranchId, req.EmployeeId, req.DayId);
-        }
+
 
     }
 }

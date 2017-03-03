@@ -47,15 +47,16 @@ namespace AionHR.Web.UI.Forms
 
         protected void login_Click(object sender, EventArgs e)
         {
-            AuthenticateRequest request = new AuthenticateRequest();
+            GetAccountRequest request = new GetAccountRequest();
             request.Account = tbAccountName.Text;
             Response<Account> account = _masterService.GetAccount(request);
             if(!account.Success)
             {
                 lblError.Text = (String)GetLocalResourceObject(account.Message);
             }
-            request.UserName = tbUsername.Text;
-            PasswordRecoveryResponse response = _systemService.RequestPasswordRecovery(request);
+            AccountRecoveryRequest recoverRequest = new AccountRecoveryRequest();
+            recoverRequest.Email = tbUsername.Text;
+            PasswordRecoveryResponse response = _systemService.RequestPasswordRecovery(recoverRequest);
             if (response.Success)
             {
                 
@@ -74,7 +75,7 @@ namespace AionHR.Web.UI.Forms
         protected void CheckField(object sender, RemoteValidationEventArgs e)
         {
             TextField field = (TextField)sender;
-            AuthenticateRequest request = new AuthenticateRequest();
+            GetAccountRequest request = new GetAccountRequest();
             request.Account = field.Text;
 
             Response<Account> response = _masterService.GetAccount(request);

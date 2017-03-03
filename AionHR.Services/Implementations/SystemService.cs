@@ -45,15 +45,9 @@ namespace AionHR.Services.Implementations
 
 
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-
-
-
-
-
-            parameters.Add("_email", request.UserName);
-            parameters.Add("_password", request.Password);
-            RecordWebServiceResponse<UserInfo> userRecord = childRepo.Authenticate(headers, parameters);
+            
+            
+            RecordWebServiceResponse<UserInfo> userRecord = childRepo.Authenticate(headers, request.Parameters);
             if (userRecord == null)
             {
                 response.Success = false;
@@ -77,7 +71,7 @@ namespace AionHR.Services.Implementations
 
         }
 
-        public PasswordRecoveryResponse RequestPasswordRecovery(AuthenticateRequest request)
+        public PasswordRecoveryResponse RequestPasswordRecovery(AccountRecoveryRequest request)
         {
             PasswordRecoveryResponse response = new PasswordRecoveryResponse();
 
@@ -85,8 +79,8 @@ namespace AionHR.Services.Implementations
 
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("_email", request.UserName);
-            RecordWebServiceResponse<UserInfo> userRecord =childRepo.RequestPasswordRecovery( headers, parameters);
+            
+            RecordWebServiceResponse<UserInfo> userRecord =childRepo.RequestPasswordRecovery( headers, request.Parameters);
 
             response = CreateServiceResponse<PasswordRecoveryResponse>(userRecord);
            // if (response.Success)
@@ -98,11 +92,8 @@ namespace AionHR.Services.Implementations
         {
             PasswordRecoveryResponse response;
             Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("_email", request.Email);
-            parameters.Add("_guid", request.Guid);
-            parameters.Add("_newPassword", request.NewPassword);
-            RecordWebServiceResponse<UserInfo> webResponse = childRepo.ResetPassword( headers, parameters);
+            
+            RecordWebServiceResponse<UserInfo> webResponse = childRepo.ResetPassword(headers, request.Parameters);
 
 
             response = CreateServiceResponse<PasswordRecoveryResponse>(webResponse);

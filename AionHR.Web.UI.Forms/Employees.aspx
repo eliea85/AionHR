@@ -17,7 +17,9 @@
 </head>
 <body style="background: url(Images/bg.png) repeat;">
     <form id="Form1" runat="server">
-        <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="1200000" />
+        <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="1200000"    >
+            
+            </ext:ResourceManager>
 
         <ext:Hidden ID="textMatch" runat="server" Text="<%$ Resources:Common , MatchFound %>" />
         <ext:Hidden ID="textLoadFailed" runat="server" Text="<%$ Resources:Common , LoadFailed %>" />
@@ -121,7 +123,7 @@
 
                     </TopBar>
 
-                    <ColumnModel ID="ColumnModel1" runat="server" SortAscText="<%$ Resources:Common , SortAscText %>" SortDescText="<%$ Resources:Common ,SortDescText  %>" SortClearText="<%$ Resources:Common ,SortClearText  %>" ColumnsText="<%$ Resources:Common ,ColumnsText  %>" EnableColumnHide="false" Sortable="false">
+                    <ColumnModel ID="ColumnModel1" runat="server" SortAscText="<%$ Resources:Common , SortAscText %>" SortDescText="<%$ Resources:Common ,SortDescText  %>" SortClearText="<%$ Resources:Common ,SortClearText  %>" ColumnsText="<%$ Resources:Common ,ColumnsText  %>" EnableColumnHide="false" >
                         <Columns>
 
                             <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
@@ -135,7 +137,7 @@
                             <ext:Column ID="ColPositionName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldPosition%>" DataIndex="positionName" Flex="2" Hideable="false" />
                             <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="2" Hideable="false" />
                             <ext:Column ID="ColHireDate" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHireDate%>" DataIndex="hireDate" Flex="2" Hideable="false">
-                                <Renderer Handler="var s = record.data['hireDate'].split('T'); return s[0];"></Renderer>
+                                <Renderer Handler="try {var s = record.data['hireDate'].split('T'); return s[0];} catch(err){return record.data['hireDate'];}"></Renderer>
                             </ext:Column>
 
 
@@ -254,8 +256,7 @@
             runat="server"
             Icon="PageEdit"
             Title="<%$ Resources:EditWindowsTitle %>"
-            Width="800"
-            Height="500"
+width="900"
             AutoShow="false"
             Modal="true"
             Hidden="true"
@@ -269,12 +270,12 @@
                             runat="server"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"
                             Icon="ApplicationSideList"
-                            DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
+                            DefaultAnchor="100%" 
                             BodyPadding="5" Layout="TableLayout">
                             <Items>
-                                <ext:Panel runat="server">
+                                <ext:Panel runat="server" Margin="20">
                                     <Items>
-                                        <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
+                                        <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>"  Name="recordId" />
                                         <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="reference" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="firstName" runat="server" FieldLabel="<%$ Resources:FieldFirstName%>" Name="firstName" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="middleName" runat="server" FieldLabel="<%$ Resources:FieldMiddleName%>" Name="middleName" BlankText="<%$ Resources:Common, MandatoryField%>" />
@@ -283,9 +284,7 @@
                                         <ext:TextField ID="homeEmail" runat="server" FieldLabel="<%$ Resources:FieldHomeEmail%>" Name="homeMail" Vtype="email" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="workEmail" runat="server" FieldLabel="<%$ Resources:FieldWorkEmail%>" Name="workMail" Vtype="email" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="mobile" runat="server" FieldLabel="<%$ Resources:FieldMobile%>" Name="mobile" BlankText="<%$ Resources:Common, MandatoryField%>">
-                                            <Plugins>
-                                                <ext:InputMask runat="server" Mask="99999?9999" />
-                                            </Plugins>
+                                         
                                         </ext:TextField>
                                         <ext:RadioGroup ID="gender" AllowBlank="false" runat="server" GroupName="gender" FieldLabel="<%$ Resources:FieldGender%>">
                                             <Items>
@@ -312,7 +311,7 @@
                                             AllowBlank="false" />
                                     </Items>
                                 </ext:Panel>
-                                <ext:Panel runat="server">
+                                <ext:Panel runat="server" Margin="20">
                                     <Items>
 
                                         <ext:ComboBox runat="server" ValueField="recordId" AllowBlank="false" DisplayField="name" ID="nationalityId" Name="nationalityId" FieldLabel="<%$ Resources:FieldNationality%>" SimpleSubmit="true" >
@@ -427,9 +426,15 @@
 
 
                                         <ext:Checkbox ID="isInactive" runat="server" FieldLabel="<%$ Resources: FieldIsInactive%>" Name="isInactive" InputValue="true" />
+                                          <ext:DateField
+                                            runat="server"
+                                            Name="hireDate"
+                                            FieldLabel="<%$ Resources:FieldHireDate%>"
+                                            MsgTarget="Side"
+                                            AllowBlank="false" />
                                     </Items>
                                 </ext:Panel>
-                                <ext:Panel runat="server">
+                                <ext:Panel runat="server" Margin="20">
                                     <Items>
                                         <ext:Image runat="server" ID="imgControl" Width="200" Height="200">
                                             <Listeners>

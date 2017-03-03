@@ -18,7 +18,7 @@ namespace AionHR.Services.Interfaces
         /// <returns>AuthenticateResponse object</returns>
         AuthenticateResponse Authenticate(AuthenticateRequest request);
 
-        PasswordRecoveryResponse RequestPasswordRecovery(AuthenticateRequest request);
+        PasswordRecoveryResponse RequestPasswordRecovery(AccountRecoveryRequest request);
 
 
         PasswordRecoveryResponse ResetPassword(ResetPasswordRequest request);

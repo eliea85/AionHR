@@ -170,6 +170,7 @@ var openNewTab = function (id, url, title, iconCls) {
     App.tabPanel.setActiveTab(tab);
 }
 var openModule = function (id) {
+    
     Ext.net.Mask.show(App.lblLoading.getValue());
     var node = null;
     var tree = App.commonTree;
@@ -195,7 +196,7 @@ var openModule = function (id) {
     if (nodes.length > 0) {
         // tree.initChildren(nodes);
         tree.setRootNode(nodes[0]);
-
+        
         if (node != null) {
 
             if (node.data.id != "root") {

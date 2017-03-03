@@ -222,4 +222,10 @@
   <data name="EditYears" xml:space="preserve">
     <value>Edit Years</value>
   </data>
+  <data name="Legends" xml:space="preserve">
+    <value>Legends</value>
+  </data>
+  <data name="LegendsWindow" xml:space="preserve">
+    <value>Legends Table</value>
+  </data>
 </root>

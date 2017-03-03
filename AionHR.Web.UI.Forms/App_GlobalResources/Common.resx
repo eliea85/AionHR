@@ -456,4 +456,7 @@
   <data name="AttendanceDay" xml:space="preserve">
     <value>Attendance Day</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
 </root>

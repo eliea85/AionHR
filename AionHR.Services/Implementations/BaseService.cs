@@ -28,7 +28,7 @@ namespace AionHR.Services.Implementations
         protected TResponse CreateServiceResponse<TResponse>(BaseWebServiceResponse webResponse) where TResponse : ResponseBase, new()
         {
             TResponse response = new TResponse();
-            if(webResponse == null)
+            if (webResponse == null)
             {
                 response.Success = false;
                 response.Message = "Unknown Error!";
@@ -38,7 +38,7 @@ namespace AionHR.Services.Implementations
                 response.Success = webResponse.statusId == "1";
                 response.Message = webResponse.message;
             }
-            
+
             return response;
         }
 
@@ -54,11 +54,8 @@ namespace AionHR.Services.Implementations
 
             RecordWebServiceResponse<T> webResponse = GetRepository().GetRecord(headers, queryParams);
             response = CreateServiceResponse<RecordResponse<T>>(webResponse);
-            if (!response.Success)
-            {
-                response.Message = webResponse.statusId;
-            }
-            response.result = webResponse.record;
+            if (response.Success)
+                response.result = webResponse.record;
 
             return response;
 
@@ -70,13 +67,12 @@ namespace AionHR.Services.Implementations
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             var webResponse = GetRepository().GetAll(headers, request.Parameters);
             var response = CreateServiceResponse<ListResponse<T>>(webResponse);
-            if (!response.Success)
+
+            if (webResponse != null)
             {
-
-
+                response.count = webResponse.count;
+                response.Items = webResponse.GetAll();
             }
-            response.count = webResponse.count;
-            response.Items = webResponse.GetAll();
 
             return response;
         }
@@ -88,7 +84,8 @@ namespace AionHR.Services.Implementations
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             PostWebServiceResponse webResponse = GetRepository().AddOrUpdate(request.entity, headers);
             response = CreateServiceResponse<PostResponse<T>>(webResponse);
-            response.recordId = webResponse.recordId;
+            if (webResponse != null)
+                response.recordId = webResponse.recordId;
             return response;
         }
 
@@ -113,7 +110,8 @@ namespace AionHR.Services.Implementations
 
             var webResponse = GetRepository().ChildGetRecord<TChild>(headers, request.Parameters);
             response = CreateServiceResponse<RecordResponse<TChild>>(webResponse);
-            response.result = webResponse.record;
+            if (webResponse != null)
+                response.result = webResponse.record;
             return response;
         }
 
@@ -124,13 +122,13 @@ namespace AionHR.Services.Implementations
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             ListWebServiceResponse<TChild> webResponse = GetRepository().ChildGetAll<TChild>(headers, request.Parameters);
             response = CreateServiceResponse<ListResponse<TChild>>(webResponse);
-            if (!response.Success)
+
+            if (webResponse != null)
             {
-                response.Message = string.IsNullOrEmpty(webResponse.message) ? "" : webResponse.message;
+                response.count = webResponse.count;
+
+                response.Items = webResponse.GetAll();
             }
-            response.count = webResponse.count;
-            if (webResponse.list != null)
-                response.Items = webResponse.list.ToList();
             return response;
 
         }
@@ -141,7 +139,8 @@ namespace AionHR.Services.Implementations
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             PostWebServiceResponse webResponse = GetRepository().ChildAddOrUpdate<TChild>(request.entity, headers);
             response = CreateServiceResponse<PostResponse<TChild>>(webResponse);
-            response.recordId = webResponse.recordId;
+            if (webResponse != null)
+                response.recordId = webResponse.recordId;
             return response;
         }
 

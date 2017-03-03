@@ -26,7 +26,7 @@ namespace AionHR.Services.Implementations
         {
             PostResponse<Employee> response;
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            PostWebServiceResponse webResponse = GetRepository().AddOrUpdateEmployeeWithImage(req.empData, req.fileName, req.imageData,headers);
+            PostWebServiceResponse webResponse = _employeeRepository.AddOrUpdateEmployeeWithImage(req.empData, req.fileName, req.imageData,headers);
             response = CreateServiceResponse<PostResponse<Employee>>(webResponse);
             response.recordId = webResponse.recordId;
             return response;

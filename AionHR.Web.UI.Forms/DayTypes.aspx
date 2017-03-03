@@ -258,7 +258,7 @@
             <Items>
                 <ext:TabPanel ID="panelRecordDetails" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
                     <Items>
-                        <ext:FormPanel
+                        <ext:FormPanel DefaultButton="SaveButton"
                             ID="BasicInfoTab"
                             runat="server"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"

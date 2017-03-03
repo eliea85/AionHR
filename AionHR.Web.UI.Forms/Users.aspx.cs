@@ -49,8 +49,7 @@ namespace AionHR.Web.UI.Forms
             }
 
         }
-        BoundedComboBox parents;
-        BoundedComboBox supervisors;
+      
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -191,23 +190,7 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        private void InitCombos(Department dept)
-        {
-            parents = new BoundedComboBox("parentId", "name", "recordId", GetLocalResourceObject("FieldParentName").ToString(), "FillParent", "", GetLocalResourceObject("FieldParentName").ToString(), false);
-            supervisors = new BoundedComboBox("supervisorId", "fullName", "recordId", GetLocalResourceObject("FieldSvFullName").ToString(), "FillSupervisor", "", GetLocalResourceObject("FieldSvFullName").ToString(), true);
-            BasicInfoTab.Items.Add(parents);
-            BasicInfoTab.Items.Add(supervisors);
-            if (dept != null)
-            {
-
-                parents.Select(dept.parentId);
-                supervisors.Select(dept.supervisorId);
-            }
-            BasicInfoTab.UpdateLayout();
-            BasicInfoTab.UpdateContent();
-
-
-        }
+      
 
         /// <summary>
         /// This direct method will be called after confirming the delete
@@ -458,8 +441,8 @@ namespace AionHR.Web.UI.Forms
                         return;
                     }
                     b.recordId = r.recordId;
-                    AuthenticateRequest req = new AuthenticateRequest();
-                    req.UserName = b.email;
+                    AccountRecoveryRequest req = new AccountRecoveryRequest();
+                    req.Email = b.email;
                     PasswordRecoveryResponse response = _systemService.RequestPasswordRecovery(req);
                     if (!response.Success)
                     //check if the insert failed

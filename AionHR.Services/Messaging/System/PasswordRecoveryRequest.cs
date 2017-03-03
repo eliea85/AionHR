@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Services.Messaging.System
 {
-    public class ResetPasswordRequest
+    public class ResetPasswordRequest:RequestBase
     {
         public string Email { get; set; }
 
@@ -15,5 +15,20 @@ namespace AionHR.Services.Messaging.System
         public string Guid { get; set; }
 
         public string NewPassword { get; set; }
+
+
+        private Dictionary<String, String> parameters;
+
+        public override Dictionary<String, String> Parameters
+        {
+            get
+            {
+                parameters = base.Parameters;
+                parameters.Add("_email", Email);
+                parameters.Add("_guid", Guid);
+                parameters.Add("_newPassword", NewPassword);
+                return parameters;
+            }
+        }
     }
 }

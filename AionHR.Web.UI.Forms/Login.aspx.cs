@@ -62,7 +62,7 @@ namespace AionHR.Web.UI.Forms
         public string Authenticate(string accountName ,string userName, string password)
         {
             AuthenticateRequest request = new AuthenticateRequest();
-            request.Account = tbAccountName.Text;
+            
             request.UserName = tbUsername.Text;
             request.Password = tbPassword.Text;
             AuthenticateResponse response = _systemService.Authenticate(request);
@@ -92,7 +92,7 @@ namespace AionHR.Web.UI.Forms
         public object DirectCheckField(string value)
         {
             //return true;
-            AuthenticateRequest request = new AuthenticateRequest();
+            GetAccountRequest request = new GetAccountRequest();
             request.Account = value;
 
             Response<Account> response = _masterService.GetAccount(request);
@@ -116,7 +116,7 @@ namespace AionHR.Web.UI.Forms
         protected void CheckField(object sender, RemoteValidationEventArgs e)
         {
             TextField field = (TextField)sender;
-            AuthenticateRequest request = new AuthenticateRequest();
+            GetAccountRequest request = new GetAccountRequest();
             request.Account = field.Text;
 
             Response<Account> response = _masterService.GetAccount(request);

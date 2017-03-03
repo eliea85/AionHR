@@ -130,9 +130,9 @@
                     <ColumnModel ID="ColumnModel1" runat="server" SortAscText="<%$ Resources:Common , SortAscText %>" SortDescText="<%$ Resources:Common ,SortDescText  %>" SortClearText="<%$ Resources:Common ,SortClearText  %>" ColumnsText="<%$ Resources:Common ,ColumnsText  %>" EnableColumnHide="false" Sortable="true">
                         <Columns>
 
-                            <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
+                            <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" DataIndex="recordId" Hideable="false" Width="75" Align="Center" Flex="1" />
 
-                            <ext:Column CellCls="cellLink" Sortable="true" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
+                            <ext:Column CellCls="cellLink" Sortable="true" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="2" Hideable="false">
                                 <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
                                 </Renderer>
                             </ext:Column>
@@ -178,7 +178,7 @@
                                 Resizable="false">
                                 <Renderer Fn="attachRender" />
                             </ext:Column>
-                             <ext:Column runat="server"
+                             <ext:Column runat="server" Flex="1"
                                 ID="colDetails"
                                 Text="<%$ Resources:EditYears %>"
                                 Hideable="false"
@@ -319,9 +319,9 @@
                             <ext:Column runat="server" ID="colCaId"  Visible="false" DataIndex="caId" >
                                 
                             </ext:Column>
-                            <ext:Column runat="server" ID="colYear" Text="<%$ Resources: Year %>"  DataIndex="year" />
+                            <ext:Column runat="server" ID="colYear" Text="<%$ Resources: Year %>"  DataIndex="year" Flex="2" />
                              <ext:Column runat="server"
-                                ID="colYearDetails"
+                                ID="colYearDetails" Flex="1"
                                 Text="<%$ Resources:EditCalendar %>"
                                 Hideable="false"
                                 Width="60"
@@ -336,7 +336,7 @@
                     </ColumnModel>
                 </ext:GridPanel>
 
-                <ext:Panel runat="server" Layout="ColumnLayout"  Title="<%$ Resources: CalendarDays %>">
+                <ext:Panel runat="server" Title="<%$ Resources: CalendarDays %>" >
                     
                     <TopBar>
                         <ext:Toolbar ID="Toolbar4" runat="server" ClassicButtonStyle="false">
@@ -353,14 +353,24 @@
                                         </Click>
                                     </DirectEvents>
                                 </ext:Button>
+                                  <ext:Button ID="legendsButton" runat="server" Text="<%$ Resources:Legends %>" Icon="Help">
+                                    <Listeners>
+                                        <Click Handler="CheckSession();" />
+                                    </Listeners>
+                                    <DirectEvents>
+                                        <Click OnEvent="Unnamed_Event">
+                                            
+                                        </Click>
+                                    </DirectEvents>
+                                </ext:Button>
                              
 
                             </Items>
                         </ext:Toolbar>
 
                     </TopBar>
-                    <Content >
-                        <div style="margin-top: 0px;margin-left:200px;">
+                    <Content  >
+                        <div style="margin-top: 0px;margin:auto;width:90%;height:90%">
         <table runat="server" id="tbCalendar" cellpadding="5" cellspacing="0" clientidmode="Static">
             <tr>
                 <th>
@@ -2005,41 +2015,7 @@
         </table>
     </div>
                     </Content>
-                    <Items>
-                        <ext:GridPanel ID="colorsGrid" runat="server"  Width="200">
-                            <Store>
-                                <ext:Store runat="server"  ID="colorsStore">
-                                    <Model>
-                                        <ext:Model runat="server" IDProperty="recordId" >
-                                            <Fields>
-                                                <ext:ModelField Name="recordId" />
-                                                <ext:ModelField Name="name" />
-                                                <ext:ModelField Name="color" />
-
-
-                                            </Fields>
-                                        </ext:Model>
-
-                                    </Model>
-                                </ext:Store>
-                                
-                            </Store>
-                            <ColumnModel>
-                                <Columns>
-                                    <ext:Column runat="server" DataIndex="recordId" Visible ="false" />
-                                    <ext:Column runat="server" DataIndex="name"   Text="Day Type" />
-                                    <ext:ComponentColumn runat="server" Text="Color" DataIndex="color" Flex="1">
-                                <Component>
-                                    <ext:ColorField runat="server" ReadOnly="true" />
-                                </Component>
-                                <Listeners>
-                                    <Bind Handler="cmp.setValue(record.get('color'));" />
-                                </Listeners>
-                            </ext:ComponentColumn>
-                                </Columns>
-                            </ColumnModel>
-                        </ext:GridPanel>
-                    </Items>
+                   
                     </ext:Panel>
             </Items>
         </ext:Viewport>
@@ -2262,6 +2238,56 @@
                 </ext:Button>
             </Buttons>
         </ext:Window>
+        <ext:Window
+            ID="legendsWindow"
+            runat="server"
+            Icon="PageEdit"
+            Title="<%$ Resources:LegendsWindow %>"
+            Width="450"
+            
+            AutoShow="false"
+            Modal="true"
+            Hidden="true"
+            Layout="Fit">
+
+            <Items>
+        <ext:GridPanel ID="GridPanel2" runat="server"  Width="200">
+                            <Store>
+                                <ext:Store runat="server"  ID="colorsStore">
+                                    <Model>
+                                        <ext:Model runat="server" IDProperty="recordId" >
+                                            <Fields>
+                                                <ext:ModelField Name="recordId" />
+                                                <ext:ModelField Name="name" />
+                                                <ext:ModelField Name="color" />
+
+
+                                            </Fields>
+                                        </ext:Model>
+
+                                    </Model>
+                                </ext:Store>
+                                
+                            </Store>
+                            <ColumnModel>
+                                <Columns>
+                                    <ext:Column runat="server" DataIndex="recordId" Visible ="false" />
+                                    <ext:Column runat="server" DataIndex="name"   Text="Day Type" Flex="1" />
+                                    <ext:ComponentColumn runat="server" Text="Color" DataIndex="color" Flex="1">
+                                <Component>
+                                    <ext:ColorField runat="server" ReadOnly="true" />
+                                </Component>
+                                <Listeners>
+                                    <Bind Handler="cmp.setValue(record.get('color'));" />
+                                </Listeners>
+                            </ext:ComponentColumn>
+                                </Columns>
+                            </ColumnModel>
+                        </ext:GridPanel>
+                </Items>
+                </ext:Window>
+        
+
 
     </form>
 </body>

@@ -46,8 +46,8 @@ namespace AionHR.Web.UI.Forms
 
         protected void login_Click(object sender, EventArgs e)
         {
-            AuthenticateRequest request = new AuthenticateRequest();
-            request.UserName = tbUsername.Text;
+            AccountRecoveryRequest request = new AccountRecoveryRequest();
+            request.Email = tbUsername.Text;
             //request.Account = tbAccountName.Text;
             Response<Account> account = _masterService.RequestAccountRecovery(request);
             if (!account.Success)

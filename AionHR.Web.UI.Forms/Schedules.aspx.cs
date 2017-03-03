@@ -49,8 +49,7 @@ namespace AionHR.Web.UI.Forms
             }
 
         }
-        BoundedComboBox parents;
-        BoundedComboBox supervisors;
+  
         protected void Page_Load(object sender, EventArgs e)
         {
 

@@ -58,6 +58,15 @@ namespace AionHR.Web.UI.Forms {
         protected global::System.Web.UI.WebControls.Literal Literal1;
         
         /// <summary>
+        /// lblLoading control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Hidden lblLoading;
+        
+        /// <summary>
         /// Form1 control.
         /// </summary>
         /// <remarks>

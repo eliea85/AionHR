@@ -97,3 +97,12 @@
             font-weight: bold;
         }
 
+
+
+.x-form-invalid-icon-default {
+    margin:0px !important;
+}
+
+.x-form-error-wrap-default.x-form-error-wrap-side {
+    width:18px !important;
+}

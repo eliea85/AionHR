@@ -62,13 +62,14 @@ namespace AionHR.Web.UI.Forms
                 absenseStore_ReadData(null, null);
                 checkMontierStore_ReadData(null, null);
                 latenessStore_ReadData(null, null);
-                leavesStore_ReadData(null, null);
+               // leavesStore_ReadData(null, null);
                 missingPunchesStore_ReadData(null, null);
 
-
+               
             }
 
         }
+        
 
 
 
@@ -113,10 +114,14 @@ namespace AionHR.Web.UI.Forms
 
         protected void activeStore_refresh(object sender, StoreReadDataEventArgs e)
         {
-            ListRequest r = new ListRequest();
+            ActiveAttendanceRequest r = new ActiveAttendanceRequest();
+            r.DepartmentId = "0";
+            r.BranchId = "0";
+            r.PositionId = "0";
             ListResponse<ActiveCheck> ACs = _timeAttendanceService.ChildGetAll<ActiveCheck>(r);
-            
-            
+            activeStore.DataSource = ACs.Items;
+            activeStore.DataBind();
+
         }
 
 
@@ -138,34 +143,91 @@ namespace AionHR.Web.UI.Forms
 
         protected void absenseStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-
+            ActiveAttendanceRequest r = new ActiveAttendanceRequest();
+            r.DepartmentId = "0";
+            r.BranchId = "0";
+            r.PositionId = "0";
+            ListResponse<ActiveAbsence> ABs = _timeAttendanceService.ChildGetAll<ActiveAbsence>(r);
+            absenseStore.DataSource = ABs.Items;
+            absenseStore.DataBind();
         }
 
         protected void latenessStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-
+            ActiveAttendanceRequest r = new ActiveAttendanceRequest();
+            r.DepartmentId = "0";
+            r.BranchId = "0";
+            r.PositionId = "0";
+            ListResponse<ActiveLate> ALs = _timeAttendanceService.ChildGetAll<ActiveLate>(r);
+           latenessStore.DataSource = ALs.Items;
+            latenessStore.DataBind();
         }
 
         protected void leavesStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-
+            // ActiveAttendanceRequest r = new ActiveAttendanceRequest();
+            //r.DepartmentId = "0";
+            //r.BranchId = "0";
+            //r.PositionId = "0";
+            //ListResponse<ActiveLeave> Leaves = _timeAttendanceService.ChildGetAll<ActiveLeave>(r);
+            //leavesStore.DataSource = Leaves.Items;
+            List<ActiveLeave> leaves = new List<ActiveLeave>();
+            leavesStore.DataSource = leaves;
+            leavesStore.DataBind();
         }
 
         protected void missingPunchesStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-
+            // ActiveAttendanceRequest r = new ActiveAttendanceRequest();
+            //r.DepartmentId = "0";
+            //r.BranchId = "0";
+            //r.PositionId = "0";
+            // ListResponse<ActiveCheck> ACs = _timeAttendanceService.ChildGetAll<ActiveCheck>(r);
+            //activeStore.DataSource = ACs.Items;
+            List<MissedPunch> punches = new List<MissedPunch>();
+            missingPunchesStore.DataSource = punches;
+            missingPunchesStore.DataBind();
         }
 
         protected void checkMontierStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-            CheckMonitor ch = new CheckMonitor() { count = 50, rate = 0.5, figureId = 1 };
-            CheckMonitor ch2 = new CheckMonitor() { count = 50, rate = 0.9, figureId = 2 };
-            List<CheckMonitor> chs = new List<CheckMonitor>();
-            chs.Add(ch);
-            chs.Add(ch2);
-            checkMontierStore.DataSource = chs;
-            checkMontierStore.DataBind();
+            ActiveAttendanceRequest r = new ActiveAttendanceRequest();
+            r.DepartmentId = "0";
+            r.BranchId = "0";
+            r.PositionId = "0";
+            ListResponse<CheckMonitor> CMs = _timeAttendanceService.ChildGetAll<CheckMonitor>(r);
+            foreach (var item in CMs.Items)
+            {
+               item.figureTitle= GetLocalResourceObject(item.figureId.ToString()).ToString();
+                item.rate = item.rate * 100;
+            }
            
+            checkMontierStore.DataSource = CMs.Items;
+            checkMontierStore.DataBind();
+
+        }
+
+        protected void outStore_ReadData(object sender, StoreReadDataEventArgs e)
+        {
+            // ActiveAttendanceRequest r = new ActiveAttendanceRequest();
+            //r.DepartmentId = "0";
+            //r.BranchId = "0";
+            //r.PositionId = "0";
+            //ListResponse<ActiveOut> AOs = _timeAttendanceService.ChildGetAll<ActiveOut>(r);
+            //outStore.DataSource = AOs.Items;
+            List<ActiveOut> outs = new List<ActiveOut>();
+            outStore.DataSource = outs;
+            outStore.DataBind();
+        }
+        [DirectMethod]
+        protected void RefreshTime(object sender, DirectEventArgs e)
+        {
+            activeStore_refresh(null, null);
+            absenseStore_ReadData(null, null);
+            checkMontierStore_ReadData(null, null);
+            latenessStore_ReadData(null, null);
+            // leavesStore_ReadData(null, null);
+            missingPunchesStore_ReadData(null, null);
         }
     }
 }

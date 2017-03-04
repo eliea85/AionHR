@@ -9,7 +9,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
-    <script type="text/javascript" src="Scripts/Branches.js"></script>
+    <script type="text/javascript" src="Scripts/AttendanceDayView.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
      <script type="text/javascript" src="Scripts/moment.js"></script>
 
@@ -22,7 +22,7 @@
         <ext:Hidden ID="textLoadFailed" runat="server" Text="<%$ Resources:Common , LoadFailed %>" />
         <ext:Hidden ID="titleSavingError" runat="server" Text="<%$ Resources:Common , TitleSavingError %>" />
         <ext:Hidden ID="titleSavingErrorMessage" runat="server" Text="<%$ Resources:Common , TitleSavingErrorMessage %>" />
-        <ext:Hidden ID="timeZoneOffset" runat="server" EnableViewState="true" />
+       
         <ext:Store
             ID="Store1"
             runat="server"

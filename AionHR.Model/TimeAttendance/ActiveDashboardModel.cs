@@ -6,6 +6,8 @@ namespace AionHR.Model.Attendance
     public  class CheckMonitor 
     {
         public int figureId { get; set; }
+
+        public string figureTitle { get; set; }
         public int count { get; set; }
         public double rate { get; set; }
     }

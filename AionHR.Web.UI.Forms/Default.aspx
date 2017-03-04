@@ -9,6 +9,7 @@
     
     <script type="text/javascript" src="Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="Scripts/app.js"></script>
+    <script type="text/javascript" src="Scripts/Common.js"></script>
     <script type="text/javascript" src="Scripts/default.js"></script>
 
     <title>
@@ -135,7 +136,7 @@
                         </Fields>
 
                         <Listeners>
-                            <ItemClick Handler="onTreeItemClick(record, e);" />
+                            <ItemClick Handler="CheckSession(); onTreeItemClick(record, e);" />
                         </Listeners>
 
                     </ext:TreePanel>

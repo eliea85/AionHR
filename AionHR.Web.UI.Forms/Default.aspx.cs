@@ -154,6 +154,14 @@ namespace AionHR.Web.UI.Forms
             return toReturn;
 
         }
-
+        [DirectMethod]
+        public string CheckSession()
+        {
+            if (!_systemService.SessionHelper.CheckUserLoggedIn())
+            {
+                return "0";
+            }
+            else return "1";
+        }
     }
 }

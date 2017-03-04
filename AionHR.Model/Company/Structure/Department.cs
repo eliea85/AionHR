@@ -1,4 +1,5 @@
 ﻿using AionHR.Infrastructure.Domain;
+using AionHR.Model.Employees.Profile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace AionHR.Model.Company.Structure
         public string parentName { get; set; }
         public int? parentId { get; set; }
         public int? supervisorId { get; set; }
-        public string svFullName { get; set; }
+        public EmployeeName supervisorName { get; set; }
         public string segmentCode { get; set; }
         public bool isSegmentHead { get; set; }
     }

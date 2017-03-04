@@ -133,7 +133,7 @@ namespace AionHR.Web.UI.Forms
                                 new
                                 {
                                     recordId = response.result.supervisorId,
-                                    fullName =response.result.svFullName
+                                    fullName =response.result.supervisorName.fullName
                                 }
                            });
                         supervisorId.SetValue(response.result.supervisorId);
@@ -401,7 +401,7 @@ namespace AionHR.Web.UI.Forms
             b.recordId = id;
             // Define the object to add or edit as null
             if (supervisorId.SelectedItem != null)
-                b.svFullName = supervisorId.SelectedItem.Text;
+                b.supervisorName.fullName = supervisorId.SelectedItem.Text;
             if (parentId.SelectedItem != null)
                 b.parentName = parentId.SelectedItem.Text;
             if (string.IsNullOrEmpty(id))
@@ -482,7 +482,7 @@ namespace AionHR.Web.UI.Forms
 
                         ModelProxy record = this.Store1.GetById(index);
                         BasicInfoTab.UpdateRecord(record);
-                        record.Set("svFullName", b.svFullName);
+                        record.Set("svFullName", b.supervisorName.fullName);
                         record.Set("parentName", b.parentName);
                         record.Commit();
                         Notification.Show(new NotificationConfig

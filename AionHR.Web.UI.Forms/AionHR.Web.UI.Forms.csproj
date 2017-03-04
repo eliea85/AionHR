@@ -85,6 +85,7 @@
   <ItemGroup>
     <Content Include="BiometricDevices.aspx" />
     <Content Include="Branches.aspx" />
+    <Content Include="CSS\Dashboard.css" />
     <Content Include="CSS\Calendars.css" />
     <Content Include="CSS\Common.css" />
     <Content Include="CSS\HeaderAR.css" />
@@ -125,6 +126,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Nationalities.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\AttendanceDayView.js" />
     <Content Include="Scripts\Calendars.js" />
     <Content Include="Scripts\Employees.js" />
     <Content Include="Scripts\moment.js" />

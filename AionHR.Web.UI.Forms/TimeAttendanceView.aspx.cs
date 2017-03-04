@@ -73,10 +73,7 @@ namespace AionHR.Web.UI.Forms
 
             }
 
-            if (timeZoneOffset.Text != "")
-            {
-                _systemService.SessionHelper.AddTimeZone(timeZoneOffset.Text);
-            }
+          
         }
 
 

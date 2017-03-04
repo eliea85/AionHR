@@ -45,7 +45,7 @@
                         <ext:ModelField Name="name" />
                         <ext:ModelField Name="reference" />
                         <ext:ModelField Name="supervisorId" />
-                        <ext:ModelField Name="svFullName" />
+                        <ext:ModelField Name="svFullName"  ServerMapping="supervisorName.fullName"/>
                         
                         <ext:ModelField Name="isSegmentHead" />
                         <ext:ModelField Name="segmentCode" />
@@ -289,7 +289,7 @@
                                                 <ext:Model runat="server">
                                                     <Fields>
                                                         <ext:ModelField Name="recordId" />
-                                                        <ext:ModelField Name="fullName" />
+                                                        <ext:ModelField Name="fullName" ServerMapping="name.fullName" />
                                                     </Fields>
                                                 </ext:Model>
                                             </Model>

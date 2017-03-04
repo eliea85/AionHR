@@ -10,6 +10,8 @@ namespace AionHR.Model.Employees.Profile
     public class Employee:ModelBase,IEntity
     {
         public string reference { get; set; }
+
+        public EmployeeName name { get; set; }
         public string fullName { get; set; }
         public string firstName { get; set; }
         public string middleName { get; set; }
@@ -46,5 +48,14 @@ namespace AionHR.Model.Employees.Profile
         public bool isInactive { get; set; }
 
         public string pictureUrl { get; set; }
+    }
+
+    public class EmployeeName
+    {
+        public string fullName { get; set; }
+        public string firstName { get; set; }
+        public string middleName { get; set; }
+        public string lastName { get; set; }
+        public string familyName { get; set; }
     }
 }

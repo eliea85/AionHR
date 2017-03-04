@@ -210,20 +210,17 @@ namespace AionHR.Infrastructure.WebService
                 // Add document object data in JSON
                 //Body += JsonConvert.SerializeObject(item);
                 Body += "\r\n--" + boundary + "\r\n"; ;
-                foreach (PropertyInfo prop in typeof(T).GetProperties())
-                {
-                    object val = prop.GetValue(item, null);
-                    if (val == null)
-                        continue;
-                    Body += string.Format("Content-Disposition: form-data; name=\"{0}\"\r\n\r\n", prop.Name);
 
 
-                    Body += string.Format(prop.GetValue(item, null).ToString());
-                    Body += "\r\n--" + boundary + "\r\n"; ;
-                }
+                Body += string.Format("Content-Disposition: form-data; name=\"{0}\"\r\n\r\n", "record");
+
+                string jsonString = JsonConvert.SerializeObject(item);
+                Body += jsonString;
+                Body += "\r\n--" + boundary + "\r\n"; ;
+
                 //Now we need to add the header for the binary part inside the body
 
-               
+
                 if (buffer != null)
                 {
                     Body += "Content-Disposition: form-data; name='file'; filename='" + fileName + "'\r\n";
@@ -238,7 +235,7 @@ namespace AionHR.Infrastructure.WebService
                 stream.Write(data, 0, data.Length);
 
                 // Add binary file to request
-               
+
 
                 // Finalizing by adding the footer of the request or what we call trailer
                 byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");

@@ -126,6 +126,9 @@
   <data name="BasicInfoTabEditWindowTitle" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="CheckMoniterGridTitle" xml:space="preserve">
+    <value>Check Monitor</value>
+  </data>
   <data name="ContractEndingDate" xml:space="preserve">
     <value>Contract Ending Date</value>
   </data>

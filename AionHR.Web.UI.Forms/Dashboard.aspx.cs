@@ -28,6 +28,7 @@ namespace AionHR.Web.UI.Forms
     public partial class Dashboard : System.Web.UI.Page
     {
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
+        ITimeAttendanceService _timeAttendanceService = ServiceLocator.Current.GetInstance<ITimeAttendanceService>();
         protected override void InitializeCulture()
         {
 
@@ -57,7 +58,12 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-
+                activeStore_refresh(null, null);
+                absenseStore_ReadData(null, null);
+                checkMontierStore_ReadData(null, null);
+                latenessStore_ReadData(null, null);
+                leavesStore_ReadData(null, null);
+                missingPunchesStore_ReadData(null, null);
 
 
             }
@@ -107,11 +113,9 @@ namespace AionHR.Web.UI.Forms
 
         protected void activeStore_refresh(object sender, StoreReadDataEventArgs e)
         {
-            ActiveCheck check = new ActiveCheck() { fullName = "grg", departmentName = "gregre", branchName = "trtrtrg", time = "grre" };
-            List<ActiveCheck> checks = new List<ActiveCheck>();
-            checks.Add(check);
-            activeStore.DataSource = checks;
-            activeStore.DataBind();
+            ListRequest r = new ListRequest();
+            ListResponse<ActiveCheck> ACs = _timeAttendanceService.ChildGetAll<ActiveCheck>(r);
+            
             
         }
 
@@ -150,6 +154,18 @@ namespace AionHR.Web.UI.Forms
         protected void missingPunchesStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
 
+        }
+
+        protected void checkMontierStore_ReadData(object sender, StoreReadDataEventArgs e)
+        {
+            CheckMonitor ch = new CheckMonitor() { count = 50, rate = 0.5, figureId = 1 };
+            CheckMonitor ch2 = new CheckMonitor() { count = 50, rate = 0.9, figureId = 2 };
+            List<CheckMonitor> chs = new List<CheckMonitor>();
+            chs.Add(ch);
+            chs.Add(ch2);
+            checkMontierStore.DataSource = chs;
+            checkMontierStore.DataBind();
+           
         }
     }
 }

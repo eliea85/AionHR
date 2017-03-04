@@ -135,6 +135,7 @@ namespace AionHR.Web.UI.Forms
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
+                    FillNameFields(response.result.name);
                     InitCombos();
                     SelectCombos(response.result);
 
@@ -170,6 +171,15 @@ namespace AionHR.Web.UI.Forms
 
 
         }
+
+        private void FillNameFields(EmployeeName name)
+        {
+            firstName.Text = name.firstName;
+            lastName.Text = name.lastName;
+            middleName.Text = name.middleName;
+            familyName.Text = name.familyName;
+        }
+
         private void SelectCombos(Employee result)
         {
             branchId.Select(result.branchId);
@@ -427,6 +437,7 @@ namespace AionHR.Web.UI.Forms
 
             string obj = e.ExtraParams["values"];
             Employee b = JsonConvert.DeserializeObject<Employee>(obj);
+            b.name = new EmployeeName() { firstName = firstName.Text, lastName = lastName.Text, familyName = familyName.Text, middleName = middleName.Text };
             b.isInactive = isInactive.Checked;
             b.recordId = id;
             // Define the object to add or edit as null
@@ -447,7 +458,7 @@ namespace AionHR.Web.UI.Forms
                     EmployeeAddOrUpdateRequest request = new EmployeeAddOrUpdateRequest();
 
                     byte[] fileData = null;
-                    if (picturePath.PostedFile != null)
+                    if (picturePath.PostedFile != null && picturePath.PostedFile.ContentLength>0)
                     {
                         using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
                         {

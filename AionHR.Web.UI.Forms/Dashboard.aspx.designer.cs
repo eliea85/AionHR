@@ -391,22 +391,22 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.RowSelectionModel rowSelectionModel4;
         
         /// <summary>
-        /// GridPanel6 control.
+        /// checkMoniterGrid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.GridPanel GridPanel6;
+        protected global::Ext.Net.GridPanel checkMoniterGrid;
         
         /// <summary>
-        /// Column25 control.
+        /// checkMontierStore control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Column Column25;
+        protected global::Ext.Net.Store checkMontierStore;
         
         /// <summary>
         /// Column26 control.

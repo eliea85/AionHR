@@ -12,7 +12,15 @@
     <script type="text/javascript" src="Scripts/Dashboard.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
 
-
+    <script  type="text/javascript">
+        function dump(obj) {
+            var out = '';
+            for (var i in obj) {
+                out += i + ": " + obj[i] + "\n";
+            }
+            return out;
+        }
+    </script>
 </head>
 <body style="background: url(Images/bg.png) repeat;">
     <form id="Form1" runat="server">
@@ -79,8 +87,9 @@
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />
-                                                                <ext:ModelField Name="fullName" />
+                                                                <ext:ModelField Name="name"  ServerMapping="employeeName.fullName"    />
                                                                 <ext:ModelField Name="time" />
+                                                                <ext:ModelField Name="checkStatus" />
                                                                 <ext:ModelField Name="positionName" />
                                                                 <ext:ModelField Name="departmentName" />
                                                                 <ext:ModelField Name="branchName" />
@@ -98,7 +107,7 @@
                                                 <Columns>
 
                                                     <ext:Column Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
-                                                    <ext:Column Flex="3" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldEmployee %>" DataIndex="fullName" Hideable="false" Width="75" Align="Center" />
+                                                    <ext:Column Flex="3" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldEmployee %>" DataIndex="name" Hideable="false" Width="75" Align="Center" />
                                                     <ext:Column MenuDisabled="true" runat="server" Text="<%$ Resources: FieldTime%>" DataIndex="time" Flex="2" Hideable="false" />
                                                     <ext:Column MenuDisabled="true" runat="server" Text="<%$ Resources: FieldPosition%>" DataIndex="positionName" Flex="2" Hideable="false" />
                                                     <ext:Column MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDepartment%>" DataIndex="departmentName" Flex="2" Hideable="false" />
@@ -191,7 +200,7 @@
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />
-                                                                <ext:ModelField Name="fullName" />
+                                                                <ext:ModelField Name="fullName" Mapping="name.fullName" />
                                                                 <ext:ModelField Name="positionName" />
                                                                 <ext:ModelField Name="departmentName" />
                                                                 <ext:ModelField Name="branchName" />
@@ -264,7 +273,7 @@
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />
-                                                                <ext:ModelField Name="fullName" />
+                                                                <ext:ModelField Name="fullName" Mapping="name.fullName" />
                                                                 <ext:ModelField Name="time" />
                                                                 <ext:ModelField Name="positionName" />
                                                                 <ext:ModelField Name="departmentName" />
@@ -337,7 +346,7 @@
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />
-                                                                <ext:ModelField Name="fullName" />
+                                                                <ext:ModelField Name="fullName" Mapping="name.fullName" />
                                                                 <ext:ModelField Name="Destination" />
                                                                 <ext:ModelField Name="Type" />
                                                                 <ext:ModelField Name="From" />
@@ -413,7 +422,7 @@
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />
-                                                                <ext:ModelField Name="fullName" />
+                                                                <ext:ModelField Name="fullName" Mapping="name.fullName" />
                                                                 <ext:ModelField Name="date" />
                                                                 <ext:ModelField Name="missedIn" />
                                                                 <ext:ModelField Name="missedOut" />
@@ -461,30 +470,40 @@
                                             </SelectionModel>
                                         </ext:GridPanel>
                                         <ext:GridPanel
-                                            ID="GridPanel6"
+                                            ID="checkMoniterGrid"
                                             runat="server"
                                             PaddingSpec="0 0 1 0"
                                             Header="true"
-                                            Title="<%$ Resources: WindowTitle %>"
+                                            Title="<%$ Resources: CheckMoniterGridTitle %>"
                                             Layout="FitLayout"
                                             Scroll="None"
                                             Border="false"
                                             Icon="User"
                                             ColumnLines="True" IDMode="Explicit" RenderXType="True">
+                                            <Store>
+                                                <ext:Store runat="server" ID="checkMontierStore" RemoteFilter="true" RemoteSort="true" OnReadData="checkMontierStore_ReadData" AutoLoad="true" AutoSync="true" >
+                                                    <Model>
+                                                        <ext:Model runat="server" >
+                                                            <Fields>
+                                                                <ext:ModelField Name="figureId" />
+                                                                <ext:ModelField Name="count" />
+                                                                <ext:ModelField Name="rate" />
+                                                            </Fields>
+                                                        </ext:Model>
 
+                                                    </Model>
+                                                </ext:Store>
+                                            </Store>
 
 
                                             <ColumnModel ID="ColumnModel6" runat="server" SortAscText="<%$ Resources:Common , SortAscText %>" SortDescText="<%$ Resources:Common ,SortDescText  %>" SortClearText="<%$ Resources:Common ,SortClearText  %>" ColumnsText="<%$ Resources:Common ,ColumnsText  %>" EnableColumnHide="false" Sortable="false">
                                                 <Columns>
 
-                                                    <ext:Column Visible="false" ID="Column25" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" Width="75" Align="Center" />
-                                                    <ext:Column Flex="1" ID="Column26" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference %>" DataIndex="reference" Hideable="false" Width="75" Align="Center" />
-                                                    <ext:Column CellCls="cellLink" ID="Column27" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="2" Hideable="false">
-                                                        <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
-                                                        </Renderer>
-                                                    </ext:Column>
+                                                    
+                                                    <ext:Column Flex="1" ID="Column26" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference %>" DataIndex="figureId" Hideable="false" Width="75" Align="Center" />
+                                                    <ext:Column CellCls="cellLink" ID="Column27" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="count" Flex="2" Hideable="false" />
 
-
+                                                    <ext:ProgressBarColumn Flex="2" DataIndex="rate" runat="server" />
 
 
 

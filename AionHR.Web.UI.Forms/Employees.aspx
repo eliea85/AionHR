@@ -45,7 +45,7 @@
                     <Fields>
 
                         <ext:ModelField Name="recordId" />
-                        <ext:ModelField Name="fullName" />
+                        <ext:ModelField Name="fullName" ServerMapping="name.fullName" />
                         <ext:ModelField Name="reference" />
                         <ext:ModelField Name="departmentName" />
                         <ext:ModelField Name="positionName" />
@@ -267,17 +267,20 @@ width="900"
                     <Items>
                         <ext:FormPanel
                             ID="BasicInfoTab"
-                            runat="server"
+                            runat="server" 
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"
                             Icon="ApplicationSideList"
-                            DefaultAnchor="100%" 
+                            DefaultAnchor="100%"  
                             BodyPadding="5" Layout="TableLayout">
+                            
                             <Items>
                                 <ext:Panel runat="server" Margin="20">
                                     <Items>
                                         <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>"  Name="recordId" />
                                         <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="reference" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                        <ext:TextField ID="firstName" runat="server" FieldLabel="<%$ Resources:FieldFirstName%>" Name="firstName" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
+                                        <ext:TextField ID="firstName" runat="server" FieldLabel="<%$ Resources:FieldFirstName%>" Name="firstName" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>"  >
+                                            
+                                        </ext:TextField>
                                         <ext:TextField ID="middleName" runat="server" FieldLabel="<%$ Resources:FieldMiddleName%>" Name="middleName" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="lastName" runat="server" FieldLabel="<%$ Resources:FieldLastName%>" Name="lastName" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                         <ext:TextField ID="familyName" runat="server" FieldLabel="<%$ Resources:FieldFamilyName%>" Name="familyName" BlankText="<%$ Resources:Common, MandatoryField%>" />

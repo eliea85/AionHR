@@ -53,5 +53,56 @@ var getCellType = function (grid, rowIndex, cellIndex) {
     return columnId;
 };
 
+var triggierImageClick = function (id) {
+    $("#" + id).click();
+}
+
+
+
+
+var showImagePreview = function (id) {
+
+    var input = $("#" + id)[0];
+    if (input.files && input.files[0]) {
+
+        //Check the extension and if not ok clear and notify the user
+
+        if (checkExtension(input.files[0].name)) {
+
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $("#" + $('#imgControl')[0].firstChild.id).attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+        else {
+            alert('File Format is not allowed');
+            $("#" + $('#imgControl')[0].firstChild.id).attr('src', '');
+            App.picturePath.reset();
+            //Alert the user and clear the input file
+        }
+    }
+}
+
+
+var checkExtension = function (file) {
+    
+    try {
+
+        if (file == null || file == '') {
+                return true;
+        }
+        var dot = file.lastIndexOf('.');
+        if (dot >= 0) {
+            var ext = file.substr(dot + 1, file.length).toLowerCase();
+            if (ext in { 'jpg': '', 'png': '', 'jpeg': '' }) { return true; }
+        }
+    
+        return false;
+    }
+    catch (e) {
+        return false;
+    }
+}
 
 

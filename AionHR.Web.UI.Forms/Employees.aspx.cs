@@ -447,7 +447,7 @@ namespace AionHR.Web.UI.Forms
                 b.departmentName = departmentId.SelectedItem.Text;
             if (positionId.SelectedItem != null)
                 b.positionName = positionId.SelectedItem.Text;
-            b.fullName = b.firstName + " " + b.middleName + " " + b.lastName + " ";
+            b.name.fullName = b.name.firstName + " " + b.name.middleName + " " + b.name.lastName + " ";
             if (string.IsNullOrEmpty(id))
             {
 
@@ -567,7 +567,7 @@ namespace AionHR.Web.UI.Forms
                         record.Set("branchName", b.branchName);
                         record.Set("departmentName", b.departmentName);
                         record.Set("positionName", b.positionName);
-                        record.Set("fullName", b.fullName);
+                        record.Set("name", b.name);
                         record.Set("hireDate", b.hireDate.Value.ToString("yyyy-MM-dd"));
                         record.Commit();
                         Notification.Show(new NotificationConfig

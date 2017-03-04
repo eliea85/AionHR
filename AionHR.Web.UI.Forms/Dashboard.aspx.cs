@@ -29,6 +29,7 @@ namespace AionHR.Web.UI.Forms
     {
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
         ITimeAttendanceService _timeAttendanceService = ServiceLocator.Current.GetInstance<ITimeAttendanceService>();
+        ICompanyStructureService _companyStructureService = ServiceLocator.Current.GetInstance<ICompanyStructureService>();
         protected override void InitializeCulture()
         {
 
@@ -58,18 +59,44 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-                activeStore_refresh(null, null);
-                absenseStore_ReadData(null, null);
-                checkMontierStore_ReadData(null, null);
-                latenessStore_ReadData(null, null);
-               // leavesStore_ReadData(null, null);
-                missingPunchesStore_ReadData(null, null);
 
-               
+                try
+                {
+                    FillDepartment();
+                    departmentId.Select(0);
+                    FillBranch();
+                    branchId.Select(0);
+                    FillPosition();
+                    ComboBox1.Select(0);
+                }
+                catch { }
             }
 
         }
-        
+
+        private void FillPosition()
+        {
+            ListRequest positionRequest = new ListRequest();
+            ListResponse<Model.Company.Structure.Position> resp = _companyStructureService.ChildGetAll<Model.Company.Structure.Position>(positionRequest);
+            positionStore.DataSource = resp.Items;
+            positionStore.DataBind();
+        }
+
+        private void FillDepartment()
+        {
+            ListRequest departmentsRequest = new ListRequest();
+            ListResponse<Department> resp = _companyStructureService.ChildGetAll<Department>(departmentsRequest);
+            departmentStore.DataSource = resp.Items;
+            departmentStore.DataBind();
+        }
+        private void FillBranch()
+        {
+            ListRequest branchesRequest = new ListRequest();
+            ListResponse<Branch> resp = _companyStructureService.ChildGetAll<Branch>(branchesRequest);
+            branchStore.DataSource = resp.Items;
+            branchStore.DataBind();
+        }
+
 
 
 
@@ -114,10 +141,8 @@ namespace AionHR.Web.UI.Forms
 
         protected void activeStore_refresh(object sender, StoreReadDataEventArgs e)
         {
-            ActiveAttendanceRequest r = new ActiveAttendanceRequest();
-            r.DepartmentId = "0";
-            r.BranchId = "0";
-            r.PositionId = "0";
+            ActiveAttendanceRequest r = GetActiveAttendanceRequest();
+         
             ListResponse<ActiveCheck> ACs = _timeAttendanceService.ChildGetAll<ActiveCheck>(r);
             activeStore.DataSource = ACs.Items;
             activeStore.DataBind();
@@ -143,10 +168,8 @@ namespace AionHR.Web.UI.Forms
 
         protected void absenseStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-            ActiveAttendanceRequest r = new ActiveAttendanceRequest();
-            r.DepartmentId = "0";
-            r.BranchId = "0";
-            r.PositionId = "0";
+            ActiveAttendanceRequest r = GetActiveAttendanceRequest();
+           
             ListResponse<ActiveAbsence> ABs = _timeAttendanceService.ChildGetAll<ActiveAbsence>(r);
             absenseStore.DataSource = ABs.Items;
             absenseStore.DataBind();
@@ -154,10 +177,8 @@ namespace AionHR.Web.UI.Forms
 
         protected void latenessStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-            ActiveAttendanceRequest r = new ActiveAttendanceRequest();
-            r.DepartmentId = "0";
-            r.BranchId = "0";
-            r.PositionId = "0";
+            ActiveAttendanceRequest r = GetActiveAttendanceRequest();
+        
             ListResponse<ActiveLate> ALs = _timeAttendanceService.ChildGetAll<ActiveLate>(r);
            latenessStore.DataSource = ALs.Items;
             latenessStore.DataBind();
@@ -165,10 +186,8 @@ namespace AionHR.Web.UI.Forms
 
         protected void leavesStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-            // ActiveAttendanceRequest r = new ActiveAttendanceRequest();
-            //r.DepartmentId = "0";
-            //r.BranchId = "0";
-            //r.PositionId = "0";
+            // ActiveAttendanceRequest r =  GetActiveAttendanceRequest();
+        
             //ListResponse<ActiveLeave> Leaves = _timeAttendanceService.ChildGetAll<ActiveLeave>(r);
             //leavesStore.DataSource = Leaves.Items;
             List<ActiveLeave> leaves = new List<ActiveLeave>();
@@ -178,23 +197,19 @@ namespace AionHR.Web.UI.Forms
 
         protected void missingPunchesStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-            // ActiveAttendanceRequest r = new ActiveAttendanceRequest();
-            //r.DepartmentId = "0";
-            //r.BranchId = "0";
-            //r.PositionId = "0";
-            // ListResponse<ActiveCheck> ACs = _timeAttendanceService.ChildGetAll<ActiveCheck>(r);
-            //activeStore.DataSource = ACs.Items;
-            List<MissedPunch> punches = new List<MissedPunch>();
-            missingPunchesStore.DataSource = punches;
+            ActiveAttendanceRequest r = GetActiveAttendanceRequest();
+
+            ListResponse<MissedPunch> ACs = _timeAttendanceService.ChildGetAll<MissedPunch>(r);
+            
+            
+            missingPunchesStore.DataSource = ACs.Items;
             missingPunchesStore.DataBind();
         }
 
         protected void checkMontierStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-            ActiveAttendanceRequest r = new ActiveAttendanceRequest();
-            r.DepartmentId = "0";
-            r.BranchId = "0";
-            r.PositionId = "0";
+            ActiveAttendanceRequest r = GetActiveAttendanceRequest();
+    
             ListResponse<CheckMonitor> CMs = _timeAttendanceService.ChildGetAll<CheckMonitor>(r);
             foreach (var item in CMs.Items)
             {
@@ -209,25 +224,60 @@ namespace AionHR.Web.UI.Forms
 
         protected void outStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
-            // ActiveAttendanceRequest r = new ActiveAttendanceRequest();
-            //r.DepartmentId = "0";
-            //r.BranchId = "0";
-            //r.PositionId = "0";
-            //ListResponse<ActiveOut> AOs = _timeAttendanceService.ChildGetAll<ActiveOut>(r);
-            //outStore.DataSource = AOs.Items;
-            List<ActiveOut> outs = new List<ActiveOut>();
-            outStore.DataSource = outs;
+            ActiveAttendanceRequest r = GetActiveAttendanceRequest();
+
+            ListResponse<ActiveOut> AOs = _timeAttendanceService.ChildGetAll<ActiveOut>(r);
+            outStore.DataSource = AOs.Items;
+            
+            
             outStore.DataBind();
         }
-        [DirectMethod]
-        protected void RefreshTime(object sender, DirectEventArgs e)
+   
+
+        private ActiveAttendanceRequest GetActiveAttendanceRequest()
         {
-            activeStore_refresh(null, null);
-            absenseStore_ReadData(null, null);
-            checkMontierStore_ReadData(null, null);
-            latenessStore_ReadData(null, null);
-            // leavesStore_ReadData(null, null);
-            missingPunchesStore_ReadData(null, null);
+            ActiveAttendanceRequest req = new ActiveAttendanceRequest();
+
+            if (!string.IsNullOrEmpty(branchId.Text) && branchId.Value.ToString() != "0")
+            {
+                req.BranchId = branchId.Value.ToString();
+               
+
+
+            }
+            else
+            {
+                req.BranchId = "0";
+               
+            }
+
+            if (!string.IsNullOrEmpty(departmentId.Text) && departmentId.Value.ToString() != "0")
+            {
+                req.DepartmentId = departmentId.Value.ToString();
+                
+
+            }
+            else
+            {
+                req.DepartmentId = "0";
+                
+            }
+            if (!string.IsNullOrEmpty(ComboBox1.Text) && ComboBox1.Value.ToString() != "0")
+            {
+                req.PositionId = ComboBox1.Value.ToString();
+
+
+            }
+            else
+            {
+                req.PositionId = "0";
+
+            }
+
+
+
+
+            return req;
         }
     }
 }

@@ -41,6 +41,7 @@ namespace AionHR.Repository.WebService.Repositories
             ChildGetAllLookup.Add(typeof(ActiveLate), "qryAL");
             ChildGetAllLookup.Add(typeof(ActiveLeave), "qryAV");
             ChildGetAllLookup.Add(typeof(ActiveOut), "qryAO");
+            ChildGetAllLookup.Add(typeof(MissedPunch), "qryMP");
 
             ChildAddOrUpdateLookup.Add(typeof(DayType), "setDT");
             ChildAddOrUpdateLookup.Add(typeof(AttendanceSchedule), "setSC");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AionHR.Model.Employees.Profile;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace AionHR.Model.Attendance
         public int employeeId { get; set; }
 
         public int branchId { get; set; }
-        public string fullName { get; set; }
+        public EmployeeName employeeName { get; set; }
 
         public string departmentName { get; set; }
         public string branchName { get; set; }

@@ -51,7 +51,7 @@
                         <ext:ModelField Name="departmentName" />
                         <ext:ModelField Name="positionName" />
                         <ext:ModelField Name="branchName" />
-                        <ext:ModelField Name="hireDate" />
+                        <ext:ModelField Name="hireDate"  />
 
 
 
@@ -78,7 +78,7 @@
                     Header="true"
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
-                    Scroll="None"
+                    Scroll="Vertical"
                     Border="false"
                     Icon="User"
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">

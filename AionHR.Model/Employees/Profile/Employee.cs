@@ -25,7 +25,7 @@ namespace AionHR.Model.Employees.Profile
         public string countryName { get; set; }
         public string mobile { get; set; }
         public string homeMail { get; set; }
-
+        public string DateTime { get; set; }
         public string workMail { get; set; }
         public int? positionId { get; set; }
         public string positionName { get; set; }

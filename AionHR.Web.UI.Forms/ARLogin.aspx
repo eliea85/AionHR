@@ -66,7 +66,7 @@
 
     <form id="Form1" runat="server">
         <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="12000" />
-
+        <ext:Hidden runat="server" ID="lblLoading" Text="<%$Resources:Common , Loading %>" />
         <ext:Viewport ID="Viewport1" runat="server">
             <Defaults>
                 <ext:Parameter Name="margin" Value="100 0 5 0" Mode="Value" />
@@ -142,7 +142,7 @@
                                         if (!#{panelLogin}.validate()) {                                
                                             return false;
                                         }
-                                    
+                                   
                                       Ext.net.Mask.show({msg:App.lblLoading.getValue(),el:#{panelLogin}.id});
                                     
                                     App.direct.Authenticate(#{tbAccountName}.value,#{tbUsername}.value,#{tbPassword}.value, {

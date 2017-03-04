@@ -279,7 +279,7 @@
                                 <ext:Checkbox ID="isInactiveCheck" runat="server" FieldLabel="<%$ Resources: FieldIsInActive%>" DataIndex="isInactive" Name="isInactive" InputValue="true" />
                                 <ext:Checkbox ID="isAdminCheck" runat="server" FieldLabel="<%$ Resources: FieldIsAdmin%>" DataIndex="isAdmin" Name="isAdmin" InputValue="true" />
                                 <ext:ComboBox runat="server" ID="employeeId"
-                                    DisplayField="fullName"
+                                    DisplayField="name.fullName"
                                     ValueField="recordId"
                                     TypeAhead="false"
                                     FieldLabel="<%$ Resources: FieldEmployeeFullName%>"
@@ -292,7 +292,7 @@
                                                 <ext:Model runat="server">
                                                     <Fields>
                                                         <ext:ModelField Name="recordId" />
-                                                        <ext:ModelField Name="fullName" />
+                                                        <ext:ModelField Name="name" IsComplex="true" />
                                                     </Fields>
                                                 </ext:Model>
                                             </Model>

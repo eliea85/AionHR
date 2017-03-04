@@ -289,7 +289,7 @@
                                                 <ext:Model runat="server">
                                                     <Fields>
                                                         <ext:ModelField Name="recordId" />
-                                                        <ext:ModelField Name="fullName" ServerMapping="name.fullName" />
+                                                        <ext:ModelField Name="fullName"  />
                                                     </Fields>
                                                 </ext:Model>
                                             </Model>

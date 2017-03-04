@@ -48,7 +48,7 @@ namespace AionHR.Web.UI.Forms
             }
 
         }
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -61,7 +61,7 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-                
+
 
             }
 
@@ -104,7 +104,7 @@ namespace AionHR.Web.UI.Forms
 
             }
         }
-        
+
 
 
         protected void PoPuP(object sender, DirectEventArgs e)
@@ -137,7 +137,7 @@ namespace AionHR.Web.UI.Forms
                                 }
                            });
                         supervisorId.SetValue(response.result.supervisorId);
-                     
+
                     }
                     this.BasicInfoTab.SetValues(response.result);
                     // InitCombos(response.result);
@@ -173,7 +173,7 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-      
+
         /// <summary>
         /// This direct method will be called after confirming the delete
         /// </summary>
@@ -236,7 +236,7 @@ namespace AionHR.Web.UI.Forms
 
 
             List<Employee> data = GetEmployeesFiltered(prms.Query);
-
+            data.ForEach(s => { s.fullName = s.name.fullName; });
             //  return new
             // {
             return data;
@@ -265,11 +265,11 @@ namespace AionHR.Web.UI.Forms
             req.BranchId = "0";
             req.IncludeIsInactive = false;
             req.SortBy = "firstName";
-           
+
             req.StartAt = "1";
             req.Size = "20";
             req.Filter = query;
-         
+
 
 
 
@@ -399,8 +399,10 @@ namespace AionHR.Web.UI.Forms
             Department b = JsonConvert.DeserializeObject<Department>(obj);
 
             b.recordId = id;
+            b.supervisorName = new EmployeeName();
             // Define the object to add or edit as null
-            if (supervisorId.SelectedItem != null)
+            if (supervisorId.SelectedItem.Text != null)
+
                 b.supervisorName.fullName = supervisorId.SelectedItem.Text;
             if (parentId.SelectedItem != null)
                 b.parentName = parentId.SelectedItem.Text;
@@ -482,6 +484,7 @@ namespace AionHR.Web.UI.Forms
 
                         ModelProxy record = this.Store1.GetById(index);
                         BasicInfoTab.UpdateRecord(record);
+
                         record.Set("svFullName", b.supervisorName.fullName);
                         record.Set("parentName", b.parentName);
                         record.Commit();

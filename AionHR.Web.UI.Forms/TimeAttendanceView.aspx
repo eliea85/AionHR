@@ -42,7 +42,7 @@
                     <Fields>
 
                         <ext:ModelField Name="dayId" />
-                        <ext:ModelField Name="fullName" />
+                        <ext:ModelField Name="employeeName" IsComplex="true" />
                         <ext:ModelField Name="branchName" />
                         <ext:ModelField Name="departmentName" />
                         <ext:ModelField Name="checkIn" />
@@ -197,8 +197,7 @@
                                     
                                 </Renderer>
                             </ext:Column>
-                            <ext:Column ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="fullName" Flex="3" Hideable="false">
-                            </ext:Column>
+                            <ext:Column ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="employeeName.fullName" Flex="3" Hideable="false" />
                             <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="2" Hideable="true" />
                             <ext:Column ID="ColDepartmentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDepartment%>" DataIndex="departmentName" Flex="2" Hideable="false">
                             </ext:Column>

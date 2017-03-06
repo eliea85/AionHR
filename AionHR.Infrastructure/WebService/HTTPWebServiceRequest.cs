@@ -283,23 +283,32 @@ namespace AionHR.Infrastructure.WebService
                 //Body += "Content-Type: application/json\r\n\r\n";//defining the content type for this part of request
                 // Add document object data in JSON
                 //Body += JsonConvert.SerializeObject(item);
-                Body += "\r\n--" + boundary + "\r\n"; ;
+                Body += "\r\n--" + boundary + "\r\n";
 
+
+               // Body += "Content-Disposition: form-data; name='record'\r\n";
+              //  Body += "Content-Type: application/json\r\n\r\n";
 
                 Body += string.Format("Content-Disposition: form-data; name=\"{0}\"\r\n\r\n", "record");
 
                 string jsonString = JsonConvert.SerializeObject(item);
                 Body += jsonString;
-                Body += "\r\n--" + boundary + "\r\n"; ;
 
-                //Now we need to add the header for the binary part inside the body
+                //Finalized the json part
+
+
+
+
 
 
                 if (buffer != null)
                 {
-                    Body += "Content-Disposition: form-data; name='picture'; filename='" + fileName + "'\r\n";
-                    stream.Write(buffer, 0, buffer.Length);
+                    //Now we need to add the header for the binary part inside the body
+                    Body += "\r\n--" + boundary + "\r\n";
+                    Body += "Content-Disposition: form-data; name=\"picture\"; filename=\"" + fileName + "\"\r\n";
                     Body += "Content-Type: binary/octet-stream\r\n\r\n";
+                 
+
                     //Body += "Content-Type: image/png\r\n\r\n";
                 }
 
@@ -311,7 +320,10 @@ namespace AionHR.Infrastructure.WebService
 
                 // Add binary file to request
 
-
+                if (buffer != null)
+                {
+                    stream.Write(buffer, 0, buffer.Length);
+                }
                 // Finalizing by adding the footer of the request or what we call trailer
                 byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
                 stream.Write(trailer, 0, trailer.Length);

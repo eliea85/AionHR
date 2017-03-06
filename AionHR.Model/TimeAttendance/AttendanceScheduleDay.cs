@@ -12,5 +12,7 @@ namespace AionHR.Model.Attendance
         public short dow { get; set; }
         public string firstIn { get; set; }
         public string lastOut { get; set; }
+
+        public string dayTypeId { get; set; }
     }
 }

@@ -49,7 +49,7 @@ namespace AionHR.Web.UI.Forms
             }
 
         }
-  
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -62,7 +62,7 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-              
+
 
             }
 
@@ -106,7 +106,7 @@ namespace AionHR.Web.UI.Forms
 
             }
         }
-      
+
 
         protected void Prev_Click(object sender, DirectEventArgs e)
         {
@@ -117,7 +117,7 @@ namespace AionHR.Web.UI.Forms
                 this.Viewport1.ActiveIndex = index - 1;
             }
 
-            
+
         }
         protected void PoPuP(object sender, DirectEventArgs e)
         {
@@ -141,7 +141,7 @@ namespace AionHR.Web.UI.Forms
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     //FillDow("1");
-                   
+
 
 
                     break;
@@ -149,7 +149,7 @@ namespace AionHR.Web.UI.Forms
                     ////Step 1 : get the object from the Web Service 
                     //panelRecordDetails.ActiveIndex = 0;
                     FillDow(id.ToString());
-                    
+
                     //_systemService.SessionHelper.Set("currentSchedule",r.RecordID);
                     //// InitCombos(response.result);
                     this.EditDayBreaks.Title = Resources.Common.EditWindowsTitle;
@@ -160,11 +160,11 @@ namespace AionHR.Web.UI.Forms
 
                     break;
                 case "colDetails":
-                     //panelRecordDetails.ActiveIndex = 0;
-                    
+                    //panelRecordDetails.ActiveIndex = 0;
+
                     AttendanceScheduleDayListRequest daysRequest = new AttendanceScheduleDayListRequest();
                     daysRequest.ScheduleId = id.ToString();
-                    
+
                     ListResponse<AttendanceScheduleDay> daysResponse = _branchService.ChildGetAll<AttendanceScheduleDay>(daysRequest);
 
 
@@ -176,8 +176,8 @@ namespace AionHR.Web.UI.Forms
                     Viewport1.ActiveIndex = 1;
                     // InitCombos(response.result);
                     break;
-                    
-                    
+
+
                 case "colDelete":
                     X.Msg.Confirm(Resources.Common.Confirmation, Resources.Common.DeleteOneRecord, new MessageBoxButtonsConfig
                     {
@@ -193,7 +193,7 @@ namespace AionHR.Web.UI.Forms
                         }
 
                     }).Show();
-                    
+
                     break;
 
                 case "colAttach":
@@ -391,7 +391,7 @@ namespace AionHR.Web.UI.Forms
 
             //Reset all values of the relative object
             BasicInfoTab.Reset();
-            
+
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
 
             this.EditRecordWindow.Show();
@@ -401,7 +401,7 @@ namespace AionHR.Web.UI.Forms
 
             //Reset all values of the relative object
             dayBreaksForm.Reset();
-            
+
             this.EditDayBreaks.Title = Resources.Common.AddNewRecord;
 
             this.EditDayBreaks.Show();
@@ -442,7 +442,7 @@ namespace AionHR.Web.UI.Forms
 
             string obj = e.ExtraParams["schedule"];
             AttendanceSchedule b = JsonConvert.DeserializeObject<AttendanceSchedule>(obj);
-            
+
             b.recordId = id;
             // Define the object to add or edit as null
 
@@ -466,8 +466,8 @@ namespace AionHR.Web.UI.Forms
                         X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
                         return;
                     }
-                   
-                    
+
+
 
                     else
                     {
@@ -517,10 +517,10 @@ namespace AionHR.Web.UI.Forms
                         X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
                         return;
                     }
-                    
+
                     //Step 2 : saving to store
 
-                  
+
                     else
                     {
 
@@ -581,7 +581,7 @@ namespace AionHR.Web.UI.Forms
         {
 
         }
-       
+
 
         [DirectMethod]
         public void panelRecordDetails_TabChanged()
@@ -611,17 +611,30 @@ namespace AionHR.Web.UI.Forms
             dayRequest.ScheduleId = CurrentSchedule.Text;// _systemService.SessionHelper.Get("currentSchedule").ToString();
             dayRequest.DayOfWeek = dow;
             CurrentDow.Text = dow;
+            List<DayType> dayTypes = LoadDayTypes();
+            dayTypesStore.DataSource = dayTypes;
+            dayTypesStore.DataBind();
+
             RecordResponse<AttendanceScheduleDay> dayResponse = _branchService.ChildGetRecord<AttendanceScheduleDay>(dayRequest);
 
             ////Step 2 : call setvalues with the retrieved object
             this.dayBreaksForm.SetValues(dayResponse.result);
+            dayTypeId.Select(dayResponse.result.dayTypeId);
+            if (dayTypes.Where(x => x.recordId == dayResponse.result.dayTypeId).First().isWorkingDay)
+            {
+                SetDayFormEnabled(true);
+                AttendanceDayBreaksListRequest breaksRequest = new AttendanceDayBreaksListRequest();
+                breaksRequest.ScheduleId = dayRequest.ScheduleId;
+                breaksRequest.DayOfWeek = dow;
+                ListResponse<AttendanceBreak> breaks = _branchService.ChildGetAll<AttendanceBreak>(breaksRequest);
+                periodsGrid.Store[0].DataSource = breaks.Items;
+                periodsGrid.Store[0].DataBind();
+            }
+            else
+            {
 
-            AttendanceDayBreaksListRequest breaksRequest = new AttendanceDayBreaksListRequest();
-            breaksRequest.ScheduleId = dayRequest.ScheduleId;
-            breaksRequest.DayOfWeek = dow;
-            ListResponse<AttendanceBreak> breaks = _branchService.ChildGetAll<AttendanceBreak>(breaksRequest);
-            periodsGrid.Store[0].DataSource = breaks.Items;
-            periodsGrid.Store[0].DataBind();
+                SetDayFormEnabled(false);
+            }
         }
 
         protected void SaveDayBreaks(object sender, DirectEventArgs e)
@@ -629,12 +642,20 @@ namespace AionHR.Web.UI.Forms
 
 
             //Getting the id to check if it is an Add or an edit as they are managed within the same form.
-            
+
             string dayJ = e.ExtraParams["day"];
             string breaksJ = e.ExtraParams["breaks"];
-         
+
             AttendanceScheduleDay day = JsonConvert.DeserializeObject<AttendanceScheduleDay>(dayJ);
-            List<AttendanceBreak> breaks = JsonConvert.DeserializeObject<List<AttendanceBreak>>(breaksJ);
+            bool workingDay = IsWorkingDay.Text == "True";
+            List<AttendanceBreak> breaks = null;
+            if (workingDay)
+                breaks = JsonConvert.DeserializeObject<List<AttendanceBreak>>(breaksJ);
+            else
+            {
+                day.firstIn = "00:00";
+                day.lastOut = "00:00";
+            }
             day.scId = Convert.ToInt32(e.ExtraParams["scId"]);
             day.dow = Convert.ToInt16(CurrentDow.Text);
 
@@ -654,43 +675,53 @@ namespace AionHR.Web.UI.Forms
                     X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
                     return;
                 }
-
-                DeleteDayBreaksRequest deleteBreaksRequest = new DeleteDayBreaksRequest();
-                deleteBreaksRequest.ScheduleId = day.scId.ToString();
-                deleteBreaksRequest.Dow = day.dow.ToString();
-                StatusResponse deleteResponse = _branchService.ChildDelete<AttendanceBreak>(deleteBreaksRequest);
-                if (!deleteResponse.Success)//it maybe another check
+                if (workingDay)
                 {
-                    X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
-                    return;
-                }
-                bool result = AddBreaksList(day.scId.ToString(), day.dow, breaks);
-                if (!result)//it maybe another check
-                {
-                    X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
-                    return;
-                }
-
-                else
-                {
-
-
-                    ModelProxy record = this.scheduleStore.GetById(day.dow);
-                    dayBreaksForm.UpdateRecord(record);
-
-                    record.Commit();
-                    Notification.Show(new NotificationConfig
+                    DeleteDayBreaksRequest deleteBreaksRequest = new DeleteDayBreaksRequest();
+                    deleteBreaksRequest.ScheduleId = day.scId.ToString();
+                    deleteBreaksRequest.Dow = day.dow.ToString();
+                    PostRequest<AttendanceBreak> req = new PostRequest<AttendanceBreak>();
+                    AttendanceBreak breakk = new AttendanceBreak();
+                    breakk.scId = day.scId;
+                    breakk.dow = day.dow;
+                    breakk.seqNo = 0;
+                    breakk.isBenefitOT = false;
+                    breakk.start = "00:00";
+                    breakk.end = "00:00";
+                    breakk.name = "a";
+                    req.entity = breakk;
+                    PostResponse<AttendanceBreak> deleteResponse = _branchService.ChildDelete<AttendanceBreak>(req);
+                    if (!deleteResponse.Success)//it maybe another check
                     {
-                        Title = Resources.Common.Notification,
-                        Icon = Icon.Information,
-                        Html = Resources.Common.RecordUpdatedSucc
-                    });
-                    this.EditDayBreaks.Close();
-
-
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                        return;
+                    }
+                    bool result = AddBreaksList(day.scId.ToString(), day.dow, breaks);
+                    if (!result)//it maybe another check
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                        return;
+                    }
                 }
+
+
+
+                ModelProxy record = this.scheduleStore.GetById(day.dow);
+                dayBreaksForm.UpdateRecord(record);
+
+                record.Commit();
+                Notification.Show(new NotificationConfig
+                {
+                    Title = Resources.Common.Notification,
+                    Icon = Icon.Information,
+                    Html = Resources.Common.RecordUpdatedSucc
+                });
+                this.EditDayBreaks.Close();
+
+
+
 
             }
             catch (Exception ex)
@@ -703,7 +734,7 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        private bool AddBreaksList(string scheduleIdString,short dow, List<AttendanceBreak> breaks)
+        private bool AddBreaksList(string scheduleIdString, short dow, List<AttendanceBreak> breaks)
         {
             short i = 1;
             int scheduleId = Convert.ToInt32(scheduleIdString);
@@ -728,13 +759,51 @@ namespace AionHR.Web.UI.Forms
         [DirectMethod]
         public object CheckTime(string value)
         {
-           
+
             int hours = Convert.ToInt32((value[0] + value[1]).ToString());
             int mins = Convert.ToInt32((value[3] + value[4]).ToString());
-            if (hours > 23 || mins>59)
+            if (hours > 23 || mins > 59)
                 return false;
             return true;
         }
-       
+
+        private List<DayType> LoadDayTypes()
+        {
+            ListRequest req = new ListRequest();
+            ListResponse<DayType> days = _branchService.ChildGetAll<DayType>(req);
+            return days.Items;
+
+
+        }
+
+        private DayType GetDayType(string id)
+        {
+            RecordRequest req = new RecordRequest();
+            req.RecordID = id;
+            RecordResponse<DayType> day = _branchService.ChildGetRecord<DayType>(req);
+            return day.result;
+        }
+
+        protected void Unnamed_Event(object sender, DirectEventArgs e)
+        {
+            string selectedDayTypeId = dayTypeId.Value.ToString();
+
+            if (GetDayType(selectedDayTypeId).isWorkingDay)
+                SetDayFormEnabled(true);
+            else
+                SetDayFormEnabled(false);
+
+        }
+
+        private void SetDayFormEnabled(bool v)
+        {
+            // ((TextFieldBase)dayBreaksForm.FindControl("fromField")).SetEditable(false);
+
+            IsWorkingDay.Text = v.ToString();
+            X.Call("setReadOnly", "firstIn", v);
+            X.Call("setReadOnly", "lastOut", v);
+            X.Call("setReadOnly", "periodsGrid", v);
+
+        }
     }
 }

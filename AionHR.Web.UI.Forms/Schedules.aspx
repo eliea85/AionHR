@@ -9,11 +9,21 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script type="text/javascript" src="Scripts/moment.js"></script>
     <script type="text/javascript" src="Scripts/Schedules.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
 
-
+<script type="text/javascript" >
+    function setReadOnly(attr,state)
+    {
+        
+        
+        Ext.getCmp(attr).setDisabled(!state);
+       
+    }
+</script>
 </head>
 <body style="background: url(Images/bg.png) repeat;">
     <form id="Form1" runat="server">
@@ -25,6 +35,7 @@
         <ext:Hidden ID="titleSavingErrorMessage" runat="server" Text="<%$ Resources:Common , TitleSavingErrorMessage %>" />
         <ext:Hidden ID="CurrentSchedule" runat="server" />
         <ext:Hidden ID="CurrentDow"  runat="server" />
+        <ext:Hidden ID="IsWorkingDay"  runat="server" />
         <ext:Store
             ID="Store1"
             runat="server"
@@ -271,6 +282,7 @@
                                         <ext:ModelField Name="dow" />
                                         <ext:ModelField Name="firstIn" />
                                         <ext:ModelField Name="lastOut" />
+                                        <ext:ModelField Name="dayTypeId" />
                                     </Fields>
                                 </ext:Model>
                             </Model>
@@ -416,8 +428,29 @@
                             <Items>
                                 <ext:TextField ID="fieldScId" Hidden="true" runat="server" Disabled="true" DataIndex="scId" />
                                 <ext:TextField ID="fieldDow" Hidden="true" runat="server" Disabled="true" DataIndex="dow" />
-                                <ext:TextField ID="firstIn" FieldLabel="First In" runat="server" DataIndex="firstIn" />
+                                  <ext:ComboBox runat="server" AllowBlank="false" DisplayField="name" ValueField="recordId" Name="dayTypeId" ID="dayTypeId" FieldLabel="<%$ Resources:DayType %>" SubmitValue="true">
+                                   <Store>
+                                       <ext:Store runat="server" ID="dayTypesStore" >
+                                           <Model>
+                                               <ext:Model runat="server" IDProperty="recordId">
+                                                   <Fields>
+                                                       <ext:ModelField Name="recordId" />
+                                                       <ext:ModelField Name="name" />
+                                                   </Fields>
+                                               </ext:Model>
+                                           </Model>
+                                       </ext:Store>
+                                   </Store>
+                                      <DirectEvents>
+                                          <Change OnEvent="Unnamed_Event" />
+                                      </DirectEvents>
+                                      <Listeners>
+                                          <Change Handler="CheckSession();" />
+                                      </Listeners>
+                               </ext:ComboBox>
+                                <ext:TextField ID="firstIn" FieldLabel="First In" runat="server" DataIndex="firstIn"  AllowBlank="false" />
                                 <ext:TextField ID="lastOut" runat="server" FieldLabel="Last Out" DataIndex="lastOut" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
+                                
                                 <ext:GridPanel
                                     ID="periodsGrid"
                                     runat="server"

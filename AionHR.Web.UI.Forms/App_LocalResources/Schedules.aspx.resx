@@ -195,4 +195,7 @@
   <data name="EditDaysButton" xml:space="preserve">
     <value>Edit Days</value>
   </data>
+  <data name="DayType" xml:space="preserve">
+    <value>Day Type</value>
+  </data>
 </root>

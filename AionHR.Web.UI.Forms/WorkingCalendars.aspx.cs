@@ -23,6 +23,7 @@ using AionHR.Model.Company.Structure;
 using AionHR.Model.Employees.Profile;
 using AionHR.Model.Employees.Leaves;
 using AionHR.Model.Attendance;
+using AionHR.Model.TimeAttendance;
 
 namespace AionHR.Web.UI.Forms
 {
@@ -791,10 +792,68 @@ namespace AionHR.Web.UI.Forms
             return schedules.Items;
         }
 
-        protected void Unnamed_Event(object sender, DirectEventArgs e)
+        protected void viewLegent_click(object sender, DirectEventArgs e)
         {
             LoadDayTypes();
             legendsWindow.Show();
         }
+
+        protected void selectPattern_click(object sender, DirectEventArgs e)
+        {
+            patternScheduleStore.DataSource = LoadSchedules();
+            patternFormPanel.Reset();
+            patternScheduleStore.DataBind();
+            dateTo.MinDate = dateFrom.MinDate = new DateTime(Convert.ToInt32(CurrentYear.Text), 1, 1);
+            dateFrom.MaxDate= dateFrom.MaxDate = new DateTime(Convert.ToInt32(CurrentYear.Text), 12, 31);
+            
+            patternWindow.Show();
+        }
+        protected void SavePattern(object sender, DirectEventArgs e)
+        {
+
+
+            string day = e.ExtraParams["pattern"];
+            CalendarPattern b = JSON.Deserialize<CalendarPattern>(day);
+
+            b.caId = CurrentCalendar.Text;
+
+            b.year = CurrentYear.Text;
+
+           
+            PostRequest<CalendarPattern> request = new PostRequest<CalendarPattern>();
+            request.entity = b;
+            PostResponse<CalendarPattern> response = _branchService.ChildAddOrUpdate<CalendarPattern>(request);
+
+            if (!response.Success)//it maybe another check
+            {
+                X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                X.Msg.Alert(Resources.Common.ErrorUpdatingRecord, response.Message).Show();
+                return;
+            }
+
+            //Step 2 : saving to store
+
+
+            else
+            {
+
+                LoadDays();
+                //Display successful notification
+                Notification.Show(new NotificationConfig
+                {
+                    Title = Resources.Common.Notification,
+                    Icon = Icon.Information,
+                    Html = Resources.Common.RecordSavingSucc
+                });
+
+                this.patternWindow.Close();
+
+
+
+            }
+
+        }
+
+
     }
 }

@@ -358,7 +358,17 @@
                                         <Click Handler="CheckSession();" />
                                     </Listeners>
                                     <DirectEvents>
-                                        <Click OnEvent="Unnamed_Event">
+                                        <Click OnEvent="viewLegent_click">
+                                            
+                                        </Click>
+                                    </DirectEvents>
+                                </ext:Button>
+                                 <ext:Button ID="patternButton" runat="server" Text="<%$ Resources:ApplyPattern %>" Icon="Help">
+                                    <Listeners>
+                                        <Click Handler="CheckSession();" />
+                                    </Listeners>
+                                    <DirectEvents>
+                                        <Click OnEvent="selectPattern_click">
                                             
                                         </Click>
                                     </DirectEvents>
@@ -2287,7 +2297,77 @@
                 </Items>
                 </ext:Window>
         
+         <ext:Window
+            ID="patternWindow"
+            runat="server"
+            Icon="PageEdit"
+            Title="<%$ Resources:PatternWindowTitle %>"
+            Width="450"
+            Height="330"
+            AutoShow="false"
+            Modal="true"
+            Hidden="true"
+            Layout="Fit">
 
+            <Items>
+                
+                        <ext:FormPanel
+                            ID="patternFormPanel"
+                            runat="server"
+                           
+                            Icon="ApplicationSideList"
+                            DefaultAnchor="100%" 
+                            BodyPadding="5">
+                            <Items>
+                                <ext:DateField runat="server" AllowBlank="false" ID="dateFrom" Name="dateFrom"  FieldLabel="<%$ Resources:From %>" />
+                                <ext:DateField runat="server" AllowBlank="false" ID="dateTo" Name="dateTo"  FieldLabel="<%$ Resources:To %>" />
+                               <ext:ComboBox runat="server" AllowBlank="false" Name="scId" ID="scIdCombo" DisplayField="name" ValueField="recordId" FieldLabel="<%$ Resources:Schedule %>" SubmitValue="true">
+                                   <Store>
+                                       <ext:Store runat="server" ID="patternScheduleStore" >
+                                           <Model>
+                                               <ext:Model runat="server" IDProperty="recordId">
+                                                   <Fields>
+                                                       <ext:ModelField Name="recordId" />
+                                                       <ext:ModelField Name="name" />
+                                                   </Fields>
+                                               </ext:Model>
+                                           </Model>
+                                       </ext:Store>
+                                   </Store>
+                               </ext:ComboBox>
+                               
+                            </Items>
+
+                        </ext:FormPanel>
+                        
+
+                    </Items>
+           
+            <Buttons>
+                <ext:Button ID="Button8" runat="server" Text="<%$ Resources:Common, Save %>" Icon="Disk">
+
+                    <Listeners>
+                        <Click Handler="CheckSession(); if (!#{patternFormPanel}.getForm().isValid()) {return false;} " />
+                    </Listeners>
+                    <DirectEvents>
+                        <Click OnEvent="SavePattern" Failure="Ext.MessageBox.alert('#{titleSavingError}.value', '#{titleSavingErrorMessage}.value');">
+                            <EventMask ShowMask="true" Target="CustomTarget" CustomTarget="={#{patternFormPanel}.body}" />
+                            <ExtraParams>
+                                <ext:Parameter Name="caId" Value="#{fieldCaId}.getValue()" Mode="Raw" />
+                               
+                                <ext:Parameter Name="pattern" Value="#{patternFormPanel}.getForm().getValues()" Mode="Raw" Encode="true" />
+                               
+                            </ExtraParams>
+                        </Click>
+                    </DirectEvents>
+                </ext:Button>
+                <ext:Button ID="Button9" runat="server" Text="<%$ Resources:Common , Cancel %>" Icon="Cancel">
+                    <Listeners>
+                        <Click Handler="this.up('window').hide();" />
+                    </Listeners>
+                </ext:Button>
+            </Buttons>
+        </ext:Window>
 
     </form>
 </body>

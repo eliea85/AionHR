@@ -228,4 +228,16 @@
   <data name="LegendsWindow" xml:space="preserve">
     <value>Legends Table</value>
   </data>
+  <data name="ApplyPattern" xml:space="preserve">
+    <value>Apply Pattern</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="PatternWindowTitle" xml:space="preserve">
+    <value>Pattern Selection</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
 </root>

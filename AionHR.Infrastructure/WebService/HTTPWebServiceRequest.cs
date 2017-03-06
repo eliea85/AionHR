@@ -232,10 +232,10 @@ namespace AionHR.Infrastructure.WebService
                     //Now we need to add the header for the binary part inside the body
                     Body += "\r\n--" + boundary + "\r\n";
                     Body += "Content-Disposition: form-data; name=\"picture\"; filename=\"" + fileName + "\"\r\n";
-                    Body += "Content-Type: binary/octet-stream\r\n\r\n";
+                    Body += "Content-Type: application/octet-stream\r\n\r\n";
                  
 
-                    //Body += "Content-Type: image/png\r\n\r\n";
+                   // Body += "Content-Type: image/png\r\n\r\n";
                 }
 
 

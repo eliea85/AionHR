@@ -526,14 +526,19 @@ namespace AionHR.Web.UI.Forms
                     EmployeeAddOrUpdateRequest request = new EmployeeAddOrUpdateRequest();
 
                     byte[] fileData = null;
-                    if (picturePath.PostedFile != null)
+                    if (picturePath.HasFile && picturePath.PostedFile.ContentLength>0)
                     {
-                        using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
-                        {
-                            fileData = binaryReader.ReadBytes(picturePath.PostedFile.ContentLength);
-                        }
+                        //using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
+                        // {
+                        //    fileData = binaryReader.ReadBytes(picturePath.PostedFile.ContentLength);
+                        // }
+                        fileData = new byte[picturePath.PostedFile.ContentLength];
+                        fileData = picturePath.FileBytes;
                         request.fileName = picturePath.PostedFile.FileName;
                         request.imageData = fileData;
+
+                       
+
                     }
                     else
                     {

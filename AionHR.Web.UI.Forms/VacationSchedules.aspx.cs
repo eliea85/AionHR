@@ -476,7 +476,9 @@ namespace AionHR.Web.UI.Forms
                     }
                     DeleteVacationPeriodsRequest deleteChildenRequest = new DeleteVacationPeriodsRequest();
                     deleteChildenRequest.ScheduleId = b.recordId;
-                    StatusResponse deleteDesponse = _branchService.ChildDelete<VacationSchedulePeriod>(deleteChildenRequest);
+                    PostRequest<DeleteVacationPeriodsRequest> delete = new PostRequest<DeleteVacationPeriodsRequest>();
+                    delete.entity = deleteChildenRequest;
+                    var deleteDesponse = _branchService.ChildDelete<DeleteVacationPeriodsRequest>(delete);
                     if (!deleteDesponse.Success)//it maybe another check
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;

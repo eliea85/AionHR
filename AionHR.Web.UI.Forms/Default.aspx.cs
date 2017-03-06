@@ -58,11 +58,13 @@ namespace AionHR.Web.UI.Forms
             {
                 SetExtLanguage();
                 SetHeaderStyle();
-
+                
                 //Building the tree
                 _systemService.SessionHelper.Set("ActiveModule","-1");
                 BuildTree(1);
                 commonTree.Title = Resources.Common.EmployeeFiles;
+
+                
             }
         }
 
@@ -109,13 +111,19 @@ namespace AionHR.Web.UI.Forms
             {
                 case 1:
                     nodes = TreeBuilder.Instance.BuildEmployeeFilesTree(commonTree.Root);
+                    tabHome.Loader.Url = "Employees.aspx";
+                    tabHome.Loader.LoadContent();
                     return nodes.ToJson();
 
                 case 3:
                     nodes = TreeBuilder.Instance.BuildCompanyStructureTree(commonTree.Root);
+                    tabHome.Loader.Url = "Departments.aspx";
+                    tabHome.Loader.LoadContent();
                     return nodes.ToJson();
                 case 4:
                     nodes = TreeBuilder.Instance.BuildTimeManagementTree(commonTree.Root);
+                    tabHome.Loader.Url = "Dashboard.aspx";
+                    tabHome.Loader.LoadContent();
                     return nodes.ToJson();
                 default:
                     nodes = TreeBuilder.Instance.BuildCaseManagementTree(commonTree.Root);

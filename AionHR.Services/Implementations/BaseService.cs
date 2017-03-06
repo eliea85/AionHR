@@ -144,14 +144,14 @@ namespace AionHR.Services.Implementations
             return response;
         }
 
-        public StatusResponse ChildDelete<TChild>(RequestBase request)
+        public PostResponse<TChild> ChildDelete<TChild>(PostRequest<TChild> request)
         {
-            StatusResponse response = new StatusResponse();
+            PostResponse<TChild> response;
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams = request.Parameters;
-            var webResponse = GetRepository().ChildDelete<TChild>(headers, queryParams);
-            response = CreateServiceResponse<StatusResponse>(webResponse);
+            var webResponse = GetRepository().ChildDelete<TChild>(request.entity,headers );
+            response = CreateServiceResponse<PostResponse<TChild>>(webResponse);
 
             return response;
         }

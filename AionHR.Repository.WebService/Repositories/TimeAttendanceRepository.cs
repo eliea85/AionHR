@@ -51,6 +51,7 @@ namespace AionHR.Repository.WebService.Repositories
             ChildAddOrUpdateLookup.Add(typeof(CalendarYear), "setCY");
             ChildAddOrUpdateLookup.Add(typeof(CalendarDay), "setCD");
             ChildAddOrUpdateLookup.Add(typeof(BiometricDevice), "setBM");
+            ChildAddOrUpdateLookup.Add(typeof(CalendarPattern), "batCD");
 
             ChildDeleteLookup.Add(typeof(AttendanceBreak), "detSB");
 

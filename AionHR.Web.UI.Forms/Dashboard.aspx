@@ -600,7 +600,7 @@
                                                     >
                                                 
                                                     <Model>
-                                                        <ext:Model ID="Model2" runat="server" IDProperty="employeeId">
+                                                        <ext:Model ID="Model2" runat="server" IDProperty="recordId">
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />

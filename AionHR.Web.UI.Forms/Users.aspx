@@ -15,7 +15,7 @@
 
 
 </head>
-<body style="background: url(Images/bg.png) repeat;" onload="getTimeZone();">
+<body style="background: url(Images/bg.png) repeat;" >
     <form id="Form1" runat="server">
         <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="1200000" />
 
@@ -279,7 +279,7 @@
                                 <ext:Checkbox ID="isInactiveCheck" runat="server" FieldLabel="<%$ Resources: FieldIsInActive%>" DataIndex="isInactive" Name="isInactive" InputValue="true" />
                                 <ext:Checkbox ID="isAdminCheck" runat="server" FieldLabel="<%$ Resources: FieldIsAdmin%>" DataIndex="isAdmin" Name="isAdmin" InputValue="true" />
                                 <ext:ComboBox runat="server" ID="employeeId"
-                                    DisplayField="name.fullName"
+                                    DisplayField="fullName"
                                     ValueField="recordId"
                                     TypeAhead="false"
                                     FieldLabel="<%$ Resources: FieldEmployeeFullName%>"
@@ -292,7 +292,7 @@
                                                 <ext:Model runat="server">
                                                     <Fields>
                                                         <ext:ModelField Name="recordId" />
-                                                        <ext:ModelField Name="name" IsComplex="true" />
+                                                        <ext:ModelField Name="fullName" />
                                                     </Fields>
                                                 </ext:Model>
                                             </Model>

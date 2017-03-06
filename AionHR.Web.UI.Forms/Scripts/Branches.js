@@ -11,20 +11,9 @@ var attachRender = function () {
 };
 
 
-function getTimeZone()
-{
-   
-    var d = new Date();
-    
-    
-    var n = d.getTimezoneOffset();
-    
-    document.getElementById("timeZoneOffset").setAttribute("text", n / 60);
-    s = n / 60;
-    App.direct.StoreTimeZone(s);
-   
 
-}
+
+
 var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
 
     CheckSession();

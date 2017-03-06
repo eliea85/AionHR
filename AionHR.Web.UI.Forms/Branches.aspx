@@ -11,10 +11,25 @@
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
     <script type="text/javascript" src="Scripts/Branches.js" ></script>
     <script type="text/javascript" src="Scripts/common.js" ></script>
-   
+    <script  type="text/javascript">
+        var GetTimeZone = function () {
+            
+            var d = new Date();
+
+
+            var n = d.getTimezoneOffset();
+            
+          
+            
+            s = n / -60;
+            App.direct.StoreTimeZone(s);
+            
+        }
+    </script>
+
  
 </head>
-<body style="background: url(Images/bg.png) repeat;" onload="getTimeZone();">
+<body style="background: url(Images/bg.png) repeat;" onload="GetTimeZone();">
     <form id="Form1" runat="server">
         <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="1200000" />        
         

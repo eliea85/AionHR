@@ -48,6 +48,14 @@ namespace AionHR.Model.Employees.Profile
         public bool isInactive { get; set; }
 
         public string pictureUrl { get; set; }
+        public string HireDateShortFormat
+        {
+            get
+
+            {
+                return hireDate.Value.ToString("yyyy-MM-dd");
+            }
+        }
     }
 
     public class EmployeeName

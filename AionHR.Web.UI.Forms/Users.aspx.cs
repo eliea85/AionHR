@@ -66,10 +66,7 @@ namespace AionHR.Web.UI.Forms
 
             }
 
-            if (timeZoneOffset.Text != "")
-            {
-                Session.Add("TimeZone", timeZoneOffset.Text);
-            }
+           
         }
 
 
@@ -121,7 +118,7 @@ namespace AionHR.Web.UI.Forms
         protected void PoPuP(object sender, DirectEventArgs e)
         {
 
-            DeactivatePassword(false);
+            DeactivatePassword(true);
             int id = Convert.ToInt32(e.ExtraParams["id"]);
             string type = e.ExtraParams["type"];
             switch (type)
@@ -149,7 +146,7 @@ namespace AionHR.Web.UI.Forms
                                 new
                                 {
                                     recordId = response.result.employeeId,
-                                    fullName =empResponse.result.fullName
+                                    fullName =empResponse.result.name.fullName
                                 }
                            });
                         employeeId.SetValue(response.result.employeeId);
@@ -255,6 +252,7 @@ namespace AionHR.Web.UI.Forms
 
             List<Employee> data = GetEmployeesFiltered(prms.Query);
 
+            data.ForEach(s => s.fullName = s.name.fullName);
             //  return new
             // {
             return data;
@@ -376,7 +374,7 @@ namespace AionHR.Web.UI.Forms
             BasicInfoTab.Reset();
 
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            DeactivatePassword(true);
+            DeactivatePassword(false);
             this.EditRecordWindow.Show();
         }
 
@@ -551,10 +549,6 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        [DirectMethod]
-        public void StoreTimeZone(string z)
-        {
-            Session["TimeZone"] = z;
-        }
+   
     }
 }

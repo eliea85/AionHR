@@ -356,6 +356,7 @@ namespace AionHR.Web.UI.Forms
 
             List<Employee> data = GetEmployeesFiltered(prms.Query);
 
+            data.ForEach(s => s.fullName = s.name.fullName);
             //  return new
             // {
             return data;

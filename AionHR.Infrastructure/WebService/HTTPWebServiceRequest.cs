@@ -223,9 +223,10 @@ namespace AionHR.Infrastructure.WebService
 
                 if (buffer != null)
                 {
-                    Body += "Content-Disposition: form-data; name='file'; filename='" + fileName + "'\r\n";
+                    Body += "Content-Disposition: form-data; name='picture'; filename='" + fileName + "'\r\n";
                     stream.Write(buffer, 0, buffer.Length);
                     Body += "Content-Type: binary/octet-stream\r\n\r\n";
+                    //Body += "Content-Type: image/png\r\n\r\n";
                 }
 
 

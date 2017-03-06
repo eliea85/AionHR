@@ -93,20 +93,20 @@ namespace AionHR.Infrastructure.Session
             return _tokenGenerator.GetUserToken(accountID, userID);
         }
 
-        public void AddTimeZone(string timeZone)
-        {
-            _sessionStorage.Save("TimeZone", timeZone);
-        }
+        //public void AddTimeZone(string timeZone)
+        //{
+        //    _sessionStorage.Save("TimeZone", timeZone);
+        //}
 
-        public string GetTimeZone()
-        {
-           object o= _sessionStorage.Retrieve("TimeZone");
-            if ( o != null)
-                    return o.ToString();
-                else return "";
+        //public string GetTimeZone()
+        //{
+        //   object o= _sessionStorage.Retrieve("TimeZone");
+        //    if ( o != null)
+        //            return o.ToString();
+        //        else return "";
             
             
-        }
+        //}
 
 
 

@@ -11,12 +11,27 @@
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" type="text/css" href="CSS/Dashboard.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
-    <script type="text/javascript" src="Scripts/Dashboard.js"/>
+    <script type="text/javascript" src="Scripts/Dashboard.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
     
     <script  type="text/javascript">
   
-
+        function startRefresh() {
+            
+            
+            setInterval(RefreshAllGrids, 10000);
+        }
+        function RefreshAllGrids() {
+            
+           
+            
+            App.activeStore.reload();
+            App.absenseStore.reload();
+            App.latenessStore.reload();
+            App.missingPunchesStore.reload();
+            App.checkMontierStore.reload();
+            App.outStore.reload();
+        }
        
     </script>
 </head>
@@ -566,7 +581,7 @@
                                     <Items>
                                         <ext:Label runat="server" Text="<%$ Resources: AbsenseGridTitle %>" StyleSpec="color:darkorange;font-weight:bold" />
                                         <ext:GridPanel  Margin="3"
-                                            ID="absenseGrid"  Height="200" 
+                                            ID="absenseGrid"   
                                             runat="server"
                                             PaddingSpec="0 0 1 0" 
                                             Header="false"
@@ -580,16 +595,10 @@
                                             <Store>
                                                 <ext:Store
                                                     ID="absenseStore"
-                                                    runat="server" OnReadData="absenseStore_ReadData"
-                                                    RemoteSort="True" PageSize="10"
-                                                    RemoteFilter="true">
-                                                    <Proxy>
-                                                        <ext:PageProxy>
-                                                            <Listeners>
-                                                                <Exception Handler="Ext.MessageBox.alert('#{textLoadFailed}.value', response.statusText);" />
-                                                            </Listeners>
-                                                        </ext:PageProxy>
-                                                    </Proxy>
+                                                    runat="server" OnReadData="absenseStore_ReadData" 
+                                                     PageSize="10"
+                                                    >
+                                                
                                                     <Model>
                                                         <ext:Model ID="Model2" runat="server" IDProperty="employeeId">
                                                             <Fields>

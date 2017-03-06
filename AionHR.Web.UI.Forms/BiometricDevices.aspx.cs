@@ -435,11 +435,7 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        [DirectMethod]
-        public void StoreTimeZone(string z)
-        {
-            Session.Add("TimeZone", z);
-        }
+      
 
         private void FillBranch()
         {

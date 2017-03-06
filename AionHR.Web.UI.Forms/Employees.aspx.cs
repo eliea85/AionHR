@@ -70,10 +70,7 @@ namespace AionHR.Web.UI.Forms
 
             }
 
-            if (timeZoneOffset.Text != "")
-            {
-                _systemService.SessionHelper.AddTimeZone(timeZoneOffset.Text);
-            }
+         
         }
 
 
@@ -545,7 +542,7 @@ namespace AionHR.Web.UI.Forms
                     }
                     request.empData = b;
 
-
+                  
 
                     PostResponse<Employee> r = _employeeService.AddOrUpdateEmployeeWithPhoto(request);
 
@@ -568,7 +565,8 @@ namespace AionHR.Web.UI.Forms
                         record.Set("departmentName", b.departmentName);
                         record.Set("positionName", b.positionName);
                         record.Set("name", b.name);
-                        record.Set("hireDate", b.hireDate.Value.ToString("yyyy-MM-dd"));
+                        record.Set("reference", b.reference);
+                        record.Set("hireDate",b.hireDate);
                         record.Commit();
                         Notification.Show(new NotificationConfig
                         {

@@ -230,7 +230,9 @@ namespace AionHR.Web.UI.Forms
 
             req.CalendarId = CurrentCalendar.Text;
             req.Year = CurrentYear.Text;
-            ListResponse<Model.Attendance.CalendarDay> daysResponse = _branchService.ChildGetAll<Model.Attendance.CalendarDay>(req);
+            if ((Convert.ToInt32(CurrentYear.Text) - 2016) % 4 != 0)
+                X.Call("setLeapDay");
+            ListResponse <Model.Attendance.CalendarDay> daysResponse = _branchService.ChildGetAll<Model.Attendance.CalendarDay>(req);
             foreach (var item in daysResponse.Items)
             {
                 string dayId = item.dayId;
@@ -239,10 +241,10 @@ namespace AionHR.Web.UI.Forms
                 
 
 
-
+                
                 string color = dtypes.Where(x => x.recordId == item.dayTypeId.ToString()).First().color;
                 X.Call("colorify", "td" + Month + Day, "#" + color.Trim());
-
+                
 
 
 
@@ -629,11 +631,6 @@ namespace AionHR.Web.UI.Forms
         }
 
 
-        [DirectMethod]
-        public void StoreTimeZone(string z)
-        {
-            Session["TimeZone"] = z;
-        }
         [DirectMethod]
         public void panelRecordDetails_TabChanged()
         {

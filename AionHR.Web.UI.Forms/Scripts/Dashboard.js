@@ -63,18 +63,6 @@ var enterKeyPressSearchHandler = function (el, event) {
         App.Store1.reload();
     }
 };
-function startRefresh() {
-    RefreshAllGrids();
-    setInterval(RefreshAllGrids, 30000);
-}
-function RefreshAllGrids()
-{
-    App.activeStore.reload();
-    App.absenseStore.reload();
-    App.latenessStore.reload();
-    App.missingPunchesStore.reload();
-    App.checkMontierStore.reload();
-    App.outStore.reload();
-}
+
 
 

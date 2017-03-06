@@ -37,21 +37,21 @@ var attachRender = function () {
 //    }
 //});
 function addEmployee() {
-    
+
     var breaksGrid = App.breaksGrid,
         store = breaksGrid.getStore();
-    
+
     breaksGrid.editingPlugin.cancelEdit();
 
     store.getSorters().removeAll();
     breaksGrid.getView().headerCt.setSortState(); // To update columns sort UI
-    
+
     store.insert(0, {
         name: 'new break',
         start: '9:00',
         end: '10:00',
         isBenifit: false
-       
+
     });
 
     breaksGrid.editingPlugin.startEdit(0, 0);
@@ -68,8 +68,8 @@ function addBreak() {
 
     store.insert(0, {
         name: 'new break',
-        start:null,
-        end:null,
+        start: null,
+        end: null,
         isBenifit: false
 
     });
@@ -91,7 +91,7 @@ function removeBreak() {
     }
 }
 function removeEmployee() {
-    
+
     var breaksGrid = App.breaksGrid,
         sm = breaksGrid.getSelectionModel(),
         store = breaksGrid.getStore();
@@ -109,11 +109,11 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
 
     CheckSession();
 
-    
-    
+
+
     var t = e.getTarget(),
         columnId = this.columns[columnIndex].id; // Get column id
-    
+
     if (t.className == "imgEdit" && columnId == "colEdit") {
         //the ajax call is allowed
 
@@ -128,12 +128,11 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
         //the ajax call is allowed
         return true;
     }
-    if (columnId == "ColName" || columnId == "colDetails" || columnId == "colDayName" || columnId == "colYearDetails")
-    {
-        
+    if (columnId == "ColName" || columnId == "colDetails" || columnId == "colDayName" || columnId == "colYearDetails") {
+
         return true;
     }
-        
+
 
 
     //forbidden
@@ -142,7 +141,7 @@ var cellClick = function (view, cell, columnIndex, record, row, rowIndex, e) {
 
 
 var getCellType = function (grid, rowIndex, cellIndex) {
-   
+
     var columnId = grid.columns[cellIndex].id; // Get column id
     return columnId;
 };
@@ -164,11 +163,19 @@ var enterKeyPressSearchHandler = function (el, event) {
 var colorify = function (tdID, color) {
     $("#" + tdID).attr("style", "background:" + color);
 };
-function getDay(dow)
-{
-  
-    switch(dow)
-    {
+var setLeapDay = function () {
+    
+    
+   
+    $("#td0229").addClass("notexist");
+        $("#td0229").html("X");
+        
+    
+
+}
+function getDay(dow) {
+
+    switch (dow) {
         case 1: return "sunday";
         case 2: return "mmonday";
         case 3: return "tuesday";
@@ -180,7 +187,7 @@ function getDay(dow)
 }
 $(document).ready(function () {
     $("#tbCalendar td").click(function () {
-        
+
         if (!$(this).hasClass('notexist')) {
             currentDayId = $(this).find('.hidden:first').html();
 

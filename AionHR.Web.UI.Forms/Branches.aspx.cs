@@ -57,15 +57,12 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-                
+
 
 
             }
 
-            if (timeZoneOffset.Text != "")
-            {
-                _systemService.SessionHelper.AddTimeZone(timeZoneOffset.Text);
-            }
+           
         }
 
 
@@ -105,7 +102,7 @@ namespace AionHR.Web.UI.Forms
 
             }
         }
-       
+
 
 
         protected void PoPuP(object sender, DirectEventArgs e)
@@ -275,8 +272,8 @@ namespace AionHR.Web.UI.Forms
             //Reset all values of the relative object
             BasicInfoTab.Reset();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-           
-                timeZoneCombo.Select(_systemService.SessionHelper.GetTimeZone());
+
+            timeZoneCombo.Select(timeZoneOffset.Text);
             this.EditRecordWindow.Show();
         }
 
@@ -433,7 +430,11 @@ namespace AionHR.Web.UI.Forms
         {
 
         }
+        [DirectMethod]
+        public void StoreTimeZone(string z)
+        {
+            timeZoneOffset.Text = z;
+        }
 
-      
     }
 }

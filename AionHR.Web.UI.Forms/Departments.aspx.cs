@@ -523,10 +523,6 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        [DirectMethod]
-        public void StoreTimeZone(string z)
-        {
-            Session["TimeZone"] = z;
-        }
+     
     }
 }

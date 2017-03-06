@@ -584,11 +584,6 @@ namespace AionHR.Web.UI.Forms
        
 
         [DirectMethod]
-        public void StoreTimeZone(string z)
-        {
-            Session["TimeZone"] = z;
-        }
-        [DirectMethod]
         public void panelRecordDetails_TabChanged()
         {
             //if (panelRecordDetails.ActiveIndex != 1)

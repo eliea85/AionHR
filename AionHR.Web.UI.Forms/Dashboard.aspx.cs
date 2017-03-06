@@ -68,6 +68,11 @@ namespace AionHR.Web.UI.Forms
                     branchId.Select(0);
                     FillPosition();
                     ComboBox1.Select(0);
+                    ActiveAttendanceRequest r = GetActiveAttendanceRequest();
+
+                    ListResponse<ActiveAbsence> ABs = _timeAttendanceService.ChildGetAll<ActiveAbsence>(r);
+                    absenseStore.DataSource = ABs.Items;
+                    absenseStore.DataBind();
                 }
                 catch { }
             }
@@ -121,7 +126,7 @@ namespace AionHR.Web.UI.Forms
         /// </summary>
         private void HideShowColumns()
         {
-           
+
         }
 
 
@@ -142,7 +147,7 @@ namespace AionHR.Web.UI.Forms
         protected void activeStore_refresh(object sender, StoreReadDataEventArgs e)
         {
             ActiveAttendanceRequest r = GetActiveAttendanceRequest();
-         
+
             ListResponse<ActiveCheck> ACs = _timeAttendanceService.ChildGetAll<ActiveCheck>(r);
             activeStore.DataSource = ACs.Items;
             activeStore.DataBind();
@@ -152,7 +157,7 @@ namespace AionHR.Web.UI.Forms
 
 
 
-       
+
 
         [DirectMethod]
         public string CheckSession()
@@ -164,12 +169,12 @@ namespace AionHR.Web.UI.Forms
             else return "1";
         }
 
-     
+
 
         protected void absenseStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
             ActiveAttendanceRequest r = GetActiveAttendanceRequest();
-           
+
             ListResponse<ActiveAbsence> ABs = _timeAttendanceService.ChildGetAll<ActiveAbsence>(r);
             absenseStore.DataSource = ABs.Items;
             absenseStore.DataBind();
@@ -178,16 +183,16 @@ namespace AionHR.Web.UI.Forms
         protected void latenessStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
             ActiveAttendanceRequest r = GetActiveAttendanceRequest();
-        
+
             ListResponse<ActiveLate> ALs = _timeAttendanceService.ChildGetAll<ActiveLate>(r);
-           latenessStore.DataSource = ALs.Items;
+            latenessStore.DataSource = ALs.Items;
             latenessStore.DataBind();
         }
 
         protected void leavesStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
             // ActiveAttendanceRequest r =  GetActiveAttendanceRequest();
-        
+
             //ListResponse<ActiveLeave> Leaves = _timeAttendanceService.ChildGetAll<ActiveLeave>(r);
             //leavesStore.DataSource = Leaves.Items;
             List<ActiveLeave> leaves = new List<ActiveLeave>();
@@ -200,8 +205,8 @@ namespace AionHR.Web.UI.Forms
             ActiveAttendanceRequest r = GetActiveAttendanceRequest();
 
             ListResponse<MissedPunch> ACs = _timeAttendanceService.ChildGetAll<MissedPunch>(r);
-            
-            
+
+
             missingPunchesStore.DataSource = ACs.Items;
             missingPunchesStore.DataBind();
         }
@@ -209,14 +214,14 @@ namespace AionHR.Web.UI.Forms
         protected void checkMontierStore_ReadData(object sender, StoreReadDataEventArgs e)
         {
             ActiveAttendanceRequest r = GetActiveAttendanceRequest();
-    
+
             ListResponse<CheckMonitor> CMs = _timeAttendanceService.ChildGetAll<CheckMonitor>(r);
             foreach (var item in CMs.Items)
             {
-               item.figureTitle= GetLocalResourceObject(item.figureId.ToString()).ToString();
-                item.rate = item.rate * 100;
+                item.figureTitle = GetLocalResourceObject(item.figureId.ToString()).ToString();
+
             }
-           
+
             checkMontierStore.DataSource = CMs.Items;
             checkMontierStore.DataBind();
 
@@ -228,12 +233,19 @@ namespace AionHR.Web.UI.Forms
 
             ListResponse<ActiveOut> AOs = _timeAttendanceService.ChildGetAll<ActiveOut>(r);
             outStore.DataSource = AOs.Items;
-            
-            
+
+
             outStore.DataBind();
         }
-   
+        [DirectMethod]
+        public void RefreshAll()
+        {
+            ActiveAttendanceRequest r = GetActiveAttendanceRequest();
 
+            ListResponse<ActiveAbsence> ABs = _timeAttendanceService.ChildGetAll<ActiveAbsence>(r);
+            absenseStore.DataSource = ABs.Items;
+            absenseStore.DataBind();
+        }
         private ActiveAttendanceRequest GetActiveAttendanceRequest()
         {
             ActiveAttendanceRequest req = new ActiveAttendanceRequest();
@@ -241,26 +253,26 @@ namespace AionHR.Web.UI.Forms
             if (!string.IsNullOrEmpty(branchId.Text) && branchId.Value.ToString() != "0")
             {
                 req.BranchId = branchId.Value.ToString();
-               
+
 
 
             }
             else
             {
                 req.BranchId = "0";
-               
+
             }
 
             if (!string.IsNullOrEmpty(departmentId.Text) && departmentId.Value.ToString() != "0")
             {
                 req.DepartmentId = departmentId.Value.ToString();
-                
+
 
             }
             else
             {
                 req.DepartmentId = "0";
-                
+
             }
             if (!string.IsNullOrEmpty(ComboBox1.Text) && ComboBox1.Value.ToString() != "0")
             {

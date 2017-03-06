@@ -49,6 +49,14 @@
                         <ext:ModelField Name="checkOut" />
                         <ext:ModelField Name="workingTime" />
                         <ext:ModelField Name="breaks" />
+                        <ext:ModelField Name="OL_A" />
+                        <ext:ModelField Name="OL_B" />
+                        <ext:ModelField Name="OL_D" />
+                        <ext:ModelField Name="OL_N" />
+                        <ext:ModelField Name="OL_A_SIGN" />
+                        <ext:ModelField Name="OL_B_SIGN" />
+                        <ext:ModelField Name="OL_D_SIGN" />
+                        <ext:ModelField Name="OL_N_SIGN" />
 
 
 

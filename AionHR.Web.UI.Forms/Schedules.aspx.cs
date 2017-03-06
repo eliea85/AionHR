@@ -685,6 +685,10 @@ namespace AionHR.Web.UI.Forms
                     breakk.scId = day.scId;
                     breakk.dow = day.dow;
                     breakk.seqNo = 0;
+                    breakk.isBenefitOT = false;
+                    breakk.start = "00:00";
+                    breakk.end = "00:00";
+                    breakk.name = "a";
                     req.entity = breakk;
                     PostResponse<AttendanceBreak> deleteResponse = _branchService.ChildDelete<AttendanceBreak>(req);
                     if (!deleteResponse.Success)//it maybe another check

@@ -166,7 +166,7 @@
                                                         </ext:PageProxy>
                                                     </Proxy>
                                                     <Model>
-                                                        <ext:Model ID="Model1" runat="server" IDProperty="employeeId">
+                                                        <ext:Model ID="Model1" runat="server" IDProperty="recordId">
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />
@@ -247,7 +247,7 @@
                                                         </ext:PageProxy>
                                                     </Proxy>
                                                     <Model>
-                                                        <ext:Model ID="Model3" runat="server" IDProperty="employeeId">
+                                                        <ext:Model ID="Model3" runat="server" IDProperty="recordId">
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />
@@ -321,7 +321,7 @@
                                                         </ext:PageProxy>
                                                     </Proxy>
                                                     <Model>
-                                                        <ext:Model ID="Model4" runat="server" IDProperty="employeeId">
+                                                        <ext:Model ID="Model4" runat="server" IDProperty="recordId">
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />
@@ -398,7 +398,7 @@
                                                         </ext:PageProxy>
                                                     </Proxy>
                                                     <Model>
-                                                        <ext:Model ID="Model6" runat="server" IDProperty="employeeId">
+                                                        <ext:Model ID="Model6" runat="server" IDProperty="recordId">
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />
@@ -523,7 +523,7 @@
                                                         </ext:PageProxy>
                                                     </Proxy>
                                                     <Model>
-                                                        <ext:Model ID="Model5" runat="server" IDProperty="employeeId">
+                                                        <ext:Model ID="Model5" runat="server" IDProperty="recordId">
                                                             <Fields>
 
                                                                 <ext:ModelField Name="employeeId" />
@@ -587,16 +587,16 @@
                                             Header="false"
                                             Title="<%$ Resources: AbsenseGridTitle %>"
                                             Layout="FitLayout"
-                                            Scroll="Vertical"
+                                            Scroll="Vertical" Height="200"
                                             Border="false"
-                                            Icon="User" 
+                                            Icon="User"  
                                             ColumnLines="True" IDMode="Explicit" RenderXType="True">
 
                                             <Store>
                                                 <ext:Store
-                                                    ID="absenseStore"
+                                                    ID="absenseStore" 
                                                     runat="server" OnReadData="absenseStore_ReadData" 
-                                                     PageSize="10"
+                                                     PageSize="5" 
                                                     >
                                                 
                                                     <Model>

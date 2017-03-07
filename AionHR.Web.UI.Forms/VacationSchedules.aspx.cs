@@ -416,13 +416,13 @@ namespace AionHR.Web.UI.Forms
                         return;
                     }
                     List<VacationSchedulePeriod> periods = JsonConvert.DeserializeObject<List<VacationSchedulePeriod>>(pers);
-                    bool result = AddPeriodsList(b.recordId, periods);
+                    PostResponse<VacationSchedulePeriod[]> result = AddPeriodsList(b.recordId, periods);
                     
 
-                    if (!result)
+                    if (!result.Success)
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
+                        X.Msg.Alert(Resources.Common.Error, result.Message).Show();
                         return;
                     }
 
@@ -474,11 +474,8 @@ namespace AionHR.Web.UI.Forms
                         X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
                         return;
                     }
-                    DeleteVacationPeriodsRequest deleteChildenRequest = new DeleteVacationPeriodsRequest();
-                    deleteChildenRequest.ScheduleId = b.recordId;
-                    PostRequest<DeleteVacationPeriodsRequest> delete = new PostRequest<DeleteVacationPeriodsRequest>();
-                    delete.entity = deleteChildenRequest;
-                    var deleteDesponse = _branchService.ChildDelete<DeleteVacationPeriodsRequest>(delete);
+                   
+                    var deleteDesponse = _branchService.DeleteVacationSchedulePeriods(Convert.ToInt32(b.recordId));
                     if (!deleteDesponse.Success)//it maybe another check
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
@@ -486,15 +483,15 @@ namespace AionHR.Web.UI.Forms
                         return;
                     }
                     List<VacationSchedulePeriod> periods = JsonConvert.DeserializeObject<List<VacationSchedulePeriod>>(pers);
-                    bool result = AddPeriodsList(b.recordId, periods);
+                    PostResponse<VacationSchedulePeriod[]> result = AddPeriodsList(b.recordId, periods);
 
                     //Step 2 : saving to store
 
                     //Step 3 :  Check if request fails
-                    if (!result)//it maybe another check
+                    if (!result.Success)//it maybe another check
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                        X.Msg.Alert(Resources.Common.Error, result.Message).Show();
                         return;
                     }
                     else
@@ -524,7 +521,7 @@ namespace AionHR.Web.UI.Forms
                 }
             }
         }
-        private bool AddPeriodsList(string scheduleIdString, List<VacationSchedulePeriod> periods)
+        private PostResponse<VacationSchedulePeriod[]> AddPeriodsList(string scheduleIdString, List<VacationSchedulePeriod> periods)
         {
             short i = 1;
             int scheduleId = Convert.ToInt32(scheduleIdString);
@@ -537,11 +534,7 @@ namespace AionHR.Web.UI.Forms
             PostRequest<VacationSchedulePeriod[]> periodRequest = new PostRequest<VacationSchedulePeriod[]>();
             periodRequest.entity = periods.ToArray() ;
             PostResponse<VacationSchedulePeriod[]> response = _branchService.ChildAddOrUpdate<VacationSchedulePeriod[]>(periodRequest);
-            if (!response.Success)
-            {
-                return false;
-            }
-            return true;
+            return response;
         }
         [DirectMethod]
         public string CheckSession()

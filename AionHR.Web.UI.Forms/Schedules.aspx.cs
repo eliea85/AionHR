@@ -677,20 +677,8 @@ namespace AionHR.Web.UI.Forms
                 }
                 if (workingDay)
                 {
-                    DeleteDayBreaksRequest deleteBreaksRequest = new DeleteDayBreaksRequest();
-                    deleteBreaksRequest.ScheduleId = day.scId.ToString();
-                    deleteBreaksRequest.Dow = day.dow.ToString();
-                    PostRequest<AttendanceBreak> req = new PostRequest<AttendanceBreak>();
-                    AttendanceBreak breakk = new AttendanceBreak();
-                    breakk.scId = day.scId;
-                    breakk.dow = day.dow;
-                    breakk.seqNo = 0;
-                    breakk.isBenefitOT = false;
-                    breakk.start = "00:00";
-                    breakk.end = "00:00";
-                    breakk.name = "a";
-                    req.entity = breakk;
-                    PostResponse<AttendanceBreak> deleteResponse = _branchService.ChildDelete<AttendanceBreak>(req);
+
+                    PostResponse<AttendanceBreak> deleteResponse = _branchService.DeleteDayBreaks(day.scId, day.dow);
                     if (!deleteResponse.Success)//it maybe another check
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;

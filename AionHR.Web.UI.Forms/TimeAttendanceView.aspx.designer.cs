@@ -292,33 +292,6 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.Column colAttach;
         
         /// <summary>
-        /// Toolbar2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Toolbar Toolbar2;
-        
-        /// <summary>
-        /// StatusBar1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.StatusBar StatusBar1;
-        
-        /// <summary>
-        /// Container1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.FieldContainer Container1;
-        
-        /// <summary>
         /// PagingToolbar1 control.
         /// </summary>
         /// <remarks>
@@ -335,6 +308,15 @@ namespace AionHR.Web.UI.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ext.Net.GridView GridView1;
+        
+        /// <summary>
+        /// Summary1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Ext.Net.Summary Summary1;
         
         /// <summary>
         /// rowSelectionModel control.

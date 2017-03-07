@@ -12,28 +12,39 @@
     <link rel="stylesheet" type="text/css" href="CSS/Dashboard.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
     <script type="text/javascript" src="Scripts/Dashboard.js"></script>
-    <script type="text/javascript" src="Scripts/app.js"></script>
+ <!--  <script type="text/javascript" src="Scripts/app.js"></script>-->
     <script type="text/javascript" src="Scripts/common.js"></script>
     
     <script  type="text/javascript">
         
         function startRefresh() {
             
-           // alert('started');
-            var v = setInterval(RefreshAllGrids, 10000);
-            setGlobalInterval(v);
+            
+            setInterval(RefreshAllGrids, 10000);
+            
         }
         function RefreshAllGrids() {
             
-           
-            
-            App.activeStore.reload();
-            App.absenseStore.reload();
-            App.latenessStore.reload();
-            App.missingPunchesStore.reload();
-            App.checkMontierStore.reload();
-            App.outStore.reload();
-           // alert('interval run');
+            if (window.parent.App.tabPanel.getActiveTab().id == "dashboard") {
+              //  alert('Refresh');
+
+                /* Not Chained
+                App.activeStore.reload();
+                App.absenseStore.reload();
+                App.latenessStore.reload();
+                App.missingPunchesStore.reload();
+                App.checkMontierStore.reload();
+                App.outStore.reload();*/
+
+
+                /*Chained*/
+
+                App.activeStore.reload({ callback: function () { App.absenseStore.reload({ callback: function () { App.latenessStore.reload({ callback: function () { App.missingPunchesStore.reload({ callback: function () { App.checkMontierStore.reload({ callback: function () { App.outStore.reload(); } }); } }); } }); } }); } });
+            }
+            else {
+               // alert('No Refresh');
+            }
+          
         }
        
     </script>

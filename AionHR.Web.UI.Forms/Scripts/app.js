@@ -1,6 +1,6 @@
 ﻿Ext.ns('Aion');
 
-
+var interval;
 var keyUp = function (el, e) {
 
     var tree = App.commonTree;
@@ -130,10 +130,19 @@ var onTreeItemClick = function (record, e) {
 
 
 };
+
+function setGlobalInterval(s)
+{
+    interval = s;
+}
 var openNewTab = function (id, url, title, iconCls) {
 
     var tab = App.tabPanel.getComponent(id);
-
+    if (id != 'dashboard') {
+        //alert(interval);
+        clearInterval(interval);
+        //alert('cleared');
+    }
     if (!tab) {
         tab = App.tabPanel.add({
             id: id,

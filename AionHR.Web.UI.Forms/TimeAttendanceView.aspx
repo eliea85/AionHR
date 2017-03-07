@@ -57,6 +57,7 @@
                         <ext:ModelField Name="OL_B_SIGN" />
                         <ext:ModelField Name="OL_D_SIGN" />
                         <ext:ModelField Name="OL_N_SIGN" />
+                         <ext:ModelField Name="netOL" />
 
 
 
@@ -211,13 +212,24 @@
                             <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="2" Hideable="true" />
                             <ext:Column ID="ColDepartmentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDepartment%>" DataIndex="departmentName" Flex="2" Hideable="false">
                             </ext:Column>
-                            <ext:Column ID="ColCheckIn" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckIn%>" DataIndex="checkIn" Flex="2" Hideable="false" />
+                            <ext:Column ID="ColCheckIn" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckIn%>" DataIndex="checkIn" Flex="2" Hideable="false" >
+                                <Renderer Handler="return record.data['checkIn'] + '<br/>' + record.data['OL_A'];" />
+                                </ext:Column>
 
-                            <ext:Column ID="ColCheckOut" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckOut%>" DataIndex="checkOut" Flex="2" Hideable="false" />
+                            <ext:Column ID="ColCheckOut" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckOut%>" DataIndex="checkOut" Flex="2" Hideable="false" >
+                                 <Renderer Handler="return record.data['checkOut'] + '<br/>' + record.data['OL_D'];" />
+                                </ext:Column>
 
-                            <ext:Column ID="Column1" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHoursWorked%>" DataIndex="hoursWorked" Flex="2" Hideable="false" />
 
-                            <ext:Column ID="Column2" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBreaks%>" DataIndex="breaks" Flex="2" Hideable="false" />
+                            <ext:Column ID="Column1" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHoursWorked%>" DataIndex="hoursWorked" Flex="2" Hideable="false" >
+                                 <Renderer Handler=" var cssClass; if(return record.data['workingTime'] + '<br/>' + record.data['OL_N'];" />
+                                </ext:Column>
+
+
+                            <ext:Column ID="Column2" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBreaks%>" DataIndex="breaks" Flex="2" Hideable="false" >
+                                 <Renderer Handler="return record.data['breaks'] + '<br/>' + record.data['OL_B'];" />
+                                </ext:Column>
+
 
 
                             <ext:Column runat="server"

@@ -619,7 +619,10 @@ namespace AionHR.Web.UI.Forms
 
             ////Step 2 : call setvalues with the retrieved object
             this.dayBreaksForm.SetValues(dayResponse.result);
+
             dayTypeId.Select(dayResponse.result.dayTypeId);
+
+
             if (dayTypes.Where(x => x.recordId == dayResponse.result.dayTypeId).First().isWorkingDay)
             {
                 SetDayFormEnabled(true);

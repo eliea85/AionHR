@@ -12,7 +12,7 @@
     <script type="text/javascript" src="Scripts/AttendanceDayView.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
      <script type="text/javascript" src="Scripts/moment.js"></script>
-
+    
 </head>
 <body style="background: url(Images/bg.png) repeat;">
     <form id="Form1" runat="server">
@@ -213,21 +213,21 @@
                             <ext:Column ID="ColDepartmentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDepartment%>" DataIndex="departmentName" Flex="2" Hideable="false">
                             </ext:Column>
                             <ext:Column ID="ColCheckIn" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckIn%>" DataIndex="checkIn" Flex="2" Hideable="false" >
-                                <Renderer Handler="return record.data['checkIn'] + '<br/>' + record.data['OL_A'];" />
+                                <Renderer Handler="var cssClass='';if(record.data['OL_A_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['checkIn'] + '<br/>' + record.data['OL_A']; + '</div>'; return result;" />
                                 </ext:Column>
 
                             <ext:Column ID="ColCheckOut" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckOut%>" DataIndex="checkOut" Flex="2" Hideable="false" >
-                                 <Renderer Handler="return record.data['checkOut'] + '<br/>' + record.data['OL_D'];" />
+                                 <Renderer Handler="var cssClass='';if(record.data['OL_D_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['checkOut'] + '<br/>' + record.data['OL_D']; + '</div>'; return result;" />
                                 </ext:Column>
 
 
                             <ext:Column ID="Column1" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHoursWorked%>" DataIndex="hoursWorked" Flex="2" Hideable="false" >
-                                 <Renderer Handler=" var cssClass; if(return record.data['workingTime'] + '<br/>' + record.data['OL_N'];" />
+                                 <Renderer Handler=" var cssClass='';if(record.data['OL_N_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['workingTime'] + '<br/>' + record.data['OL_N']; + '</div>'; return result;" />
                                 </ext:Column>
 
 
                             <ext:Column ID="Column2" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBreaks%>" DataIndex="breaks" Flex="2" Hideable="false" >
-                                 <Renderer Handler="return record.data['breaks'] + '<br/>' + record.data['OL_B'];" />
+                                 <Renderer Handler="var cssClass='';if(record.data['OL_B_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['breaks'] + '<br/>' + record.data['OL_B']; + '</div>'; return result;" />
                                 </ext:Column>
 
 
@@ -286,7 +286,7 @@
 
                             </Items>
                         </ext:Toolbar>
-
+                        
                     </DockedItems>
                     <BottomBar>
 
@@ -313,7 +313,12 @@
                     </BottomBar>
                   
                     <View>
-                        <ext:GridView ID="GridView1" runat="server" />
+                        <ext:GridView ID="GridView1" runat="server" >
+                            <Listeners>
+                        
+                    </Listeners>
+                            </ext:GridView>
+
                     </View>
 
 

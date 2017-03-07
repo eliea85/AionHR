@@ -320,7 +320,7 @@
                     <ColumnModel>
                         <Columns>
                             <ext:Column runat="server" ID="colDayName" Text="<%$ Resources: FieldDow %>" DataIndex="dow">
-                                <Renderer Handler="return getDay(record.data['dow']);" />
+                                <Renderer Handler="return '<u>' +getDay(record.data['dow'])+'</u>';" />
                             </ext:Column>
                             <ext:Column runat="server" ID="firstInCol" Text="<%$ Resources: FieldFirstIn %>" DataIndex="firstIn" />
                             <ext:Column runat="server" ID="lastOutCol" Text="<%$ Resources: FieldLastOut %>" DataIndex="lastOut" />

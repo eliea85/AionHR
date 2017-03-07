@@ -338,7 +338,7 @@ namespace AionHR.Web.UI.Forms
                     {
                         //Show an error saving...
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.ErrorSavingRecord,r.Message ).Show();
+                        X.Msg.Alert(Resources.Common.ErrorSavingRecord, r.Summary).Show();
                         return;
                     }
                     else

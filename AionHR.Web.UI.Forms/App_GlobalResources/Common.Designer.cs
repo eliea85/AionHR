@@ -619,6 +619,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Friday.
+        /// </summary>
+        internal static string FridayText {
+            get {
+                return ResourceManager.GetString("FridayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         internal static string Home {
@@ -651,6 +660,15 @@ namespace Resources {
         internal static string LeaveManagement {
             get {
                 return ResourceManager.GetString("LeaveManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LeaveTypes.
+        /// </summary>
+        internal static string LeaveTypes {
+            get {
+                return ResourceManager.GetString("LeaveTypes", resourceCulture);
             }
         }
         
@@ -723,6 +741,15 @@ namespace Resources {
         internal static string Modules {
             get {
                 return ResourceManager.GetString("Modules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monday.
+        /// </summary>
+        internal static string MondayText {
+            get {
+                return ResourceManager.GetString("MondayText", resourceCulture);
             }
         }
         
@@ -943,6 +970,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Routers.
+        /// </summary>
+        internal static string Routers {
+            get {
+                return ResourceManager.GetString("Routers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saturday.
+        /// </summary>
+        internal static string SaturdayText {
+            get {
+                return ResourceManager.GetString("SaturdayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Save {
@@ -1006,11 +1051,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sunday.
+        /// </summary>
+        internal static string SundayText {
+            get {
+                return ResourceManager.GetString("SundayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to System Settings.
         /// </summary>
         internal static string SystemSettings {
             get {
                 return ResourceManager.GetString("SystemSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thursday.
+        /// </summary>
+        internal static string ThursdayText {
+            get {
+                return ResourceManager.GetString("ThursdayText", resourceCulture);
             }
         }
         
@@ -1051,6 +1114,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tuesday.
+        /// </summary>
+        internal static string TuesdayText {
+            get {
+                return ResourceManager.GetString("TuesdayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users.
         /// </summary>
         internal static string Users {
@@ -1065,6 +1137,15 @@ namespace Resources {
         internal static string VacationSchedules {
             get {
                 return ResourceManager.GetString("VacationSchedules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wednesday.
+        /// </summary>
+        internal static string WednesdayText {
+            get {
+                return ResourceManager.GetString("WednesdayText", resourceCulture);
             }
         }
         

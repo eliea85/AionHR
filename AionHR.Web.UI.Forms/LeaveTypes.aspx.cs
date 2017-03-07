@@ -21,12 +21,16 @@ using AionHR.Model.Company.News;
 using AionHR.Services.Messaging;
 using AionHR.Model.Company.Structure;
 using AionHR.Model.System;
+using AionHR.Model.Attendance;
+using AionHR.Model.Employees.Leaves;
 
 namespace AionHR.Web.UI.Forms
 {
-    public partial class Currencies : System.Web.UI.Page
+    public partial class LeaveTypes : System.Web.UI.Page
     {
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
+        ILeaveManagementService _leaveManagementService = ServiceLocator.Current.GetInstance<ILeaveManagementService>();
+        ICompanyStructureService _companyStructureService = ServiceLocator.Current.GetInstance<ICompanyStructureService>();
         protected override void InitializeCulture()
         {
 
@@ -56,7 +60,7 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-                
+
 
 
             }
@@ -100,26 +104,29 @@ namespace AionHR.Web.UI.Forms
 
             }
         }
-      
+
 
 
         protected void PoPuP(object sender, DirectEventArgs e)
         {
 
 
-            int id = Convert.ToInt32(e.ExtraParams["id"]);
+            string id = e.ExtraParams["id"];
             string type = e.ExtraParams["type"];
+            
             switch (type)
             {
                 case "ColName":
                     //Step 1 : get the object from the Web Service 
                     RecordRequest r = new RecordRequest();
-                    r.RecordID = id.ToString();
-                    RecordResponse<Currency> response = _systemService.ChildGetRecord<Currency>(r);
+                    r.RecordID = id;
+                   
+                    RecordResponse<LeaveType> response = _leaveManagementService.ChildGetRecord<LeaveType>(r);
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
-
+                    
+                  
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -269,8 +276,10 @@ namespace AionHR.Web.UI.Forms
 
             //Reset all values of the relative object
             BasicInfoTab.Reset();
+          
+          
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            string timeZone = Session["TimeZone"] as string;
+
 
             this.EditRecordWindow.Show();
         }
@@ -290,11 +299,11 @@ namespace AionHR.Web.UI.Forms
             ListRequest request = new ListRequest();
 
             request.Filter = "";
-            ListResponse<Currency> currencies = _systemService.ChildGetAll<Currency>(request);
-            if (!currencies.Success)
+            ListResponse<LeaveType> routers = _leaveManagementService.ChildGetAll<LeaveType>(request);
+            if (!routers.Success)
                 return;
-            this.Store1.DataSource = currencies.Items;
-            e.Total = currencies.count;
+            this.Store1.DataSource = routers.Items;
+            e.Total = routers.Items.Count; ;
 
             this.Store1.DataBind();
         }
@@ -307,12 +316,12 @@ namespace AionHR.Web.UI.Forms
 
 
             //Getting the id to check if it is an Add or an edit as they are managed within the same form.
-            string id = e.ExtraParams["id"];
+
 
             string obj = e.ExtraParams["values"];
-            Currency b = JsonConvert.DeserializeObject<Currency>(obj);
+            LeaveType b = JsonConvert.DeserializeObject<LeaveType>(obj);
 
-            b.recordId = id;
+            string id = e.ExtraParams["id"];
             // Define the object to add or edit as null
 
             if (string.IsNullOrEmpty(id))
@@ -322,10 +331,11 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    PostRequest<Currency> request = new PostRequest<Currency>();
+                    PostRequest<LeaveType> request = new PostRequest<LeaveType>();
+
                     request.entity = b;
-                    PostResponse<Currency> r = _systemService.ChildAddOrUpdate<Currency>(request);
-                    b.recordId = r.recordId;
+                    PostResponse<LeaveType> r = _leaveManagementService.ChildAddOrUpdate<LeaveType>(request);
+
 
                     //check if the insert failed
                     if (!r.Success)//it maybe be another condition
@@ -337,7 +347,7 @@ namespace AionHR.Web.UI.Forms
                     }
                     else
                     {
-
+                        b.recordId = r.recordId;
                         //Add this record to the store 
                         this.Store1.Insert(0, b);
 
@@ -373,10 +383,10 @@ namespace AionHR.Web.UI.Forms
 
                 try
                 {
-                    int index = Convert.ToInt32(id);//getting the id of the record
-                    PostRequest<Currency> request = new PostRequest<Currency>();
+                    //getting the id of the record
+                    PostRequest<LeaveType> request = new PostRequest<LeaveType>();
                     request.entity = b;
-                    PostResponse<Currency> r = _systemService.ChildAddOrUpdate<Currency>(request);                      //Step 1 Selecting the object or building up the object for update purpose
+                    PostResponse<LeaveType> r = _leaveManagementService.ChildAddOrUpdate<LeaveType>(request);                      //Step 1 Selecting the object or building up the object for update purpose
 
                     //Step 2 : saving to store
 
@@ -391,7 +401,7 @@ namespace AionHR.Web.UI.Forms
                     {
 
 
-                        ModelProxy record = this.Store1.GetById(index);
+                        ModelProxy record = this.Store1.GetById(id);
                         BasicInfoTab.UpdateRecord(record);
                         record.Commit();
                         Notification.Show(new NotificationConfig
@@ -429,6 +439,6 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-       
+     
     }
 }

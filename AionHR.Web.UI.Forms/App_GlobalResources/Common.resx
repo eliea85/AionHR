@@ -459,4 +459,31 @@
   <data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
   </data>
+  <data name="FridayText" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="MondayText" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="SaturdayText" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="SundayText" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="ThursdayText" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="TuesdayText" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="WednesdayText" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="Routers" xml:space="preserve">
+    <value>Routers</value>
+  </data>
+  <data name="LeaveTypes" xml:space="preserve">
+    <value>LeaveTypes</value>
+  </data>
 </root>

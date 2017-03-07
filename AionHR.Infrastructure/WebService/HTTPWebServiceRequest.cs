@@ -218,7 +218,7 @@ namespace AionHR.Infrastructure.WebService
                 Body += "\r\n--" + boundary + "\r\n"; ;
 
                 //Now we need to add the header for the binary part inside the body
-                byte[] data = System.Text.Encoding.ASCII.GetBytes(Body);
+                byte[] data = System.Text.Encoding.UTF8.GetBytes(Body);
                 stream.Write(data, 0, data.Length);
 
                 // Add binary file to request
@@ -253,7 +253,7 @@ namespace AionHR.Infrastructure.WebService
                 string exception = BuildLogMessage() + " : " + ex.Message;
                 LoggingFactory.GetLogger().Log(exception);
                 response.statusId = "0";
-                response.message = ex.Message;
+                response.description = ex.Message;
                 return response;
             }
 

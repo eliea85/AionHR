@@ -12,7 +12,54 @@
     <script type="text/javascript" src="Scripts/AttendanceDayView.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
      <script type="text/javascript" src="Scripts/moment.js"></script>
-    
+    <script type="text/javascript">
+        function setTotal(t)
+        {
+            alert(t);
+            alert(document.getElementById("total"));
+            document.getElementById("total").innerHTML = t;
+        }
+        var updateTotal = function (grid, container) {
+            if (!grid.view.rendered) {
+                return;
+            }
+            
+            if (grid.store.getCount() == '0')
+                return;
+            var field,
+                value,
+                width,
+                data = {  netOL: 0 },
+                c,
+                cs = grid.headerCt.getVisibleGridColumns();
+            
+            
+            for (var j = 0, jlen = grid.store.getCount() ; j < jlen; j++) {
+                var r = grid.store.getAt(j);
+                
+                data['netOL'] += r.get('netOL');
+                
+            }
+
+            container.suspendLayout = true;
+
+                value = data['netOL'];
+                
+                field = container.down('component[id="Column2"]');
+                alert(field);
+                container.remove(field, false);
+                container.insert(7, field);
+                width = 50;
+                field.setWidth(width - 1);
+                field.setValue(c.renderer ? (c.renderer)(value, {}, {}, 0, 7, grid.store, grid.view) : value);
+            
+
+          
+
+            container.suspendLayout = false;
+            container.updateLayout();
+        };
+    </script>
 </head>
 <body style="background: url(Images/bg.png) repeat;">
     <form id="Form1" runat="server">
@@ -286,7 +333,31 @@
 
                             </Items>
                         </ext:Toolbar>
-                        
+                        <ext:FieldContainer ID="Container1" runat="server" Layout="HBoxLayout" Dock="Bottom" StyleSpec="margin-top:2px;">
+                    <Defaults>
+                        <ext:Parameter Name="height" Value="24" />
+                    </Defaults>
+                    <Items>
+                        <ext:DisplayField
+                            runat="server"
+                            Name="test1"
+                            Cls="total-field"
+                            Text="-"
+                            />
+                        <ext:DisplayField
+                            runat="server"
+                            Name="test2"
+                            Cls="total-field"
+                            Text="-"
+                            />
+                        <ext:DisplayField
+                            runat="server"
+                            Name="test3"
+                            Cls="total-field"
+                            Text="-"
+                            />
+                    </Items>
+                </ext:FieldContainer>
                     </DockedItems>
                     <BottomBar>
 
@@ -315,7 +386,7 @@
                     <View>
                         <ext:GridView ID="GridView1" runat="server" >
                             <Listeners>
-                        
+                       <%-- <Refresh Handler="updateTotal(this.panel, #{Container1});" />--%>
                     </Listeners>
                             </ext:GridView>
 
@@ -327,7 +398,7 @@
                         <%--<ext:CheckboxSelectionModel ID="CheckboxSelectionModel1" runat="server" Mode="Multi" StopIDModeInheritance="true" />--%>
                     </SelectionModel>
                 </ext:GridPanel>
-
+                <ext:Label runat="server" ID="total" />
             </Items>
         </ext:Viewport>
 

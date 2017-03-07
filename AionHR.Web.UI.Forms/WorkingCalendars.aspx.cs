@@ -234,6 +234,7 @@ namespace AionHR.Web.UI.Forms
             if ((Convert.ToInt32(CurrentYear.Text) - 2016) % 4 != 0)
                 X.Call("setLeapDay");
             ListResponse <Model.Attendance.CalendarDay> daysResponse = _branchService.ChildGetAll<Model.Attendance.CalendarDay>(req);
+            X.Call("init");
             foreach (var item in daysResponse.Items)
             {
                 string dayId = item.dayId;
@@ -267,19 +268,36 @@ namespace AionHR.Web.UI.Forms
         {
             try
             {
-                //Step 1 Code to delete the object from the database 
-
-                //Step 2 :  remove the object from the store
-                Store1.Remove(index);
-
-                //Step 3 : Showing a notification for the user 
-                Notification.Show(new NotificationConfig
+                WorkingCalendar c = new WorkingCalendar();
+                c.name = "";
+                c.recordId = index;
+                PostRequest<WorkingCalendar> req = new PostRequest<WorkingCalendar>();
+                req.entity = c;
+                PostResponse<WorkingCalendar> response = _branchService.ChildDelete<WorkingCalendar>(req);
+                if (!response.Success)
                 {
-                    Title = Resources.Common.Notification,
-                    Icon = Icon.Information,
-                    Html = Resources.Common.RecordDeletedSucc
-                });
 
+                    X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                    X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                    return;
+                }
+                else
+                {
+
+
+                    //Step 1 Code to delete the object from the database 
+
+                    //Step 2 :  remove the object from the store
+                    Store1.Remove(index);
+
+                    //Step 3 : Showing a notification for the user 
+                    Notification.Show(new NotificationConfig
+                    {
+                        Title = Resources.Common.Notification,
+                        Icon = Icon.Information,
+                        Html = Resources.Common.RecordDeletedSucc
+                    });
+                }
 
             }
             catch (Exception ex)
@@ -512,7 +530,7 @@ namespace AionHR.Web.UI.Forms
                     {
                         //Show an error saving...
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
+                        X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
                         return;
                     }
 
@@ -804,7 +822,7 @@ namespace AionHR.Web.UI.Forms
             patternFormPanel.Reset();
             patternScheduleStore.DataBind();
             dateTo.MinDate = dateFrom.MinDate = new DateTime(Convert.ToInt32(CurrentYear.Text), 1, 1);
-            dateFrom.MaxDate= dateFrom.MaxDate = new DateTime(Convert.ToInt32(CurrentYear.Text), 12, 31);
+            dateTo.MaxDate= dateFrom.MaxDate = new DateTime(Convert.ToInt32(CurrentYear.Text), 12, 31);
             
             patternWindow.Show();
         }

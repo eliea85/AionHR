@@ -397,7 +397,7 @@ namespace AionHR.Web.UI.Forms
 
             string obj = e.ExtraParams["values"];
             Department b = JsonConvert.DeserializeObject<Department>(obj);
-
+            
             b.recordId = id;
             b.supervisorName = new EmployeeName();
             // Define the object to add or edit as null
@@ -423,7 +423,7 @@ namespace AionHR.Web.UI.Forms
                     {
                         //Show an error saving...
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
+                        X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
                         return;
                     }
                     else

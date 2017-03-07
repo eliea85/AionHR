@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Currencies.aspx.cs" Inherits="AionHR.Web.UI.Forms.Currencies" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Routers.aspx.cs" Inherits="AionHR.Web.UI.Forms.Routers" %>
 
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -38,12 +38,12 @@
                 </ext:PageProxy>
             </Proxy>
             <Model>
-                <ext:Model ID="Model1" runat="server" IDProperty="recordId">
+                <ext:Model ID="Model1" runat="server" IDProperty="routerRef">
                     <Fields>
 
-                        <ext:ModelField Name="recordId" />
-                        <ext:ModelField Name="name" />
-                        <ext:ModelField Name="reference" />
+                        <ext:ModelField Name="routerRef" />
+                        <ext:ModelField Name="branchId" />
+                        <ext:ModelField Name="isInactive" />
                       
                                </Fields>
                 </ext:Model>
@@ -113,14 +113,12 @@
                     <ColumnModel ID="ColumnModel1" runat="server" SortAscText="<%$ Resources:Common , SortAscText %>" SortDescText="<%$ Resources:Common ,SortDescText  %>" SortClearText="<%$ Resources:Common ,SortClearText  %>" ColumnsText="<%$ Resources:Common ,ColumnsText  %>" EnableColumnHide="false" Sortable="false" >
                         <Columns>
 
-                              <ext:Column  Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" width="75" Align="Center"/>
-                            <ext:Column  Flex="1"  ID="ColReference" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldReference %>" DataIndex="reference" Hideable="false" width="75" Align="Center"/> 
-                            <ext:Column    CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="2" Hideable="false">
-                            <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
+                             <ext:Column    CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="routerRef" Flex="2" Hideable="false">
+                            <Renderer Handler="return '<u>'+ record.data['routerRef']+'</u>'">
 
                             </Renderer>
                                 </ext:Column>
-                         
+                         <ext:CheckColumn runat="server" Flex="1" Text="<%$ Resources: FieldIsInactive %>"  DataIndex="isInactive" ></ext:CheckColumn>
                            
 
                             <ext:Column runat="server"
@@ -138,7 +136,7 @@
 
                             </ext:Column>
                             <ext:Column runat="server"
-                                ID="colDelete" Visible="true"
+                                ID="colDelete" Visible="false"
                                 Text="<%$ Resources: Common , Delete %>"
                                 Width="60"
                                 Align="Center"
@@ -254,9 +252,24 @@
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
                             BodyPadding="5">
                             <Items>
-                                <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
-                                <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                <ext:TextField ID="reference" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="reference" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
+                                <ext:TextField ID="recordId" runat="server"  Name="recordId"  Hidden="true"/>
+                                <ext:TextField ID="routerRef" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="routerRef"   ReadOnly="true" AllowBlank="false"/>
+                                
+                                <ext:Checkbox runat="server" Name="isInactive" InputValue="true" ID="isInactiveCheck" DataIndex="isInactive" FieldLabel="<%$ Resources:FieldReference%>" />
+                                <ext:ComboBox runat="server" AllowBlank="false" ValueField="recordId" DisplayField="name" ID="branchId" Name="branchId" FieldLabel="<%$ Resources:FieldBranch%>" SimpleSubmit="true">
+                                            <Store>
+                                                <ext:Store runat="server" ID="BranchStore">
+                                                    <Model>
+                                                        <ext:Model runat="server" IDProperty="recordId">
+                                                            <Fields>
+                                                                <ext:ModelField Name="recordId" />
+                                                                <ext:ModelField Name="name" />
+                                                            </Fields>
+                                                        </ext:Model>
+                                                    </Model>
+                                                </ext:Store>
+                                            </Store>
+                                        </ext:ComboBox>
                                
 
                             </Items>
@@ -270,14 +283,14 @@
                 <ext:Button ID="SaveButton" runat="server" Text="<%$ Resources:Common, Save %>" Icon="Disk">
 
                     <Listeners>
-                        <Click Handler="CheckSession(); if (!#{BasicInfoTab}.getForm().isValid()) {return false;} " />
+                        <Click Handler="CheckSession(); if (!#{BasicInfoTab}.getForm().isValid()) {return false;}  " />
                     </Listeners>
                     <DirectEvents>
                         <Click OnEvent="SaveNewRecord" Failure="Ext.MessageBox.alert('#{titleSavingError}.value', '#{titleSavingErrorMessage}.value');">
                             <EventMask ShowMask="true" Target="CustomTarget" CustomTarget="={#{EditRecordWindow}.body}" />
                             <ExtraParams>
                                 <ext:Parameter Name="id" Value="#{recordId}.getValue()" Mode="Raw" />
-                                <ext:Parameter Name="values" Value ="#{BasicInfoTab}.getForm().getValues(false, false, false, true)" Mode="Raw" Encode="true" />
+                                <ext:Parameter Name="values" Value ="#{BasicInfoTab}.getForm().getValues()" Mode="Raw" Encode="true" />
                             </ExtraParams>
                         </Click>
                     </DirectEvents>

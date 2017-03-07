@@ -225,3 +225,18 @@ public class ActiveAttendanceRequest:ListRequest
         }
     }
 }
+
+public class GetRouterRequest:RecordRequest
+{
+    public string RouterRef { get; set; }
+    
+    public override Dictionary<string, string> Parameters
+    {
+        get
+        {
+            parameters = new Dictionary<string, string>();
+            parameters.Add("_routerRef", RouterRef);
+            return parameters;
+        }
+    }
+}

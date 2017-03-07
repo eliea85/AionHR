@@ -163,18 +163,33 @@ namespace AionHR.Web.UI.Forms
             try
             {
                 //Step 1 Code to delete the object from the database 
-
-                //Step 2 :  remove the object from the store
-                Store1.Remove(index);
-
-                //Step 3 : Showing a notification for the user 
-                Notification.Show(new NotificationConfig
+                DayType s = new DayType();
+                s.recordId = index;
+                s.color = "";
+                s.isWorkingDay = false;
+                s.name = "";
+                PostRequest<DayType> req = new PostRequest<DayType>();
+                req.entity = s;
+                PostResponse<DayType> r = _timeAttendanceService.ChildDelete<DayType>(req);
+                if (!r.Success)
                 {
-                    Title = Resources.Common.Notification,
-                    Icon = Icon.Information,
-                    Html = Resources.Common.RecordDeletedSucc
-                });
+                    X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                    X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
+                    return;
+                }
+                else
+                {
+                    //Step 2 :  remove the object from the store
+                    Store1.Remove(index);
 
+                    //Step 3 : Showing a notification for the user 
+                    Notification.Show(new NotificationConfig
+                    {
+                        Title = Resources.Common.Notification,
+                        Icon = Icon.Information,
+                        Html = Resources.Common.RecordDeletedSucc
+                    });
+                }
 
             }
             catch (Exception ex)
@@ -333,7 +348,7 @@ namespace AionHR.Web.UI.Forms
                     {
                         //Show an error saving...
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
+                        X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
                         return;
                     }
                     else

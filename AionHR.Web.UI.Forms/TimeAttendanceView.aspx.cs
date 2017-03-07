@@ -304,6 +304,9 @@ namespace AionHR.Web.UI.Forms
             AttendnanceDayListRequest req = GetAttendanceDayRequest();
 
             ListResponse<AttendanceDay> daysResponse = _timeAttendanceService.ChildGetAll<AttendanceDay>(req);
+            int total = daysResponse.Items.Sum(s => s.netOL);
+            X.Call("setTotal", total);
+            this.total.Text= total.ToString();
             var data = daysResponse.Items;
             if (daysResponse.Items != null)
             {

@@ -161,12 +161,12 @@ function getDay(dow)
   
     switch(dow)
     {
-        case 1: return "sunday";
-        case 2: return "mmonday";
-        case 3: return "tuesday";
-        case 4: return "wednesday";
-        case 5: return "thursday";
-        case 6: return "friday";
-        case 7: return "saturday";
+        case 1: return document.getElementById('MondayText').value;
+        case 2: return document.getElementById('TuesdayText').value;
+        case 3: return document.getElementById('WednesdayText').value;
+        case 4: return document.getElementById('ThursdayText').value;
+        case 5: return document.getElementById('FridayText').value;
+        case 6: return document.getElementById('SaturdayText').value;
+        case 7: return document.getElementById('SundayText').value;
     }
 }

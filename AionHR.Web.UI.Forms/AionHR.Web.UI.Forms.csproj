@@ -123,9 +123,11 @@
     <Content Include="Images\Tools\edit.png" />
     <Content Include="Images\Tools\expand-all.gif" />
     <Content Include="Images\Tools\group.png" />
+    <Content Include="LeaveTypes.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Nationalities.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Routers.aspx" />
     <Content Include="Scripts\AttendanceDayView.js" />
     <Content Include="Scripts\Calendars.js" />
     <Content Include="Scripts\Employees.js" />
@@ -268,6 +270,13 @@
     <Compile Include="ARLogin.aspx.designer.cs">
       <DependentUpon>ARLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LeaveTypes.aspx.cs">
+      <DependentUpon>LeaveTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LeaveTypes.aspx.designer.cs">
+      <DependentUpon>LeaveTypes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -296,6 +305,13 @@
     </Compile>
     <Compile Include="resetPw.aspx.designer.cs">
       <DependentUpon>resetPw.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Routers.aspx.cs">
+      <DependentUpon>Routers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Routers.aspx.designer.cs">
+      <DependentUpon>Routers.aspx</DependentUpon>
     </Compile>
     <Compile Include="Schedules.aspx.cs">
       <DependentUpon>Schedules.aspx</DependentUpon>
@@ -449,6 +465,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\Dashboard.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Routers.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\LeaveTypes.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

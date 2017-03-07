@@ -20,5 +20,8 @@ namespace AionHR.Infrastructure.WebService
         /// the message returned
         /// </summary>
         public string message { get; set; }
+
+        public string description { get; set; }
+
     }
 }

@@ -21,12 +21,15 @@ using AionHR.Model.Company.News;
 using AionHR.Services.Messaging;
 using AionHR.Model.Company.Structure;
 using AionHR.Model.System;
+using AionHR.Model.Attendance;
 
 namespace AionHR.Web.UI.Forms
 {
-    public partial class Currencies : System.Web.UI.Page
+    public partial class Routers : System.Web.UI.Page
     {
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
+        ITimeAttendanceService _timeAttendanceService = ServiceLocator.Current.GetInstance<ITimeAttendanceService>();
+        ICompanyStructureService _companyStructureService = ServiceLocator.Current.GetInstance<ICompanyStructureService>();
         protected override void InitializeCulture()
         {
 
@@ -56,7 +59,7 @@ namespace AionHR.Web.UI.Forms
                 SetExtLanguage();
                 HideShowButtons();
                 HideShowColumns();
-                
+
 
 
             }
@@ -100,26 +103,29 @@ namespace AionHR.Web.UI.Forms
 
             }
         }
-      
+
 
 
         protected void PoPuP(object sender, DirectEventArgs e)
         {
 
 
-            int id = Convert.ToInt32(e.ExtraParams["id"]);
+            string id = e.ExtraParams["id"];
             string type = e.ExtraParams["type"];
+            routerRef.ReadOnly = true;
             switch (type)
             {
                 case "ColName":
                     //Step 1 : get the object from the Web Service 
-                    RecordRequest r = new RecordRequest();
-                    r.RecordID = id.ToString();
-                    RecordResponse<Currency> response = _systemService.ChildGetRecord<Currency>(r);
+                    GetRouterRequest r = new GetRouterRequest();
+                    r.RouterRef = id;
+                    FillBranch();
+                    RecordResponse<Router> response = _timeAttendanceService.ChildGetRecord<Router>(r);
 
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
-
+                    recordId.Text = id;
+                    branchId.Select(response.result.branchId.ToString());
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -269,8 +275,10 @@ namespace AionHR.Web.UI.Forms
 
             //Reset all values of the relative object
             BasicInfoTab.Reset();
+            routerRef.ReadOnly = false;
+            FillBranch();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
-            string timeZone = Session["TimeZone"] as string;
+            
 
             this.EditRecordWindow.Show();
         }
@@ -290,11 +298,11 @@ namespace AionHR.Web.UI.Forms
             ListRequest request = new ListRequest();
 
             request.Filter = "";
-            ListResponse<Currency> currencies = _systemService.ChildGetAll<Currency>(request);
-            if (!currencies.Success)
+            ListResponse<Router> routers = _timeAttendanceService.ChildGetAll<Router>(request);
+            if (!routers.Success)
                 return;
-            this.Store1.DataSource = currencies.Items;
-            e.Total = currencies.count;
+            this.Store1.DataSource = routers.Items;
+            e.Total = routers.count;
 
             this.Store1.DataBind();
         }
@@ -307,12 +315,12 @@ namespace AionHR.Web.UI.Forms
 
 
             //Getting the id to check if it is an Add or an edit as they are managed within the same form.
-            string id = e.ExtraParams["id"];
+            
 
             string obj = e.ExtraParams["values"];
-            Currency b = JsonConvert.DeserializeObject<Currency>(obj);
+            Router b = JsonConvert.DeserializeObject<Router>(obj);
 
-            b.recordId = id;
+            string id = e.ExtraParams["id"];
             // Define the object to add or edit as null
 
             if (string.IsNullOrEmpty(id))
@@ -322,10 +330,11 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    PostRequest<Currency> request = new PostRequest<Currency>();
+                    PostRequest<Router> request = new PostRequest<Router>();
+                    
                     request.entity = b;
-                    PostResponse<Currency> r = _systemService.ChildAddOrUpdate<Currency>(request);
-                    b.recordId = r.recordId;
+                    PostResponse<Router> r = _timeAttendanceService.ChildAddOrUpdate<Router>(request);
+                    
 
                     //check if the insert failed
                     if (!r.Success)//it maybe be another condition
@@ -352,7 +361,7 @@ namespace AionHR.Web.UI.Forms
                         this.EditRecordWindow.Close();
                         RowSelectionModel sm = this.GridPanel1.GetSelectionModel() as RowSelectionModel;
                         sm.DeselectAll();
-                        sm.Select(b.recordId.ToString());
+                        sm.Select(b.routerRef.ToString());
 
 
 
@@ -373,10 +382,10 @@ namespace AionHR.Web.UI.Forms
 
                 try
                 {
-                    int index = Convert.ToInt32(id);//getting the id of the record
-                    PostRequest<Currency> request = new PostRequest<Currency>();
+                    //getting the id of the record
+                    PostRequest<Router> request = new PostRequest<Router>();
                     request.entity = b;
-                    PostResponse<Currency> r = _systemService.ChildAddOrUpdate<Currency>(request);                      //Step 1 Selecting the object or building up the object for update purpose
+                    PostResponse<Router> r = _timeAttendanceService.ChildAddOrUpdate<Router>(request);                      //Step 1 Selecting the object or building up the object for update purpose
 
                     //Step 2 : saving to store
 
@@ -391,7 +400,7 @@ namespace AionHR.Web.UI.Forms
                     {
 
 
-                        ModelProxy record = this.Store1.GetById(index);
+                        ModelProxy record = this.Store1.GetById(id);
                         BasicInfoTab.UpdateRecord(record);
                         record.Commit();
                         Notification.Show(new NotificationConfig
@@ -429,6 +438,12 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-       
+        private void FillBranch()
+        {
+            ListRequest branchesRequest = new ListRequest();
+            ListResponse<Branch> resp = _companyStructureService.ChildGetAll<Branch>(branchesRequest);
+            BranchStore.DataSource = resp.Items;
+            BranchStore.DataBind();
+        }
     }
 }

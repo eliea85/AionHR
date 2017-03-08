@@ -33,6 +33,7 @@ namespace AionHR.Repository.WebService.Repositories
             ChildGetLookup.Add(typeof(UserInfo), "getUS");
 
             ChildDeleteLookup.Add(typeof(Nationality) ,"delNA");
+            ChildDeleteLookup.Add(typeof(UserInfo), "delUS");
         }
 
         public RecordWebServiceResponse<UserInfo> Authenticate(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)

@@ -22,7 +22,10 @@ namespace AionHR.Repository.WebService.Repositories
         {
             base.ServiceURL = ApplicationSettingsFactory.GetApplicationSettings().BaseURL + serviceName;
             base.GetRecordMethodName = "getAC";
-            
+            ChildAddOrUpdateLookup.Add(typeof(Registration), "setRE");
+            ChildAddOrUpdateLookup.Add(typeof(Account), "setAC");
+            ChildAddOrUpdateLookup.Add(typeof(DbSetup), "createDB");
+
         }
 
         public RecordWebServiceResponse<Account> RequestAccountRecovery(Dictionary<string, string> Headers = null, Dictionary<string, string> QueryStringParams = null)

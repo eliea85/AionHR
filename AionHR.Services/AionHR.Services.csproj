@@ -62,7 +62,7 @@
     <Compile Include="Interfaces\ITimeAttendanceService.cs" />
     <Compile Include="Messaging\Employees\EmployeesRequests.cs" />
     <Compile Include="Messaging\LeaveManagement\LeaveManagementRequests.cs" />
-    <Compile Include="Messaging\TimeAttendance\ListReponse.cs" />
+    <Compile Include="Messaging\ListReponse.cs" />
     <Compile Include="Messaging\Master Service\MasterServiceRequests.cs" />
     <Compile Include="Messaging\PostRequest.cs" />
     <Compile Include="Messaging\PostResponse.cs" />
@@ -77,6 +77,7 @@
     <Compile Include="Messaging\ResponseBase.cs" />
     <Compile Include="Messaging\System\PasswordRecoveryRequest.cs" />
     <Compile Include="Messaging\System\PasswordRecoveryResponse.cs" />
+    <Compile Include="Messaging\System\SystemDefaultRecordRequest.cs" />
     <Compile Include="Messaging\TimeAttendance\TimeAttendanceRequests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

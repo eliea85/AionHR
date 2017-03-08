@@ -75,7 +75,7 @@
                 <ext:VBoxLayoutConfig Align="Center" />
             </LayoutConfig>
             <Items>
-                <ext:FormPanel
+               <ext:FormPanel 
                     ID="panelLogin"
                     runat="server"
                     Icon="LockGo"

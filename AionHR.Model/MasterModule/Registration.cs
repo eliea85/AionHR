@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AionHR.Model.MasterModule
 {
-    class Registration:ModelBase
+   public class Registration:ModelBase
     {
         public short status;
         public string name;

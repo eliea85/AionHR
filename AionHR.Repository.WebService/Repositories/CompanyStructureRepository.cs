@@ -32,6 +32,10 @@ namespace AionHR.Repository.WebService.Repositories
             base.ChildAddOrUpdateLookup.Add(typeof(Department), "setDE");
             base.ChildAddOrUpdateLookup.Add(typeof(Position), "setPO");
 
+            ChildDeleteLookup.Add(typeof(Branch), "delBR");
+            ChildDeleteLookup.Add(typeof(Department), "delDE");
+            ChildDeleteLookup.Add(typeof(Position), "delPO");
+
             base.GetAllMethodName = "";
             base.GetRecordMethodName = "";
             base.DeleteMethodName = "";

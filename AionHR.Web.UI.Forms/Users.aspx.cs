@@ -128,9 +128,14 @@ namespace AionHR.Web.UI.Forms
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
                     RecordResponse<UserInfo> response = _systemService.ChildGetRecord<UserInfo>(r);
-
+                    if (!response.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                        return;
+                    }
                     //Step 2 : call setvalues with the retrieved object
-                    
+
                     PasswordConfirmation.Text = response.result.password;
                     if (!String.IsNullOrEmpty(response.result.employeeId))
                     {
@@ -205,7 +210,7 @@ namespace AionHR.Web.UI.Forms
                 s.companyName = "";
                 s.email = "";
                 s.fullName = "";
-                s.languageId = "";
+                s.languageId = 0;
                 
                 PostRequest<UserInfo> req = new PostRequest<UserInfo>();
                 req.entity = s;

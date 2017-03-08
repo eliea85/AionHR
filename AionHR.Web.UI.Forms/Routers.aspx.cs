@@ -108,7 +108,7 @@ namespace AionHR.Web.UI.Forms
 
         protected void PoPuP(object sender, DirectEventArgs e)
         {
-
+            
 
             string id = e.ExtraParams["id"];
             string type = e.ExtraParams["type"];
@@ -121,7 +121,12 @@ namespace AionHR.Web.UI.Forms
                     r.RouterRef = id;
                     FillBranch();
                     RecordResponse<Router> response = _timeAttendanceService.ChildGetRecord<Router>(r);
-
+                    if (!response.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                        return;
+                    }
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     recordId.Text = id;

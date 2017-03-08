@@ -121,7 +121,12 @@ namespace AionHR.Web.UI.Forms
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
                     RecordResponse<Model.Company.Structure.Position> response = _branchService.ChildGetRecord<Model.Company.Structure.Position>(r);
-
+                    if (!response.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                        return;
+                    }
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     InitCombos(response.result);

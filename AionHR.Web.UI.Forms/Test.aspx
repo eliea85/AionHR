@@ -29,7 +29,7 @@
             RemoteSort="True"
             RemoteFilter="true"
             OnReadData="Store1_RefreshData"
-            PageSize="10" IDMode="Explicit" Namespace="App">
+            PageSize="30" IDMode="Explicit" Namespace="App">
             <Proxy>
                 <ext:PageProxy>
                     <Listeners>
@@ -68,7 +68,7 @@
                     Header="true"
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
-                    Scroll="None"
+                    Scroll="Vertical"
                     Border="false"
                     Icon="User"
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
@@ -143,7 +143,7 @@
 
                             </ext:Column>
                             <ext:Column runat="server"
-                                ID="colDelete"
+                                ID="colDelete" Flex="1"
                                 Text="<%$ Resources: Common , Delete %>"
                                 Width="60"
                                 Align="Center"

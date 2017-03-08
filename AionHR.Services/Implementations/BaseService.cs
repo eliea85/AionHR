@@ -36,8 +36,8 @@ namespace AionHR.Services.Implementations
             else
             {
                 response.Success = webResponse.statusId == "1";
-                response.Summary = webResponse.description;
-                
+                response.Summary = webResponse.Details;
+
             }
 
             return response;
@@ -66,13 +66,17 @@ namespace AionHR.Services.Implementations
 
 
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
-            var webResponse = GetRepository().GetAll(headers, request.Parameters);
-            var response = CreateServiceResponse<ListResponse<T>>(webResponse);
+            ListWebServiceResponse<T> webResponse = GetRepository().GetAll(headers, request.Parameters);
+            ListResponse<T> response = CreateServiceResponse<ListResponse<T>>(webResponse);
 
             if (webResponse != null)
             {
-                response.count = webResponse.count;
+                
                 response.Items = webResponse.GetAll();
+                if (webResponse.count != 0)
+                    response.count = webResponse.count;
+                else
+                    response.count = response.Items.Count;
             }
 
             return response;
@@ -151,7 +155,7 @@ namespace AionHR.Services.Implementations
             var headers = SessionHelper.GetAuthorizationHeadersForUser();
             Dictionary<string, string> queryParams = new Dictionary<string, string>();
             queryParams = request.Parameters;
-            var webResponse = GetRepository().ChildDelete<TChild>(request.entity,headers );
+            var webResponse = GetRepository().ChildDelete<TChild>(request.entity, headers);
             response = CreateServiceResponse<PostResponse<TChild>>(webResponse);
 
             return response;

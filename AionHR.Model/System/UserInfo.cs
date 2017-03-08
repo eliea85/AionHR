@@ -19,7 +19,7 @@ namespace AionHR.Model.System
         public string recordId { get; set; }
 
         public string employeeId { get; set; }
-        public string languageId { get; set; }
+        public int languageId { get; set; }
         public string email { get; set; }
         public string enableHijriCalendar { get; set; }
 

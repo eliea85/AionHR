@@ -122,7 +122,12 @@ namespace AionHR.Web.UI.Forms
                     r.RecordID = id;
                    
                     RecordResponse<LeaveType> response = _leaveManagementService.ChildGetRecord<LeaveType>(r);
-
+                    if (!response.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                        return;
+                    }
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     

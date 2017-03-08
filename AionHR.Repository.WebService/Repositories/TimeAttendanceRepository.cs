@@ -59,8 +59,9 @@ namespace AionHR.Repository.WebService.Repositories
             ChildDeleteLookup.Add(typeof(AttendanceBreak), "delSB");
             ChildDeleteLookup.Add(typeof(AttendanceSchedule), "delSC");
             ChildDeleteLookup.Add(typeof(WorkingCalendar), "delCA");
-
             ChildDeleteLookup.Add(typeof(DayType), "delDT");
+            ChildDeleteLookup.Add(typeof(BiometricDevice), "delBM");
+
 
 
 

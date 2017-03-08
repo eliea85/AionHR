@@ -122,7 +122,12 @@ namespace AionHR.Web.UI.Forms
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
                     RecordResponse<VacationSchedule> response = _branchService.ChildGetRecord<VacationSchedule>(r);
-
+                    if (!response.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                        return;
+                    }
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
 
@@ -177,18 +182,32 @@ namespace AionHR.Web.UI.Forms
             try
             {
                 //Step 1 Code to delete the object from the database 
+                VacationSchedule s = new VacationSchedule();
+                s.recordId = index;
+                s.name = "";
 
-                //Step 2 :  remove the object from the store
-                Store1.Remove(index);
-
-                //Step 3 : Showing a notification for the user 
-                Notification.Show(new NotificationConfig
+                PostRequest<VacationSchedule> req = new PostRequest<VacationSchedule>();
+                req.entity = s;
+                PostResponse<VacationSchedule> r = _branchService.ChildDelete<VacationSchedule>(req);
+                if (!r.Success)
                 {
-                    Title = Resources.Common.Notification,
-                    Icon = Icon.Information,
-                    Html = Resources.Common.RecordDeletedSucc
-                });
+                    X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                    X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
+                    return;
+                }
+                else
+                {
+                    //Step 2 :  remove the object from the store
+                    Store1.Remove(index);
 
+                    //Step 3 : Showing a notification for the user 
+                    Notification.Show(new NotificationConfig
+                    {
+                        Title = Resources.Common.Notification,
+                        Icon = Icon.Information,
+                        Html = Resources.Common.RecordDeletedSucc
+                    });
+                }
 
             }
             catch (Exception ex)

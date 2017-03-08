@@ -16,17 +16,25 @@
     <script type="text/javascript" src="Scripts/common.js"></script>
     
     <script  type="text/javascript">
-        
+        function dump(obj) {
+            var out = '';
+            for (var i in obj) {
+                out += i + ": " + obj[i] + "\n";
+            }
+            return out;
+        }
         function startRefresh() {
             
             
-            setInterval(RefreshAllGrids, 10000);
+            setInterval(RefreshAllGrids, 5000);
             
         }
         function RefreshAllGrids() {
             
-            if (window.parent.App.tabPanel.getActiveTab().id == "dashboard") {
-              //  alert('Refresh');
+            
+            if (window.parent.App.tabPanel.getActiveTab().id == "dashboard" || (window.parent.App.tabPanel.getActiveTab().id == "tabHome" && window.parent.App.commonTree.getTitle()=='Time Management')) {
+                
+            
 
                 /* Not Chained
                 App.activeStore.reload();
@@ -170,7 +178,7 @@
                                                 <ext:Store
                                                     ID="activeStore"
                                                     runat="server" OnReadData="activeStore_refresh"
-                                                    RemoteSort="True" PageSize="10"
+                                                    RemoteSort="True" PageSize="30"
                                                     RemoteFilter="true">
                                                     <Proxy>
                                                         <ext:PageProxy>
@@ -248,7 +256,7 @@
                                             Icon="User" 
                                             ColumnLines="True" IDMode="Explicit" RenderXType="True">
                                             <Store>
-                                                <ext:Store PageSize="10"
+                                                <ext:Store PageSize="30"
                                                     ID="latenessStore"
                                                     runat="server" OnReadData="latenessStore_ReadData"
                                                     RemoteSort="True"
@@ -322,7 +330,7 @@
                                             Icon="User"
                                             ColumnLines="True" IDMode="Explicit" RenderXType="True">
                                             <Store>
-                                                <ext:Store PageSize="10"
+                                                <ext:Store PageSize="30"
                                                     ID="leavesStore"
                                                     runat="server" OnReadData="leavesStore_ReadData"
                                                     RemoteSort="True"
@@ -399,7 +407,7 @@
                                             Icon="User" 
                                             ColumnLines="True" IDMode="Explicit" RenderXType="True">
                                             <Store>
-                                                <ext:Store PageSize="10"
+                                                <ext:Store PageSize="30"
                                                     ID="outStore"
                                                     runat="server" OnReadData="outStore_ReadData"
                                                     RemoteSort="True"
@@ -471,7 +479,7 @@
                                             Icon="User"
                                             ColumnLines="True" IDMode="Explicit" RenderXType="True">
                                             <Store>
-                                                <ext:Store runat="server" PageSize="10" ID="checkMontierStore" RemoteFilter="true" RemoteSort="true" OnReadData="checkMontierStore_ReadData" AutoLoad="true" AutoSync="true" >
+                                                <ext:Store runat="server" PageSize="30" ID="checkMontierStore" RemoteFilter="true" RemoteSort="true" OnReadData="checkMontierStore_ReadData" AutoLoad="true" AutoSync="true" >
                                                     <Model>
                                                         <ext:Model runat="server" >
                                                             <Fields>
@@ -525,7 +533,7 @@
                                             ColumnLines="True" IDMode="Explicit" RenderXType="True">
                                             <Store>
                                                 <ext:Store
-                                                    ID="missingPunchesStore" PageSize="10"
+                                                    ID="missingPunchesStore" PageSize="30"
                                                     runat="server" OnReadData="missingPunchesStore_ReadData"
                                                     RemoteSort="True"
                                                     RemoteFilter="true">

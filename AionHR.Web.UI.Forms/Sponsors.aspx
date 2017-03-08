@@ -71,7 +71,7 @@
                     Header="true" 
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
-                    Scroll="None"
+                    Scroll="Vertical"
                     Border="false"  
                     Icon="User"
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
@@ -151,7 +151,7 @@
 
                             </ext:Column>
                             <ext:Column runat="server"
-                                ID="colDelete" Visible="false"
+                                ID="colDelete" Flex="1" Visible="false"
                                 Text="<%$ Resources: Common , Delete %>"
                                 Width="60"
                                 Align="Center"
@@ -259,7 +259,7 @@
             <Items>
                 <ext:TabPanel ID="panelRecordDetails" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
                     <Items>
-                        <ext:FormPanel
+                        <ext:FormPanel DefaultButton="SaveButton"
                             ID="BasicInfoTab"
                             runat="server"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"

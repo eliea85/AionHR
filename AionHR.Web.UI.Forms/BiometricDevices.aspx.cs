@@ -120,7 +120,12 @@ namespace AionHR.Web.UI.Forms
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
                     RecordResponse<BiometricDevice> response = _timeAttendanceService.ChildGetRecord<BiometricDevice>(r);
-
+                    if (!response.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                        return;
+                    }
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     FillBranch();
@@ -168,18 +173,35 @@ namespace AionHR.Web.UI.Forms
             try
             {
                 //Step 1 Code to delete the object from the database 
+                BiometricDevice n = new BiometricDevice();
+                n.recordId = index;
+                n.name = "";
+                n.reference = "";
+                n.branchId = "";
 
-                //Step 2 :  remove the object from the store
-                Store1.Remove(index);
-
-                //Step 3 : Showing a notification for the user 
-                Notification.Show(new NotificationConfig
+                PostRequest<BiometricDevice> req = new PostRequest<BiometricDevice>();
+                req.entity = n;
+                PostResponse<BiometricDevice> res = _timeAttendanceService.ChildDelete<BiometricDevice>(req);
+                if (!res.Success)
                 {
-                    Title = Resources.Common.Notification,
-                    Icon = Icon.Information,
-                    Html = Resources.Common.RecordDeletedSucc
-                });
+                    //Show an error saving...
+                    X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                    X.Msg.Alert(Resources.Common.Error, res.Summary).Show();
+                    return;
+                }
+                else
+                {
+                    //Step 2 :  remove the object from the store
+                    Store1.Remove(index);
 
+                    //Step 3 : Showing a notification for the user 
+                    Notification.Show(new NotificationConfig
+                    {
+                        Title = Resources.Common.Notification,
+                        Icon = Icon.Information,
+                        Html = Resources.Common.RecordDeletedSucc
+                    });
+                }
 
             }
             catch (Exception ex)

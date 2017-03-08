@@ -14,7 +14,11 @@ namespace AionHR.Services.Interfaces
         Response<Account> GetAccount(GetAccountRequest request);
 
         Response<Account> RequestAccountRecovery(AccountRecoveryRequest request);
-            
+        PostResponse<DbSetup> CreateDB(DbSetup r);
+
+        PostResponse<Account> AddAccount(Account r);
+
+        PostResponse<Registration> AddRegistration(Registration r);
 
     }
 }

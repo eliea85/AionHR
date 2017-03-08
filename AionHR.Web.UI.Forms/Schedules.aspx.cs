@@ -133,7 +133,12 @@ namespace AionHR.Web.UI.Forms
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
                     RecordResponse<AttendanceSchedule> response = _branchService.ChildGetRecord<AttendanceSchedule>(r);
-
+                    if (!response.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                        return;
+                    }
                     ////Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     //_systemService.SessionHelper.Set("currentSchedule",r.RecordID);
@@ -148,8 +153,18 @@ namespace AionHR.Web.UI.Forms
                 case "colDayName":
                     ////Step 1 : get the object from the Web Service 
                     //panelRecordDetails.ActiveIndex = 0;
-                    FillDow(id.ToString());
+                    try
+                    {
+                        FillDow(id.ToString());
+                    }
+                    catch (Exception exp)
+                    {
 
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, exp.Message).Show();
+                        return;
+
+                    }
                     //_systemService.SessionHelper.Set("currentSchedule",r.RecordID);
                     //// InitCombos(response.result);
                     this.EditDayBreaks.Title = Resources.Common.EditWindowsTitle;
@@ -166,7 +181,12 @@ namespace AionHR.Web.UI.Forms
                     daysRequest.ScheduleId = id.ToString();
 
                     ListResponse<AttendanceScheduleDay> daysResponse = _branchService.ChildGetAll<AttendanceScheduleDay>(daysRequest);
-
+                    if (!daysResponse.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, daysResponse.Summary).Show();
+                        return;
+                    }
 
                     //Step 2 : call setvalues with the retrieved object
                     scheduleDays.Store[0].DataSource = daysResponse.Items;
@@ -229,7 +249,7 @@ namespace AionHR.Web.UI.Forms
                 if (!r.Success)
                 {
                     X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.Error,r.Summary).Show();
+                    X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
                     return;
                 }
                 else
@@ -630,7 +650,10 @@ namespace AionHR.Web.UI.Forms
             dayTypesStore.DataBind();
 
             RecordResponse<AttendanceScheduleDay> dayResponse = _branchService.ChildGetRecord<AttendanceScheduleDay>(dayRequest);
-
+            if (!dayResponse.Success)
+            {
+                throw new Exception(dayResponse.Summary);
+            }
             ////Step 2 : call setvalues with the retrieved object
             this.dayBreaksForm.SetValues(dayResponse.result);
 
@@ -644,6 +667,10 @@ namespace AionHR.Web.UI.Forms
                 breaksRequest.ScheduleId = dayRequest.ScheduleId;
                 breaksRequest.DayOfWeek = dow;
                 ListResponse<AttendanceBreak> breaks = _branchService.ChildGetAll<AttendanceBreak>(breaksRequest);
+                if (!breaks.Success)
+                {
+                    throw new Exception(breaks.Summary);
+                }
                 periodsGrid.Store[0].DataSource = breaks.Items;
                 periodsGrid.Store[0].DataBind();
             }
@@ -689,7 +716,7 @@ namespace AionHR.Web.UI.Forms
                 if (!r.Success)//it maybe another check
                 {
                     X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                    X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
                     return;
                 }
                 if (workingDay)
@@ -699,23 +726,33 @@ namespace AionHR.Web.UI.Forms
                     if (!deleteResponse.Success)//it maybe another check
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                        X.Msg.Alert(Resources.Common.Error, deleteResponse.Summary).Show();
                         return;
                     }
-                    bool result = AddBreaksList(day.scId.ToString(), day.dow, breaks);
-                    if (!result)//it maybe another check
+                    try
+
                     {
+                        AddBreaksList(day.scId.ToString(), day.dow, breaks);
+                    }
+                    catch(Exception ex)
+                    {
+
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
+                        X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
                         return;
                     }
+                   
                 }
 
 
 
                 ModelProxy record = this.scheduleStore.GetById(day.dow);
                 dayBreaksForm.UpdateRecord(record);
-
+                if (!workingDay)
+                {
+                    record.Set("firstIn", "00:00");
+                    record.Set("lastOut", "00:00");
+                }
                 record.Commit();
                 Notification.Show(new NotificationConfig
                 {
@@ -739,7 +776,7 @@ namespace AionHR.Web.UI.Forms
 
         }
 
-        private bool AddBreaksList(string scheduleIdString, short dow, List<AttendanceBreak> breaks)
+        private void AddBreaksList(string scheduleIdString, short dow, List<AttendanceBreak> breaks)
         {
             short i = 1;
             int scheduleId = Convert.ToInt32(scheduleIdString);
@@ -757,9 +794,9 @@ namespace AionHR.Web.UI.Forms
             PostResponse<AttendanceBreak[]> response = _branchService.ChildAddOrUpdate<AttendanceBreak[]>(periodRequest);
             if (!response.Success)
             {
-                return false;
+                throw new Exception(response.Summary);
             }
-            return true;
+
         }
         [DirectMethod]
         public object CheckTime(string value)

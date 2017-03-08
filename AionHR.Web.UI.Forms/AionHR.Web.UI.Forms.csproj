@@ -135,6 +135,7 @@
     <Content Include="Scripts\Dashboard.js" />
     <Content Include="Scripts\Sponsors.js" />
     <Content Include="Sponsors.aspx" />
+    <Content Include="SystemDefaults.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="TimeAttendanceView.aspx" />
     <Content Include="WorkingCalendars.aspx" />
@@ -328,6 +329,13 @@
       <DependentUpon>Sponsors.aspx</DependentUpon>
     </Compile>
     <Compile Include="StructureMapServiceLocator.cs" />
+    <Compile Include="SystemDefaults.aspx.cs">
+      <DependentUpon>SystemDefaults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemDefaults.aspx.designer.cs">
+      <DependentUpon>SystemDefaults.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -471,6 +479,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\LeaveTypes.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\SystemDefaults.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

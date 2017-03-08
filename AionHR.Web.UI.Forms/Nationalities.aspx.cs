@@ -117,7 +117,12 @@ namespace AionHR.Web.UI.Forms
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
                     RecordResponse<Nationality> response = _systemService.ChildGetRecord<Nationality>(r);
-
+                    if (!response.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                        return;
+                    }
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     
@@ -309,7 +314,7 @@ namespace AionHR.Web.UI.Forms
             if (!nationalities.Success)
                 return;
             this.Store1.DataSource = nationalities.Items;
-            e.Total = nationalities.count;
+            e.Total = nationalities.Items.Count;
 
             this.Store1.DataBind();
         }

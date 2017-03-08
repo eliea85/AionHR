@@ -47,6 +47,7 @@
     <Compile Include="LeaveManagement\ILeaveManagementRepository.cs" />
     <Compile Include="MasterModule\IAccountRepository.cs" />
     <Compile Include="ModelBase.cs" />
+    <Compile Include="System\SystemDefault.cs" />
     <Compile Include="TimeAttendance\ActiveDashboardModel.cs" />
     <Compile Include="TimeAttendance\AttendanceBreak.cs" />
     <Compile Include="TimeAttendance\AttendanceDay.cs" />

@@ -25,6 +25,7 @@ using AionHR.Model.Employees.Profile;
 using AionHR.Model.System;
 using AionHR.Model.Employees.Leaves;
 using AionHR.Model.Attendance;
+using AionHR.Services.Messaging.System;
 
 namespace AionHR.Web.UI.Forms
 {
@@ -70,7 +71,7 @@ namespace AionHR.Web.UI.Forms
 
             }
 
-         
+
         }
 
 
@@ -129,7 +130,12 @@ namespace AionHR.Web.UI.Forms
                     RecordResponse<Employee> response = _employeeService.Get<Employee>(r);
                     BasicInfoTab.Reset();
                     picturePath.Clear();
-
+                    if (!response.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                        return;
+                    }
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     FillNameFields(response.result.name);
@@ -357,7 +363,10 @@ namespace AionHR.Web.UI.Forms
             empRequest.DepartmentId = "0";
             empRequest.Filter = searchTrigger.Text;
             empRequest.IncludeIsInactive = false;
-            empRequest.SortBy = e.Sort[0].Property;
+            if (e.Sort[0].Property == "name.fullName")
+                empRequest.SortBy = GetNameFormat();
+            else
+                empRequest.SortBy = e.Sort[0].Property;
             empRequest.Size = e.Limit.ToString();
             empRequest.StartAt = e.Start.ToString();
 
@@ -455,7 +464,7 @@ namespace AionHR.Web.UI.Forms
                     EmployeeAddOrUpdateRequest request = new EmployeeAddOrUpdateRequest();
 
                     byte[] fileData = null;
-                    if (picturePath.PostedFile != null && picturePath.PostedFile.ContentLength>0)
+                    if (picturePath.PostedFile != null && picturePath.PostedFile.ContentLength > 0)
                     {
                         using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
                         {
@@ -526,7 +535,7 @@ namespace AionHR.Web.UI.Forms
                     EmployeeAddOrUpdateRequest request = new EmployeeAddOrUpdateRequest();
 
                     byte[] fileData = null;
-                    if (picturePath.HasFile && picturePath.PostedFile.ContentLength>0)
+                    if (picturePath.HasFile && picturePath.PostedFile.ContentLength > 0)
                     {
                         //using (var binaryReader = new BinaryReader(picturePath.PostedFile.InputStream))
                         // {
@@ -537,7 +546,7 @@ namespace AionHR.Web.UI.Forms
                         request.fileName = picturePath.PostedFile.FileName;
                         request.imageData = fileData;
 
-                       
+
 
                     }
                     else
@@ -547,7 +556,7 @@ namespace AionHR.Web.UI.Forms
                     }
                     request.empData = b;
 
-                  
+
 
                     PostResponse<Employee> r = _employeeService.AddOrUpdateEmployeeWithPhoto(request);
 
@@ -571,7 +580,7 @@ namespace AionHR.Web.UI.Forms
                         record.Set("positionName", b.positionName);
                         record.Set("name", b.name);
                         record.Set("reference", b.reference);
-                        record.Set("hireDate",b.hireDate);
+                        record.Set("hireDate", b.hireDate);
                         record.Commit();
                         Notification.Show(new NotificationConfig
                         {
@@ -603,7 +612,23 @@ namespace AionHR.Web.UI.Forms
             else return "1";
         }
 
-  
-        
+        private string GetNameFormat()
+        {
+            SystemDefaultRecordRequest req = new SystemDefaultRecordRequest();
+            req.Key = "nameFormat";
+            RecordResponse<KeyValuePair<string, string>> response = _systemService.ChildGetRecord<KeyValuePair<string, string>>(req);
+            if (!response.Success)
+            {
+
+            }
+            string paranthized = response.result.Value;
+            paranthized= paranthized.Replace('{', ' ');
+            paranthized= paranthized.Replace('}', ',');
+            paranthized = paranthized.Substring(0, paranthized.Length - 1);
+            paranthized = paranthized.Replace(" ", string.Empty);
+            return paranthized;
+
+        }
+
     }
 }

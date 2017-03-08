@@ -16,6 +16,7 @@
         function setTotal(t) {
             // alert(t);
             // alert(document.getElementById("total"));
+            
             document.getElementById("total").innerHTML = t;
             Ext.defer(function () {
                 App.GridPanel1.view.refresh();
@@ -34,6 +35,8 @@
         <ext:Hidden ID="textLoadFailed" runat="server" Text="<%$ Resources:Common , LoadFailed %>" />
         <ext:Hidden ID="titleSavingError" runat="server" Text="<%$ Resources:Common , TitleSavingError %>" />
         <ext:Hidden ID="titleSavingErrorMessage" runat="server" Text="<%$ Resources:Common , TitleSavingErrorMessage %>" />
+        <ext:Hidden ID="TotalText" runat="server" Text="<%$ Resources: TotalText %>" />
+        <ext:Hidden ID="HoursWorked" runat="server" Text="<%$ Resources: FieldHoursWorked %>" />
 
         <ext:Store
             ID="Store1"
@@ -41,7 +44,7 @@
             RemoteSort="True"
             RemoteFilter="true"
             OnReadData="Store1_RefreshData"
-            PageSize="10" IDMode="Explicit" Namespace="App" IsPagingStore="true">
+            PageSize="30" IDMode="Explicit" Namespace="App" IsPagingStore="true">
             <Proxy>
                 <ext:PageProxy>
                     <Listeners>
@@ -96,7 +99,7 @@
                     Header="true"
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
-                    Scroll="None"
+                    Scroll="Vertical"
                     Border="false"
                     Icon="User" 
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
@@ -216,33 +219,33 @@
                             <ext:Column ID="ColDay" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDay%>" DataIndex="dayId" Flex="2" Hideable="false">
                                 <Renderer Handler="var s =  moment(record.data['dayId'],'YYYYMMDD'); return s.calendar();">
                                 </Renderer>
-                                 <SummaryRenderer Handler="return '&nbsp;';" />
+                                 <SummaryRenderer Handler="return #{TotalText}.value;" />
                             </ext:Column>
                             <ext:Column ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="employeeName.fullName" Flex="3" Hideable="false">
                                 <Renderer Handler="return record.data['employeeName'].fullName;" />
-                                 <SummaryRenderer Handler="return '&nbsp;';" />
+                                 <SummaryRenderer Handler="return '<hr/>';" />
                             </ext:Column>
                             <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="2" Hideable="true" >
-                                 <SummaryRenderer Handler="return '&nbsp;';" />
+                                 <SummaryRenderer Handler="return '<hr/>';" />
                             </ext:Column>
                             <ext:Column ID="ColDepartmentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDepartment%>" DataIndex="departmentName" Flex="2" Hideable="false">
-                             <SummaryRenderer Handler="return '&nbsp;';" />
+                             <SummaryRenderer Handler="return '<hr/>';" />
                             </ext:Column>
                            
                              <ext:Column ID="ColCheckIn" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckIn%>" DataIndex="checkIn" Flex="2" Hideable="false">
                                 <Renderer Handler="var cssClass='';if(record.data['OL_A_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['checkIn'] + '<br/>' + record.data['OL_A']; + '</div>'; return result;" />
-                                  <SummaryRenderer Handler="return '&nbsp;';" />
+                                  <SummaryRenderer Handler="return '<hr/>';" />
                             </ext:Column>
 
                             <ext:Column ID="ColCheckOut" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckOut%>" DataIndex="checkOut" Flex="2" Hideable="false">
                                 <Renderer Handler="var cssClass='';if(record.data['OL_D_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['checkOut'] + '<br/>' + record.data['OL_D']; + '</div>'; return result;" />
-                                 <SummaryRenderer Handler="return '&nbsp;';" />
+                                 <SummaryRenderer Handler="return '<hr/>';" />
                             </ext:Column>
 
 
                             <ext:Column SummaryType="None" ID="Column1" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHoursWorked%>" DataIndex="hoursWorked" Flex="2" Hideable="false">
                                 <Renderer Handler=" var cssClass='';if(record.data['OL_N_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['workingTime'] + '<br/>' + record.data['OL_N']; + '</div>'; return result;" />
-                                 <SummaryRenderer Handler="return '10 Working Hour';" />
+                                 <SummaryRenderer Handler="return document.getElementById('total').innerHTML+ ' ' + #{HoursWorked}.value;" />
                             </ext:Column>
 
 
@@ -267,7 +270,7 @@
                                  <SummaryRenderer Handler="return '&nbsp;';" />
                             </ext:Column>
                             <ext:Column runat="server"
-                                ID="colDelete" Visible="false"
+                                ID="colDelete" Flex="1" Visible="false"
                                 Text="<%$ Resources: Common , Delete %>"
                                 Width="60"
                                 Align="Center"

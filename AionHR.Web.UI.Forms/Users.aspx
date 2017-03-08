@@ -30,7 +30,7 @@
             RemoteSort="True"
             RemoteFilter="true"
             OnReadData="Store1_RefreshData"
-            PageSize="10" IDMode="Explicit" Namespace="App">
+            PageSize="30" IDMode="Explicit" Namespace="App">
             <Proxy>
                 <ext:PageProxy>
                     <Listeners>
@@ -77,7 +77,7 @@
                     Header="true"
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
-                    Scroll="None"
+                    Scroll="Vertical"
                     Border="false"
                     Icon="User"
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
@@ -156,7 +156,7 @@
 
                             </ext:Column>
                             <ext:Column runat="server"
-                                ID="colDelete" Visible="true"
+                                ID="colDelete" Flex="1" Visible="true"
                                 Text="<%$ Resources: Common , Delete %>"
                                 Width="60"
                                 Align="Center"
@@ -263,7 +263,7 @@
             <Items>
                 <ext:TabPanel ID="panelRecordDetails" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
                     <Items>
-                        <ext:FormPanel
+                       <ext:FormPanel DefaultButton="SaveButton"
                             ID="BasicInfoTab"
                             runat="server"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"
@@ -304,7 +304,7 @@
 
                                     </Store>
                                 </ext:ComboBox>
-                                <ext:ComboBox runat="server" ID="languageId"
+                                <ext:ComboBox runat="server" ID="languageId" AllowBlank="false"
                                     SubmitValue="true"
                                     TypeAhead="false"
                                     FieldLabel="<%$ Resources: FieldLanguageId%>">

@@ -49,7 +49,7 @@
             RemoteSort="True"
             RemoteFilter="true"
             OnReadData="Store1_RefreshData"
-            PageSize="10" IDMode="Explicit" Namespace="App">
+            PageSize="30" IDMode="Explicit" Namespace="App">
             <Proxy>
                 <ext:PageProxy>
                     <Listeners>
@@ -95,7 +95,7 @@
                     Header="true"
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
-                    Scroll="None"
+                    Scroll="Vertical"
                     Border="false"
                     Icon="User"
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
@@ -151,8 +151,8 @@
                             </ext:Column>
 
                             <ext:Column ID="Colfci_min_ot" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldfci_min_ot%>" DataIndex="fci_min_ot" Hideable="false" Width="75" Align="Center" Flex="1" />
-                            <ext:Column ID="Colfci_max_lt" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldfci_max_lt%>" DataIndex="fci_max_lt" Hideable="false" Width="75" Align="Center" Flex="1" />
-                            <ext:Column ID="Collco_max_el" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldlco_max_el%>" DataIndex="lco_max_el" Hideable="false" Width="75" Align="Center" Flex="1" />
+                            <ext:Column ID="Colfci_max_lt" CellWrap="true" ShrinkWrap="Height" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldfci_max_lt%>" DataIndex="fci_max_lt" Hideable="false" Width="75" Align="Center" Flex="1" />
+                            <ext:Column ID="Collco_max_el" CellWrap="true" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldlco_max_el%>" DataIndex="lco_max_el" Hideable="false" Width="75" Align="Center" Flex="1" />
                             <ext:Column ID="Collco_min_ot" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldlco_min_ot%>" DataIndex="lco_min_ot" Hideable="false" Width="75" Align="Center" Flex="1" />
                             <ext:Column ID="Collco_max_ot" MenuDisabled="true" runat="server" Text="<%$ Resources: Fieldlco_max_ot%>" DataIndex="lco_max_ot" Hideable="false" Width="75" Align="Center"  Flex="1"/>
 
@@ -172,7 +172,7 @@
 
                             </ext:Column>
                             <ext:Column runat="server"
-                                ID="colDelete" Visible="true"
+                                ID="colDelete" Flex="1" Visible="true"
                                 Text="<%$ Resources: Common , Delete %>"
                                 Width="60"
                                 Align="Center"
@@ -358,7 +358,7 @@
                         </TabChange>
                     </Listeners>
                     <Items>
-                        <ext:FormPanel
+                       <ext:FormPanel DefaultButton="SaveButton"
                             ID="BasicInfoTab"
                             runat="server"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"
@@ -425,7 +425,7 @@
                 <ext:TabPanel ID="TabPanel1" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
 
                     <Items>
-                        <ext:FormPanel
+                       <ext:FormPanel DefaultButton="SaveButton"
                             ID="dayBreaksForm"
                             runat="server"
                             Title="<%$ Resources:DayBreaksForm %>"
@@ -455,8 +455,16 @@
                                           <Change Handler="CheckSession();" />
                                       </Listeners>
                                </ext:ComboBox>
-                                <ext:TextField ID="firstIn" FieldLabel="First In" runat="server" DataIndex="firstIn"  AllowBlank="false" />
-                                <ext:TextField ID="lastOut" runat="server" FieldLabel="Last Out" DataIndex="lastOut" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
+                                <ext:TextField ID="firstIn" FieldLabel="First In" runat="server" DataIndex="firstIn"  AllowBlank="false" >
+                                    <Plugins>
+                                        <ext:InputMask Mask="99:99" />
+                                    </Plugins>
+                                    </ext:TextField>
+                                <ext:TextField ID="lastOut" runat="server" FieldLabel="Last Out" DataIndex="lastOut" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" >
+                                    <Plugins>
+                                        <ext:InputMask Mask="99:99" />
+                                    </Plugins>
+                                    </ext:TextField>
                                 
                                 <ext:GridPanel
                                     ID="periodsGrid"

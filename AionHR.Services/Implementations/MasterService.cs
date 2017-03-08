@@ -63,7 +63,48 @@ namespace AionHR.Services.Implementations
             return response;
         }
 
-  
+        public PostResponse<Registration> AddRegistration(Registration r)
+        {
+            PostResponse<Registration> response = new PostResponse<Registration>();
+            SessionHelper.ClearSession();
+            SessionHelper.Set("AccountId", "0"); //To be checked as it is a strange behavior ( simulated from old code)
+            Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
+            var accountRecord = _accountRepository.ChildAddOrUpdate<Registration>(r, headers);
+            response = base.CreateServiceResponse<PostResponse<Registration>>(accountRecord);
+
+            if (accountRecord != null)
+                response.recordId = accountRecord.recordId;
+            return response;
+
+        }
+        public PostResponse<Account> AddAccount(Account r)
+        {
+            PostResponse<Account> response = new PostResponse<Account>();
+            SessionHelper.ClearSession();
+            SessionHelper.Set("AccountId", "0"); //To be checked as it is a strange behavior ( simulated from old code)
+            Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
+            var accountRecord = _accountRepository.ChildAddOrUpdate<Account>(r, headers);
+            response = base.CreateServiceResponse<PostResponse<Account>>(accountRecord);
+
+            if (accountRecord != null)
+                response.recordId = accountRecord.recordId;
+            return response;
+
+        }
+        public PostResponse<DbSetup> CreateDB(DbSetup r)
+        {
+            PostResponse<DbSetup> response = new PostResponse<DbSetup>();
+            SessionHelper.ClearSession();
+            SessionHelper.Set("AccountId", "0"); //To be checked as it is a strange behavior ( simulated from old code)
+            Dictionary<string, string> headers = SessionHelper.GetAuthorizationHeadersForUser();
+            var accountRecord = _accountRepository.ChildAddOrUpdate<DbSetup>(r, headers);
+            response = base.CreateServiceResponse<PostResponse<DbSetup>>(accountRecord);
+
+            if (accountRecord != null)
+                response.recordId = accountRecord.recordId;
+            return response;
+
+        }
         protected override dynamic GetRepository()
         {
             return _accountRepository;

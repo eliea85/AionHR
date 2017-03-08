@@ -349,6 +349,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Day - Month - Year.
+        /// </summary>
+        internal static string DayMonthYear {
+            get {
+                return ResourceManager.GetString("DayMonthYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DaySaturday.
         /// </summary>
         internal static string DaySaturday {
@@ -399,6 +408,15 @@ namespace Resources {
         internal static string DayWednesday {
             get {
                 return ResourceManager.GetString("DayWednesday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day- Year - Month.
+        /// </summary>
+        internal static string DayYearMonth {
+            get {
+                return ResourceManager.GetString("DayYearMonth", resourceCulture);
             }
         }
         
@@ -610,6 +628,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First Name , Last Name.
+        /// </summary>
+        internal static string FirstNameLastName {
+            get {
+                return ResourceManager.GetString("FirstNameLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name, Middle Name, Last Name.
+        /// </summary>
+        internal static string FirstNameMiddleNameLastName {
+            get {
+                return ResourceManager.GetString("FirstNameMiddleNameLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First.
         /// </summary>
         internal static string FirstText {
@@ -642,6 +678,15 @@ namespace Resources {
         internal static string LanguageSwitch {
             get {
                 return ResourceManager.GetString("LanguageSwitch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name, First Name.
+        /// </summary>
+        internal static string LastNameFirstName {
+            get {
+                return ResourceManager.GetString("LastNameFirstName", resourceCulture);
             }
         }
         
@@ -750,6 +795,24 @@ namespace Resources {
         internal static string MondayText {
             get {
                 return ResourceManager.GetString("MondayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month - Day - Year.
+        /// </summary>
+        internal static string MonthDayYear {
+            get {
+                return ResourceManager.GetString("MonthDayYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month - Year - Day.
+        /// </summary>
+        internal static string MonthYearDay {
+            get {
+                return ResourceManager.GetString("MonthYearDay", resourceCulture);
             }
         }
         
@@ -1060,6 +1123,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Defaults.
+        /// </summary>
+        internal static string SystemDefaults {
+            get {
+                return ResourceManager.GetString("SystemDefaults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to System Settings.
         /// </summary>
         internal static string SystemSettings {
@@ -1155,6 +1227,24 @@ namespace Resources {
         internal static string WorkingCalendars {
             get {
                 return ResourceManager.GetString("WorkingCalendars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year - Day - Month.
+        /// </summary>
+        internal static string YearDayMonth {
+            get {
+                return ResourceManager.GetString("YearDayMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year - Month - Day.
+        /// </summary>
+        internal static string YearMonthDay {
+            get {
+                return ResourceManager.GetString("YearMonthDay", resourceCulture);
             }
         }
         

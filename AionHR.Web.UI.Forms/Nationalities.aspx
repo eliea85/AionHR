@@ -64,7 +64,7 @@
                     Header="true" 
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
-                    Scroll="None"
+                    Scroll="Vertical"
                     Border="false"  
                     Icon="User"
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
@@ -136,7 +136,7 @@
 
                             </ext:Column>
                             <ext:Column runat="server"
-                                ID="colDelete" Visible="true"
+                                ID="colDelete" Flex="1" Visible="true"
                                 Text="<%$ Resources: Common , Delete %>"
                                 Width="60"
                                 Align="Center"

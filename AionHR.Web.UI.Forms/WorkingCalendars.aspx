@@ -40,7 +40,7 @@
             RemoteSort="True"
             RemoteFilter="true"
             OnReadData="Store1_RefreshData"
-            PageSize="10" IDMode="Explicit" Namespace="App">
+            PageSize="30" IDMode="Explicit" Namespace="App">
             <Proxy>
                 <ext:PageProxy>
                     <Listeners>
@@ -82,7 +82,7 @@
                     Header="true"
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
-                    Scroll="None"
+                    Scroll="Vertical"
                     Border="false"
                     Icon="User"
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
@@ -154,7 +154,7 @@
 
                             </ext:Column>
                             <ext:Column runat="server"
-                                ID="colDelete" Visible="true"
+                                ID="colDelete" Flex="1" Visible="true"
                                 Text="<%$ Resources: Common , Delete %>"
                                 Width="60"
                                 Align="Center"
@@ -2048,7 +2048,7 @@
                 <ext:TabPanel ID="panelRecordDetails" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
                 
                     <Items>
-                        <ext:FormPanel
+                       <ext:FormPanel DefaultButton="SaveButton"
                             ID="BasicInfoTab"
                             runat="server"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"
@@ -2109,7 +2109,7 @@
                 <ext:TabPanel ID="TabPanel1" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
                    
                     <Items>
-                        <ext:FormPanel
+                       <ext:FormPanel DefaultButton="Button3"
                             ID="calendarYearForm"
                             runat="server"
                             Title="<%$ Resources:CalendarYearFormTitle %>"
@@ -2179,7 +2179,7 @@
 
             <Items>
                 
-                        <ext:FormPanel
+                       <ext:FormPanel DefaultButton="Button2"
                             ID="dayConfigForm"
                             runat="server"
                             Title="<%$ Resources:DayConfigTitle %>"
@@ -2311,7 +2311,7 @@
 
             <Items>
                 
-                        <ext:FormPanel
+                       <ext:FormPanel DefaultButton="Button8"
                             ID="patternFormPanel"
                             runat="server"
                            

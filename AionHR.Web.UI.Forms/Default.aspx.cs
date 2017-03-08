@@ -1,4 +1,6 @@
-﻿using AionHR.Services.Interfaces;
+﻿using AionHR.Model.MasterModule;
+using AionHR.Services.Interfaces;
+using AionHR.Services.Messaging;
 using AionHR.Web.UI.Forms.Utilities;
 using Ext.Net;
 using Microsoft.Practices.ServiceLocation;
@@ -17,7 +19,7 @@ namespace AionHR.Web.UI.Forms
 
 
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
-
+        IMasterService _masterService = ServiceLocator.Current.GetInstance<IMasterService>();
         /// <summary>
         /// Could be added in a base page, but we keep it here in order to control the page UI. This method should be copied to each page
         /// </summary>
@@ -64,7 +66,6 @@ namespace AionHR.Web.UI.Forms
                 BuildTree(1);
                 commonTree.Title = Resources.Common.EmployeeFiles;
 
-                
             }
         }
 

@@ -134,7 +134,12 @@ namespace AionHR.Web.UI.Forms
                     RecordRequest r = new RecordRequest();
                     r.RecordID = id.ToString();
                     RecordResponse<WorkingCalendar> response = _branchService.ChildGetRecord<WorkingCalendar>(r);
-
+                    if (!response.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, response.Summary).Show();
+                        return;
+                    }
                     ////Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
                     //_systemService.SessionHelper.Set("currentSchedule",r.RecordID);
@@ -167,7 +172,12 @@ namespace AionHR.Web.UI.Forms
                     yearsRequest.CalendarId = id.ToString();
 
                     ListResponse<CalendarYear> daysResponse = _branchService.ChildGetAll<CalendarYear>(yearsRequest);
-
+                    if (!daysResponse.Success)
+                    {
+                        X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                        X.Msg.Alert(Resources.Common.Error, daysResponse.Summary).Show();
+                        return;
+                    }
 
                     //Step 2 : call setvalues with the retrieved object
                     calendarYears.Store[0].DataSource = daysResponse.Items;
@@ -190,7 +200,18 @@ namespace AionHR.Web.UI.Forms
                     //calendarYears.Store[0].DataSource = daysResponse.Items;
                     //calendarYears.Store[0].DataBind();
                     CurrentYear.Text = id.ToString();
-                    LoadDays();
+                    try
+                    {
+                        LoadDays();
+                    }
+                    catch(Exception exp)
+                    {
+                        
+                            X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
+                            X.Msg.Alert(Resources.Common.Error, exp.Message).Show();
+                            return;
+                        
+                    }
                     Viewport1.ActiveIndex = 2;
                     // InitCombos(response.result);
                     break;
@@ -234,6 +255,8 @@ namespace AionHR.Web.UI.Forms
             if ((Convert.ToInt32(CurrentYear.Text) - 2016) % 4 != 0)
                 X.Call("setLeapDay");
             ListResponse <Model.Attendance.CalendarDay> daysResponse = _branchService.ChildGetAll<Model.Attendance.CalendarDay>(req);
+            if (!daysResponse.Success)
+                throw new Exception(daysResponse.Summary);
             X.Call("init");
             foreach (var item in daysResponse.Items)
             {

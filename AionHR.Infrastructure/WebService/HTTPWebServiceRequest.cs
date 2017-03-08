@@ -315,7 +315,7 @@ namespace AionHR.Infrastructure.WebService
 
                 //Now we need  to write the headers to the request 
                 // Add header data to request
-                byte[] data = System.Text.Encoding.ASCII.GetBytes(Body);
+                byte[] data = System.Text.Encoding.UTF8.GetBytes(Body);
                 stream.Write(data, 0, data.Length);
 
                 // Add binary file to request

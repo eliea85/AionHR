@@ -21,7 +21,21 @@ namespace AionHR.Infrastructure.WebService
         /// </summary>
         public string message { get; set; }
 
+        public string error { get; set; }
+
+        public string logId { get; set; }
+
+        public string reference { get; set; }
+
         public string description { get; set; }
+
+        public string Details
+        {
+            get
+            {
+                return string.Format("Error:{0}, reference:{1}, Description:{2}, LogId:{3}", error, reference, description, logId);
+            }
+        }
 
     }
 }

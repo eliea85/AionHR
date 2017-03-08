@@ -66,7 +66,7 @@
                     Header="true"
                     Title="<%$ Resources: WindowTitle %>"
                     Layout="FitLayout"
-                    Scroll="None"
+                    Scroll="Vertical"
                     Border="false"
                     Icon="User"
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
@@ -151,7 +151,7 @@
 
                             </ext:Column>
                             <ext:Column runat="server"
-                                ID="colDelete" Visible="true"
+                                ID="colDelete" Flex="1" Visible="true"
                                 Text="<%$ Resources: Common , Delete %>"
                                 Width="60"
                                 Align="Center"
@@ -187,7 +187,7 @@
                             <Items>
                                 <ext:StatusBar ID="StatusBar1" runat="server" />
                                 <ext:ToolbarFill />
-                               
+
                             </Items>
                         </ext:Toolbar>
 
@@ -232,7 +232,7 @@
                         <ext:GridView ID="GridView1" runat="server" />
                     </View>
 
-                   
+
                     <SelectionModel>
                         <ext:RowSelectionModel ID="rowSelectionModel" runat="server" Mode="Single" StopIDModeInheritance="true" />
                         <%--<ext:CheckboxSelectionModel ID="CheckboxSelectionModel1" runat="server" Mode="Multi" StopIDModeInheritance="true" />--%>
@@ -266,14 +266,15 @@
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
                             BodyPadding="5">
                             <Items>
+                                 
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                 <ext:Checkbox ID="isWorkingDay" runat="server" SubmitValue="true" InputValue="true" Name="isWorkingDay" FieldLabel="<%$ Resources:FieldIsWorkingDay%>" />
-                               
-                                <ext:ColorField ID="color" runat="server" FieldLabel="<%$ Resources:FieldColor%>" Name="color">
-                                   
-                                </ext:ColorField>
 
+                                <ext:ColorField ID="color" runat="server" FieldLabel="<%$ Resources:FieldColor%>" Name="color">
+                                </ext:ColorField>
+                               
+                               
                             </Items>
 
                         </ext:FormPanel>
@@ -303,8 +304,30 @@
                     </Listeners>
                 </ext:Button>
             </Buttons>
+            
         </ext:Window>
+        <ext:Window
+            ID="Window1"
+            runat="server"
+            Icon="PageEdit"
+            Title="<%$ Resources:EditWindowsTitle %>"
+            Width="450"
+            Height="330"
+            AutoShow="false"
+            Modal="true"
+            Hidden="true"
+            Layout="Fit">
 
+            <Items>
+                
+                <ext:ColorSelector ID="ColorSelector1" runat="server" ShowOkCancelButtons="true" Format="sharplchex8">
+                    <Listeners>
+                        <Ok Handler="App.Label3.setText('Clicked OK. Color chosen: ' + color);" />
+                        <Cancel Handler="App.Label3.setText('Clicked Cancel. Current color: ' + item.value);" />
+                    </Listeners>
+                </ext:ColorSelector>
+            </Items>
+        </ext:Window>
 
 
     </form>

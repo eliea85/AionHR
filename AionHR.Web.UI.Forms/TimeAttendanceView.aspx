@@ -11,55 +11,20 @@
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
     <script type="text/javascript" src="Scripts/AttendanceDayView.js"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
-     <script type="text/javascript" src="Scripts/moment.js"></script>
+    <script type="text/javascript" src="Scripts/moment.js"></script>
     <script type="text/javascript">
-        function setTotal(t)
-        {
-            alert(t);
-            alert(document.getElementById("total"));
+        function setTotal(t) {
+            // alert(t);
+            // alert(document.getElementById("total"));
             document.getElementById("total").innerHTML = t;
+            Ext.defer(function () {
+                App.GridPanel1.view.refresh();
+            }, 10);
         }
-        var updateTotal = function (grid, container) {
-            if (!grid.view.rendered) {
-                return;
-            }
-            
-            if (grid.store.getCount() == '0')
-                return;
-            var field,
-                value,
-                width,
-                data = {  netOL: 0 },
-                c,
-                cs = grid.headerCt.getVisibleGridColumns();
-            
-            
-            for (var j = 0, jlen = grid.store.getCount() ; j < jlen; j++) {
-                var r = grid.store.getAt(j);
-                
-                data['netOL'] += r.get('netOL');
-                
-            }
-
-            container.suspendLayout = true;
-
-                value = data['netOL'];
-                
-                field = container.down('component[id="Column2"]');
-                alert(field);
-                container.remove(field, false);
-                container.insert(7, field);
-                width = 50;
-                field.setWidth(width - 1);
-                field.setValue(c.renderer ? (c.renderer)(value, {}, {}, 0, 7, grid.store, grid.view) : value);
-            
-
-          
-
-            container.suspendLayout = false;
-            container.updateLayout();
-        };
+       
     </script>
+
+
 </head>
 <body style="background: url(Images/bg.png) repeat;">
     <form id="Form1" runat="server">
@@ -69,7 +34,7 @@
         <ext:Hidden ID="textLoadFailed" runat="server" Text="<%$ Resources:Common , LoadFailed %>" />
         <ext:Hidden ID="titleSavingError" runat="server" Text="<%$ Resources:Common , TitleSavingError %>" />
         <ext:Hidden ID="titleSavingErrorMessage" runat="server" Text="<%$ Resources:Common , TitleSavingErrorMessage %>" />
-       
+
         <ext:Store
             ID="Store1"
             runat="server"
@@ -104,7 +69,7 @@
                         <ext:ModelField Name="OL_B_SIGN" />
                         <ext:ModelField Name="OL_D_SIGN" />
                         <ext:ModelField Name="OL_N_SIGN" />
-                         <ext:ModelField Name="netOL" />
+                        <ext:ModelField Name="netOL" />
 
 
 
@@ -133,7 +98,7 @@
                     Layout="FitLayout"
                     Scroll="None"
                     Border="false"
-                    Icon="User"
+                    Icon="User" 
                     ColumnLines="True" IDMode="Explicit" RenderXType="True">
 
                     <TopBar>
@@ -184,7 +149,7 @@
                                     <Items>
                                         <ext:ListItem Text="-----All-----" Value="0" />
                                     </Items>
-                                    
+
                                 </ext:ComboBox>
                                 <ext:ComboBox runat="server" ID="employeeId"
                                     DisplayField="fullName"
@@ -222,7 +187,7 @@
                                         <FocusLeave Handler="#{Store1}.reload()" />
                                     </Listeners>
                                 </ext:DateField>
-                        
+
 
 
 
@@ -248,34 +213,42 @@
                     <ColumnModel ID="ColumnModel1" runat="server" SortAscText="<%$ Resources:Common , SortAscText %>" SortDescText="<%$ Resources:Common ,SortDescText  %>" SortClearText="<%$ Resources:Common ,SortClearText  %>" ColumnsText="<%$ Resources:Common ,ColumnsText  %>" EnableColumnHide="false" Sortable="true">
                         <Columns>
 
-                            <ext:Column ID="ColDay" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDay%>" DataIndex="dayId" Flex="2" Hideable="false" >
+                            <ext:Column ID="ColDay" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDay%>" DataIndex="dayId" Flex="2" Hideable="false">
                                 <Renderer Handler="var s =  moment(record.data['dayId'],'YYYYMMDD'); return s.calendar();">
-                                    
                                 </Renderer>
+                                 <SummaryRenderer Handler="return '&nbsp;';" />
                             </ext:Column>
-                            <ext:Column ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="employeeName.fullName" Flex="3" Hideable="false" >
+                            <ext:Column ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldFullName%>" DataIndex="employeeName.fullName" Flex="3" Hideable="false">
                                 <Renderer Handler="return record.data['employeeName'].fullName;" />
-                                </ext:Column>
-                            <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="2" Hideable="true" />
-                            <ext:Column ID="ColDepartmentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDepartment%>" DataIndex="departmentName" Flex="2" Hideable="false">
+                                 <SummaryRenderer Handler="return '&nbsp;';" />
                             </ext:Column>
-                            <ext:Column ID="ColCheckIn" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckIn%>" DataIndex="checkIn" Flex="2" Hideable="false" >
+                            <ext:Column ID="ColBranchName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBranch%>" DataIndex="branchName" Flex="2" Hideable="true" >
+                                 <SummaryRenderer Handler="return '&nbsp;';" />
+                            </ext:Column>
+                            <ext:Column ID="ColDepartmentName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldDepartment%>" DataIndex="departmentName" Flex="2" Hideable="false">
+                             <SummaryRenderer Handler="return '&nbsp;';" />
+                            </ext:Column>
+                           
+                             <ext:Column ID="ColCheckIn" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckIn%>" DataIndex="checkIn" Flex="2" Hideable="false">
                                 <Renderer Handler="var cssClass='';if(record.data['OL_A_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['checkIn'] + '<br/>' + record.data['OL_A']; + '</div>'; return result;" />
-                                </ext:Column>
+                                  <SummaryRenderer Handler="return '&nbsp;';" />
+                            </ext:Column>
 
-                            <ext:Column ID="ColCheckOut" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckOut%>" DataIndex="checkOut" Flex="2" Hideable="false" >
-                                 <Renderer Handler="var cssClass='';if(record.data['OL_D_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['checkOut'] + '<br/>' + record.data['OL_D']; + '</div>'; return result;" />
-                                </ext:Column>
-
-
-                            <ext:Column ID="Column1" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHoursWorked%>" DataIndex="hoursWorked" Flex="2" Hideable="false" >
-                                 <Renderer Handler=" var cssClass='';if(record.data['OL_N_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['workingTime'] + '<br/>' + record.data['OL_N']; + '</div>'; return result;" />
-                                </ext:Column>
+                            <ext:Column ID="ColCheckOut" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldCheckOut%>" DataIndex="checkOut" Flex="2" Hideable="false">
+                                <Renderer Handler="var cssClass='';if(record.data['OL_D_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['checkOut'] + '<br/>' + record.data['OL_D']; + '</div>'; return result;" />
+                                 <SummaryRenderer Handler="return '&nbsp;';" />
+                            </ext:Column>
 
 
-                            <ext:Column ID="Column2" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBreaks%>" DataIndex="breaks" Flex="2" Hideable="false" >
-                                 <Renderer Handler="var cssClass='';if(record.data['OL_B_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['breaks'] + '<br/>' + record.data['OL_B']; + '</div>'; return result;" />
-                                </ext:Column>
+                            <ext:Column SummaryType="None" ID="Column1" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldHoursWorked%>" DataIndex="hoursWorked" Flex="2" Hideable="false">
+                                <Renderer Handler=" var cssClass='';if(record.data['OL_N_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['workingTime'] + '<br/>' + record.data['OL_N']; + '</div>'; return result;" />
+                                 <SummaryRenderer Handler="return '10 Working Hour';" />
+                            </ext:Column>
+
+
+                            <ext:Column ID="Column2" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldBreaks%>" DataIndex="breaks" Flex="2" Hideable="false">
+                                <Renderer Handler="var cssClass='';if(record.data['OL_B_SIGN']<0) cssClass='color:red;'; var result = ' <div style= ' + cssClass +' > ' + record.data['breaks'] + '<br/>' + record.data['OL_B']; + '</div>'; return result;" />
+                            </ext:Column>
 
 
 
@@ -291,7 +264,7 @@
                                 Resizable="false">
 
                                 <Renderer Fn="editRender" />
-
+                                 <SummaryRenderer Handler="return '&nbsp;';" />
                             </ext:Column>
                             <ext:Column runat="server"
                                 ID="colDelete" Visible="false"
@@ -304,7 +277,7 @@
                                 MenuDisabled="true"
                                 Resizable="false">
                                 <Renderer Fn="deleteRender" />
-
+                                 <SummaryRenderer Handler="return '&nbsp;';" />
                             </ext:Column>
                             <ext:Column runat="server"
                                 ID="colAttach"
@@ -317,48 +290,16 @@
                                 MenuDisabled="true"
                                 Resizable="false">
                                 <Renderer Fn="attachRender" />
+                                 <SummaryRenderer Handler="return '&nbsp;';" />
                             </ext:Column>
 
 
 
 
                         </Columns>
+
                     </ColumnModel>
-                    <DockedItems>
-
-                        <ext:Toolbar ID="Toolbar2" runat="server" Dock="Bottom">
-                            <Items>
-                                <ext:StatusBar ID="StatusBar1" runat="server" />
-                                <ext:ToolbarFill />
-
-                            </Items>
-                        </ext:Toolbar>
-                        <ext:FieldContainer ID="Container1" runat="server" Layout="HBoxLayout" Dock="Bottom" StyleSpec="margin-top:2px;">
-                    <Defaults>
-                        <ext:Parameter Name="height" Value="24" />
-                    </Defaults>
-                    <Items>
-                        <ext:DisplayField
-                            runat="server"
-                            Name="test1"
-                            Cls="total-field"
-                            Text="-"
-                            />
-                        <ext:DisplayField
-                            runat="server"
-                            Name="test2"
-                            Cls="total-field"
-                            Text="-"
-                            />
-                        <ext:DisplayField
-                            runat="server"
-                            Name="test3"
-                            Cls="total-field"
-                            Text="-"
-                            />
-                    </Items>
-                </ext:FieldContainer>
-                    </DockedItems>
+         
                     <BottomBar>
 
                         <ext:PagingToolbar ID="PagingToolbar1"
@@ -382,16 +323,19 @@
                         </ext:PagingToolbar>
 
                     </BottomBar>
-                  
+
                     <View>
-                        <ext:GridView ID="GridView1" runat="server" >
-                            <Listeners>
-                       <%-- <Refresh Handler="updateTotal(this.panel, #{Container1});" />--%>
-                    </Listeners>
-                            </ext:GridView>
+
+                        <ext:GridView ID="GridView1" runat="server">
+                          
+                        </ext:GridView>
+
 
                     </View>
-
+                    <Features>
+                        
+                        <ext:Summary ID="Summary1" runat="server"  DefaultValueMode="Ignore" />
+                    </Features>
 
                     <SelectionModel>
                         <ext:RowSelectionModel ID="rowSelectionModel" runat="server" Mode="Single" StopIDModeInheritance="true" />

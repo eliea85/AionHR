@@ -124,10 +124,12 @@ namespace AionHR.Web.UI.Forms
                         return;
                     }
                     
-                    color.SelectedColor = response.result.color;
+                    colorDay.SetValue(response.result.color);
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
-                    color.SelectedColor = response.result.color;
+                    colorDay.SetValue(response.result.color);
+                    X.Call("setTriggerColor", response.result.color);
+
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -294,7 +296,7 @@ namespace AionHR.Web.UI.Forms
             BasicInfoTab.Reset();
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
             string timeZone = Session["TimeZone"] as string;
-
+            X.Call("setTriggerColor", "fff");
             this.EditRecordWindow.Show();
         }
 

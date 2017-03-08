@@ -9,12 +9,12 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
-    <script type="text/javascript" src="Scripts/DayTypes.js"></script>
+    <script type="text/javascript" src="Scripts/DayTypes.js?id=0"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
-
+   
 
 </head>
-<body style="background: url(Images/bg.png) repeat;" onload="getTimeZone();">
+<body style="background: url(Images/bg.png) repeat;">
     <form id="Form1" runat="server">
         <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="1200000" />
 
@@ -249,7 +249,7 @@
             Icon="PageEdit"
             Title="<%$ Resources:EditWindowsTitle %>"
             Width="450"
-            Height="330"
+            Height="350"
             AutoShow="false"
             Modal="true"
             Hidden="true"
@@ -266,15 +266,32 @@
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
                             BodyPadding="5">
                             <Items>
-                                 
+
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
                                 <ext:Checkbox ID="isWorkingDay" runat="server" SubmitValue="true" InputValue="true" Name="isWorkingDay" FieldLabel="<%$ Resources:FieldIsWorkingDay%>" />
 
-                                <ext:ColorField ID="color" runat="server" FieldLabel="<%$ Resources:FieldColor%>" Name="color">
-                                </ext:ColorField>
                                
-                               
+                                <ext:DropDownField
+                                    ID="colorDay"
+                                    runat="server"
+                                    FieldLabel="<%$ Resources:FieldColor%>"
+                                    Editable="false"
+                                    Name="color">
+                                    <Component>
+                                        <ext:Panel runat="server" AutoWidth="true" AutoHeight="true">
+                                            <Items>
+                                                <ext:ColorPicker runat="server">
+                                                    <Listeners>
+                                                        <Select Fn="selectColor" />
+                                                    </Listeners>
+                                                </ext:ColorPicker>
+                                            </Items>
+                                        </ext:Panel>
+                                    </Component>
+                                   
+                                </ext:DropDownField>
+
                             </Items>
 
                         </ext:FormPanel>
@@ -304,7 +321,7 @@
                     </Listeners>
                 </ext:Button>
             </Buttons>
-            
+
         </ext:Window>
         <ext:Window
             ID="Window1"
@@ -319,7 +336,7 @@
             Layout="Fit">
 
             <Items>
-                
+
                 <ext:ColorSelector ID="ColorSelector1" runat="server" ShowOkCancelButtons="true" Format="sharplchex8">
                     <Listeners>
                         <Ok Handler="App.Label3.setText('Clicked OK. Color chosen: ' + color);" />

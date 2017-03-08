@@ -63,3 +63,12 @@ var enterKeyPressSearchHandler = function (el, event) {
         App.Store1.reload();
     }
 };
+
+
+var selectColor = function (cp, color) {
+    App.colorDay.setValue(color);
+    App.colorDay.triggerEl.elements["0"].applyStyles("background-color:" + "#" + color + ";");
+};
+var setTriggerColor = function (color) {
+    App.colorDay.triggerEl.elements["0"].applyStyles("background-color:" + "#" + color + ";");
+};

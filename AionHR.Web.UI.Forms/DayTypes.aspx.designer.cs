@@ -301,13 +301,13 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.Checkbox isWorkingDay;
         
         /// <summary>
-        /// color control.
+        /// colorDay control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.ColorField color;
+        protected global::Ext.Net.DropDownField colorDay;
         
         /// <summary>
         /// SaveButton control.

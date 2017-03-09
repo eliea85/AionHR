@@ -12,7 +12,7 @@
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script type="text/javascript" src="Scripts/moment.js"></script>
-    <script type="text/javascript" src="Scripts/Schedules.js"></script>
+    <script type="text/javascript" src="Scripts/Schedules.js?id=0"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
 
 <script type="text/javascript" >
@@ -425,7 +425,7 @@
                 <ext:TabPanel ID="TabPanel1" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
 
                     <Items>
-                       <ext:FormPanel DefaultButton="SaveButton"
+                       <ext:FormPanel DefaultButton="Button3"
                             ID="dayBreaksForm"
                             runat="server"
                             Title="<%$ Resources:DayBreaksForm %>"

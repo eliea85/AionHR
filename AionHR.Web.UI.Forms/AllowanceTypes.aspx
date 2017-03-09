@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BiometricDevices.aspx.cs" Inherits="AionHR.Web.UI.Forms.BiometricDevices" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AllowanceTypes.aspx.cs" Inherits="AionHR.Web.UI.Forms.AllowanceTypes" %>
+
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,12 +9,12 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
-    <script type="text/javascript" src="Scripts/Nationalities.js" ></script>
+    <script type="text/javascript" src="Scripts/AllowanceTypes.js?id=0" ></script>
     <script type="text/javascript" src="Scripts/common.js" ></script>
    
  
 </head>
-<body style="background: url(Images/bg.png) repeat;" >
+<body style="background: url(Images/bg.png) repeat;" ">
     <form id="Form1" runat="server">
         <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="1200000" />        
         
@@ -41,8 +42,9 @@
                     <Fields>
 
                         <ext:ModelField Name="recordId" />
+                        
                         <ext:ModelField Name="name" />
-                        <ext:ModelField Name="reference" />
+                        <ext:ModelField Name="isCash" />
                       
                                </Fields>
                 </ext:Model>
@@ -111,15 +113,14 @@
 
                     <ColumnModel ID="ColumnModel1" runat="server" SortAscText="<%$ Resources:Common , SortAscText %>" SortDescText="<%$ Resources:Common ,SortDescText  %>" SortClearText="<%$ Resources:Common ,SortClearText  %>" ColumnsText="<%$ Resources:Common ,ColumnsText  %>" EnableColumnHide="false" Sortable="false" >
                         <Columns>
-
-                              <ext:Column  Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" width="75" Align="Center"/>
-                          <ext:Column   ID="colReference" MenuDisabled="true" runat="server"  Text="<%$ Resources: FieldReference %>" DataIndex="reference" Flex="1" Hideable="false" width="75" Align="Center"/>
-                            <ext:Column   CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
+                            <ext:Column ID="ColRecordId" Visible="false" DataIndex="recordId" runat="server" />
+                            
+                             <ext:Column    CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="2" Hideable="false">
                             <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
 
                             </Renderer>
                                 </ext:Column>
-                            
+                         <ext:CheckColumn runat="server" Flex="1" Text="<%$ Resources: FieldIsCash %>"  DataIndex="isCash" ></ext:CheckColumn>
                            
 
                             <ext:Column runat="server"
@@ -173,7 +174,7 @@
                             <Items>
                                 <ext:StatusBar ID="StatusBar1" runat="server" />
                                 <ext:ToolbarFill />
-                             
+                                
                             </Items>
                         </ext:Toolbar>
 
@@ -219,7 +220,7 @@
                         <ext:GridView ID="GridView1" runat="server" />
                     </View>
 
-                   
+                  
                     <SelectionModel>
                         <ext:RowSelectionModel ID="rowSelectionModel" runat="server" Mode="Single"  StopIDModeInheritance="true" />
                         <%--<ext:CheckboxSelectionModel ID="CheckboxSelectionModel1" runat="server" Mode="Multi" StopIDModeInheritance="true" />--%>
@@ -245,31 +246,21 @@
             <Items>
                 <ext:TabPanel ID="panelRecordDetails" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
                     <Items>
-                        <ext:FormPanel
+                        <ext:FormPanel DefaultButton="SaveButton"
                             ID="BasicInfoTab"
-                            runat="server" DefaultButton="SaveButton"
+                            runat="server"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"
                             Icon="ApplicationSideList"
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
                             BodyPadding="5">
                             <Items>
-                                <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
-                                <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                <ext:TextField ID="reference" AllowBlank="false" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="reference"  BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                   <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="divisionId" Name="divisionId" FieldLabel="<%$ Resources:FieldDivision%>"  SimpleSubmit="true">
-                                            <Store>
-                                                <ext:Store runat="server" ID="DivisionStore">
-                                                    <Model>
-                                                        <ext:Model runat="server">
-                                                            <Fields>
-                                                                <ext:ModelField Name="recordId" />
-                                                                <ext:ModelField Name="name" />
-                                                            </Fields>
-                                                        </ext:Model>
-                                                    </Model>
-                                                </ext:Store>
-                                            </Store>
-                                        </ext:ComboBox>
+                                <ext:TextField ID="recordId" runat="server"  Name="recordId"  Hidden="true"/>
+                                <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="name"   AllowBlank="false"/>
+                                
+
+                                
+                                <ext:Checkbox runat="server" Name="isCash" InputValue="true" ID="requiresApprovalCheck" DataIndex="isCash" FieldLabel="<%$ Resources:FieldIsCash%>" />
+                                
                                
 
                             </Items>
@@ -283,14 +274,14 @@
                 <ext:Button ID="SaveButton" runat="server" Text="<%$ Resources:Common, Save %>" Icon="Disk">
 
                     <Listeners>
-                        <Click Handler="CheckSession(); if (!#{BasicInfoTab}.getForm().isValid()) {return false;} " />
+                        <Click Handler="CheckSession(); if (!#{BasicInfoTab}.getForm().isValid()) {return false;}  " />
                     </Listeners>
                     <DirectEvents>
                         <Click OnEvent="SaveNewRecord" Failure="Ext.MessageBox.alert('#{titleSavingError}.value', '#{titleSavingErrorMessage}.value');">
                             <EventMask ShowMask="true" Target="CustomTarget" CustomTarget="={#{EditRecordWindow}.body}" />
                             <ExtraParams>
                                 <ext:Parameter Name="id" Value="#{recordId}.getValue()" Mode="Raw" />
-                                <ext:Parameter Name="values" Value ="#{BasicInfoTab}.getForm().getValues(false, false, false, true)" Mode="Raw" Encode="true" />
+                                <ext:Parameter Name="values" Value ="#{BasicInfoTab}.getForm().getValues()" Mode="Raw" Encode="true" />
                             </ExtraParams>
                         </Click>
                     </DirectEvents>
@@ -308,4 +299,3 @@
     </form>
 </body>
 </html>
-

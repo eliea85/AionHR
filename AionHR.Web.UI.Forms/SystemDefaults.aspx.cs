@@ -84,14 +84,18 @@ namespace AionHR.Web.UI.Forms
 
         private void FillDefaults(List<KeyValuePair<string, string>> items)
         {
-            currencyIdCombo.Select(items.Where(s => s.Key == "currencyId").First().Value);
-            countryIdCombo.Select(items.Where(s => s.Key == "countryId").First().Value);
-            dateFormatCombo.Select(items.Where(s => s.Key == "dateFormat").First().Value);
-            nameFormatCombo.Select(items.Where(s => s.Key == "nameFormat").First().Value);
-            timeZoneCombo.Select(items.Where(s => s.Key == "TimeZone").First().Value);
-            fdowCombo.Select(items.Where(s => s.Key == "fdow").First().Value);
-            logCheck.Checked = items.Where(s => s.Key == "transactionLog").First().Value == "on";
-            enableCameraCheck.Checked = items.Where(s => s.Key == "diableCamera").First().Value == "on";
+            try
+            {
+                currencyIdCombo.Select(items.Where(s => s.Key == "currencyId").First().Value);
+                countryIdCombo.Select(items.Where(s => s.Key == "countryId").First().Value);
+                dateFormatCombo.Select(items.Where(s => s.Key == "dateFormat").First().Value);
+                nameFormatCombo.Select(items.Where(s => s.Key == "nameFormat").First().Value);
+                timeZoneCombo.Select(items.Where(s => s.Key == "TimeZone").First().Value);
+                fdowCombo.Select(items.Where(s => s.Key == "fdow").First().Value);
+                logCheck.Checked = items.Where(s => s.Key == "transactionLog").First().Value == "on";
+                enableCameraCheck.Checked = items.Where(s => s.Key == "diableCamera").First().Value == "on";
+            }
+            catch { }
         }
 
 

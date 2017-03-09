@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allowance Types.
+        /// </summary>
+        internal static string AllowanceTypes {
+            get {
+                return ResourceManager.GetString("AllowanceTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Human Resources Solution.
         /// </summary>
         internal static string ApplicationModule {
@@ -237,6 +246,15 @@ namespace Resources {
         internal static string CasesLeaf {
             get {
                 return ResourceManager.GetString("CasesLeaf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Certificate Levels.
+        /// </summary>
+        internal static string CertificateLevels {
+            get {
+                return ResourceManager.GetString("CertificateLevels", resourceCulture);
             }
         }
         
@@ -471,6 +489,15 @@ namespace Resources {
         internal static string DisplayMsg {
             get {
                 return ResourceManager.GetString("DisplayMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Divisions.
+        /// </summary>
+        internal static string Divisions {
+            get {
+                return ResourceManager.GetString("Divisions", resourceCulture);
             }
         }
         

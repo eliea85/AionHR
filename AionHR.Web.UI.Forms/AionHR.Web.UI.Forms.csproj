@@ -83,8 +83,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AllowanceTypes.aspx" />
     <Content Include="BiometricDevices.aspx" />
     <Content Include="Branches.aspx" />
+    <Content Include="CertificateLevels.aspx" />
     <Content Include="CSS\Dashboard.css" />
     <Content Include="CSS\Calendars.css" />
     <Content Include="CSS\Common.css" />
@@ -100,6 +102,7 @@
     <Content Include="DayTypes.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Departments.aspx" />
+    <Content Include="Divisions.aspx" />
     <Content Include="Employees.aspx" />
     <Content Include="ForgotAccount.aspx" />
     <Content Include="ForgotPassword.aspx" />
@@ -128,8 +131,10 @@
     <Content Include="Nationalities.aspx" />
     <Content Include="packages.config" />
     <Content Include="Routers.aspx" />
+    <Content Include="Scripts\AllowanceTypes.js" />
     <Content Include="Scripts\AttendanceDayView.js" />
     <Content Include="Scripts\Calendars.js" />
+    <Content Include="Scripts\Divisions.js" />
     <Content Include="Scripts\Employees.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\Dashboard.js" />
@@ -168,6 +173,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllowanceTypes.aspx.cs">
+      <DependentUpon>AllowanceTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AllowanceTypes.aspx.designer.cs">
+      <DependentUpon>AllowanceTypes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Common.ar.designer.cs">
       <DependentUpon>Common.ar.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -197,6 +209,13 @@
     </Compile>
     <Compile Include="Branches.aspx.designer.cs">
       <DependentUpon>Branches.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CertificateLevels.aspx.cs">
+      <DependentUpon>CertificateLevels.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CertificateLevels.aspx.designer.cs">
+      <DependentUpon>CertificateLevels.aspx</DependentUpon>
     </Compile>
     <Compile Include="Currencies.aspx.cs">
       <DependentUpon>Currencies.aspx</DependentUpon>
@@ -232,6 +251,13 @@
     </Compile>
     <Compile Include="Departments.aspx.designer.cs">
       <DependentUpon>Departments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Divisions.aspx.cs">
+      <DependentUpon>Divisions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Divisions.aspx.designer.cs">
+      <DependentUpon>Divisions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employees.aspx.cs">
       <DependentUpon>Employees.aspx</DependentUpon>
@@ -482,6 +508,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\SystemDefaults.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Divisions.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\AllowanceTypes.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\CertificateLevels.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

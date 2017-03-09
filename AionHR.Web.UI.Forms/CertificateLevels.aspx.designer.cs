@@ -10,7 +10,7 @@
 namespace AionHR.Web.UI.Forms {
     
     
-    public partial class BiometricDevices {
+    public partial class CertificateLevels {
         
         /// <summary>
         /// Form1 control.
@@ -148,22 +148,22 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.TextField searchTrigger;
         
         /// <summary>
-        /// ColrecordId control.
+        /// ColRecordId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Column ColrecordId;
+        protected global::Ext.Net.Column ColRecordId;
         
         /// <summary>
-        /// colReference control.
+        /// Column1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Column colReference;
+        protected global::Ext.Net.Column Column1;
         
         /// <summary>
         /// ColName control.
@@ -299,24 +299,6 @@ namespace AionHR.Web.UI.Forms {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Ext.Net.TextField reference;
-        
-        /// <summary>
-        /// divisionId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.ComboBox divisionId;
-        
-        /// <summary>
-        /// DivisionStore control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Store DivisionStore;
         
         /// <summary>
         /// SaveButton control.

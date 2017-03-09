@@ -516,4 +516,13 @@
   <data name="YearMonthDay" xml:space="preserve">
     <value>Year - Month - Day</value>
   </data>
+  <data name="Divisions" xml:space="preserve">
+    <value>Divisions</value>
+  </data>
+  <data name="AllowanceTypes" xml:space="preserve">
+    <value>Allowance Types</value>
+  </data>
+  <data name="CertificateLevels" xml:space="preserve">
+    <value>Certificate Levels</value>
+  </data>
 </root>

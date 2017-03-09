@@ -10,7 +10,7 @@
 namespace AionHR.Web.UI.Forms {
     
     
-    public partial class BiometricDevices {
+    public partial class AllowanceTypes {
         
         /// <summary>
         /// Form1 control.
@@ -148,22 +148,13 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.TextField searchTrigger;
         
         /// <summary>
-        /// ColrecordId control.
+        /// ColRecordId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.Column ColrecordId;
-        
-        /// <summary>
-        /// colReference control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Column colReference;
+        protected global::Ext.Net.Column ColRecordId;
         
         /// <summary>
         /// ColName control.
@@ -292,31 +283,13 @@ namespace AionHR.Web.UI.Forms {
         protected global::Ext.Net.TextField name;
         
         /// <summary>
-        /// reference control.
+        /// requiresApprovalCheck control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Ext.Net.TextField reference;
-        
-        /// <summary>
-        /// divisionId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.ComboBox divisionId;
-        
-        /// <summary>
-        /// DivisionStore control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Ext.Net.Store DivisionStore;
+        protected global::Ext.Net.Checkbox requiresApprovalCheck;
         
         /// <summary>
         /// SaveButton control.

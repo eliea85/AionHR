@@ -13,6 +13,6 @@ namespace AionHR.Model.TimeAttendance
         {
             get; set;
         }
-        public string branchId { get; set; }
+        public string divisionId { get; set; }
     }
 }

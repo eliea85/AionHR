@@ -580,7 +580,7 @@ namespace AionHR.Web.UI.Forms
                         record.Set("positionName", b.positionName);
                         record.Set("name", b.name);
                         record.Set("reference", b.reference);
-                        record.Set("hireDate", b.hireDate);
+                        record.Set("hireDate", b.hireDate.Value.ToShortDateString());
                         record.Commit();
                         Notification.Show(new NotificationConfig
                         {

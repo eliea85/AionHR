@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BiometricDevices.aspx.cs" Inherits="AionHR.Web.UI.Forms.BiometricDevices" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Divisions.aspx.cs" Inherits="AionHR.Web.UI.Forms.Divisions" %>
+
 <%@ Register Assembly="Ext.Net" Namespace="Ext.Net" TagPrefix="ext" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,12 +9,27 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
-    <script type="text/javascript" src="Scripts/Nationalities.js" ></script>
+    <script type="text/javascript" src="Scripts/Divisions.js" ></script>
     <script type="text/javascript" src="Scripts/common.js" ></script>
-   
+    <script  type="text/javascript">
+        var GetTimeZone = function () {
+            
+            var d = new Date();
+
+
+            var n = d.getTimezoneOffset();
+            
+          
+            
+            s = n / -60;
+            App.direct.StoreTimeZone(s);
+            
+        }
+    </script>
+
  
 </head>
-<body style="background: url(Images/bg.png) repeat;" >
+<body style="background: url(Images/bg.png) repeat;" onload="GetTimeZone();">
     <form id="Form1" runat="server">
         <ext:ResourceManager ID="ResourceManager1" runat="server" Theme="Neptune" AjaxTimeout="1200000" />        
         
@@ -21,7 +37,7 @@
         <ext:Hidden ID="textLoadFailed" runat="server" Text="<%$ Resources:Common , LoadFailed %>" />
         <ext:Hidden ID="titleSavingError" runat="server" Text="<%$ Resources:Common , TitleSavingError %>" />
         <ext:Hidden ID="titleSavingErrorMessage" runat="server" Text="<%$ Resources:Common , TitleSavingErrorMessage %>" />
-        
+        <ext:Hidden ID="timeZoneOffset" runat="server" EnableViewState="true" />
         <ext:Store
             ID="Store1"
             runat="server"
@@ -42,9 +58,14 @@
 
                         <ext:ModelField Name="recordId" />
                         <ext:ModelField Name="name" />
-                        <ext:ModelField Name="reference" />
-                      
-                               </Fields>
+                        
+                        <ext:ModelField Name="timeZone" />
+                        
+                        <ext:ModelField Name="isInactive" Type="Boolean" DefaultValue="false"/>
+                       
+
+
+                    </Fields>
                 </ext:Model>
             </Model>
             <Sorters>
@@ -113,14 +134,18 @@
                         <Columns>
 
                               <ext:Column  Visible="false" ID="ColrecordId" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldrecordId %>" DataIndex="recordId" Hideable="false" width="75" Align="Center"/>
-                          <ext:Column   ID="colReference" MenuDisabled="true" runat="server"  Text="<%$ Resources: FieldReference %>" DataIndex="reference" Flex="1" Hideable="false" width="75" Align="Center"/>
-                            <ext:Column   CellCls="cellLink" ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="1" Hideable="false">
+                            <ext:Column   ID="ColName" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldName%>" DataIndex="name" Flex="2" Hideable="false">
                             <Renderer Handler="return '<u>'+ record.data['name']+'</u>'">
 
                             </Renderer>
                                 </ext:Column>
-                            
-                           
+                            <ext:Column ID="ColTimeZone" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldTimeZone%>" DataIndex="timeZone" Flex="1" Hideable="false">
+                                <Renderer Handler="var sign = ''; if(record.data['timeZone']>=0) sign = '+'; return 'UTC '+sign + record.data['timeZone'] + ':00 ' " />     
+                                </ext:Column>
+                          
+                            <ext:CheckColumn ID="ColInactive" MenuDisabled="true" runat="server" Text="<%$ Resources: FieldIsInactive %>" DataIndex="isInactive" Flex="1" Width="75" Hideable="false" />
+
+                         
 
                             <ext:Column runat="server"
                                 ID="colEdit"  Visible="false"
@@ -173,7 +198,7 @@
                             <Items>
                                 <ext:StatusBar ID="StatusBar1" runat="server" />
                                 <ext:ToolbarFill />
-                             
+                               
                             </Items>
                         </ext:Toolbar>
 
@@ -245,31 +270,47 @@
             <Items>
                 <ext:TabPanel ID="panelRecordDetails" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
                     <Items>
-                        <ext:FormPanel
+                       <ext:FormPanel DefaultButton="SaveButton"
                             ID="BasicInfoTab"
-                            runat="server" DefaultButton="SaveButton"
+                            runat="server"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"
-                            Icon="ApplicationSideList"
+                            Icon="ApplicationSideList" 
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"
                             BodyPadding="5">
                             <Items>
                                 <ext:TextField ID="recordId" Hidden="true" runat="server" FieldLabel="<%$ Resources:FieldrecordId%>" Disabled="true" Name="recordId" />
                                 <ext:TextField ID="name" runat="server" FieldLabel="<%$ Resources:FieldName%>" Name="name" AllowBlank="false" BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                <ext:TextField ID="reference" AllowBlank="false" runat="server" FieldLabel="<%$ Resources:FieldReference%>" Name="reference"  BlankText="<%$ Resources:Common, MandatoryField%>" />
-                                   <ext:ComboBox runat="server" ValueField="recordId" DisplayField="name" ID="divisionId" Name="divisionId" FieldLabel="<%$ Resources:FieldDivision%>"  SimpleSubmit="true">
-                                            <Store>
-                                                <ext:Store runat="server" ID="DivisionStore">
-                                                    <Model>
-                                                        <ext:Model runat="server">
-                                                            <Fields>
-                                                                <ext:ModelField Name="recordId" />
-                                                                <ext:ModelField Name="name" />
-                                                            </Fields>
-                                                        </ext:Model>
-                                                    </Model>
-                                                </ext:Store>
-                                            </Store>
-                                        </ext:ComboBox>
+                               <ext:ComboBox runat="server" ID="timeZoneCombo"  AllowBlank="false" SimpleSubmit="true" IDMode="Static" Name="timeZone" FieldLabel="<%$ Resources:FieldTimeZone%>">
+                                    <Items>
+                                        <ext:ListItem Text="-12 UTC" Value="-12" />
+                                        <ext:ListItem Text="-11 UTC" Value="-11" />
+                                        <ext:ListItem Text="-10 UTC" Value="-10" />
+                                        <ext:ListItem Text="-9 UTC" Value="-9" />
+                                        <ext:ListItem Text="-8 UTC" Value="-8" />
+                                        <ext:ListItem Text="-7 UTC" Value="-7" />
+                                        <ext:ListItem Text="-6 UTC" Value="-6" />
+                                        <ext:ListItem Text="-5 UTC" Value="-5" />
+                                        <ext:ListItem Text="-4 UTC" Value="-4" />
+                                        <ext:ListItem Text="-3 UTC" Value="-3" />
+                                        <ext:ListItem Text="-2 UTC" Value="-2" />
+                                        <ext:ListItem Text="-1 UTC" Value="-1" />
+                                        <ext:ListItem Text=" UTC" Value="0" />
+                                        <ext:ListItem Text="+1 UTC" Value="1" />
+                                        <ext:ListItem Text="+2 UTC" Value="2" />
+                                        <ext:ListItem Text="+3 UTC" Value="3" />
+                                        <ext:ListItem Text="+4 UTC" Value="4" />
+                                        <ext:ListItem Text="+5 UTC" Value="5" />
+                                        <ext:ListItem Text="+6 UTC" Value="6" />
+                                        <ext:ListItem Text="+7 UTC" Value="7" />
+                                        <ext:ListItem Text="+8 UTC" Value="8" />
+                                        <ext:ListItem Text="+9 UTC" Value="9" />
+                                        <ext:ListItem Text="+10 UTC" Value="10" />
+                                        <ext:ListItem Text="+11 UTC" Value="11" />
+                                        <ext:ListItem Text="+12 UTC" Value="12" />
+                                    </Items>
+                                </ext:ComboBox>
+                                
+                                <ext:Checkbox ID="isInactive" runat="server" FieldLabel="<%$ Resources: FieldIsInactive%>" Name="isInactive" InputValue="true" />
                                
 
                             </Items>
@@ -308,4 +349,3 @@
     </form>
 </body>
 </html>
-

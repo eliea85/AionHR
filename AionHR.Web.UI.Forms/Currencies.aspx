@@ -9,7 +9,7 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
-    <script type="text/javascript" src="Scripts/Nationalities.js" ></script>
+    <script type="text/javascript" src="Scripts/Nationalities.js?id=0" ></script>
     <script type="text/javascript" src="Scripts/common.js" ></script>
    
  
@@ -247,7 +247,7 @@
                 <ext:TabPanel ID="panelRecordDetails" runat="server" ActiveTabIndex="0" Border="false" DeferredRender="false">
                     <Items>
                         <ext:FormPanel
-                            ID="BasicInfoTab"
+                            ID="BasicInfoTab" DefaultButton="SaveButton"
                             runat="server"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"
                             Icon="ApplicationSideList"

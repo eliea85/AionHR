@@ -29,10 +29,20 @@ namespace AionHR.Repository.WebService.Repositories
             GetRecordMethodName = "getEM1";
 
             ChildGetAllLookup.Add(typeof(Sponsor), "qrySP");
+            ChildGetAllLookup.Add(typeof(AllowanceType), "qryAT");
+            ChildGetAllLookup.Add(typeof(CertificateLevel), "qryCL");
 
             ChildGetLookup.Add(typeof(Sponsor), "getSP");
+            ChildGetLookup.Add(typeof(AllowanceType), "getAT");
+            ChildGetLookup.Add(typeof(CertificateLevel), "getCL");
 
-            ChildAddOrUpdateLookup.Add(typeof(Sponsor), "setSP"); 
+            ChildAddOrUpdateLookup.Add(typeof(Sponsor), "setSP");
+            ChildAddOrUpdateLookup.Add(typeof(AllowanceType), "setAT");
+            ChildAddOrUpdateLookup.Add(typeof(CertificateLevel), "setCL");
+
+            ChildDeleteLookup.Add(typeof(Sponsor), "delSP");
+            ChildDeleteLookup.Add(typeof(AllowanceType), "delAT");
+            ChildDeleteLookup.Add(typeof(CertificateLevel), "delCL");
         }
 
         public PostWebServiceResponse AddOrUpdateEmployeeWithImage(Employee emp, string imgName, byte[] imgDate,Dictionary<string,string> headers = null)

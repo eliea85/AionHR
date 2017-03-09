@@ -118,42 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BasicInfoTabEditWindowTitle" xml:space="preserve">
-    <value>Biometric Device Info</value>
+    <value>Division Info</value>
   </data>
   <data name="EditWindowsTitle" xml:space="preserve">
-    <value>Edit Biometric Device</value>
-  </data>
-  <data name="FieldDivision" xml:space="preserve">
-    <value>Devision</value>
+    <value>Edit Division</value>
   </data>
   <data name="FieldIsInactive" xml:space="preserve">
     <value>Is Inactive?</value>
   </data>
-  <data name="FieldIsSegmentedHead" xml:space="preserve">
-    <value>Is Segmented Head</value>
-  </data>
   <data name="FieldName" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="FieldParentName" xml:space="preserve">
-    <value>Parent</value>
   </data>
   <data name="FieldRecordId" xml:space="preserve">
     <value>Record ID</value>
   </data>
-  <data name="FieldReference" xml:space="preserve">
-    <value>Reference</value>
-  </data>
   <data name="FieldSegmentCode" xml:space="preserve">
     <value>Segment</value>
-  </data>
-  <data name="FieldSvFullName" xml:space="preserve">
-    <value>Supervisor</value>
   </data>
   <data name="FieldTimeZone" xml:space="preserve">
     <value>Time Zone</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
-    <value>Biometric Devices</value>
+    <value>Divisions</value>
   </data>
 </root>

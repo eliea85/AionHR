@@ -21,16 +21,17 @@ using AionHR.Model.Company.News;
 using AionHR.Services.Messaging;
 using AionHR.Model.Company.Structure;
 using AionHR.Model.System;
-using AionHR.Model.TimeAttendance;
+using AionHR.Model.Attendance;
+using AionHR.Model.Employees.Leaves;
+using AionHR.Model.Employees.Profile;
 
 namespace AionHR.Web.UI.Forms
 {
-    public partial class BiometricDevices : System.Web.UI.Page
+    public partial class AllowanceTypes : System.Web.UI.Page
     {
-
         ISystemService _systemService = ServiceLocator.Current.GetInstance<ISystemService>();
-        ICompanyStructureService _companyStructureService = ServiceLocator.Current.GetInstance<ICompanyStructureService>();
-        ITimeAttendanceService _timeAttendanceService = ServiceLocator.Current.GetInstance<ITimeAttendanceService>();
+        
+        IEmployeeService _employeeService = ServiceLocator.Current.GetInstance<IEmployeeService>();
         protected override void InitializeCulture()
         {
 
@@ -111,15 +112,17 @@ namespace AionHR.Web.UI.Forms
         {
 
 
-            int id = Convert.ToInt32(e.ExtraParams["id"]);
+            string id = e.ExtraParams["id"];
             string type = e.ExtraParams["type"];
+
             switch (type)
             {
                 case "ColName":
                     //Step 1 : get the object from the Web Service 
                     RecordRequest r = new RecordRequest();
-                    r.RecordID = id.ToString();
-                    RecordResponse<BiometricDevice> response = _timeAttendanceService.ChildGetRecord<BiometricDevice>(r);
+                    r.RecordID = id;
+
+                    RecordResponse<AllowanceType> response = _employeeService.ChildGetRecord<AllowanceType>(r);
                     if (!response.Success)
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
@@ -128,9 +131,8 @@ namespace AionHR.Web.UI.Forms
                     }
                     //Step 2 : call setvalues with the retrieved object
                     this.BasicInfoTab.SetValues(response.result);
-                    FillBranch();
-                    if (response.result.divisionId != null)
-                        divisionId.Select(response.result.divisionId);
+
+
                     this.EditRecordWindow.Title = Resources.Common.EditWindowsTitle;
                     this.EditRecordWindow.Show();
                     break;
@@ -173,20 +175,18 @@ namespace AionHR.Web.UI.Forms
             try
             {
                 //Step 1 Code to delete the object from the database 
-                BiometricDevice n = new BiometricDevice();
-                n.recordId = index;
-                n.name = "";
-                n.reference = "";
-                n.divisionId = "0";
-
-                PostRequest<BiometricDevice> req = new PostRequest<BiometricDevice>();
-                req.entity = n;
-                PostResponse<BiometricDevice> res = _timeAttendanceService.ChildDelete<BiometricDevice>(req);
-                if (!res.Success)
+                AllowanceType s = new AllowanceType();
+                s.recordId = index;
+                s.isCash = false;
+                
+                s.name = "";
+                PostRequest<AllowanceType> req = new PostRequest<AllowanceType>();
+                req.entity = s;
+                PostResponse<AllowanceType> r = _employeeService.ChildDelete<AllowanceType>(req);
+                if (!r.Success)
                 {
-                    //Show an error saving...
                     X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.Error, res.Summary).Show();
+                    X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
                     return;
                 }
                 else
@@ -297,9 +297,11 @@ namespace AionHR.Web.UI.Forms
 
             //Reset all values of the relative object
             BasicInfoTab.Reset();
+
+
             this.EditRecordWindow.Title = Resources.Common.AddNewRecord;
 
-            FillBranch();
+
             this.EditRecordWindow.Show();
         }
 
@@ -318,11 +320,11 @@ namespace AionHR.Web.UI.Forms
             ListRequest request = new ListRequest();
 
             request.Filter = "";
-            ListResponse<BiometricDevice> nationalities = _timeAttendanceService.ChildGetAll<BiometricDevice>(request);
-            if (!nationalities.Success)
+            ListResponse<AllowanceType> routers = _employeeService.ChildGetAll<AllowanceType>(request);
+            if (!routers.Success)
                 return;
-            this.Store1.DataSource = nationalities.Items;
-            e.Total = nationalities.count;
+            this.Store1.DataSource = routers.Items;
+            e.Total = routers.Items.Count; ;
 
             this.Store1.DataBind();
         }
@@ -335,12 +337,12 @@ namespace AionHR.Web.UI.Forms
 
 
             //Getting the id to check if it is an Add or an edit as they are managed within the same form.
-            string id = e.ExtraParams["id"];
+
 
             string obj = e.ExtraParams["values"];
-            BiometricDevice b = JsonConvert.DeserializeObject<BiometricDevice>(obj);
+            AllowanceType b = JsonConvert.DeserializeObject<AllowanceType>(obj);
 
-            b.recordId = id;
+            string id = e.ExtraParams["id"];
             // Define the object to add or edit as null
 
             if (string.IsNullOrEmpty(id))
@@ -350,22 +352,23 @@ namespace AionHR.Web.UI.Forms
                 {
                     //New Mode
                     //Step 1 : Fill The object and insert in the store 
-                    PostRequest<BiometricDevice> request = new PostRequest<BiometricDevice>();
+                    PostRequest<AllowanceType> request = new PostRequest<AllowanceType>();
+
                     request.entity = b;
-                    PostResponse<BiometricDevice> r = _timeAttendanceService.ChildAddOrUpdate<BiometricDevice>(request);
-                    b.recordId = r.recordId;
+                    PostResponse<AllowanceType> r = _employeeService.ChildAddOrUpdate<AllowanceType>(request);
+
 
                     //check if the insert failed
                     if (!r.Success)//it maybe be another condition
                     {
                         //Show an error saving...
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.ErrorSavingRecord, r.Summary).Show();
+                        X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
                         return;
                     }
                     else
                     {
-
+                        b.recordId = r.recordId;
                         //Add this record to the store 
                         this.Store1.Insert(0, b);
 
@@ -390,7 +393,7 @@ namespace AionHR.Web.UI.Forms
                 {
                     //Error exception displaying a messsage box
                     X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.ErrorSavingRecord,ex.Message ).Show();
+                    X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorSavingRecord).Show();
                 }
 
 
@@ -401,10 +404,10 @@ namespace AionHR.Web.UI.Forms
 
                 try
                 {
-                    int index = Convert.ToInt32(id);//getting the id of the record
-                    PostRequest<BiometricDevice> request = new PostRequest<BiometricDevice>();
+                    //getting the id of the record
+                    PostRequest<AllowanceType> request = new PostRequest<AllowanceType>();
                     request.entity = b;
-                    PostResponse<BiometricDevice> r = _timeAttendanceService.ChildAddOrUpdate<BiometricDevice>(request);                      //Step 1 Selecting the object or building up the object for update purpose
+                    PostResponse<AllowanceType> r = _employeeService.ChildAddOrUpdate<AllowanceType>(request);                      //Step 1 Selecting the object or building up the object for update purpose
 
                     //Step 2 : saving to store
 
@@ -412,14 +415,14 @@ namespace AionHR.Web.UI.Forms
                     if (!r.Success)//it maybe another check
                     {
                         X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                        X.Msg.Alert(Resources.Common.ErrorUpdatingRecord, r.Message).Show();
+                        X.Msg.Alert(Resources.Common.Error, r.Summary).Show();
                         return;
                     }
                     else
                     {
 
 
-                        ModelProxy record = this.Store1.GetById(index);
+                        ModelProxy record = this.Store1.GetById(id);
                         BasicInfoTab.UpdateRecord(record);
                         record.Commit();
                         Notification.Show(new NotificationConfig
@@ -437,7 +440,7 @@ namespace AionHR.Web.UI.Forms
                 catch (Exception ex)
                 {
                     X.MessageBox.ButtonText.Ok = Resources.Common.Ok;
-                    X.Msg.Alert(Resources.Common.ErrorUpdatingRecord, ex.Message ).Show();
+                    X.Msg.Alert(Resources.Common.Error, Resources.Common.ErrorUpdatingRecord).Show();
                 }
             }
         }
@@ -455,16 +458,6 @@ namespace AionHR.Web.UI.Forms
         protected void BasicInfoTab_Load(object sender, EventArgs e)
         {
 
-        }
-
-      
-
-        private void FillBranch()
-        {
-            ListRequest branchesRequest = new ListRequest();
-            ListResponse<Division> resp = _companyStructureService.ChildGetAll<Division>(branchesRequest);
-            DivisionStore.DataSource = resp.Items;
-            DivisionStore.DataBind();
         }
     }
 }

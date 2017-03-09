@@ -11,9 +11,9 @@
     <link rel="stylesheet" type="text/css" href="CSS/Common.css" />
     <link rel="stylesheet" href="CSS/LiveSearch.css" />
     <script type="text/javascript" src="Scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="Scripts/Branches.js"></script>
+    <script type="text/javascript" src="Scripts/Branches.js?id=0"></script>
     <script type="text/javascript" src="Scripts/common.js"></script>
-    <script type="text/javascript" src="Scripts/Employees.js"></script>
+    <script type="text/javascript" src="Scripts/Employees.js?id=0"></script>
 
 
 </head>
@@ -424,7 +424,7 @@
                                                 </ext:Store>
                                             </Store>
                                         </ext:ComboBox>
-                                        <ext:TextField ID="birthPlace" runat="server" FieldLabel="<%$ Resources:FieldBirthPlace%>" Name="placeOfBirth" AllowBlank="false" />
+                                        <ext:TextField ID="birthPlace" runat="server" FieldLabel="<%$ Resources:FieldBirthPlace%>" Name="placeOfBirth"  />
 
 
                                         <ext:Checkbox ID="isInactive" runat="server" FieldLabel="<%$ Resources: FieldIsInactive%>" Name="isInactive" InputValue="true" />

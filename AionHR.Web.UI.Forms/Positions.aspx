@@ -254,7 +254,7 @@
                     <Items>
                         <ext:FormPanel
                             ID="BasicInfoTab"
-                            runat="server"
+                            runat="server" DefaultButton="SaveButton"
                             Title="<%$ Resources: BasicInfoTabEditWindowTitle %>"
                             Icon="ApplicationSideList"
                             DefaultAnchor="100%" OnLoad="BasicInfoTab_Load"

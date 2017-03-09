@@ -31,18 +31,26 @@ namespace AionHR.Repository.WebService.Repositories
             ChildGetAllLookup.Add(typeof(Sponsor), "qrySP");
             ChildGetAllLookup.Add(typeof(AllowanceType), "qryAT");
             ChildGetAllLookup.Add(typeof(CertificateLevel), "qryCL");
+            ChildGetAllLookup.Add(typeof(TrainingType), "qryTT");
+            ChildGetAllLookup.Add(typeof(EntitlementDeduction), "qryED");
 
             ChildGetLookup.Add(typeof(Sponsor), "getSP");
             ChildGetLookup.Add(typeof(AllowanceType), "getAT");
             ChildGetLookup.Add(typeof(CertificateLevel), "getCL");
+            ChildGetLookup.Add(typeof(TrainingType), "getTT");
+            ChildGetLookup.Add(typeof(EntitlementDeduction), "getED");
 
             ChildAddOrUpdateLookup.Add(typeof(Sponsor), "setSP");
             ChildAddOrUpdateLookup.Add(typeof(AllowanceType), "setAT");
             ChildAddOrUpdateLookup.Add(typeof(CertificateLevel), "setCL");
+            ChildAddOrUpdateLookup.Add(typeof(TrainingType), "setTT");
+            ChildAddOrUpdateLookup.Add(typeof(EntitlementDeduction), "setED");
 
             ChildDeleteLookup.Add(typeof(Sponsor), "delSP");
             ChildDeleteLookup.Add(typeof(AllowanceType), "delAT");
             ChildDeleteLookup.Add(typeof(CertificateLevel), "delCL");
+            ChildDeleteLookup.Add(typeof(TrainingType), "delTT");
+            ChildDeleteLookup.Add(typeof(EntitlementDeduction), "delED");
         }
 
         public PostWebServiceResponse AddOrUpdateEmployeeWithImage(Employee emp, string imgName, byte[] imgDate,Dictionary<string,string> headers = null)

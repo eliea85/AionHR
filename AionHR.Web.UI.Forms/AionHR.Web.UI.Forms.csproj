@@ -44,8 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ext.Net">
-      <HintPath>..\..\..\..\Ext.net\Ext.NET.WebForms.4.1.0\lib\net46\Ext.Net.dll</HintPath>
+    <Reference Include="Ext.Net, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2e12ce3d0176cd87, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Ext.Net.dll</HintPath>
     </Reference>
     <Reference Include="Ext.Net.Utilities">
       <HintPath>..\..\..\..\Ext.net\Ext.NET.WebForms.4.1.0\lib\net46\Ext.Net.Utilities.dll</HintPath>
@@ -59,8 +60,9 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\Desktop\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=4.4.2.472, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StructureMap.4.4.2\lib\net45\StructureMap.dll</HintPath>
@@ -104,6 +106,7 @@
     <Content Include="Departments.aspx" />
     <Content Include="Divisions.aspx" />
     <Content Include="Employees.aspx" />
+    <Content Include="EntitlementDeductions.aspx" />
     <Content Include="ForgotAccount.aspx" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="Global.asax" />
@@ -136,13 +139,16 @@
     <Content Include="Scripts\Calendars.js" />
     <Content Include="Scripts\Divisions.js" />
     <Content Include="Scripts\Employees.js" />
+    <Content Include="Scripts\EntitlementDeductions.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\Dashboard.js" />
     <Content Include="Scripts\Sponsors.js" />
+    <Content Include="Scripts\TrainingTypes.js" />
     <Content Include="Sponsors.aspx" />
     <Content Include="SystemDefaults.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="TimeAttendanceView.aspx" />
+    <Content Include="TrainingTypes.aspx" />
     <Content Include="WorkingCalendars.aspx" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Web.Debug.config">
@@ -266,6 +272,13 @@
     <Compile Include="Employees.aspx.designer.cs">
       <DependentUpon>Employees.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EntitlementDeductions.aspx.cs">
+      <DependentUpon>EntitlementDeductions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EntitlementDeductions.aspx.designer.cs">
+      <DependentUpon>EntitlementDeductions.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ForgotAccount.aspx.cs">
       <DependentUpon>ForgotAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -375,6 +388,13 @@
     </Compile>
     <Compile Include="TimeAttendanceView.aspx.designer.cs">
       <DependentUpon>TimeAttendanceView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TrainingTypes.aspx.cs">
+      <DependentUpon>TrainingTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TrainingTypes.aspx.designer.cs">
+      <DependentUpon>TrainingTypes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>
@@ -517,6 +537,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_LocalResources\CertificateLevels.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\TrainingTypes.aspx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\EntitlementDeductions.aspx.resx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

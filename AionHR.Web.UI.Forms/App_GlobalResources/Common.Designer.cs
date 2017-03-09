@@ -565,6 +565,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entitlement Deduction.
+        /// </summary>
+        internal static string EntitlementDeduction {
+            get {
+                return ResourceManager.GetString("EntitlementDeduction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Error {
@@ -1200,6 +1209,15 @@ namespace Resources {
         internal static string TitleSavingErrorMessage {
             get {
                 return ResourceManager.GetString("TitleSavingErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Training Types.
+        /// </summary>
+        internal static string TrainingTypes {
+            get {
+                return ResourceManager.GetString("TrainingTypes", resourceCulture);
             }
         }
         

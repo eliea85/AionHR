@@ -52,9 +52,13 @@ namespace AionHR.Web.UI.Forms.Utilities
             Ext.Net.Node sponsors = BuildLeafNode("rootParent_Employee_Sponsors", Resources.Common.Sponsors, "Group", true, employees);
             Ext.Net.Node allowanceTypes = BuildLeafNode("rootParent_Employee_allowance", Resources.Common.AllowanceTypes, "Group", true, employees);
             Ext.Net.Node certificateLevels = BuildLeafNode("rootParent_Employee_certificate", Resources.Common.CertificateLevels, "Group", true, employees);
+            Ext.Net.Node trainingTypes = BuildLeafNode("rootParent_Employee_trainingTypes", Resources.Common.TrainingTypes, "Group", true, employees);
+            Ext.Net.Node EntitlementDeductions = BuildLeafNode("rootParent_Employee_EntitlementDeductions", Resources.Common.EntitlementDeduction, "Group", true, employees);
             FillConfigItem(sponsors, "sponsors", "Sponsors.aspx", Resources.Common.Sponsors, "icon-Employees", "1");
             FillConfigItem(allowanceTypes, "allowanceTypes", "AllowanceTypes.aspx", Resources.Common.AllowanceTypes, "icon-Employees", "1");
             FillConfigItem(certificateLevels, "certificateLevels", "CertificateLevels.aspx", Resources.Common.CertificateLevels, "icon-Employees", "1");
+            FillConfigItem(trainingTypes, "trainingTypes", "TrainingTypes.aspx", Resources.Common.TrainingTypes, "icon-Employees", "1");
+            FillConfigItem(EntitlementDeductions, "entitlementDeductions", "EntitlementDeductions.aspx", Resources.Common.EntitlementDeduction, "icon-Employees", "1");
 
 
             nodes.Add(rootParent);
